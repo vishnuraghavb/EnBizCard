@@ -1,0 +1,33 @@
+{
+  "name": "digital-business-card-generator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "HOST=192.168.1.7 nuxt",
+    "build": "nuxt build",
+    "export": "nuxt export",
+    "generate": "nuxt build && nuxt export"
+  },
+  "dependencies": {
+    "@aceforth/nuxt-optimized-images": "^1.1.0",
+    "@caohenghu/vue-colorpicker": "^1.2.4",
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "@nuxtjs/robots": "^2.4.2",
+    "file-saver": "^2.0.2",
+    "id3-parser": "^2.0.0",
+    "jszip": "^3.5.0",
+    "mp3tag.js": "^2.3.1",
+    "nuxt": "^2.13.0",
+    "vue-clickaway2": "^2.3.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^2.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "imagemin-svgo": "^8.0.0",
+    "node-sass": "^4.14.1",
+    "pdfjs-dist": "^2.4.456",
+    "prettier": "^2.0.5",
+    "sass-loader": "^9.0.2"
+  }
+}

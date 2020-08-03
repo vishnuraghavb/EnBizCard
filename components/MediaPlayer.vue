@@ -1,0 +1,113 @@
+<template>
+  <div class="mediaPlayerContainer">
+    <video
+      controlsList="nodownload nofullscreen noremoteplayback"
+      @timeupdate="updateSeek()"
+      disablePictureInPicture
+      ref="mediaSource"
+      class="source"
+      :style="{ pointerEvents: PreviewMode ? 'none' : 'auto' }"
+      :controls="!PreviewMode"
+      :poster="
+        type == 'music'
+          ? PreviewMode
+            ? media.coverDataURI
+            : './featured/music-' + index + '.' + media.coverFormat
+          : null
+      "
+      preload="metadata"
+    >
+      <source
+        :src="
+          PreviewMode
+            ? media.dataURI + '#t=0.2'
+            : `./featured/${type == 'music' ? 'music' : 'video'}-${index}.${
+                type == 'music' ? 'mp3' : 'mp4#t=0.2'
+              }`
+        "
+      />
+    </video>
+    <div class="infoControls">
+      <p class="title">
+        {{ media.title }}
+      </p>
+      <p class="artistAlbum" v-if="media.artist">
+        <span>{{ media.artist }}</span>
+        <span v-if="media.album"> - {{ media.album }}</span>
+      </p>
+      <div
+        class="playerControl"
+        ref="playerControl"
+        :style="{ display: PreviewMode ? 'flex' : 'none' }"
+      >
+        <output class="currentTime" ref="bubble">00:00</output>
+        <input
+          class="seekBar"
+          @change="setProgress($event)"
+          ref="seekbar"
+          type="range"
+          value="0"
+        />
+        <a
+          class="playPause"
+          :style="{
+            backgroundColor: `${colors.buttonBg.color}`,
+          }"
+          @click="togglePlay($refs.mediaSource)"
+        >
+          <div
+            class="icon play action"
+            ref="play"
+            v-html="require(`~/assets/icons/play.svg?include`)"
+          ></div>
+          <div
+            class="icon pause action"
+            ref="pause"
+            v-html="require(`~/assets/icons/stop.svg?include`)"
+          ></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['media', 'type', 'colors', 'PreviewMode', 'index', 'togglePlay'],
+  methods: {
+    setProgress(e) {
+      let mediaSource = this.$refs.mediaSource
+      let time = mediaSource.duration * (e.target.value / 100)
+      mediaSource.currentTime = time
+    },
+    updateSeek() {
+      let mediaSource = this.$refs.mediaSource
+      let timenow = mediaSource.currentTime
+      let seekbar = this.$refs.seekbar
+      let bubble = this.$refs.bubble
+      let value = (100 / mediaSource.duration) * timenow
+      seekbar.value = value
+
+      let m = Math.floor(timenow / 60)
+      let s = Math.floor(timenow % 60)
+      if (m.toString().length < 2) {
+        m = '0' + m
+      }
+      if (s.toString().length < 2) {
+        s = '0' + s
+      }
+      bubble.value = m + ':' + s
+
+      if (value == 100) {
+        this.isPlaying = false
+        seekbar.value = 0
+        this.$refs.play.style.display = 'block'
+        this.$refs.pause.style.display = 'none'
+      }
+    },
+  },
+  mounted() {
+    this.$refs.playerControl.style.display = 'flex'
+  },
+}
+</script>

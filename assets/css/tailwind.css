@@ -1,0 +1,46 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.field-container {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.toggle-checkbox:checked {
+  @apply right-0;
+  right: 0;
+  border-color: #38a169;
+}
+.toggle-checkbox:checked + .toggle-label {
+  @apply bg-green-600;
+  background-color: #38a169;
+}
+/* .checkbox:checked {
+  background-color: #38a169;
+} */
+.checkbox:checked + img {
+  filter: invert(1);
+}
+.device-curve {
+  border-radius: 2rem;
+}
+.max-hd {
+  /* max-height: 60vh; */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.max-hd::-webkit-scrollbar {
+  display: none;
+}
+.device-viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.device-viewport::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 640px) {
+  .max-hd {
+    max-height: 60vh;
+  }
+}

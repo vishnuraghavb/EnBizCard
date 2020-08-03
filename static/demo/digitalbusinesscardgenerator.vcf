@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Digital Business Card Generator;;;;
+FN:Digital Business Card Generator
+ORG:Digital Business Card Generator
+TITLE:Web App
+TEL;TYPE=work,pref:+91 9876543210
+TEL;TYPE=work:
+EMAIL;TYPE=work:dbizcard@example.com
+URL:https://dbizcard.vercel.app/
+UID:dbizcard-388598
+END:VCARD
