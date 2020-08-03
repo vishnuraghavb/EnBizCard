@@ -450,7 +450,7 @@
             | MIT&nbsp;License |
             <a
               class="underline hover:text-green-600 transition-colors duration-200"
-              href="https://gitlab.com/vishnuraghavb/dbizcard"
+              href="https://github.com/vishnuraghavb/dbizcard"
               target="_blank"
               rel="noopener noreferrer"
               >View&nbsp;Source</a
