@@ -547,7 +547,7 @@ export default {
     background: #fff;
     border-radius: 1.5rem 1.5rem 0 0;
     padding: 1.5rem;
-    box-shadow: 0 -1px 4px -1px rgba(#000, 0.2);
+    box-shadow: 0 -1px 4px -1px rgba(#000, 0.1);
   }
   #profile {
     display: flex;
