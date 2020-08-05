@@ -136,7 +136,6 @@
             <div id="shareActions">
               <a
                 id="share"
-                :style="{ backgroundColor: `${this.dynamicShareBG}` }"
                 @click.prevent.capture="sharingAlert()"
               >
                 <div
@@ -146,7 +145,6 @@
               </a>
               <a
                 id="showQRCode"
-                :style="{ backgroundColor: `${this.dynamicShareBG}` }"
                 @click.prevent.capture="sharingAlert()"
                 ><div
                   class="icon shareAction"
@@ -157,7 +155,6 @@
             <a
               v-if="pubKeyIsValid"
               id="showPubKey"
-              :style="{ backgroundColor: `${this.dynamicShareBG}` }"
               @click.prevent.capture="showPubKey()"
               ><div
                 class="icon shareAction"
@@ -353,7 +350,6 @@ export default {
     'downloadKey',
     'footerCredit',
     'showAlert',
-    'dynamicShareBG',
     'shareHasLightBG',
     'actionHasLightBG',
     'publicKey',

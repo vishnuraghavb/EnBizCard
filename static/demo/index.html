@@ -1,79 +1,397 @@
-<!DOCTYPE html><html style="background-color: rgb(56, 161, 105);" lang="en"><head><meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="robots" content="noindex, nofollow"> <meta name="author" content="Digital Business Card Generator"> <meta name="url" content="https://dbizcard.vercel.app/"> <meta name="designer" content="Vishnu Raghav B"> <script>
-        'http' == window.location.href.substr(0, 4) &&
-          '/' != window.location.href.slice(-1) &&
-          window.location.replace(window.location.href + '/')
-      </script> <link rel="stylesheet" href="./style.min.css"> <title>Digital Business Card Generator's Digital Business Card</title> <style>
-        input[type='range']::-moz-range-track {
-          background: none;
-        }
-        input[type='range']::-moz-range-thumb {
-          -moz-appearance: none;
-          width: 3rem;
-          height: 3rem;
-          border-radius: 100%;
-          border: none;
-          background: #38a169;
-          z-index: 3;
-          cursor: pointer;
-        }
-        input[type='range']::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          width: 3rem;
-          height: 3rem;
-          border-radius: 100%;
-          border: none;
-          background: #38a169;
-          z-index: 3;
-          cursor: pointer;
-        }
-        .action{
-          color:#fff;
-          
-        }
+<!DOCTYPE html>
+<html style="background-color: rgb(56, 161, 105);" lang="en">
 
-        .shareAction{
-          
-        }
-      </style></head> <body><div id="shareContainer" style="visibility: hidden; top: 2rem; opacity: 0;"><div id="closeBtnContainer"><a id="closeBtn"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1A202C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></div></a></div> <div id="shareContent"><div id="pubKeyInfo"><p>
-              You can download my public key and use it to send me encrypted
-              messages.
-            </p> <a href="Digital Business Card Generator's public key.asc" download="" target="_blank" id="downloadKey" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m4-5l5 5 5-5m-5 5V3"></path></svg></div><span class="action">Download</span></a></div> <div id="copyURL"><p>
-              You can copy my Business Card URL and share it via any medium.
-            </p> <a id="copyShareURL" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg></div><span class="action">Copy URL</span></a></div> <div id="displayQRCode"><div id="qrcode"></div> <h2>
-              Scan this QR Code
-            </h2> <p>
-              to view my Business Card
-            </p></div></div></div> <header><img id="logo" src="./logo.svg" alt="Logo"> <div id="actions" style="display: none;"><div id="shareActions"><a id="share" style="background-color: rgba(128, 128, 128, 0.25);"><div class="icon shareAction"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#fff" stroke-width="2"><circle cx="17" cy="5" r="3"></circle><circle cx="5" cy="12" r="3"></circle><circle cx="17" cy="19" r="3"></circle><path d="M7.59 13.51l6.83 3.98m-.01-10.98l-6.82 3.98"></path></svg></div></a> <a id="showQRCode" style="background-color: rgba(128, 128, 128, 0.25);"><div class="icon shareAction"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round"><g fill="none" stroke="#fff" stroke-width="2"><path d="M4 4h4v4H4zm0 12h4v4H4zM16 4h4v4h-4z"></path><path d="M12 3v15a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2H3"></path></g><path fill="#fff" d="M15 15h2v2h-2z"></path></svg></div></a></div> <a id="showPubKey" style="background-color: rgba(128, 128, 128, 0.25);"><div class="icon shareAction"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg></div></a></div></header> <main><div id="profile"><img src="./photo.png" alt="Photo"> <div id="profileInfo"><p class="name">
-              Digital Business Card Generator
-            </p> <p class="jobtitle">
-              Web App
-            </p></div></div> <p class="bizDescription">Quickly generate an interactive and responsive HTML-based digital business card, that can be hosted with your website.
-        </p> <div id="contactBtns"><div class="contactBtnContainer"><div class="contactBtn"><a href="tel:+91 9876543210" target="_blank" rel="noopener noreferrer" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg></div></a> <p>
-                Call
-              </p></div></div><div class="contactBtnContainer"><div class="contactBtn"><a href="https://wa.me/" target="_blank" rel="noopener noreferrer" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" fill="#fff"><path d="M2.841 16.664A10.987 10.987 0 014.776 3.725c4.297-4.297 11.273-4.297 15.57 0 4.297 4.297 4.297 11.273 0 15.57-3.522 3.522-8.845 4.157-13.018 1.904l-4.142.784a1.002 1.002 0 01-1.167-1.178l.822-4.141zm1.428 3.078l3.045-.576c.238-.045.483-.002.692.12 3.452 2.024 7.966 1.555 10.926-1.405 3.516-3.516 3.516-9.226 0-12.742s-9.226-3.516-12.742 0a8.992 8.992 0 00-1.432 10.86 1 1 0 01.116.696l-.605 3.047z"></path><path d="M17.5 14.002v1.512a1.01 1.01 0 01-1.006 1.006c-.03 0-.06-.002-.09-.004a9.948 9.948 0 01-4.34-1.544 9.811 9.811 0 01-3.016-3.017 9.944 9.944 0 01-1.544-4.359A1.01 1.01 0 018.505 6.5h1.508a1.01 1.01 0 011.006.865c.063.483.181.957.352 1.413.137.367.049.782-.227 1.061l-.638.638a8.039 8.039 0 003.017 3.017l.638-.639a1.008 1.008 0 011.061-.226c.456.17.93.288 1.413.352.503.071.877.513.865 1.021z" fill-rule="nonzero"></path></svg></div></a> <p>
-                Whatsapp
-              </p></div></div><div class="contactBtnContainer"><div class="contactBtn"><a href="https://t.me/dbizcard" target="_blank" rel="noopener noreferrer" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><path d="M5.671 14.738L.989 12.787a1.399 1.399 0 01-.013-2.579L20.222 1.96a1.498 1.498 0 012.058 1.688l-3.483 16.547a2.001 2.001 0 01-3.134 1.206l-3.56-2.59-2.415 2.415a1.4 1.4 0 01-2.336-.605l-1.681-5.883zm3.319 4.338l.005.015 2.902-2.902 4.943 3.594 3.285-15.606-17.056 7.31 4.183 1.743 10.106-6.22a.2.2 0 01.242.316L9.5 15l-.51 4.076z" fill="#fff"></path></svg></div></a> <p>
-                Telegram
-              </p></div></div><div class="contactBtnContainer"><div class="contactBtn"><a href="mailto:dbizcard@example.com" target="_blank" rel="noopener noreferrer" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M22 6l-10 7L2 6"></path></svg></div></a> <p>
-                Email
-              </p></div></div><div class="contactBtnContainer"><div class="contactBtn"><a href="https://dbizcard.vercel.app/" target="_blank" rel="noopener noreferrer" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg></div></a> <p>
-                Website
-              </p></div></div> <div id="ctaContainer"><a id="downloadVcard" href="digitalbusinesscardgenerator.vcf" download="" target="_blank" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><path d="M20 8v6m3-3h-6"></path></svg></div> <p class="action">
-              Add to Contacts
-            </p></a></div></div> <div id="socialBtns"><div class="socialBtnContainer"><div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(64, 93, 230);" href="https://www.instagram.com/"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24"><path d="M11.999 7.377a4.623 4.623 0 100 9.248 4.623 4.623 0 000-9.248zm0 7.627a3.004 3.004 0 110-6.008 3.004 3.004 0 010 6.008z"></path><circle cx="16.806" cy="7.207" r="1.078"></circle><path d="M20.533 6.111A4.605 4.605 0 0017.9 3.479a6.606 6.606 0 00-2.186-.42c-.963-.042-1.268-.054-3.71-.054s-2.755 0-3.71.054a6.554 6.554 0 00-2.184.42 4.6 4.6 0 00-2.633 2.632 6.585 6.585 0 00-.419 2.186c-.043.962-.056 1.267-.056 3.71 0 2.442 0 2.753.056 3.71.015.748.156 1.486.419 2.187a4.61 4.61 0 002.634 2.632 6.584 6.584 0 002.185.45c.963.042 1.268.055 3.71.055s2.755 0 3.71-.055a6.615 6.615 0 002.186-.419 4.613 4.613 0 002.633-2.633c.263-.7.404-1.438.419-2.186.043-.962.056-1.267.056-3.71s0-2.753-.056-3.71a6.581 6.581 0 00-.421-2.217zm-1.218 9.532a5.043 5.043 0 01-.311 1.688 2.987 2.987 0 01-1.712 1.711 4.985 4.985 0 01-1.67.311c-.95.044-1.218.055-3.654.055-2.438 0-2.687 0-3.655-.055a4.96 4.96 0 01-1.669-.311 2.985 2.985 0 01-1.719-1.711 5.08 5.08 0 01-.311-1.669c-.043-.95-.053-1.218-.053-3.654 0-2.437 0-2.686.053-3.655a5.038 5.038 0 01.311-1.687c.305-.789.93-1.41 1.719-1.712a5.01 5.01 0 011.669-.311c.951-.043 1.218-.055 3.655-.055s2.687 0 3.654.055a4.96 4.96 0 011.67.311 2.991 2.991 0 011.712 1.712 5.08 5.08 0 01.311 1.669c.043.951.054 1.218.054 3.655 0 2.436 0 2.698-.043 3.654h-.011z"></path></svg></div></a></div></div><div class="socialBtnContainer"><div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(24, 119, 242);" href="https://www.facebook.com/"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24"><path d="M12.001 2.002c-5.522 0-9.999 4.477-9.999 9.999 0 4.99 3.656 9.126 8.437 9.879v-6.988h-2.54v-2.891h2.54V9.798c0-2.508 1.493-3.891 3.776-3.891 1.094 0 2.24.195 2.24.195v2.459h-1.264c-1.24 0-1.628.772-1.628 1.563v1.875h2.771l-.443 2.891h-2.328v6.988C18.344 21.129 22 16.992 22 12.001c0-5.522-4.477-9.999-9.999-9.999z"></path></svg></div></a></div></div><div class="socialBtnContainer"><div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(0, 119, 181);" href="https://www.linkedin.com/"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zM8.339 18.337H5.667v-8.59h2.672v8.59zM7.003 8.574a1.548 1.548 0 110-3.096 1.548 1.548 0 010 3.096zm11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg></div></a></div></div><div class="socialBtnContainer"><div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(43, 144, 217);" href="https://mastodon.social/"><div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" fill="#fff"><path d="M20.93 13.99c-.274 1.411-2.455 2.955-4.961 3.254-1.307.156-2.594.299-3.966.236-2.243-.103-4.013-.535-4.013-.535 0 .218.013.426.04.621.291 2.214 2.195 2.346 3.999 2.408 1.82.063 3.441-.448 3.441-.448l.075 1.645s-1.274.684-3.542.81c-1.25.068-2.803-.032-4.612-.511-3.923-1.038-4.598-5.22-4.701-9.462-.031-1.26-.012-2.448-.012-3.441 0-4.339 2.842-5.611 2.842-5.611 1.434-.658 3.894-.935 6.45-.956h.063c2.557.021 5.018.298 6.452.956 0 0 2.842 1.272 2.842 5.611 0 0 .036 3.201-.397 5.423zm-2.956-5.087v5.253h-2.081V9.058c0-1.075-.453-1.621-1.357-1.621-1.001 0-1.501.647-1.501 1.927v2.791h-2.07V9.364c0-1.28-.501-1.927-1.501-1.927-.904 0-1.357.546-1.357 1.621v5.098H6.025V8.903c0-1.074.275-1.927.823-2.558.567-.632 1.308-.955 2.228-.955 1.066 0 1.872.409 2.405 1.228l.519.87.519-.87c.532-.819 1.339-1.228 2.404-1.228.921 0 1.662.323 2.228.955.549.631.823 1.484.823 2.558z"></path></svg></div></a></div></div><div class="socialBtnContainer"><div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(29, 161, 242);" href="https://twitter.com/"><div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><path d="M19.981 8.497c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 005.001-1.721 4.036 4.036 0 01-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 01-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 01-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 008.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 014.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 002.556-.973 4.02 4.02 0 01-1.771 2.22A8.073 8.073 0 0022 6.414a8.645 8.645 0 01-2.019 2.083z" fill="#fff" fill-rule="nonzero"></path></svg></div></a></div></div><div class="socialBtnContainer"><div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(26, 183, 234);" href="https://vimeo.com/"><div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><path d="M20.562 10.414c-2.036 4.349-6.949 10.267-10.054 10.267-3.06 0-3.501-6.527-5.173-10.869-.823-2.138-1.354-1.646-2.896-.567L1.5 8.031c2.248-1.976 4.499-4.272 5.88-4.399 1.559-.148 2.517.916 2.873 3.193.475 2.994 1.137 7.641 2.291 7.641.9 0 3.117-3.686 3.232-5.004.203-1.93-1.421-1.989-2.828-1.387 2.228-7.295 11.494-5.95 7.614 2.339z" fill="#fff" fill-rule="nonzero"></path></svg></div></a></div></div></div> <div id="featuredContent"><div class="images"><img src="./featured/image-0.jpeg" alt="Product image"> <div class="infoControls"><p class="title">
-                Photo by Erol Ahmed on Unsplash
-              </p></div></div> <div class="music"><div class="mediaPlayerContainer"><video controlslist="nodownload nofullscreen noremoteplayback" disablepictureinpicture="" poster="./featured/music-0.jpeg" preload="metadata" class="source" style="pointer-events: auto;" controls="controls"><source src="./featured/music-0.mp3"></video> <div class="infoControls"><p class="title">
-      Shipping Lanes 
-    </p> <p class="artistAlbum"><span>Chad Crouch </span> <span> - Arps </span></p> <div class="playerControl" style="display: none;"><output class="currentTime">00:00</output> <input type="range" value="0" class="seekBar"> <a class="playPause" style="background-color: rgb(56, 161, 105);"><div class="icon play action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3l14 9-14 9V3z" fill="none" stroke="#fff" stroke-width="2"></path></svg></div> <div class="icon pause action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path fill="none" stroke="#fff" stroke-width="2" d="M5 5h14v14H5z"></path></svg></div></a></div></div></div></div> <div class="video"><div class="mediaPlayerContainer"><video controlslist="nodownload nofullscreen noremoteplayback" disablepictureinpicture="" preload="metadata" class="source" style="pointer-events: auto;" controls="controls"><source src="./featured/video-0.mp4#t=0.2"></video> <div class="infoControls"><p class="title">
-      Sea Side
-    </p> <!----> <div class="playerControl" style="display: none;"><output class="currentTime">00:00</output> <input type="range" value="0" class="seekBar"> <a class="playPause" style="background-color: rgb(56, 161, 105);"><div class="icon play action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3l14 9-14 9V3z" fill="none" stroke="#fff" stroke-width="2"></path></svg></div> <div class="icon pause action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path fill="none" stroke="#fff" stroke-width="2" d="M5 5h14v14H5z"></path></svg></div></a></div></div></div></div> <div class="document"><div class="documentContainer"><div class="documentPreview"><img src="./featured/document-0.jpeg" alt="Business_card"></div> <div class="infoControls"><p class="title">
-      Business_card
-    </p> <p class="fileSize">
-      PDF - 830.59 KB
-    </p> <div class="downloadDocument"><a href="./featured/Business_card.pdf" download="" target="_blank" class="downloadBtn" style="background-color: rgb(56, 161, 105);"><div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m4-5l5 5 5-5m-5 5V3"></path></svg></div></a></div></div></div></div></div></main> <footer><hr> <div>
-          Created with
-          <a href="https://dbizcard.vercel.app/" target="_blank" rel="noopener noreferrer">Digital Business Card Generator</a></div></footer> <script src="./qrcode.min.js"></script> <script>
-        let sC=document.getElementById("shareContainer"),cBtn=document.getElementById("closeBtn"),cURL=document.getElementById("copyURL"),cSURL=document.getElementById("copyShareURL"),dQR=document.getElementById("displayQRCode"),qrc=document.getElementById("qrcode"),s=document.getElementById("share"),sQRC=document.getElementById("showQRCode"),pKI=document.getElementById("pubKeyInfo"),sPK=document.getElementById("showPubKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#actions").style.display="flex",qrc.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(sC),cURL.style.display="flex",dN(dQR),pKI&&dN(pKI)}),sQRC.addEventListener("click",()=>{tC(sC),dQR.style.display="block",dN(cURL),pKI&&dN(pKI)}),sPK&&sPK.addEventListener("click",()=>{tC(sC),pKI&&(pKI.style.display="flex"),dN(cURL),dN(dQR)}),cBtn.addEventListener("click",()=>tC(sC)),cSURL.addEventListener("click",async()=>{let e=cSURL.querySelectorAll(".action")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});
-      </script> <script>
-        let pC=document.querySelectorAll(".playerControl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),o=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",o.style.display="none");let c=Math.floor(e/60),y=Math.floor(e%60);c.toString().length<2&&(c="0"+c),y.toString().length<2&&(y="0"+y),r.value=c+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",o.style.display="block"):(srcs[l].pause(),o.style.display="none",a.style.display="block")})});
-      </script></body></html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="author" content="Digital Business Card Generator">
+  <meta name="url" content="https://dbizcard.vercel.app/">
+  <meta name="designer" content="Vishnu Raghav B">
+  <script>
+    'http' == window.location.href.substr(0, 4) &&
+      '/' != window.location.href.slice(-1) &&
+      window.location.replace(window.location.href + '/')
+  </script>
+  <link rel="stylesheet" href="./style.min.css">
+  <title>Digital Business Card Generator's Digital Business Card</title>
+  <style>
+    input[type='range']::-moz-range-track {
+      background: none;
+    }
+
+    input[type='range']::-moz-range-thumb {
+      -moz-appearance: none;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 100%;
+      border: none;
+      background: #38a169;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 100%;
+      border: none;
+      background: #38a169;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    .action {
+      color: #fff;
+
+    }
+
+    .shareAction {}
+  </style>
+</head>
+
+<body>
+  <div id="shareContainer" style="visibility: hidden; top: 2rem; opacity: 0;">
+    <div id="closeBtnContainer"><a id="closeBtn">
+        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1A202C"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg></div>
+      </a></div>
+    <div id="shareContent">
+      <div id="pubKeyInfo">
+        <p>
+          You can download my public key and use it to send me encrypted
+          messages.
+        </p> <a href="Digital Business Card Generator's public key.asc" download="" target="_blank" id="downloadKey"
+          style="background-color: rgb(56, 161, 105);">
+          <div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+              stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m4-5l5 5 5-5m-5 5V3"></path>
+            </svg></div><span class="action">Download</span>
+        </a>
+      </div>
+      <div id="copyURL">
+        <p>
+          You can copy my Business Card URL and share it via any medium.
+        </p> <a id="copyShareURL" style="background-color: rgb(56, 161, 105);">
+          <div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+              stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+            </svg></div><span class="action">Copy URL</span>
+        </a>
+      </div>
+      <div id="displayQRCode">
+        <div id="qrcode"></div>
+        <h2>
+          Scan this QR Code
+        </h2>
+        <p>
+          to view my Business Card
+        </p>
+      </div>
+    </div>
+  </div>
+  <header><img id="logo" src="./logo.svg" alt="Logo">
+    <div id="actions" style="display: none;">
+      <div id="shareActions"><a id="share">
+          <div class="icon shareAction"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+              clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#fff"
+              stroke-width="2">
+              <circle cx="17" cy="5" r="3"></circle>
+              <circle cx="5" cy="12" r="3"></circle>
+              <circle cx="17" cy="19" r="3"></circle>
+              <path d="M7.59 13.51l6.83 3.98m-.01-10.98l-6.82 3.98"></path>
+            </svg></div>
+        </a> <a id="showQRCode">
+          <div class="icon shareAction"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+              clip-rule="evenodd" stroke-linejoin="round">
+              <g fill="none" stroke="#fff" stroke-width="2">
+                <path d="M4 4h4v4H4zm0 12h4v4H4zM16 4h4v4h-4z"></path>
+                <path d="M12 3v15a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2H3"></path>
+              </g>
+              <path fill="#fff" d="M15 15h2v2h-2z"></path>
+            </svg></div>
+        </a></div> <a id="showPubKey">
+        <div class="icon shareAction"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4">
+            </path>
+          </svg></div>
+      </a>
+    </div>
+  </header>
+  <main>
+    <div id="profile"><img src="./photo.png" alt="Photo">
+      <div id="profileInfo">
+        <p class="name">
+          Digital Business Card Generator
+        </p>
+        <p class="jobtitle">
+          Web App
+        </p>
+      </div>
+    </div>
+    <p class="bizDescription">Quickly generate an interactive and responsive HTML-based digital business card, that can
+      be hosted with your website.
+    </p>
+    <div id="contactBtns">
+      <div class="contactBtnContainer">
+        <div class="contactBtn"><a href="tel:+91 9876543210" target="_blank" rel="noopener noreferrer"
+            style="background-color: rgb(56, 161, 105);">
+            <div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z">
+                </path>
+              </svg></div>
+          </a>
+          <p>
+            Call
+          </p>
+        </div>
+      </div>
+      <div class="contactBtnContainer">
+        <div class="contactBtn"><a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
+            style="background-color: rgb(56, 161, 105);">
+            <div class="icon action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" fill="#fff">
+                <path
+                  d="M2.841 16.664A10.987 10.987 0 014.776 3.725c4.297-4.297 11.273-4.297 15.57 0 4.297 4.297 4.297 11.273 0 15.57-3.522 3.522-8.845 4.157-13.018 1.904l-4.142.784a1.002 1.002 0 01-1.167-1.178l.822-4.141zm1.428 3.078l3.045-.576c.238-.045.483-.002.692.12 3.452 2.024 7.966 1.555 10.926-1.405 3.516-3.516 3.516-9.226 0-12.742s-9.226-3.516-12.742 0a8.992 8.992 0 00-1.432 10.86 1 1 0 01.116.696l-.605 3.047z">
+                </path>
+                <path
+                  d="M17.5 14.002v1.512a1.01 1.01 0 01-1.006 1.006c-.03 0-.06-.002-.09-.004a9.948 9.948 0 01-4.34-1.544 9.811 9.811 0 01-3.016-3.017 9.944 9.944 0 01-1.544-4.359A1.01 1.01 0 018.505 6.5h1.508a1.01 1.01 0 011.006.865c.063.483.181.957.352 1.413.137.367.049.782-.227 1.061l-.638.638a8.039 8.039 0 003.017 3.017l.638-.639a1.008 1.008 0 011.061-.226c.456.17.93.288 1.413.352.503.071.877.513.865 1.021z"
+                  fill-rule="nonzero"></path>
+              </svg></div>
+          </a>
+          <p>
+            Whatsapp
+          </p>
+        </div>
+      </div>
+      <div class="contactBtnContainer">
+        <div class="contactBtn"><a href="https://t.me/dbizcard" target="_blank" rel="noopener noreferrer"
+            style="background-color: rgb(56, 161, 105);">
+            <div class="icon action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+                <path
+                  d="M5.671 14.738L.989 12.787a1.399 1.399 0 01-.013-2.579L20.222 1.96a1.498 1.498 0 012.058 1.688l-3.483 16.547a2.001 2.001 0 01-3.134 1.206l-3.56-2.59-2.415 2.415a1.4 1.4 0 01-2.336-.605l-1.681-5.883zm3.319 4.338l.005.015 2.902-2.902 4.943 3.594 3.285-15.606-17.056 7.31 4.183 1.743 10.106-6.22a.2.2 0 01.242.316L9.5 15l-.51 4.076z"
+                  fill="#fff"></path>
+              </svg></div>
+          </a>
+          <p>
+            Telegram
+          </p>
+        </div>
+      </div>
+      <div class="contactBtnContainer">
+        <div class="contactBtn"><a href="mailto:dbizcard@example.com" target="_blank" rel="noopener noreferrer"
+            style="background-color: rgb(56, 161, 105);">
+            <div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <path d="M22 6l-10 7L2 6"></path>
+              </svg></div>
+          </a>
+          <p>
+            Email
+          </p>
+        </div>
+      </div>
+      <div class="contactBtnContainer">
+        <div class="contactBtn"><a href="https://dbizcard.vercel.app/" target="_blank" rel="noopener noreferrer"
+            style="background-color: rgb(56, 161, 105);">
+            <div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z">
+                </path>
+              </svg></div>
+          </a>
+          <p>
+            Website
+          </p>
+        </div>
+      </div>
+      <div id="ctaContainer"><a id="downloadVcard" href="digitalbusinesscardgenerator.vcf" download="" target="_blank"
+          style="background-color: rgb(56, 161, 105);">
+          <div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+              stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+              <circle cx="8.5" cy="7" r="4"></circle>
+              <path d="M20 8v6m3-3h-6"></path>
+            </svg></div>
+          <p class="action">
+            Add to Contacts
+          </p>
+        </a></div>
+    </div>
+    <div id="socialBtns">
+      <div class="socialBtnContainer">
+        <div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(64, 93, 230);"
+            href="https://www.instagram.com/">
+            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24">
+                <path
+                  d="M11.999 7.377a4.623 4.623 0 100 9.248 4.623 4.623 0 000-9.248zm0 7.627a3.004 3.004 0 110-6.008 3.004 3.004 0 010 6.008z">
+                </path>
+                <circle cx="16.806" cy="7.207" r="1.078"></circle>
+                <path
+                  d="M20.533 6.111A4.605 4.605 0 0017.9 3.479a6.606 6.606 0 00-2.186-.42c-.963-.042-1.268-.054-3.71-.054s-2.755 0-3.71.054a6.554 6.554 0 00-2.184.42 4.6 4.6 0 00-2.633 2.632 6.585 6.585 0 00-.419 2.186c-.043.962-.056 1.267-.056 3.71 0 2.442 0 2.753.056 3.71.015.748.156 1.486.419 2.187a4.61 4.61 0 002.634 2.632 6.584 6.584 0 002.185.45c.963.042 1.268.055 3.71.055s2.755 0 3.71-.055a6.615 6.615 0 002.186-.419 4.613 4.613 0 002.633-2.633c.263-.7.404-1.438.419-2.186.043-.962.056-1.267.056-3.71s0-2.753-.056-3.71a6.581 6.581 0 00-.421-2.217zm-1.218 9.532a5.043 5.043 0 01-.311 1.688 2.987 2.987 0 01-1.712 1.711 4.985 4.985 0 01-1.67.311c-.95.044-1.218.055-3.654.055-2.438 0-2.687 0-3.655-.055a4.96 4.96 0 01-1.669-.311 2.985 2.985 0 01-1.719-1.711 5.08 5.08 0 01-.311-1.669c-.043-.95-.053-1.218-.053-3.654 0-2.437 0-2.686.053-3.655a5.038 5.038 0 01.311-1.687c.305-.789.93-1.41 1.719-1.712a5.01 5.01 0 011.669-.311c.951-.043 1.218-.055 3.655-.055s2.687 0 3.654.055a4.96 4.96 0 011.67.311 2.991 2.991 0 011.712 1.712 5.08 5.08 0 01.311 1.669c.043.951.054 1.218.054 3.655 0 2.436 0 2.698-.043 3.654h-.011z">
+                </path>
+              </svg></div>
+          </a></div>
+      </div>
+      <div class="socialBtnContainer">
+        <div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(24, 119, 242);"
+            href="https://www.facebook.com/">
+            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24">
+                <path
+                  d="M12.001 2.002c-5.522 0-9.999 4.477-9.999 9.999 0 4.99 3.656 9.126 8.437 9.879v-6.988h-2.54v-2.891h2.54V9.798c0-2.508 1.493-3.891 3.776-3.891 1.094 0 2.24.195 2.24.195v2.459h-1.264c-1.24 0-1.628.772-1.628 1.563v1.875h2.771l-.443 2.891h-2.328v6.988C18.344 21.129 22 16.992 22 12.001c0-5.522-4.477-9.999-9.999-9.999z">
+                </path>
+              </svg></div>
+          </a></div>
+      </div>
+      <div class="socialBtnContainer">
+        <div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(0, 119, 181);"
+            href="https://www.linkedin.com/">
+            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24">
+                <path
+                  d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zM8.339 18.337H5.667v-8.59h2.672v8.59zM7.003 8.574a1.548 1.548 0 110-3.096 1.548 1.548 0 010 3.096zm11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z">
+                </path>
+              </svg></div>
+          </a></div>
+      </div>
+      <div class="socialBtnContainer">
+        <div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(43, 144, 217);"
+            href="https://mastodon.social/">
+            <div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" fill="#fff">
+                <path
+                  d="M20.93 13.99c-.274 1.411-2.455 2.955-4.961 3.254-1.307.156-2.594.299-3.966.236-2.243-.103-4.013-.535-4.013-.535 0 .218.013.426.04.621.291 2.214 2.195 2.346 3.999 2.408 1.82.063 3.441-.448 3.441-.448l.075 1.645s-1.274.684-3.542.81c-1.25.068-2.803-.032-4.612-.511-3.923-1.038-4.598-5.22-4.701-9.462-.031-1.26-.012-2.448-.012-3.441 0-4.339 2.842-5.611 2.842-5.611 1.434-.658 3.894-.935 6.45-.956h.063c2.557.021 5.018.298 6.452.956 0 0 2.842 1.272 2.842 5.611 0 0 .036 3.201-.397 5.423zm-2.956-5.087v5.253h-2.081V9.058c0-1.075-.453-1.621-1.357-1.621-1.001 0-1.501.647-1.501 1.927v2.791h-2.07V9.364c0-1.28-.501-1.927-1.501-1.927-.904 0-1.357.546-1.357 1.621v5.098H6.025V8.903c0-1.074.275-1.927.823-2.558.567-.632 1.308-.955 2.228-.955 1.066 0 1.872.409 2.405 1.228l.519.87.519-.87c.532-.819 1.339-1.228 2.404-1.228.921 0 1.662.323 2.228.955.549.631.823 1.484.823 2.558z">
+                </path>
+              </svg></div>
+          </a></div>
+      </div>
+      <div class="socialBtnContainer">
+        <div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(29, 161, 242);"
+            href="https://twitter.com/">
+            <div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+                <path
+                  d="M19.981 8.497c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 005.001-1.721 4.036 4.036 0 01-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 01-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 01-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 008.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 014.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 002.556-.973 4.02 4.02 0 01-1.771 2.22A8.073 8.073 0 0022 6.414a8.645 8.645 0 01-2.019 2.083z"
+                  fill="#fff" fill-rule="nonzero"></path>
+              </svg></div>
+          </a></div>
+      </div>
+      <div class="socialBtnContainer">
+        <div class="socialBtn"><a target="_blank" rel="noopener noreferrer" style="background-color: rgb(26, 183, 234);"
+            href="https://vimeo.com/">
+            <div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+                <path
+                  d="M20.562 10.414c-2.036 4.349-6.949 10.267-10.054 10.267-3.06 0-3.501-6.527-5.173-10.869-.823-2.138-1.354-1.646-2.896-.567L1.5 8.031c2.248-1.976 4.499-4.272 5.88-4.399 1.559-.148 2.517.916 2.873 3.193.475 2.994 1.137 7.641 2.291 7.641.9 0 3.117-3.686 3.232-5.004.203-1.93-1.421-1.989-2.828-1.387 2.228-7.295 11.494-5.95 7.614 2.339z"
+                  fill="#fff" fill-rule="nonzero"></path>
+              </svg></div>
+          </a></div>
+      </div>
+    </div>
+    <div id="featuredContent">
+      <div class="images"><img src="./featured/image-0.jpeg" alt="Product image">
+        <div class="infoControls">
+          <p class="title">
+            Photo by Erol Ahmed on Unsplash
+          </p>
+        </div>
+      </div>
+      <div class="music">
+        <div class="mediaPlayerContainer"><video controlslist="nodownload nofullscreen noremoteplayback"
+            disablepictureinpicture="" poster="./featured/music-0.jpeg" preload="metadata" class="source"
+            style="pointer-events: auto;" controls="controls">
+            <source src="./featured/music-0.mp3"></video>
+          <div class="infoControls">
+            <p class="title">
+              Shipping Lanes 
+            </p>
+            <p class="artistAlbum"><span>Chad Crouch </span> <span> - Arps </span></p>
+            <div class="playerControl" style="display: none;"><output class="currentTime">00:00</output> <input
+                type="range" value="0" class="seekBar"> <a class="playPause"
+                style="background-color: rgb(56, 161, 105);">
+                <div class="icon play action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                    fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 3l14 9-14 9V3z" fill="none" stroke="#fff" stroke-width="2"></path>
+                  </svg></div>
+                <div class="icon pause action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                    fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                    <path fill="none" stroke="#fff" stroke-width="2" d="M5 5h14v14H5z"></path>
+                  </svg></div>
+              </a></div>
+          </div>
+        </div>
+      </div>
+      <div class="video">
+        <div class="mediaPlayerContainer"><video controlslist="nodownload nofullscreen noremoteplayback"
+            disablepictureinpicture="" preload="metadata" class="source" style="pointer-events: auto;"
+            controls="controls">
+            <source src="./featured/video-0.mp4#t=0.2"></video>
+          <div class="infoControls">
+            <p class="title">
+              Sea Side
+            </p>
+            <!---->
+            <div class="playerControl" style="display: none;"><output class="currentTime">00:00</output> <input
+                type="range" value="0" class="seekBar"> <a class="playPause"
+                style="background-color: rgb(56, 161, 105);">
+                <div class="icon play action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                    fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 3l14 9-14 9V3z" fill="none" stroke="#fff" stroke-width="2"></path>
+                  </svg></div>
+                <div class="icon pause action"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                    fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                    <path fill="none" stroke="#fff" stroke-width="2" d="M5 5h14v14H5z"></path>
+                  </svg></div>
+              </a></div>
+          </div>
+        </div>
+      </div>
+      <div class="document">
+        <div class="documentContainer">
+          <div class="documentPreview"><img src="./featured/document-0.jpeg" alt="Business_card"></div>
+          <div class="infoControls">
+            <p class="title">
+              Business_card
+            </p>
+            <p class="fileSize">
+              PDF - 830.59 KB
+            </p>
+            <div class="downloadDocument"><a href="./featured/Business_card.pdf" download="" target="_blank"
+                class="downloadBtn" style="background-color: rgb(56, 161, 105);">
+                <div class="icon action"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                    stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m4-5l5 5 5-5m-5 5V3"></path>
+                  </svg></div>
+              </a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <hr>
+    <div>
+      Created with
+      <a href="https://dbizcard.vercel.app/" target="_blank" rel="noopener noreferrer">Digital Business Card
+        Generator</a></div>
+  </footer>
+  <script src="./qrcode.min.js"></script>
+  <script>
+    let sC = document.getElementById("shareContainer"), cBtn = document.getElementById("closeBtn"), cURL = document.getElementById("copyURL"), cSURL = document.getElementById("copyShareURL"), dQR = document.getElementById("displayQRCode"), qrc = document.getElementById("qrcode"), s = document.getElementById("share"), sQRC = document.getElementById("showQRCode"), pKI = document.getElementById("pubKeyInfo"), sPK = document.getElementById("showPubKey"); function tC(e) { "2rem" == e.style.top ? (e.style.visibility = "visible", e.style.top = "0px", e.style.opacity = 1) : (e.style.top = "2rem", e.style.opacity = 0, setTimeout(() => { e.style.visibility = "hidden" }, 200)) } function dN(e) { e.style.display = "none" } window.addEventListener("load", () => { document.querySelector("#actions").style.display = "flex", qrc.innerHTML = new QRCode({ content: window.location.href, container: "svg-viewbox", join: !0, ecl: "L", padding: 0 }).svg() }), navigator.canShare ? s.addEventListener("click", () => { navigator.share({ title: document.title, text: "You can view my Digital Business Card here:", url: window.location.href }) }) : s.addEventListener("click", () => { tC(sC), cURL.style.display = "flex", dN(dQR), pKI && dN(pKI) }), sQRC.addEventListener("click", () => { tC(sC), dQR.style.display = "block", dN(cURL), pKI && dN(pKI) }), sPK && sPK.addEventListener("click", () => { tC(sC), pKI && (pKI.style.display = "flex"), dN(cURL), dN(dQR) }), cBtn.addEventListener("click", () => tC(sC)), cSURL.addEventListener("click", async () => { let e = cSURL.querySelectorAll(".action")[1]; await navigator.clipboard.writeText(window.location.href).then(t => { e.innerText = "Copied", setTimeout(() => { e.innerText = "Copy URL" }, 1e3) }) });
+  </script>
+  <script>
+    let pC = document.querySelectorAll(".playerControl"), pP = document.querySelectorAll(".playPause"), srcs = document.querySelectorAll(".source"); srcs.forEach(e => { e.style.pointerEvents = "none", e.removeAttribute("controls") }), pC.forEach((e, l) => { e.style.display = "flex"; let r = e.querySelector(".currentTime"), s = e.querySelector(".seekBar"), t = e.querySelector(".playPause"), a = t.querySelector(".play"), o = t.querySelector(".pause"); srcs[l].addEventListener("timeupdate", () => { let e = srcs[l].currentTime, t = 100 / srcs[l].duration * e; s.value = t, 100 == t && (s.value = 0, a.style.display = "block", o.style.display = "none"); let c = Math.floor(e / 60), y = Math.floor(e % 60); c.toString().length < 2 && (c = "0" + c), y.toString().length < 2 && (y = "0" + y), r.value = c + ":" + y }), s.addEventListener("change", () => { srcs[l].currentTime = srcs[l].duration * (parseInt(s.value) / 100) }), t.addEventListener("click", () => { srcs[l].paused ? (srcs.forEach((e, r) => { l != r && (e.paused || e.pause()) }), pP.forEach((e, l) => { let r = e.querySelector(".play"), s = e.querySelector(".pause"); r.style.display = "block", s.style.display = "none" }), srcs[l].play(), a.style.display = "none", o.style.display = "block") : (srcs[l].pause(), o.style.display = "none", a.style.display = "block") }) });
+  </script>
+</body>
+
+</html>

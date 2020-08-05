@@ -320,7 +320,6 @@
                 :downloadVcard="downloadVcard"
                 :footerCredit="footerCredit"
                 :showAlert="showAlert"
-                :dynamicShareBG="dynamicShareBG"
                 :shareHasLightBG="shareHasLightBG"
                 :actionHasLightBG="actionHasLightBG"
                 :publicKey="businessInfo.publicKey"
@@ -718,22 +717,6 @@ export default {
         URL: website,
         UID: `dbizcard-${randomNumber}`,
       }
-    },
-    dynamicShareBG() {
-      let hex = this.colors.logoBg.color
-      hex = hex.slice(1)
-      if (hex.length === 3) {
-        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
-      }
-      let r = parseInt(hex.slice(0, 2), 16)
-      let g = parseInt(hex.slice(2, 4), 16)
-      let b = parseInt(hex.slice(4, 6), 16)
-      const brightness = Math.round(
-        (parseInt(r) * 299 + parseInt(g) * 587 + parseInt(b) * 114) / 1000
-      )
-      return brightness > 125
-        ? `rgba(228,228,228,.25)`
-        : `rgba(128,128,128,.25)`
     },
     shareHasLightBG() {
       let hex = this.colors.logoBg.color
