@@ -1,6 +1,6 @@
 <template>
   <div id="donate" class="mt-16 px-4">
-    <h2 class="font-extrabold text-2xl">Please donate</h2>
+    <h2 class="font-extrabold text-2xl">Support me</h2>
     <div class="field-container mt-6">
       <p>
         If you find this service valuable to your
