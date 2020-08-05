@@ -28,7 +28,7 @@
             <div
               v-show="showUPI"
               v-on-clickaway="() => closeUPIQR()"
-              class="absolute text-center left-0 bottom-0 w-48 bg-white shadow-xs z-10 rounded m-12 p-4"
+              class="absolute text-center left-0 bottom-0 w-48 bg-white shadow-md z-10 rounded m-12 p-4"
             >
               <div ref="upiQR"></div>
               <p class="mt-2 font-extrabold">Scan to donate via UPI</p>

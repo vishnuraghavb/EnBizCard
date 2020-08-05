@@ -10,17 +10,19 @@
           colors[name].openPalette = !colors[name].openPalette
         "
       >
-        <div
-          class="absolute mt-10 ml-10 z-10"
-          v-if="colors[name].openPalette"
-          v-on-clickaway="() => closeColourPalette(name)"
-        >
-          <colorpicker
-            theme="light"
-            :color="colors[name].color"
-            @changeColor="changeColour($event, name)"
-          ></colorpicker>
-        </div>
+        <transition name="palette">
+          <div
+            class="absolute mt-12 ml-12 z-10"
+            v-show="colors[name].openPalette"
+            v-on-clickaway="() => closeColourPalette(name)"
+          >
+            <colorpicker
+              theme="light"
+              :color="colors[name].color"
+              @changeColor="changeColour($event, name)"
+            ></colorpicker>
+          </div>
+        </transition>
       </div>
       <p class="">{{ label }}</p>
     </div>
@@ -49,7 +51,31 @@ export default {
 }
 </script>
 <style lang="scss">
+.palette-enter-active,
+.palette-leave-active {
+  transition: transform 0.1s ease;
+  transform-origin: left top;
+}
+.palette-enter,
+.palette-leave-to {
+  transform: scale(0);
+}
 .hu-color-picker {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  &.light {
+    background: #fff;
+    .color-type {
+      .name {
+        background: #edf2f7;
+        color: black;
+      }
+      .value {
+        background: #f7fafc;
+        color: black;
+      }
+    }
+  }
   & > div:nth-last-child(-2n + 2),
   .color-alpha {
     display: none;
@@ -60,6 +86,7 @@ export default {
       width: 100% !important;
     }
   }
+
   & > div:last-of-type {
     .colors {
       margin: 0;
@@ -69,9 +96,13 @@ export default {
       grid-template-columns: repeat(5, 30px);
       grid-column-gap: 0.5rem;
       .item {
+        box-shadow: 0 0 1px rgba(#000, 0.2);
         margin: 0;
         width: auto;
         height: 30px;
+        &:hover {
+          transform: none;
+        }
         &:nth-last-child(-n + 14) {
           display: none;
         }

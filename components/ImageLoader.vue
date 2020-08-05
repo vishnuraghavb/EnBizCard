@@ -8,7 +8,7 @@
           type == 'logo' ? 'brand' : 'photo'
         }.svg?include`)
       "
-      :title="type.substr(0, 1).toUpperCase() + type.slice(1)"
+      :title="`${type == 'logo' ? 'Brand logo' : 'Card holder\'s photo'}`"
     ></div>
     <div class="flex flex-wrap items-center">
       <img
