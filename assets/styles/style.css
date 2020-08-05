@@ -118,11 +118,13 @@ header {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  height: 16rem;
+  padding: 6rem 3rem 4rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 #logo {
-  height: 6rem;
+  max-height: 6rem;
   text-align: center;
   color: gray;
   pointer-events: none;
