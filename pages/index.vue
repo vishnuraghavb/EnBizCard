@@ -143,12 +143,12 @@
               <button
                 v-for="(action, index) in actions.primaryActions"
                 @click="addAction('primaryActions', index)"
-                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer"
+                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer shadow"
                 :style="{
                   backgroundColor: `${colors.buttonBg.color}`,
                 }"
                 :title="action.name"
-                :aria-label="'Add '+action.name"
+                :aria-label="'Add ' + action.name"
               >
                 <div
                   class="w-6 h-6 action"
@@ -187,7 +187,7 @@
           </div>
           <div id="step-5" class="mt-16">
             <h2 class="font-extrabold text-2xl">
-              Featured content
+              Feature content
             </h2>
             <div class="field-container">
               <FeaturedContentLoader
@@ -335,66 +335,13 @@
     <div id="downloadSection" class="mt-16 px-4">
       <h2 class="font-extrabold text-2xl">Download</h2>
       <div class="field-container">
-        <div class="checklistItem mt-6 flex items-center">
-          <div class="relative" style="line-height: 0;">
-            <input
-              v-model="downloadCheck[0]"
-              class="checkbox cursor-pointer appearance-none h-12 w-12 border-gray-900 border-4 rounded-lg"
-              type="checkbox"
-              name="check1"
-              id="check1"
-            />
-            <img
-              v-if="downloadCheck[0]"
-              src="~/assets/icons/check.svg"
-              class="absolute top-0 left-0 m-3 z-10 pointer-events-none select-none"
-            />
-          </div>
-          <label class="ml-4" for="check1"
-            >I did not attach any link or file that will cause any risk to the
-            user</label
-          >
-        </div>
-        <div class="checklistItem mt-6 flex items-center">
-          <div class="relative" style="line-height: 0;">
-            <input
-              v-model="downloadCheck[1]"
-              class="checkbox cursor-pointer appearance-none h-12 w-12 border-gray-900 border-4 rounded-lg"
-              type="checkbox"
-              name="check2"
-              id="check2"
-            />
-            <img
-              v-if="downloadCheck[1]"
-              src="~/assets/icons/check.svg"
-              class="absolute top-0 left-0 m-3 z-10 pointer-events-none select-none"
-            />
-          </div>
-          <label class="ml-4" for="check2"
-            >I have verified that all the links are working correctly in the
-            Preview</label
-          >
-        </div>
-        <div class="checklistItem mt-6 flex items-center">
-          <div class="relative" style="line-height: 0;">
-            <input
-              v-model="downloadCheck[2]"
-              class="checkbox cursor-pointer appearance-none h-12 w-12 border-gray-900 border-4 rounded-lg"
-              type="checkbox"
-              name="check3"
-              id="check3"
-            />
-            <img
-              v-if="downloadCheck[2]"
-              src="~/assets/icons/check.svg"
-              class="absolute top-0 left-0 m-3 z-10 pointer-events-none select-none"
-            />
-          </div>
-          <label class="ml-4" for="check3"
-            >I have verified that all the information provided here are
-            correct</label
-          >
-        </div>
+        <CheckListItem
+          v-for="(item, index) in downloadCheckList"
+          :downloadCheckList='downloadCheckList'
+          :item="item"
+          :key="index"
+          :index="index"
+        />
         <button
           ref="downloadPackage"
           @click="downloadPackage"
@@ -412,7 +359,7 @@
         </p>
       </div>
     </div>
-
+    <Donate />
     <StyleSheet ref="stylesheet" v-show="false" />
     <Vcard ref="vCard" v-show="false" :vCard="vCard" />
     <ReadMe ref="readme" v-show="false" :name="username" />
@@ -473,6 +420,8 @@ import StyleSheet from '@/components/StyleSheet'
 import ReadMe from '@/components/ReadMe'
 import Vcard from '@/components/Vcard'
 import QRCode from '@/components/QRCode'
+import Donate from '@/components/Donate'
+import CheckListItem from '@/components/CheckListItem'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 export default {
@@ -487,11 +436,29 @@ export default {
     ReadMe,
     Vcard,
     QRCode,
+    Donate,
+    CheckListItem,
   },
 
   data() {
     return {
-      downloadCheck: [false, false, false],
+      downloadCheckList: [
+        {
+          label:
+            'I did not attach any link or file that will cause any risk to the user',
+          checked: false,
+        },
+        {
+          label:
+            'I have verified that all the links are working correctly in the Preview',
+          checked: false,
+        },
+        {
+          label:
+            'I have verified that all the information provided here are correct',
+          checked: false,
+        },
+      ],
       images: {
         logo: {
           url: null,
@@ -715,7 +682,7 @@ export default {
       } else return false
     },
     downloadChecked() {
-      return this.downloadCheck.filter((e) => e).length == 3
+      return this.downloadCheckList.filter((e) => e.checked).length == 3
     },
     descriptionCharCount() {
       return this.businessInfo.businessDescription

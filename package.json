@@ -16,7 +16,6 @@
     "file-saver": "^2.0.2",
     "id3-parser": "^2.0.0",
     "jszip": "^3.5.0",
-    "mp3tag.js": "^2.3.1",
     "nuxt": "^2.13.0",
     "vue-clickaway2": "^2.3.2"
   },

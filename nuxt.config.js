@@ -67,7 +67,7 @@ export default {
         href: '/safari-pinned-tab.svg',
       },
     ],
-    script: [],
+    script: [{src:'/qrcode.min.js'}],
   },
   manifest: {
     name: 'Digital Business Card Generator - Free & Open-Source',

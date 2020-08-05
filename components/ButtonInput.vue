@@ -1,7 +1,7 @@
 <template>
   <div class="field-container flex mt-6">
     <div
-      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full shadow"
+      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full"
       :style="{
         backgroundColor: `${name == 'socialLinks' ? item.color : buttonBg}`,
       }"
@@ -23,12 +23,12 @@
       />
     </div>
     <button
-      class="p-4 flex-shrink-0 outline-none"
+      class="p-3 flex-shrink-0 outline-none"
       @click="removeAction(name, index)"
       :aria-label="'Remove ' + item.label"
     >
       <div
-        class="w-4 h-4"
+        class="w-6 h-6"
         v-html="require(`~/assets/icons/remove.svg?include`)"
       ></div>
     </button>

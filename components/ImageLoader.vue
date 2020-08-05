@@ -19,7 +19,7 @@
       />
       <button
         v-if="!imageAttached"
-        class="p-2 border-4 rounded-full border-gray-900 cursor-pointer"
+        class="p-2 border-4 rounded-full border-gray-900 cursor-pointer shadow"
         @click="loadImage(type)" :aria-label="label"
       >
         <input
