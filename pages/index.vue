@@ -393,7 +393,7 @@
               rel="noopener noreferrer"
               >Vishnu&nbsp;Raghav</a
             >
-            | MIT&nbsp;License |
+            | GNU&nbsp;GPLv3 |
             <a
               class="underline hover:text-green-600 transition-colors duration-200"
               href="https://github.com/vishnuraghavb/dbizcard"
