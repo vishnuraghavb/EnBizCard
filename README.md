@@ -2,8 +2,6 @@ WEBSITE: https://dbizcard.vercel.app/
 
 # Digital Business Card Generator
 
-Project ported from GitLab
-
 ## Introduction
 
 Digital Business Card Generator is a free and open-source front-end web application that lets user to quickly generate an interactive and responsive HTML-based digital business card that can be hosted with their website.
