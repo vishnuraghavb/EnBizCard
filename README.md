@@ -58,4 +58,4 @@ Digital Business Card Generator is a free and open-source front-end web applicat
 
 ## Licensing
 
-GNU GPLv3 License
+GPL-3.0 License
