@@ -55,6 +55,7 @@ Digital Business Card Generator is a free and open-source front-end web applicat
   - ~~Documents~~
 - ~~Embed content~~( dropped due to security reasons )
 - ~~Public encryption key sharing~~
+- Product showcase
 
 ## License
 
