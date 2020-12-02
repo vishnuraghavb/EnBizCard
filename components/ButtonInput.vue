@@ -1,7 +1,7 @@
 <template>
   <div class="field-container flex mt-6">
     <div
-      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full"
+      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full shadow"
       :style="{
         backgroundColor: `${name == 'socialLinks' ? item.color : buttonBg}`,
       }"
