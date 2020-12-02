@@ -725,7 +725,7 @@ export default {
           },
           {
             name: 'funkwhale',
-            placeholder: 'funkwhale.com/username',
+            placeholder: 'funkwhale.audio/username',
             value: null,
             color: '#ffffff',
             label: 'Funkwhale username',
