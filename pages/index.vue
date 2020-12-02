@@ -336,7 +336,7 @@
       <div class="field-container">
         <CheckListItem
           v-for="(item, index) in downloadCheckList"
-          :downloadCheckList='downloadCheckList'
+          :downloadCheckList="downloadCheckList"
           :item="item"
           :key="index"
           :index="index"
@@ -563,11 +563,32 @@ export default {
         ],
         socialLinks: [
           {
+            name: 'pixelfed',
+            placeholder: 'pixelfed.social/username',
+            value: null,
+            color: '#8d59a8',
+            label: 'Pixelfed profile URL',
+          },
+          {
             name: 'facebook',
             placeholder: 'facebook.com/pagename',
             value: null,
             color: '#1877f2',
             label: 'Facebook page URL',
+          },
+          {
+            name: 'diaspora',
+            placeholder: 'diaspora.social/username',
+            value: null,
+            color: '#000000',
+            label: 'Diaspora profile URL',
+          },
+          {
+            name: 'friendica',
+            placeholder: 'friendica.social/username',
+            value: null,
+            color: '#1d6e9a',
+            label: 'Friendica profile URL',
           },
           {
             name: 'twitter',
@@ -603,6 +624,13 @@ export default {
             value: null,
             color: '#1ab7ea',
             label: 'Vimeo channel URL',
+          },
+          {
+            name: 'peertube',
+            placeholder: 'peertube.video/channelname',
+            value: null,
+            color: '#ffffff',
+            label: 'Peertube channel URL',
           },
           {
             name: 'pinterest',
@@ -652,6 +680,55 @@ export default {
             value: null,
             color: '#2c4762',
             label: 'Tumblr blog URL',
+          },
+          {
+            name: 'quora',
+            placeholder: 'quora.com/username',
+            value: null,
+            color: '#a82400',
+            label: 'Quora username',
+          },
+          {
+            name: 'medium',
+            placeholder: 'medium.com/publication_name',
+            value: null,
+            color: '#000000',
+            label: 'Medium publication',
+          },
+          {
+            name: 'discord',
+            placeholder: 'discord.com/username',
+            value: null,
+            color: '#7289da',
+            label: 'Discord username',
+          },
+          {
+            name: 'twitch',
+            placeholder: 'twitch.tv/username',
+            value: null,
+            color: '#9146ff',
+            label: 'Twitch username',
+          },
+          {
+            name: 'spotify',
+            placeholder: 'spotify.com/username',
+            value: null,
+            color: '#1ed760',
+            label: 'Spotify username',
+          },
+          {
+            name: 'soundcloud',
+            placeholder: 'soundcloud.com/username',
+            value: null,
+            color: '#ff3300',
+            label: 'Soundcloud username',
+          },
+          {
+            name: 'funkwhale',
+            placeholder: 'funkwhale.com/username',
+            value: null,
+            color: '#ffffff',
+            label: 'Funkwhale username',
           },
         ],
       },
