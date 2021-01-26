@@ -49,11 +49,11 @@
 <script>
 import { convertFileToBuffer } from 'id3-parser/lib/universal/helpers'
 import { parse } from 'id3-parser'
-
-import pdfjs from 'pdfjs-dist'
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry'
+const pdfjs = require('pdfjs-dist/build/pdf.min')
+const pdfjsWorker = require('pdfjs-dist/build/pdf.worker.entry')
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
-
+pdfjs.disableWorker = true
+pdfjs.workerSrc = false
 export default {
   props: [
     'featured',
