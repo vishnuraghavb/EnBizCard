@@ -3,7 +3,7 @@ body {
   width: 100%;
   padding: 0;
   max-width: 30rem;
-  color: #1a202c;
+  color: #000;
   font-family: sans-serif;
   position: relative;
 }
@@ -13,7 +13,6 @@ body {
   z-index: 1;
   width: 100%;
   bottom: 0;
-  background: #fff;
   -webkit-transition: top 0.2s ease-out, opacity 0.1s ease-out;
   transition: top 0.2s ease-out, opacity 0.1s ease-out;
   -webkit-transform: translateZ(0);
@@ -105,6 +104,9 @@ body {
 
 #qrcode {
   margin: 2rem;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 1.5rem;
 }
 
 header {
@@ -163,11 +165,8 @@ header {
 }
 
 main {
-  background: #fff;
   border-radius: 1.5rem 1.5rem 0 0;
   padding: 1.5rem;
-  -webkit-box-shadow: 0 -1px 4px -1px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 -1px 4px -1px rgba(0, 0, 0, 0.1);
 }
 
 #profile {
@@ -180,10 +179,8 @@ main {
   width: 6rem;
   height: 6rem;
   border-radius: 100%;
-  border: 1px solid #edf2f7;
   margin-right: 0.75rem;
   text-align: center;
-  color: gray;
   -ms-flex-item-align: start;
       align-self: flex-start;
   pointer-events: none;
@@ -220,7 +217,7 @@ main {
 }
 
 .bizDescription {
-  color: #4a5568;
+  color: #212529;
   font-size: 0.875rem;
   white-space: pre-line;
   line-height: 1.5;
@@ -242,7 +239,7 @@ main {
 
 .contactBtnContainer,
 .socialBtnContainer {
-  width: 33.333333%;
+  width: 33.33%;
 }
 
 .contactBtn,
@@ -323,7 +320,6 @@ a:not(#closeBtn):hover, a:not(#closeBtn):focus {
 }
 
 #downloadVcard p {
-  color: #fff;
   margin: 0;
 }
 
@@ -355,8 +351,6 @@ a:not(#closeBtn):hover, a:not(#closeBtn):focus {
 .document {
   overflow: hidden;
   border-radius: 0.5rem;
-  -webkit-box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.2);
   margin-top: 1rem;
 }
 
@@ -442,7 +436,7 @@ video {
   height: 0.5rem;
   margin-top: 2rem;
   border-radius: 5rem;
-  background: #edf2f7;
+  background: #adb5bd;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -463,7 +457,6 @@ video {
 }
 
 footer {
-  background: #fff;
   padding: 1.5rem 1.5rem 2rem;
 }
 
@@ -471,17 +464,11 @@ footer div {
   margin-top: 1rem;
   font-size: 0.75rem;
   text-align: center;
-  color: #4a5568;
+  color: #000;
 }
 
 footer div a {
   text-decoration: underline;
-  color: #4a5568;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid #edf2f7;
-  border-bottom: 1px solid #fff;
+  color: #000;
 }
 /*# sourceMappingURL=style.css.map */

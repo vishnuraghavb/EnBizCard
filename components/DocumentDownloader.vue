@@ -4,10 +4,10 @@
       <img :src="PreviewMode?media.coverDataURI:`./featured/document-${index}.jpeg`" :alt="media.title" />
     </div>
     <div class="infoControls">
-      <p class="title">
+      <p class="title card">
         {{ media.title }}
       </p>
-      <p class="fileSize">
+      <p class="fileSize card">
         PDF - {{ media.filesize }}
       </p>
       <div class="downloadDocument">

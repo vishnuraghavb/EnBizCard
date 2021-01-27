@@ -48,26 +48,28 @@
           }
           .action{
             color:#fff;
-            {{actionHasLightBG ? 'filter:invert(1)' : null}}
+            {{hasLightBG('buttonBg') ? 'filter:invert(1)' : null}}
           }
 
           .shareAction{
-            {{shareHasLightBG ? 'filter:invert(1)' : null}}
+            {{hasLightBG('logoBg') ? 'filter:invert(1)' : null}}
+          }
+          .card{
+            {{hasLightBG('cardBg') ? null : 'filter:invert(1)'}}
+          }
+          .text{
+            {{hasLightBG('mainBg') ? null : 'filter:invert(1)'}}
           }
         </style>
       </head>
       <body>
-        <div
+        <div 
           id="shareContainer"
           ref="shareContainer"
-          :style="
-            !PreviewMode
-              ? 'visibility: hidden; top: 2rem; opacity: 0;'
-              : 'visibility: hidden; top: 2rem; opacity: 0;'
-          "
+          :style="`backgroundColor: ${colors.mainBg.color}; visibility: hidden; top: 2rem; opacity: 0;`"
         >
           <div id="closeBtnContainer">
-            <a id="closeBtn" @click="closePublicKey()">
+            <a id="closeBtn" @click="closePublicKey()" class="text">
               <div
                 class="icon"
                 v-html="require(`~/assets/icons/remove.svg?include`)"
@@ -76,9 +78,9 @@
           </div>
           <div id="shareContent">
             <div id="pubKeyInfo">
-              <p>
+              <p class="text">
                 You can download my public key and use it to send me encrypted
-                messages.
+                messages
               </p>
               <a
                 :href="
@@ -98,8 +100,8 @@
               ><span class="action">Download</span></a>
             </div>
             <div id="copyURL" ref="copyURL">
-              <p>
-                You can copy my Business Card URL and share it via any medium.
+              <p class="text">
+                You can copy my Business Card URL and share it via any medium
               </p>
               <a
                 id="copyShareURL"
@@ -114,10 +116,10 @@
             </div>
             <div id="displayQRCode" ref="displayQRCode">
               <div id="qrcode"></div>
-              <h2>
+              <h2 class="text">
                 Scan this QR Code
               </h2>
-              <p>
+              <p class="text">
                 to view my Business Card
               </p>
             </div>
@@ -163,7 +165,7 @@
             </a>
           </div>
         </header>
-        <main>
+        <main :style="{ backgroundColor: `${colors.mainBg.color}` }">
           <div id="profile">
             <img
               v-if="images.photo.url"
@@ -176,15 +178,15 @@
             />
 
             <div id="profileInfo">
-              <p class="name">
+              <p class="name text">
                 {{ businessInfo.name }}
               </p>
-              <p class="jobtitle">
+              <p class="jobtitle text">
                 {{ businessInfo.jobTitle }}
               </p>
             </div>
           </div>
-          <p class="bizDescription" v-if="businessInfo.businessDescription">{{ businessInfo.businessDescription }}
+          <p class="bizDescription text" v-if="businessInfo.businessDescription">{{ businessInfo.businessDescription }}
           </p>
           <div id="contactBtns">
             <div
@@ -207,7 +209,7 @@
                     v-html="require(`~/assets/icons/${item.name}.svg?include`)"
                   ></div>
                 </a>
-                <p>
+                <p class="text">
                   {{
                     item.name.substr(0, 1).toUpperCase() + item.name.slice(1)
                   }}
@@ -253,7 +255,7 @@
             </div>
           </div>
           <div id="featuredContent">
-            <div class="images" v-for="(image, index) in featured.images">
+            <div class="images" v-for="(image, index) in featured.images" :style="{ backgroundColor: `${colors.cardBg.color}` }">
               <img
                 v-if="image.dataURI"
                 :src="
@@ -264,12 +266,12 @@
                 alt="Product image"
               />
               <div class="infoControls">
-                <p class="title">
+                <p class="title card">
                   {{ image.title }}
                 </p>
               </div>
             </div>
-            <div class="music" v-for="(music, index) in featured.music">
+            <div class="music" v-for="(music, index) in featured.music" :style="{ backgroundColor: `${colors.cardBg.color}` }">
               <MediaPlayer
                 ref="mediaPlayer"
                 :media="music"
@@ -280,7 +282,7 @@
                 :PreviewMode="PreviewMode"
               />
             </div>
-            <div class="video" v-for="(video, index) in featured.videos">
+            <div class="video" v-for="(video, index) in featured.videos" :style="{ backgroundColor: `${colors.cardBg.color}` }">
               <MediaPlayer
                 ref="mediaPlayer"
                 :media="video"
@@ -293,7 +295,7 @@
             </div>
             <div
               class="document"
-              v-for="(document, index) in featured.documents"
+              v-for="(document, index) in featured.documents" :style="{ backgroundColor: `${colors.cardBg.color}` }"
             >
               <DocumentDownloader
                 :media="document"
@@ -305,9 +307,8 @@
             </div>
           </div>
         </main>
-        <footer v-if="footerCredit">
-          <hr />
-          <div>
+        <footer v-if="footerCredit" :style="{ backgroundColor: `${colors.mainBg.color}` }">
+          <div class="text">
             Created with
             <a
               href="https://dbizcard.vercel.app/"
@@ -350,8 +351,7 @@ export default {
     'downloadKey',
     'footerCredit',
     'showAlert',
-    'shareHasLightBG',
-    'actionHasLightBG',
+    'hasLightBG',
     'publicKey',
     'pubKeyIsValid',
   ],
@@ -435,7 +435,7 @@ export default {
     width: 100%;
     padding: 0;
     max-width: 30rem;
-    color: #1a202c;
+    color: #000;
     font-family: sans-serif;
     position: relative;
   }
@@ -444,7 +444,6 @@ export default {
     z-index: 1;
     width: 100%;
     bottom: 0;
-    background: #fff;
     transition: top 0.2s ease-out, opacity 0.1s ease-out;
     transform: translateZ(0);
   }
@@ -508,6 +507,9 @@ export default {
   }
   #qrcode {
     margin: 2rem;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 1.5rem;
   }
 
   header {
@@ -544,10 +546,8 @@ export default {
     display: flex;
   }
   main {
-    background: #fff;
     border-radius: 1.5rem 1.5rem 0 0;
     padding: 1.5rem;
-    box-shadow: 0 -1px 4px -1px rgba(#000, 0.1);
   }
   #profile {
     display: flex;
@@ -555,10 +555,8 @@ export default {
       width: 6rem;
       height: 6rem;
       border-radius: 100%;
-      border: 1px solid #edf2f7;
       margin-right: 0.75rem;
       text-align: center;
-      color: gray;
       align-self: flex-start;
       pointer-events: none;
       user-select: none;
@@ -582,7 +580,7 @@ export default {
   }
 
   .bizDescription {
-    color: #4a5568;
+    color: #212529;
     font-size: 0.875rem;
     white-space: pre-line;
     line-height: 1.5;
@@ -597,7 +595,7 @@ export default {
   }
   .contactBtnContainer,
   .socialBtnContainer {
-    width: 33.333333%;
+    width: 33.33%;
   }
   .contactBtn,
   .socialBtn {
@@ -644,7 +642,6 @@ a{
       margin-right: 0.5rem;
     }
     p {
-      color: #fff;
       margin: 0;
     }
   }
@@ -666,7 +663,6 @@ a{
   .document {
     overflow: hidden;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 8px -2px rgba(#000, 0.2);
     margin-top: 1rem;
     img {
       display: block;
@@ -720,7 +716,7 @@ a{
     height: 0.5rem;
     margin-top: 2rem;
     border-radius: 5rem;
-    background: #edf2f7;
+    background: #adb5bd;
     appearance: none;
     cursor: pointer;
   }
@@ -736,23 +732,17 @@ a{
     display: none;
   }
   footer {
-    background: #fff;
     padding: 1.5rem 1.5rem 2rem;
     div {
       margin-top: 1rem;
       font-size: 0.75rem;
       text-align: center;
-      color: #4a5568;
+      color: #000;
       a {
         text-decoration: underline;
-        color: #4a5568;
+        color: #000;
       }
     }
-  }
-  hr {
-    border: 0;
-    border-top: 1px solid #edf2f7;
-    border-bottom: 1px solid #fff;
   }
 }
 </style>

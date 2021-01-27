@@ -28,10 +28,10 @@
       />
     </video>
     <div class="infoControls">
-      <p class="title">
+      <p class="title card">
         {{ media.title }}
       </p>
-      <p class="artistAlbum" v-if="media.artist">
+      <p class="artistAlbum card" v-if="media.artist">
         <span>{{ media.artist }}</span>
         <span v-if="media.album"> - {{ media.album }}</span>
       </p>
@@ -40,7 +40,7 @@
         ref="playerControl"
         :style="{ display: PreviewMode ? 'flex' : 'none' }"
       >
-        <output class="currentTime" ref="bubble">00:00</output>
+        <output class="currentTime card" ref="bubble">00:00</output>
         <input
           class="seekBar"
           @change="setProgress($event)"

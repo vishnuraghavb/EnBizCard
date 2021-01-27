@@ -1,9 +1,9 @@
 <template>
   <div class="checklistItem mt-6 flex items-center">
-    <div class="relative" style="line-height: 0;">
+    <div class="relative" style="line-height: 0">
       <input
         v-model="downloadCheckList[index].checked"
-        class="checkbox cursor-pointer appearance-none h-12 w-12 border-gray-900 border-4 rounded-lg shadow"
+        class="checkbox cursor-pointer appearance-none h-12 w-12 border-gray-900 border-4 rounded shadow"
         type="checkbox"
         :id="'check' + index"
       />
