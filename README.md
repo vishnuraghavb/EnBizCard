@@ -42,7 +42,8 @@ Digital Business Card Generator is a free and open-source front-end web applicat
 - Social media links
 - Feature your product images, artworks, music releases, video showreels, brochures
 - Easily share your card from any mobile device with either a link or QR-code
-- PGP public key sharing
+- PGP public key sharing with fingerprint support
+- Embed HTML content (supports iframe)
 
 ## Roadmap
 
@@ -54,7 +55,7 @@ Digital Business Card Generator is a free and open-source front-end web applicat
   - ~~Videos~~
   - ~~Documents~~
 - ~~Public encryption key sharing~~
-- Embed content
+- ~~Embed content~~
 - Product showcase
 
 ## License

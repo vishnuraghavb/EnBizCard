@@ -190,9 +190,8 @@
           </p>
           <div id="contactBtns">
             <div
-              v-if="primaryActions.length"
               class="contactBtnContainer"
-              v-for="item in primaryActions"
+              v-for="(item, index) in primaryActions" :key="index"
             >
               <div class="contactBtn">
                 <a
@@ -237,7 +236,7 @@
             </div>
           </div>
           <div id="socialBtns">
-            <div class="socialBtnContainer" v-for="item in socialLinks">
+            <div class="socialBtnContainer" v-for="(item, index) in socialLinks" :key="index">
               <div class="socialBtn">
                 <a
                   :href="item.value"
@@ -255,7 +254,7 @@
             </div>
           </div>
           <div id="featuredContent">
-            <div class="images" v-for="(image, index) in featured.images" :style="{ backgroundColor: `${colors.cardBg.color}` }">
+            <div class="images" v-for="(image, index) in featured.images" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }">
               <img
                 v-if="image.dataURI"
                 :src="
@@ -271,7 +270,7 @@
                 </p>
               </div>
             </div>
-            <div class="music" v-for="(music, index) in featured.music" :style="{ backgroundColor: `${colors.cardBg.color}` }">
+            <div class="music" v-for="(music, index) in featured.music" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }">
               <MediaPlayer
                 ref="mediaPlayer"
                 :media="music"
@@ -282,7 +281,7 @@
                 :PreviewMode="PreviewMode"
               />
             </div>
-            <div class="video" v-for="(video, index) in featured.videos" :style="{ backgroundColor: `${colors.cardBg.color}` }">
+            <div class="video" v-for="(video, index) in featured.videos" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }">
               <MediaPlayer
                 ref="mediaPlayer"
                 :media="video"
@@ -295,7 +294,7 @@
             </div>
             <div
               class="document"
-              v-for="(document, index) in featured.documents" :style="{ backgroundColor: `${colors.cardBg.color}` }"
+              v-for="(document, index) in featured.documents" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }"
             >
               <DocumentDownloader
                 :media="document"
@@ -304,6 +303,11 @@
                 :index="index"
                 :PreviewMode="PreviewMode"
               />
+            </div>
+          </div>
+          <div id="embedContent">
+            <div class="embedContent" v-for="(item, index) in getEmbedContent" :key="item.value+index" style="position:relative;padding-top:56.25%;">
+            <iframe :src="stripAttr(item.value)" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" allow="layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'; camera 'none'; microphone 'none'"></iframe>
             </div>
           </div>
         </main>
@@ -343,6 +347,7 @@ export default {
     'businessInfo',
     'images',
     'featured',
+    'embedContent',
     'colors',
     'primaryActions',
     'socialLinks',
@@ -373,8 +378,17 @@ export default {
     getFeaturedMusic() {
       return this.featured.music
     },
+    getEmbedContent(){
+      return this.embedContent.filter(e=>this.stripAttr(e.value))
+    },
   },
   methods: {
+    stripAttr(val){
+      if(/<iframe/.test(val)) {
+      let iframe = val.match(/<iframe(.*)\/iframe>/)[0]
+      return iframe.match(/src="?([^"\s]+)"/)[1]
+      } else return null
+    },
     toggleContainer(e) {
       '2rem' == e.style.top
         ? ((e.style.visibility = 'visible'),
@@ -425,7 +439,6 @@ export default {
       })
     },
   },
-  mounted() {},
 }
 </script>
 <style lang="scss">
@@ -660,10 +673,11 @@ a{
   .images,
   .music,
   .video,
-  .document {
+  .document,
+  .embedContent {
     overflow: hidden;
     border-radius: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     img {
       display: block;
       pointer-events: none;

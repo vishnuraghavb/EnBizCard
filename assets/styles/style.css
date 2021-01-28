@@ -348,16 +348,18 @@ a:not(#closeBtn):hover, a:not(#closeBtn):focus {
 .images,
 .music,
 .video,
-.document {
+.document,
+.embedContent {
   overflow: hidden;
   border-radius: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .images img,
 .music img,
 .video img,
-.document img {
+.document img,
+.embedContent img {
   display: block;
   pointer-events: none;
   -webkit-user-select: none;

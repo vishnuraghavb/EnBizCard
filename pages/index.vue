@@ -123,7 +123,7 @@
                 class="block mt-2 px-4 py-3 w-full bg-gray-200 placeholder-gray-600 rounded focus:outline-none resize-none"
                 rows="5"
                 spellcheck="false"
-                placeholder="Paste the PGP PUBLIC KEY BLOCK here"
+                placeholder="Paste PGP PUBLIC KEY BLOCK here"
               ></textarea>
             </div>
             <div class="field-container relative mt-6">
@@ -143,7 +143,7 @@
                 type="text"
                 v-model="businessInfo.fingerprint"
                 class="mt-2 px-4 w-full h-12 bg-gray-200 placeholder-gray-600 rounded focus:outline-none"
-                placeholder="Paste the 40 character fingerprint here"
+                placeholder="Paste 40 character fingerprint here"
               />
             </div>
           </div>
@@ -250,6 +250,29 @@
             </div>
           </div>
           <div id="step-6" class="mt-16">
+            <h2 class="font-extrabold text-2xl">Embed content</h2>
+            <IframeInput
+              v-for="(item, index) in embedContent"
+              :key="index"
+              name="embedContent"
+              :type="embedContent"
+              :item="item"
+              :index="index"
+              :buttonBg="colors.buttonBg.color"
+              :removeEmbedContent="removeEmbedContent"
+            />
+            <div class="field-container">
+              <button
+                @click="addEmbedContent()"
+                class="flex-shrink-0 mt-6 mr-6 p-2 border-4 rounded-full border-gray-900 cursor-pointer shadow"
+                title="Add embed content"
+                aria-label="Add embed content"
+              >
+                <div class="w-6 h-6" v-html="require(`~/assets/icons/add.svg?include`)"></div>
+              </button>
+            </div>
+          </div>
+          <div id="step-7" class="mt-16">
             <h2 class="font-extrabold text-2xl">Colour customisation</h2>
             <div class="field-container">
               <ColourSelector
@@ -274,8 +297,7 @@
               />
             </div>
           </div>
-
-          <div id="step-7" class="mt-16">
+          <div id="step-8" class="mt-16">
             <h2 class="font-extrabold text-2xl">Enable footer credit?</h2>
             <div class="field-container mt-6">
               <div
@@ -343,6 +365,7 @@
                 :businessInfo="businessInfo"
                 :images="images"
                 :featured="featured"
+                :embedContent="embedContent"
                 :colors="colors"
                 :primaryActions="primaryActions"
                 :socialLinks="socialLinks"
@@ -442,6 +465,7 @@ import CustomAlert from '@/components/CustomAlert'
 import ImageLoader from '@/components/ImageLoader'
 import FeaturedContentLoader from '@/components/FeaturedContentLoader'
 import ButtonInput from '@/components/ButtonInput'
+import IframeInput from '@/components/IframeInput'
 import ColourSelector from '@/components/ColourSelector'
 import DBizCard from '@/components/DBizCard'
 import StyleSheet from '@/components/StyleSheet'
@@ -458,6 +482,7 @@ export default {
     ImageLoader,
     FeaturedContentLoader,
     ButtonInput,
+    IframeInput,
     ColourSelector,
     DBizCard,
     StyleSheet,
@@ -770,6 +795,13 @@ export default {
           },
         ],
       },
+      embedContent: [
+        {
+          placeholder: 'Paste HTML embed link here',
+          value: null,
+          label: 'Embed link',
+        },
+      ],
       footerCredit: true,
       PreviewMode: true,
       content: null,
@@ -863,6 +895,16 @@ export default {
     removeAction(type, index) {
       this.actions[type].unshift(this[type][index])
       this[type].splice(index, 1)
+    },
+    addEmbedContent(index) {
+      this.embedContent.push({
+          placeholder: 'Paste HTML embed link here',
+          value: null,
+          label: 'Embed link',
+        },)
+    },
+    removeEmbedContent(index) {
+      this.embedContent.splice(index, 1)
     },
     downloadVcard() {
       let blob = new Blob([this.$refs.vCard.$refs.vCard.innerText], {

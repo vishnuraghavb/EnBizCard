@@ -228,10 +228,11 @@ a:not(#closeBtn){
 .images,
 .music,
 .video,
-.document {
+.document,
+.embedContent {
   overflow: hidden;
   border-radius: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   img {
     display: block;
     pointer-events: none;

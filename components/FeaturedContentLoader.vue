@@ -2,13 +2,13 @@
   <div class="flex mt-6">
     <div
       v-if="fileAttached"
-      class="w-12 h-12 p-3 mr-1"
+      class="w-12 h-12 p-3 mr-1 flex-shrink-0"
       v-html="require(`~/assets/icons/${type}.svg?include`)"
     ></div>
     <div class="flex flex-wrap items-center">
-      <div v-for="(item, index) in featured[type]">
+      <div v-for="(item, index) in featured[type]" :key="index">
         <img
-          class="h-12 border-2 p-1 mr-1 border-white transition-colors duration-200 hover:border-red-600 cursor-pointer"
+          class="h-12  border-2 p-1 mr-1 border-white transition-colors duration-200 hover:border-red-600 cursor-pointer"
           v-if="type == 'images' ? item.dataURI : item.coverDataURI"
           :src="type == 'images' ? item.dataURI : item.coverDataURI"
           :alt="item.title"
