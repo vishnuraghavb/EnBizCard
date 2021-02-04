@@ -1,6 +1,7 @@
 <template>
   <div class="mediaPlayerContainer">
     <video
+      v-show="type == 'video'"
       controlsList="nodownload nofullscreen noremoteplayback"
       @timeupdate="updateSeek()"
       disablePictureInPicture
@@ -8,25 +9,24 @@
       class="source"
       :style="{ pointerEvents: PreviewMode ? 'none' : 'auto' }"
       :controls="!PreviewMode"
-      :poster="
-        type == 'music'
-          ? PreviewMode
-            ? media.coverDataURI
-            : './featured/music-' + index + '.' + media.coverFormat
-          : null
-      "
       preload="metadata"
     >
       <source
         :src="
           PreviewMode
             ? media.dataURI + '#t=0.2'
-            : `./featured/${type == 'music' ? 'music' : 'video'}-${index}.${
-                type == 'music' ? 'mp3' : 'mp4#t=0.2'
-              }`
+            : `./featured/${getTitle(media.title)}.${media.format}`
         "
       />
     </video>
+    <img v-show="type == 'music'"
+      :src="
+        PreviewMode
+          ? media.coverDataURI
+          : `./featured/${getTitle(media.title)}.${media.coverFormat}`
+      "
+      alt="cover"
+    />
     <div class="infoControls">
       <p class="title card">
         {{ media.title }}
@@ -73,8 +73,11 @@
 
 <script>
 export default {
-  props: ['media', 'type', 'colors', 'PreviewMode', 'index', 'togglePlay'],
+  props: ['media', 'type', 'colors', 'PreviewMode', 'togglePlay'],
   methods: {
+    getTitle(e) {
+      return e.toLowerCase().split(' ').join('_')
+    },
     setProgress(e) {
       let mediaSource = this.$refs.mediaSource
       let time = mediaSource.duration * (e.target.value / 100)

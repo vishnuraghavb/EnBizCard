@@ -3,18 +3,21 @@
     <div
       class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full shadow"
       :style="{
-        backgroundColor: `${name == 'socialLinks' ? item.color : buttonBg}`,
+        backgroundColor: `${
+          name == 'secondaryActions' ? item.color : buttonBg
+        }`,
       }"
     >
       <div
         class="w-6 h-6"
-        :class="name == 'socialLinks' ? null : 'action'"
+        :class="name == 'secondaryActions' ? null : 'action'"
         v-html="require(`~/assets/icons/${item.name}.svg?include`)"
       ></div>
     </div>
     <div class="w-full">
       <input
-        class="px-4 w-full h-12 bg-gray-200 placeholder-gray-600 rounded focus:outline-none"
+        ref="input"
+        class="px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
         type="text"
         :aria-label="'Enter ' + item.label"
         :title="'Enter ' + item.label"
@@ -26,6 +29,7 @@
       class="p-3 flex-shrink-0 outline-none"
       @click="removeAction(name, index)"
       :aria-label="'Remove ' + item.label"
+      title="Remove field"
     >
       <div
         class="w-6 h-6"
@@ -38,7 +42,8 @@
 <script>
 export default {
   props: ['name', 'item', 'index', 'type', 'buttonBg', 'removeAction'],
+  mounted() {
+   this.$refs.input.focus()
+  },
 }
 </script>
-
-<style></style>

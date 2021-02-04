@@ -6,7 +6,7 @@
         class="w-12 h-12 rounded-full mr-3 shadow relative cursor-pointer"
         tabindex="0"
         @click.self="colors[name].openPalette = !colors[name].openPalette"
-        @keypress.space.enter="
+        @keypress.space.enter.prevent="
           colors[name].openPalette = !colors[name].openPalette
         "
       >
@@ -64,17 +64,20 @@ export default {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   &.light {
-    background: #fff;
+    background: #4a5568;
     .color-type {
       .name {
-        background: #edf2f7;
-        color: black;
+        background: #2d3748;
+        color: #fff;
       }
       .value {
-        background: #f7fafc;
-        color: black;
+        background: #1a202c;
+        color: #fff;
       }
     }
+  }
+  .color-show{
+    display: none;
   }
   & > div:nth-last-child(-2n + 2),
   .color-alpha {

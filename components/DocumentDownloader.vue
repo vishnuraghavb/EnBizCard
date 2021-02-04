@@ -1,15 +1,20 @@
 <template>
   <div class="documentContainer">
     <div class="documentPreview">
-      <img :src="PreviewMode?media.coverDataURI:`./featured/document-${index}.jpeg`" :alt="media.title" />
+      <img
+        :src="
+          PreviewMode
+            ? media.coverDataURI
+            : `./featured/${getTitle(media.title)}.${media.coverFormat}`
+        "
+        :alt="media.title"
+      />
     </div>
     <div class="infoControls">
       <p class="title card">
         {{ media.title }}
       </p>
-      <p class="fileSize card">
-        PDF - {{ media.filesize }}
-      </p>
+      <p class="fileSize card">PDF - {{ media.filesize }}</p>
       <div class="downloadDocument">
         <a
           class="downloadBtn"
@@ -17,7 +22,11 @@
           :style="{
             backgroundColor: `${colors.buttonBg.color}`,
           }"
-          :href="PreviewMode ? '' : `./featured/${media.title}.pdf`"
+          :href="
+            PreviewMode
+              ? ''
+              : `./featured/${getTitle(media.title)}.${media.format}`
+          "
           download
           target="_blank"
         >
@@ -34,8 +43,11 @@
 <script>
 import { saveAs } from 'file-saver'
 export default {
-  props: ['media', 'type', 'index', 'colors', 'PreviewMode'],
+  props: ['media', 'type', 'colors', 'PreviewMode'],
   methods: {
+    getTitle(e) {
+      return e.toLowerCase().split(' ').join('_')
+    },
     downloadDocument() {
       saveAs(
         window.URL.createObjectURL(this.media.file),

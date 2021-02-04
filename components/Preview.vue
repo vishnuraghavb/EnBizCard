@@ -191,7 +191,7 @@
           <div id="contactBtns">
             <div
               class="contactBtnContainer"
-              v-for="(item, index) in primaryActions" :key="index"
+              v-for="(item, index) in primaryActions" :key="'pa'+index"
             >
               <div class="contactBtn">
                 <a
@@ -236,7 +236,7 @@
             </div>
           </div>
           <div id="socialBtns">
-            <div class="socialBtnContainer" v-for="(item, index) in socialLinks" :key="index">
+            <div class="socialBtnContainer" v-for="(item, index) in secondaryActions" :key="'sa'+index">
               <div class="socialBtn">
                 <a
                   :href="item.value"
@@ -253,62 +253,57 @@
               </div>
             </div>
           </div>
-          <div id="featuredContent">
-            <div class="images" v-for="(image, index) in featured.images" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }">
-              <img
-                v-if="image.dataURI"
+          <div class="contentContainer" v-for="(item, index) in featured" :key="'fc'+index">
+            <h2 class="sectionTitle text">{{item.title}}</h2>
+            <div :class="item.type" v-for="(item, i) in item.content" :key="i" :style="{ backgroundColor: `${colors.cardBg.color}` }">
+              <div v-if="item.type == 'image'">
+                <img
+                v-if="item.dataURI"
                 :src="
                   PreviewMode
-                    ? image.dataURI
-                    : `./featured/image-${index}.${image.format}`
+                    ? item.dataURI
+                    : `./featured/${getTitle(item.title)}.${item.format}`
                 "
                 alt="Product image"
-              />
-              <div class="infoControls">
-                <p class="title card">
-                  {{ image.title }}
-                </p>
+                />
+                <div class="infoControls">
+                  <p class="title card">
+                    {{ item.title }}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div class="music" v-for="(music, index) in featured.music" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }">
               <MediaPlayer
+                v-if="item.type  == 'music' || item.type  == 'video'"
                 ref="mediaPlayer"
-                :media="music"
-                type="music"
+                :media="item"
+                :type="item.type"
                 :colors="colors"
-                :index="index"
                 :togglePlay="togglePlay"
                 :PreviewMode="PreviewMode"
               />
-            </div>
-            <div class="video" v-for="(video, index) in featured.videos" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }">
-              <MediaPlayer
-                ref="mediaPlayer"
-                :media="video"
-                type="videos"
-                :colors="colors"
-                :index="index"
-                :togglePlay="togglePlay"
-                :PreviewMode="PreviewMode"
-              />
-            </div>
-            <div
-              class="document"
-              v-for="(document, index) in featured.documents" :key="index" :style="{ backgroundColor: `${colors.cardBg.color}` }"
-            >
               <DocumentDownloader
-                :media="document"
-                type="documents"
+                v-if="item.type  == 'document'"
+                :media="item"
+                :type="item.type"
                 :colors="colors"
-                :index="index"
                 :PreviewMode="PreviewMode"
               />
             </div>
           </div>
-          <div id="embedContent">
-            <div class="embedContent" v-for="(item, index) in getEmbedContent" :key="item.value+index" style="position:relative;padding-top:56.25%;">
-            <iframe :src="stripAttr(item.value)" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" allow="layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'; camera 'none'; microphone 'none'"></iframe>
+          <div class="contentContainer" v-for="(item, index) in getEmbedContent" :key="'ec'+index">
+            <h2 class="sectionTitle text">{{item.title}}</h2>
+            <div class="embedContent" style="position:relative;padding-top:56.25%;" v-for="(item, index) in item.content" :key="index">
+              <iframe  :src="stripAttr(item)" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" allow="layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'; camera 'none'; microphone 'none'"></iframe>
             </div>
+          </div>
+          <div class="contentContainer" v-for="(item, index) in products" :key="'pc'+index">
+            <h2 class="sectionTitle text">{{item.title}}</h2>
+            <ProductShowcase
+              :products="item.content"
+              :colors="colors"
+              :index="index"
+              :PreviewMode="PreviewMode"
+            />
           </div>
         </main>
         <footer v-if="footerCredit" :style="{ backgroundColor: `${colors.mainBg.color}` }">
@@ -328,7 +323,7 @@
         </script>
         <script
           v-if="
-            !PreviewMode && (featured.music.length || featured.videos.length)
+            !PreviewMode && (featured.length)
           "
         >
           let pC=document.querySelectorAll(".playerControl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),o=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",o.style.display="none");let c=Math.floor(e/60),y=Math.floor(e%60);c.toString().length<2&&(c="0"+c),y.toString().length<2&&(y="0"+y),r.value=c+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",o.style.display="block"):(srcs[l].pause(),o.style.display="none",a.style.display="block")})});
@@ -341,6 +336,7 @@
 <script>
 import MediaPlayer from './MediaPlayer'
 import DocumentDownloader from './DocumentDownloader'
+import ProductShowcase from './ProductShowcase'
 export default {
   props: [
     'username',
@@ -348,9 +344,10 @@ export default {
     'images',
     'featured',
     'embedContent',
+    'products',
     'colors',
     'primaryActions',
-    'socialLinks',
+    'secondaryActions',
     'PreviewMode',
     'downloadVcard',
     'downloadKey',
@@ -363,6 +360,7 @@ export default {
   components: {
     MediaPlayer,
     DocumentDownloader,
+    ProductShowcase,
   },
   watch: {
     getFeaturedMusic(oldv, newv) {
@@ -379,10 +377,18 @@ export default {
       return this.featured.music
     },
     getEmbedContent(){
-      return this.embedContent.filter(e=>this.stripAttr(e.value))
+      return this.embedContent.map(e=>{
+        return{
+          title: e.title,
+          content: e.content.filter(f=>this.stripAttr(f))
+        }
+      }).filter(e=>e)
     },
   },
   methods: {
+    getTitle(e){
+      return e.toLowerCase().split(' ').join('_')
+    },
     stripAttr(val){
       if(/<iframe/.test(val)) {
       let iframe = val.match(/<iframe(.*)\/iframe>/)[0]
@@ -522,7 +528,7 @@ export default {
     margin: 2rem;
     padding: 2rem;
     background: #fff;
-    border-radius: 1.5rem;
+    border-radius: 0.5rem;
   }
 
   header {
@@ -530,7 +536,7 @@ export default {
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 6rem 3rem 4rem;
+    padding: 6rem 3rem;
     box-sizing: border-box;
   }
   #logo {
@@ -559,18 +565,18 @@ export default {
     display: flex;
   }
   main {
-    border-radius: 1.5rem 1.5rem 0 0;
-    padding: 1.5rem;
+    padding: 1rem;
   }
   #profile {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -5rem;
     img {
-      width: 6rem;
-      height: 6rem;
+      width: 7rem;
+      height: 7rem;
       border-radius: 100%;
-      margin-right: 0.75rem;
       text-align: center;
-      align-self: flex-start;
       pointer-events: none;
       user-select: none;
     }
@@ -579,6 +585,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
     line-height: 1.25;
     word-break: break-word;
   }
@@ -588,12 +596,12 @@ export default {
     margin: 0;
   }
   .jobtitle {
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin: 0.25rem 0 0 0;
   }
 
   .bizDescription {
-    color: #212529;
+    text-align: center;
     font-size: 0.875rem;
     white-space: pre-line;
     line-height: 1.5;
@@ -664,17 +672,24 @@ a{
   .socialBtn {
     padding: 1rem;
   }
-  #featuredContent {
+  .contentContainer {
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .images,
+  .sectionTitle{
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 3rem 1.5rem 1.5rem;
+  }
+  .image,
   .music,
   .video,
   .document,
-  .embedContent {
+  .embedContent,
+  .product {
     overflow: hidden;
     border-radius: 0.5rem;
     margin-top: 1.5rem;
@@ -701,19 +716,45 @@ a{
     width: 100%;
   }
   .infoControls {
-    padding: 1rem 2rem 2rem;
-    font-size: 0.75rem;
+    padding: 2rem 1rem;
+    font-size: 0.875rem;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
   }
+  .productContent{
+    .description{
+      margin: -1rem 0 0;
+      font-size: 0.875rem;
+      white-space: pre-line;
+      line-height: 1.5;
+    }
+    .price{
+      margin: 2rem 0 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .label{
+      display: inline-block;
+      font-size: 1rem;
+      margin-top: 1rem;
+      border-radius: 5rem;
+      letter-spacing: 1px;
+      padding: 0.75rem 1.5rem;
+      line-height: 0;
+      .action{
+        margin: 0;
+      }    
+    }
+  }
   .title {
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 700;
+    margin: 0 0 0.5rem;
   }
   .artistAlbum,
   .fileSize {
-    margin-top: 0.25rem;
+    margin: 0;
   }
   .playerControl,
   .downloadDocument {
@@ -749,7 +790,7 @@ a{
     padding: 1.5rem 1.5rem 2rem;
     div {
       margin-top: 1rem;
-      font-size: 0.75rem;
+      font-size: 1rem;
       text-align: center;
       color: #000;
       a {

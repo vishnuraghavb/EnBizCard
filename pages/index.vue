@@ -1,8 +1,8 @@
 <template>
   <div
-    class="container relative mx-auto mt-16 max-w-screen-lg text-gray-900 md:px-4"
+    class="container relative bg-gray-800 mx-auto mt-16 max-w-screen-lg text-gray-100 md:px-4"
   >
-    <CustomAlert
+    <Modal
       v-if="content"
       @click.native.self="content = null"
       @scroll.native="content = null"
@@ -15,7 +15,7 @@
             class="logo w-32"
             v-html="require(`~/assets/icons/logo.svg?include`)"
           ></div>
-          <h1 class="text-4xl font-extrabold leading-tight mt-4 text-gray-900">
+          <h1 class="text-4xl font-extrabold leading-tight mt-4">
             Digital Business Card Generator
           </h1>
         </header>
@@ -33,7 +33,7 @@
           <div id="step-1" class="mt-16">
             <h2 class="font-extrabold text-2xl">Image attachments</h2>
             <div class="field-container">
-              <ImageLoader
+              <Attachment
                 :content="images"
                 type="logo"
                 :resizeImage="resizeImage"
@@ -41,7 +41,7 @@
                 description="recommended format: svg or png"
                 :showAlert="showAlert"
               />
-              <ImageLoader
+              <Attachment
                 :content="images"
                 type="photo"
                 :resizeImage="resizeImage"
@@ -60,7 +60,7 @@
                 spellcheck="false"
                 type="text"
                 v-model="businessInfo.name"
-                class="mt-2 px-4 w-full h-12 bg-gray-200 placeholder-gray-600 rounded focus:outline-none"
+                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
               />
             </div>
             <div class="field-container mt-6">
@@ -70,7 +70,7 @@
                 type="text"
                 spellcheck="true"
                 v-model="businessInfo.jobTitle"
-                class="mt-2 px-4 w-full h-12 bg-gray-200 placeholder-gray-600 rounded focus:outline-none"
+                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
               />
             </div>
             <div class="field-container mt-6">
@@ -80,32 +80,19 @@
                 spellcheck="false"
                 type="text"
                 v-model="businessInfo.businessName"
-                class="mt-2 px-4 w-full h-12 bg-gray-200 placeholder-gray-600 rounded focus:outline-none"
+                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
               />
             </div>
-            <div class="field-container relative mt-6">
-              <label
-                for="business-description"
-                class="flex justify-between ml-4"
+            <div class="field-container mt-6">
+              <label for="business-description" class="ml-4"
                 >Business description
-                <span
-                  v-if="businessInfo.businessDescription"
-                  class="mr-4"
-                  :class="
-                    descriptionCharCount <= 160
-                      ? 'text-green-600'
-                      : 'text-orange-600'
-                  "
-                  >{{ descriptionCharCount }}</span
-                ></label
-              >
+              </label>
               <textarea
                 id="business-description"
                 :value="businessInfo.businessDescription"
                 @input="businessInfo.businessDescription = $event.target.value"
-                class="block mt-2 px-4 py-3 w-full bg-gray-200 placeholder-gray-600 rounded focus:outline-none resize-none"
+                class="block mt-2 px-4 py-3 w-full bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 resize-none hover:border-green-600"
                 rows="5"
-                placeholder="Please keep it short and simple ( <160 characters )"
               ></textarea>
             </div>
             <div class="field-container relative mt-6">
@@ -120,7 +107,7 @@
               <textarea
                 id="pgp-public-key"
                 v-model="businessInfo.publicKey"
-                class="block mt-2 px-4 py-3 w-full bg-gray-200 placeholder-gray-600 rounded focus:outline-none resize-none"
+                class="block mt-2 px-4 py-3 w-full bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 resize-none hover:border-green-600"
                 rows="5"
                 spellcheck="false"
                 placeholder="Paste PGP PUBLIC KEY BLOCK here"
@@ -142,14 +129,14 @@
                 spellcheck="false"
                 type="text"
                 v-model="businessInfo.fingerprint"
-                class="mt-2 px-4 w-full h-12 bg-gray-200 placeholder-gray-600 rounded focus:outline-none"
+                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
                 placeholder="Paste 40 character fingerprint here"
               />
             </div>
           </div>
           <div id="step-3" class="mt-16">
             <h2 class="font-extrabold text-2xl">Primary actions</h2>
-            <ButtonInput
+            <Action
               v-for="(item, index) in primaryActions"
               :key="index"
               name="primaryActions"
@@ -164,12 +151,14 @@
                 v-for="(action, index) in actions.primaryActions"
                 :key="index"
                 @click="addAction('primaryActions', index)"
-                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer shadow"
+                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer shadow hover:scale-110 transform transition-transform duration-200"
                 :style="{
                   backgroundColor: `${colors.buttonBg.color}`,
                 }"
-                :title="action.name"
-                :aria-label="'Add ' + action.name"
+                :title="
+                  action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
+                "
+                :aria-label="action.name"
               >
                 <div
                   class="w-6 h-6 action"
@@ -179,22 +168,22 @@
             </div>
           </div>
           <div id="step-4" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Social links</h2>
-            <ButtonInput
-              v-for="(item, index) in socialLinks"
+            <h2 class="font-extrabold text-2xl">Secondary actions</h2>
+            <Action
+              v-for="(item, index) in secondaryActions"
               :key="index"
-              name="socialLinks"
-              :type="socialLinks"
+              name="secondaryActions"
+              :type="secondaryActions"
               :item="item"
               :index="index"
               :removeAction="removeAction"
             />
             <div class="field-container flex flex-wrap">
               <button
-                v-for="(action, index) in actions.socialLinks"
+                v-for="(action, index) in actions.secondaryActions"
                 :key="index"
-                @click="addAction('socialLinks', index)"
-                class="p-3 flex-shrink-0 mt-6 mr-6 rounded-full cursor-pointer shadow"
+                @click="addAction('secondaryActions', index)"
+                class="p-3 flex-shrink-0 mt-6 mr-6 rounded-full cursor-pointer shadow hover:scale-110 transform transition-transform duration-200"
                 :style="{ backgroundColor: action.color }"
                 :title="
                   action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
@@ -210,94 +199,110 @@
           <div id="step-5" class="mt-16">
             <h2 class="font-extrabold text-2xl">Feature content</h2>
             <div class="field-container">
-              <FeaturedContentLoader
+              <Feature
+                v-for="(content, index) in featured"
+                :key="index"
                 :featured="featured"
-                type="images"
-                :multiple="true"
                 :resizeImage="resizeImage"
-                label="Attach image"
-                mimetypes="image/jpeg, image/png"
-                description="supports jpeg, png"
+                :index="index"
+                label="Attach content"
+                mimetypes="image/jpeg, image/png, audio/mpeg, video/mp4, video/webm, application/pdf"
                 :showAlert="showAlert"
               />
-              <FeaturedContentLoader
-                :featured="featured"
-                type="music"
-                :resizeImage="resizeImage"
-                label="Attach music"
-                mimetypes="audio/mpeg"
-                description="supports mp3"
-                :showAlert="showAlert"
-              />
-              <FeaturedContentLoader
-                :featured="featured"
-                type="videos"
-                :resizeImage="resizeImage"
-                label="Attach video"
-                mimetypes="video/mp4,video/webm"
-                description="supports mp4, webm"
-                :showAlert="showAlert"
-              />
-              <FeaturedContentLoader
-                :featured="featured"
-                type="documents"
-                :resizeImage="resizeImage"
-                label="Attach document"
-                mimetypes="application/pdf"
-                description="supports pdf"
-                :showAlert="showAlert"
-              />
+              <div class="flex mt-6">
+                <div class="flex flex-wrap items-center">
+                  <button
+                    class="p-3 rounded-full cursor-pointer bg-gray-500 shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    @click="addFeature()"
+                    aria-label="Add section"
+                  >
+                    <div
+                      class="w-6 h-6"
+                      v-html="require(`~/assets/icons/add.svg?include`)"
+                    ></div>
+                  </button>
+                  <p class="ml-3 leading-none">Add section</p>
+                </div>
+              </div>
+              <!-- <p
+                class="mt-6 border px-4 py-2 rounded border-gray-600 text-gray-500"
+              >
+                Add a section to attach images, music, videos and documents to
+                your business card.
+                <br />
+                <br />
+                Supported file formats: jpeg, png, mp3, mp4, webm, pdf
+              </p> -->
             </div>
           </div>
           <div id="step-6" class="mt-16">
             <h2 class="font-extrabold text-2xl">Embed content</h2>
-            <IframeInput
-              v-for="(item, index) in embedContent"
-              :key="index"
-              name="embedContent"
-              :type="embedContent"
-              :item="item"
-              :index="index"
-              :buttonBg="colors.buttonBg.color"
-              :removeEmbedContent="removeEmbedContent"
-            />
             <div class="field-container">
-              <button
-                @click="addEmbedContent()"
-                class="flex-shrink-0 mt-6 mr-6 p-2 border-4 rounded-full border-gray-900 cursor-pointer shadow"
-                title="Add embed content"
-                aria-label="Add embed content"
-              >
-                <div class="w-6 h-6" v-html="require(`~/assets/icons/add.svg?include`)"></div>
-              </button>
+              <Embed
+                v-for="(item, index) in embedContent"
+                :key="index"
+                :index="index"
+                :embedContent="embedContent"
+              />
+              <div class="flex mt-6">
+                <div class="flex flex-wrap items-center">
+                  <button
+                    class="p-3 rounded-full cursor-pointer bg-gray-500 shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    @click="addEmbed()"
+                    aria-label="Add section"
+                  >
+                    <div
+                      class="w-6 h-6"
+                      v-html="require(`~/assets/icons/add.svg?include`)"
+                    ></div>
+                  </button>
+                  <p class="ml-3 leading-none">Add section</p>
+                </div>
+              </div>
             </div>
           </div>
           <div id="step-7" class="mt-16">
+            <h2 class="font-extrabold text-2xl">Product catalogue</h2>
+            <div class="field-container">
+              <Product
+                v-for="(item, index) in products"
+                :key="index"
+                :index="index"
+                :products="products"
+                :showAlert="showAlert"
+                :resizeImage="resizeImage"
+              />
+              <div class="flex mt-6">
+                <div class="flex flex-wrap items-center">
+                  <button
+                    class="p-3 rounded-full cursor-pointer bg-gray-500 shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    @click="addProduct()"
+                    aria-label="Add section"
+                  >
+                    <div
+                      class="w-6 h-6"
+                      v-html="require(`~/assets/icons/add.svg?include`)"
+                    ></div>
+                  </button>
+                  <p class="ml-3 leading-none">Add section</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="step-8" class="mt-16">
             <h2 class="font-extrabold text-2xl">Colour customisation</h2>
             <div class="field-container">
-              <ColourSelector
-                name="logoBg"
-                label="Logo background"
-                :colors="colors"
-              />
-              <ColourSelector
-                name="mainBg"
-                label="Main background"
-                :colors="colors"
-              />
-              <ColourSelector
+              <Colour name="logoBg" label="Logo background" :colors="colors" />
+              <Colour name="mainBg" label="Main background" :colors="colors" />
+              <Colour
                 name="buttonBg"
                 label="Button background"
                 :colors="colors"
               />
-              <ColourSelector
-                name="cardBg"
-                label="Featured content background"
-                :colors="colors"
-              />
+              <Colour name="cardBg" label="Card background" :colors="colors" />
             </div>
           </div>
-          <div id="step-8" class="mt-16">
+          <div id="step-9" class="mt-16">
             <h2 class="font-extrabold text-2xl">Enable footer credit?</h2>
             <div class="field-container mt-6">
               <div
@@ -309,17 +314,17 @@
                   aria-label="Toggle footer credit"
                   id="toggle"
                   v-model="footerCredit"
-                  class="toggle-checkbox absolute block w-12 h-12 rounded-full bg-white border-4 border-gray-900 appearance-none cursor-pointer transition-colors duration-200"
+                  class="toggle-switch absolute block w-10 h-10 m-1 rounded-full bg-gray-900 border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200"
                 />
                 <label
                   for="toggle"
-                  class="toggle-label block overflow-hidden h-12 rounded-full bg-gray-900 cursor-pointer transition-colors duration-200 shadow"
+                  class="toggle-label block overflow-hidden h-12 rounded-full bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200 shadow focus:border-green-600"
                 ></label>
               </div>
               <label for="toggle">{{
                 footerCredit ? 'Yes, for sure!' : 'No, thanks'
               }}</label>
-              <p class="text-gray-700 mt-6">
+              <p class="text-gray-500 mt-6">
                 Footer credit is nothing but a backlink which lets others to use
                 this Service. You can help getting the word out by enabling the
                 footer credit.
@@ -344,11 +349,11 @@
               id="browserFrame"
               class="overflow-hidden rounded-lg mx-2 pb-8 flex flex-col"
             >
-              <div id="topBar" class="topbar bg-white shadow-sm z-10">
+              <div id="topBar" class="topbar bg-gray-800 shadow-sm z-10">
                 <div id="searchField" class="pt-6 pl-2 pb-2 flex items-center">
                   <input
                     type="text"
-                    class="pl-4 h-12 w-full bg-gray-200 rounded"
+                    class="pl-4 h-12 w-full bg-gray-900 rounded text-gray-500"
                     aria-label="vCard URL"
                     disabled
                     :value="'yoursite/vcard/' + username + '/'"
@@ -359,16 +364,17 @@
                   ></div>
                 </div>
               </div>
-              <DBizCard
+              <Preview
                 ref="html"
                 :username="username"
                 :businessInfo="businessInfo"
                 :images="images"
                 :featured="featured"
                 :embedContent="embedContent"
+                :products="products"
                 :colors="colors"
                 :primaryActions="primaryActions"
-                :socialLinks="socialLinks"
+                :secondaryActions="secondaryActions"
                 :PreviewMode="PreviewMode"
                 :downloadVcard="downloadVcard"
                 :footerCredit="footerCredit"
@@ -386,7 +392,7 @@
     <div id="downloadSection" class="mt-16 px-4">
       <h2 class="font-extrabold text-2xl">Download</h2>
       <div class="field-container">
-        <CheckListItem
+        <Check
           v-for="(item, index) in downloadCheckList"
           :downloadCheckList="downloadCheckList"
           :item="item"
@@ -396,7 +402,7 @@
         <button
           ref="downloadPackage"
           @click="downloadPackage"
-          class="inline-block bg-gray-900 text-lg uppercase font-extrabold text-white px-8 py-6 rounded-full mt-12 shadow-md select-none transition-colors duration-200"
+          class="inline-block bg-gray-700 text-lg uppercase font-extrabold text-white px-8 py-6 rounded mt-12 shadow-md select-none transition-colors duration-200"
           :class="
             downloadChecked
               ? 'bg-green-600 cursor-pointer focus:bg-green-500 hover:bg-green-500'
@@ -405,7 +411,7 @@
         >
           Download Package
         </button>
-        <p class="text-gray-700 mt-6">
+        <p class="text-gray-500 mt-6">
           Extract the package and follow the instructions in the README.txt file
         </p>
       </div>
@@ -416,7 +422,7 @@
     <ReadMe ref="readme" v-show="false" :name="username" />
     <QRCode ref="qrcode" v-show="false" />
     <footer class="py-8 mx-4 mt-24">
-      <p class="text-gray-700 text-sm">
+      <p class="text-gray-500 text-sm">
         <a
           class="underline hover:text-green-600 transition-colors duration-200"
           href="http://t.me/dbizcard"
@@ -424,9 +430,9 @@
           rel="noopener noreferrer"
           >Join the Telegram group</a
         >
-        for reporting issues, suggestions and feedback.
+        for reporting issues, suggestions and feedback
       </p>
-      <hr class="border-t-2 border-gray-200 mt-4" />
+      <hr class="border-t-2 border-gray-700 mt-4" />
       <div class="flex justify-start items-center mt-8">
         <div
           class="logo w-16 mr-2 self-start"
@@ -436,7 +442,7 @@
           <p class="font-extrabold leading-tight">
             Digital Business Card Generator
           </p>
-          <p class="text-gray-700 text-xs">
+          <p class="text-gray-500 text-xs">
             by
             <a
               class="underline hover:text-green-600 transition-colors duration-200"
@@ -445,7 +451,7 @@
               rel="noopener noreferrer"
               >Vishnu&nbsp;Raghav</a
             >
-            | AGPLv3&nbsp;License |
+            | AGPLv3 |
             <a
               class="underline hover:text-green-600 transition-colors duration-200"
               href="https://github.com/vishnuraghavb/dbizcard"
@@ -461,36 +467,39 @@
 </template>
 
 <script>
-import CustomAlert from '@/components/CustomAlert'
-import ImageLoader from '@/components/ImageLoader'
-import FeaturedContentLoader from '@/components/FeaturedContentLoader'
-import ButtonInput from '@/components/ButtonInput'
-import IframeInput from '@/components/IframeInput'
-import ColourSelector from '@/components/ColourSelector'
-import DBizCard from '@/components/DBizCard'
+import Modal from '@/components/Modal'
+import Attachment from '@/components/Attachment'
+import Action from '@/components/Action'
+import Feature from '@/components/Feature'
+import Embed from '@/components/Embed'
+import Product from '@/components/Product'
+import Colour from '@/components/Colour'
+import Preview from '@/components/Preview'
+import Check from '@/components/Check'
+import Donate from '@/components/Donate'
+
 import StyleSheet from '@/components/StyleSheet'
 import ReadMe from '@/components/ReadMe'
 import Vcard from '@/components/Vcard'
 import QRCode from '@/components/QRCode'
-import Donate from '@/components/Donate'
-import CheckListItem from '@/components/CheckListItem'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 export default {
   components: {
-    CustomAlert,
-    ImageLoader,
-    FeaturedContentLoader,
-    ButtonInput,
-    IframeInput,
-    ColourSelector,
-    DBizCard,
+    Modal,
+    Attachment,
+    Action,
+    Feature,
+    Embed,
+    Product,
+    Colour,
+    Preview,
+    Check,
+    Donate,
     StyleSheet,
     ReadMe,
     Vcard,
     QRCode,
-    Donate,
-    CheckListItem,
   },
 
   data() {
@@ -526,12 +535,6 @@ export default {
           resized: null,
         },
       },
-      featured: {
-        images: [],
-        music: [],
-        videos: [],
-        documents: [],
-      },
       colors: {
         mainBg: {
           color: `#ffffff`,
@@ -558,27 +561,17 @@ export default {
         publicKey: null,
         fingerprint: null,
       },
-      primaryActions: [
-        {
-          name: 'call',
-          action: 'Call',
-          href: 'tel:',
-          placeholder: '+91 XXXXX XXXXX',
-          value: null,
-          label: 'Phone number',
-        },
-      ],
-      socialLinks: [
-        {
-          name: 'instagram',
-          placeholder: 'https://instagram.com/username',
-          value: null,
-          color: '#405de6',
-          label: 'Instagram profile URL',
-        },
-      ],
+      primaryActions: [],
+      secondaryActions: [],
       actions: {
         primaryActions: [
+          {
+            name: 'call',
+            href: 'tel:',
+            placeholder: '+91 XXXXX XXXXX',
+            value: null,
+            label: 'Phone number',
+          },
           {
             name: 'call',
             href: 'tel:',
@@ -624,7 +617,14 @@ export default {
             label: 'Map location URL',
           },
         ],
-        socialLinks: [
+        secondaryActions: [
+          {
+            name: 'instagram',
+            placeholder: 'https://instagram.com/username',
+            value: null,
+            color: '#405de6',
+            label: 'Instagram profile URL',
+          },
           {
             name: 'pixelfed',
             placeholder: 'https://pixelfed.social/username',
@@ -749,7 +749,7 @@ export default {
             placeholder: 'https://quora.com/username',
             value: null,
             color: '#a82400',
-            label: 'Quora username',
+            label: 'Quora profile URL',
           },
           {
             name: 'medium',
@@ -763,43 +763,98 @@ export default {
             placeholder: 'https://discord.com/username',
             value: null,
             color: '#7289da',
-            label: 'Discord username',
+            label: 'Discord profile URL',
           },
           {
             name: 'twitch',
             placeholder: 'https://twitch.tv/username',
             value: null,
             color: '#9146ff',
-            label: 'Twitch username',
+            label: 'Twitch profile URL',
           },
           {
             name: 'spotify',
             placeholder: 'https://spotify.com/username',
             value: null,
             color: '#1ed760',
-            label: 'Spotify username',
+            label: 'Spotify profile URL',
           },
           {
             name: 'soundcloud',
             placeholder: 'https://soundcloud.com/username',
             value: null,
             color: '#ff3300',
-            label: 'Soundcloud username',
+            label: 'Soundcloud profile URL',
           },
           {
             name: 'funkwhale',
             placeholder: 'https://funkwhale.audio/username',
             value: null,
             color: '#ffffff',
-            label: 'Funkwhale username',
+            label: 'Funkwhale profile URL',
+          },
+          {
+            name: 'github',
+            placeholder: 'https://github.com/username',
+            value: null,
+            color: '#333',
+            label: 'Github profile URL',
+          },
+          {
+            name: 'gitlab',
+            placeholder: 'https://gitlab.com/username',
+            value: null,
+            color: '#554488 ',
+            label: 'Gitlab profile URL',
+          },
+          {
+            name: 'codeberg',
+            placeholder: 'https://codeberg.org/username',
+            value: null,
+            color: '#2185d0',
+            label: 'Codeberg profile URL',
+          },
+          {
+            name: 'yelp',
+            placeholder: 'https://yelp.com/bizname',
+            value: null,
+            color: '#fff',
+            label: 'Yelp page URL',
+          },
+          {
+            name: 'paypal',
+            placeholder: 'https://paypal.me/username',
+            value: null,
+            color: '#003087',
+            label: 'PayPal.me URL',
           },
         ],
       },
+      featured: [
+        {
+          title: 'Section title',
+          content: [],
+        },
+      ],
       embedContent: [
         {
-          placeholder: 'Paste HTML embed link here',
-          value: null,
-          label: 'Embed link',
+          title: 'Section title',
+          content: [''],
+        },
+      ],
+      products: [
+        {
+          title: 'Section title',
+          content: [
+            {
+              image: null,
+              title: null,
+              description: null,
+              price: null,
+              label: null,
+              link: null,
+            },
+          ],
         },
       ],
       footerCredit: true,
@@ -836,11 +891,6 @@ export default {
     downloadChecked() {
       return this.downloadCheckList.filter((e) => e.checked).length == 3
     },
-    descriptionCharCount() {
-      return this.businessInfo.businessDescription
-        ? this.businessInfo.businessDescription.length
-        : null
-    },
     username() {
       return this.businessInfo.name
         ? this.businessInfo.name.toLowerCase().replace(/\W+/g, '')
@@ -871,6 +921,36 @@ export default {
     },
   },
   methods: {
+    getTitle(e) {
+      return e.toLowerCase().split(' ').join('_')
+    },
+    addFeature() {
+      this.featured.push({
+        title: 'Section title',
+        content: [],
+      })
+    },
+    addEmbed() {
+      this.embedContent.push({
+        title: 'Section title',
+        content: [''],
+      })
+    },
+    addProduct() {
+      this.products.push({
+        title: 'Section title',
+        content: [
+          {
+            image: null,
+            title: null,
+            description: null,
+            price: null,
+            label: null,
+            link: null,
+          },
+        ],
+      })
+    },
     hasLightBG(e) {
       let hex = this.colors[e].color
       hex = hex.slice(1)
@@ -896,16 +976,6 @@ export default {
       this.actions[type].unshift(this[type][index])
       this[type].splice(index, 1)
     },
-    addEmbedContent(index) {
-      this.embedContent.push({
-          placeholder: 'Paste HTML embed link here',
-          value: null,
-          label: 'Embed link',
-        },)
-    },
-    removeEmbedContent(index) {
-      this.embedContent.splice(index, 1)
-    },
     downloadVcard() {
       let blob = new Blob([this.$refs.vCard.$refs.vCard.innerText], {
         type: 'text/plain',
@@ -921,15 +991,17 @@ export default {
         `${this.businessInfo.name}'s public key.asc`
       )
     },
-    async resizeImage(type, index) {
+    async resizeImage(type, index1, index2) {
       let vm = this
       let reader = new FileReader()
       let file
-      if (index >= 0) {
-        if (type == 'images') {
-          file = await this.featured[type][index].file
+      if (index2 >= 0) {
+        if (type == 'image') {
+          file = await this.featured[index1].content[index2].file
         } else if (type == 'music') {
-          file = await this.featured[type][index].cover
+          file = await this.featured[index1].content[index2].cover
+        } else if (type == 'product') {
+          file = await this.products[index1].content[index2].image.file
         }
       } else {
         file = this.images[type].blob
@@ -968,11 +1040,13 @@ export default {
           canvas.toBlob(
             function (blob) {
               let image = new File([blob], type)
-              if (index >= 0) {
-                if (type == 'images') {
-                  vm.featured[type][index].file = image
+              if (index2 >= 0) {
+                if (type == 'image') {
+                  vm.featured[index1].content[index2].file = image
                 } else if (type == 'music') {
-                  vm.featured[type][index].cover = image
+                  vm.featured[index1].content[index2].cover = image
+                } else if (type == 'product') {
+                  vm.products[index1].content[index2].image.file = image
                 }
               } else {
                 vm.images[type].resized = image
@@ -1034,47 +1108,39 @@ export default {
                 this.images.photo.resized
               )
           }
-          if (this.featured.images.length) {
-            this.featured.images.forEach((image, index) => {
-              zip
-                .folder(username)
-                .folder('featured')
-                .file(`image-${index}.${image.format}`, image.file)
+          if (this.featured.length) {
+            this.featured.forEach((item, index) => {
+              item.content.forEach((item, i) => {
+                zip
+                  .folder(username)
+                  .folder('featured')
+                  .file(
+                    `${this.getTitle(item.title)}.${item.format}`,
+                    item.file
+                  )
+                if (item.type.match(/music|document/gi)) {
+                  zip
+                    .folder(username)
+                    .folder('featured')
+                    .file(
+                      `${this.getTitle(item.title)}.${item.coverFormat}`,
+                      item.cover
+                    )
+                }
+              })
             })
           }
-          if (this.featured.music.length) {
-            this.featured.music.forEach((music, index) => {
-              zip
-                .folder(username)
-                .folder('featured')
-                .file(`music-${index}.mp3`, music.file)
-              zip
-                .folder(username)
-                .folder('featured')
-                .file(`music-${index}.${music.coverFormat}`, music.cover)
-            })
-          }
-          if (this.featured.videos.length) {
-            this.featured.videos.forEach((video, index) => {
-              zip
-                .folder(username)
-                .folder('featured')
-                .file(`video-${index}.mp4`, video.file)
-            })
-          }
-          if (this.featured.documents.length) {
-            this.featured.documents.forEach((document, index) => {
-              zip
-                .folder(username)
-                .folder('featured')
-                .file(`${document.title}.pdf`, document.file)
-              zip
-                .folder(username)
-                .folder('featured')
-                .file(
-                  `document-${index}.${document.coverFormat}`,
-                  document.cover
-                )
+          if (this.products.length) {
+            this.products.forEach((item, index) => {
+              item.content.forEach((item, i) => {
+                zip
+                  .folder(username)
+                  .folder('products')
+                  .file(
+                    `${this.getTitle(item.image.title)}.${item.image.format}`,
+                    item.image.file
+                  )
+              })
             })
           }
           if (this.pubKeyIsValid) {

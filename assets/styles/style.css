@@ -120,7 +120,7 @@ header {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  padding: 6rem 3rem 4rem;
+  padding: 6rem 3rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -165,24 +165,28 @@ header {
 }
 
 main {
-  border-radius: 1.5rem 1.5rem 0 0;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 #profile {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: -5rem;
 }
 
 #profile img {
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 100%;
-  margin-right: 0.75rem;
   text-align: center;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
   pointer-events: none;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -201,6 +205,10 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1rem;
   line-height: 1.25;
   word-break: break-word;
 }
@@ -212,12 +220,12 @@ main {
 }
 
 .jobtitle {
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin: 0.25rem 0 0 0;
 }
 
 .bizDescription {
-  color: #212529;
+  text-align: center;
   font-size: 0.875rem;
   white-space: pre-line;
   line-height: 1.5;
@@ -331,7 +339,7 @@ a:not(#closeBtn):hover, a:not(#closeBtn):focus {
   padding: 1rem;
 }
 
-#featuredContent {
+.contentContainer {
   margin-top: 1.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -345,21 +353,30 @@ a:not(#closeBtn):hover, a:not(#closeBtn):focus {
           justify-content: center;
 }
 
-.images,
+.sectionTitle {
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 3rem 1.5rem 1.5rem;
+}
+
+.image,
 .music,
 .video,
 .document,
-.embedContent {
+.embedContent,
+.product {
   overflow: hidden;
   border-radius: 0.5rem;
   margin-top: 1.5rem;
 }
 
-.images img,
+.image img,
 .music img,
 .video img,
 .document img,
-.embedContent img {
+.embedContent img,
+.product img {
   display: block;
   pointer-events: none;
   -webkit-user-select: none;
@@ -396,22 +413,45 @@ video {
 }
 
 .infoControls {
-  padding: 1rem 2rem 2rem;
-  font-size: 0.75rem;
+  padding: 2rem 1rem;
+  font-size: 0.875rem;
   text-align: center;
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.title {
+.productContent .description {
+  margin: 0;
+  font-size: 0.875rem;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.productContent .price {
+  margin: 2rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.productContent .label {
+  display: inline-block;
   font-size: 1rem;
+  margin-top: 1rem;
+  border-radius: 5rem;
+  letter-spacing: 1px;
+  padding: 0.75rem 1.5rem;
+  line-height: 0;
+}
+
+.title {
+  font-size: 1.125rem;
   font-weight: 700;
 }
 
 .artistAlbum,
 .fileSize {
-  margin-top: 0.25rem;
+  margin: 0;
 }
 
 .playerControl,
@@ -464,7 +504,7 @@ footer {
 
 footer div {
   margin-top: 1rem;
-  font-size: 0.75rem;
+  font-size: 1rem;
   text-align: center;
   color: #000;
 }

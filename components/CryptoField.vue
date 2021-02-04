@@ -12,11 +12,12 @@
     </div>
     <div class="w-full">
       <input
-        class="px-4 w-full h-12 bg-gray-200 placeholder-gray-600 rounded focus:outline-none"
+        class="px-4 w-full h-12 bg-gray-900 rounded focus:outline-none border border-transparent transition-colors duration-200 focus:border-green-600 hover:border-green-600"
         type="text"
         :value="crypto.address"
         @click="(e) => e.target.select()"
         readonly
+        :title="crypto.title"
       />
     </div>
     <transition name="showQR">
@@ -34,7 +35,7 @@
     >
       <div
         class="w-6 h-6"
-        v-html="require(`~/assets/icons/qrcodeb.svg?include`)"
+        v-html="require(`~/assets/icons/qrcode.svg?include`)"
       ></div>
     </button>
   </div>

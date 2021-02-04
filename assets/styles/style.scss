@@ -85,7 +85,7 @@ header {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 6rem 3rem 4rem;
+  padding: 6rem 3rem;
   box-sizing: border-box;
 }
 #logo {
@@ -114,18 +114,18 @@ header {
   display: flex;
 }
 main {
-  border-radius: 1.5rem 1.5rem 0 0;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 #profile {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -5rem;
   img {
-    width: 6rem;
-    height: 6rem;
+    width: 7rem;
+    height: 7rem;
     border-radius: 100%;
-    margin-right: 0.75rem;
     text-align: center;
-    align-self: flex-start;
     pointer-events: none;
     user-select: none;
   }
@@ -134,6 +134,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
   line-height: 1.25;
   word-break: break-word;
 }
@@ -143,12 +145,12 @@ main {
   margin: 0;
 }
 .jobtitle {
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin: 0.25rem 0 0 0;
 }
 
 .bizDescription {
-  color: #212529;
+  text-align: center;
   font-size: 0.875rem;
   white-space: pre-line;
   line-height: 1.5;
@@ -219,17 +221,24 @@ a:not(#closeBtn){
 .socialBtn {
   padding: 1rem;
 }
-#featuredContent {
+.contentContainer {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.images,
+.sectionTitle{
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 3rem 1.5rem 1.5rem;
+}
+.image,
 .music,
 .video,
 .document,
-.embedContent {
+.embedContent,
+.product {
   overflow: hidden;
   border-radius: 0.5rem;
   margin-top: 1.5rem;
@@ -256,19 +265,41 @@ video {
   width: 100%;
 }
 .infoControls {
-  padding: 1rem 2rem 2rem;
-  font-size: 0.75rem;
+  padding: 2rem 1rem;
+  font-size: 0.875rem;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
 }
+.productContent{
+  .description{
+    margin: 0;
+    font-size: 0.875rem;
+    white-space: pre-line;
+    line-height: 1.5;
+  }
+  .price{
+    margin: 2rem 0 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .label{
+    display: inline-block;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border-radius: 5rem;
+    letter-spacing: 1px;
+    padding: 0.75rem 1.5rem;
+    line-height: 0;
+  }
+}
 .title {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 700;
 }
 .artistAlbum,
 .fileSize {
-  margin-top: 0.25rem;
+  margin: 0;
 }
 .playerControl,
 .downloadDocument {
@@ -304,7 +335,7 @@ footer {
   padding: 1.5rem 1.5rem 2rem;
   div {
     margin-top: 1rem;
-    font-size: 0.75rem;
+    font-size: 1rem;
     text-align: center;
     color: #000;
     a {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color: #2d3748;">
     <Nuxt />
   </div>
 </template>
@@ -19,6 +19,7 @@
 }
 html {
   font-family: 'Nunito', sans-serif;
+  background: #2d3748;
   font-weight: 400;
   font-size: 16px;
   -ms-text-size-adjust: 100%;

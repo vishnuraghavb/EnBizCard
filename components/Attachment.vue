@@ -12,14 +12,15 @@
     ></div>
     <div class="flex flex-wrap items-center">
       <img
-        class="h-12 border-2 p-1 mr-1 border-white transition-colors duration-200 hover:border-red-600 cursor-pointer"
+        class="h-12 rounded border-2 p-1 border-gray-800 transition-colors duration-200 hover:border-red-600 cursor-pointer"
         v-if="imageAttached"
         :src="content[type].url"
         @click="content[type].url = null"
+        :title="`Click to remove ${type}`"
       />
       <button
         v-if="!imageAttached"
-        class="p-2 border-4 rounded-full border-gray-900 cursor-pointer shadow"
+        class="p-3 rounded-full bg-gray-500 cursor-pointer shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200 "
         @click="loadImage(type)" :aria-label="label"
       >
         <input
@@ -37,7 +38,7 @@
       </button>
       <p v-if="!imageAttached" class="ml-3 leading-none">
         {{ label
-        }}<span class="text-sm text-gray-700"><br />{{ description }}</span>
+        }}<span class="text-sm text-gray-500"><br />{{ description }}</span>
       </p>
     </div>
   </div>

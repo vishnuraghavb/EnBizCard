@@ -31,7 +31,7 @@
               class="absolute text-center left-0 bottom-0 w-48 bg-white shadow-md z-10 rounded m-12 p-4"
             >
               <div ref="upiQR"></div>
-              <p class="mt-2 font-extrabold">Scan to donate via UPI</p>
+              <p class="mt-2 font-extrabold text-gray-900">Scan to donate via UPI</p>
             </div>
           </transition>
           <a
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="cryptocurrencies mt-6 max-w-lg">
-        <p>You may also donate via the cryptocurrencies below.</p>
+        <p>You may also donate via the cryptocurrencies below,</p>
         <CryptoField
           v-for="(crypto, index) in cryptocurrencies"
           :key="index"
