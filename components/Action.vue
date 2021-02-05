@@ -1,7 +1,7 @@
 <template>
   <div class="field-container flex mt-6">
     <div
-      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full shadow"
+      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full"
       :style="{
         backgroundColor: `${
           name == 'secondaryActions' ? item.color : buttonBg
@@ -33,7 +33,7 @@
     >
       <div
         class="w-6 h-6"
-        v-html="require(`~/assets/icons/remove.svg?include`)"
+        v-html="require(`~/assets/icons/x.svg?include`)"
       ></div>
     </button>
   </div>

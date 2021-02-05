@@ -3,7 +3,7 @@ body {
   width: 100%;
   padding: 0;
   max-width: 30rem;
-  color: #000;
+  color: #fff;
   font-family: sans-serif;
   position: relative;
 }
@@ -40,7 +40,7 @@ body {
 #copyURL,
 #pubKeyInfo {
   p {
-    margin: 2rem 2em 0;
+    margin: 1rem 2em 0;
     line-height: 1.5;
     text-align: center;
   }
@@ -74,10 +74,10 @@ body {
   }
 }
 #qrcode {
-  margin: 2rem;
+  margin: 1rem 2rem 2rem;
   padding: 2rem;
   background: #fff;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 header {
@@ -120,8 +120,9 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -5rem;
-  img {
+  margin-top: -4.5rem;
+  img,
+  .img {
     width: 7rem;
     height: 7rem;
     border-radius: 100%;
@@ -154,7 +155,7 @@ main {
   font-size: 0.875rem;
   white-space: pre-line;
   line-height: 1.5;
-  margin-top: 1rem;
+  margin: 1rem;
 }
 #contactBtns,
 #socialBtns {
@@ -184,21 +185,14 @@ main {
     font-size: 0.875rem;
   }
 }
-a{
-text-decoration: none;
-user-select: none;
+a {
+  text-decoration: none;
+  user-select: none;
 }
-a:not(#closeBtn){
-  box-shadow: 0 1px 4px -1px rgba(#000, 0.2);
-    &:hover,&:focus{
-      box-shadow:none;
-    }
-}
-#ctaContainer{
+#ctaContainer {
   display: flex;
   justify-content: center;
   width: 100%;
-
 }
 #downloadVcard {
   display: flex;
@@ -227,7 +221,7 @@ a:not(#closeBtn){
   flex-direction: column;
   justify-content: center;
 }
-.sectionTitle{
+.sectionTitle {
   font-weight: 700;
   text-align: center;
   font-size: 1.5rem;
@@ -271,19 +265,19 @@ video {
   width: 100%;
   box-sizing: border-box;
 }
-.productContent{
-  .description{
-    margin: 0;
+.productContent {
+  .description {
+    margin: -1rem 0 0;
     font-size: 0.875rem;
     white-space: pre-line;
     line-height: 1.5;
   }
-  .price{
+  .price {
     margin: 2rem 0 0;
     font-size: 1.25rem;
     font-weight: 700;
   }
-  .label{
+  .label {
     display: inline-block;
     font-size: 1rem;
     margin-top: 1rem;
@@ -291,11 +285,15 @@ video {
     letter-spacing: 1px;
     padding: 0.75rem 1.5rem;
     line-height: 0;
+    .action {
+      margin: 0;
+    }
   }
 }
 .title {
   font-size: 1.125rem;
   font-weight: 700;
+  margin: 0 0 0.5rem;
 }
 .artistAlbum,
 .fileSize {
@@ -335,12 +333,11 @@ footer {
   padding: 1.5rem 1.5rem 2rem;
   div {
     margin-top: 1rem;
-    font-size: 1rem;
+    font-size: 0.75rem;
     text-align: center;
-    color: #000;
     a {
       text-decoration: underline;
-      color: #000;
+      color: inherit;
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col mt-2 bg-gray-600 rounded p-4 shadow">
+  <div class="flex flex-col mt-2 bg-gray-600 rounded p-4 ">
     <div class="flex">
       <div id="imageContainer" class="mr-2 flex-shrink-0">
         <img
@@ -52,7 +52,7 @@
       >
         <div
           class="w-6 h-6"
-          v-html="require(`~/assets/icons/remove.svg?include`)"
+          v-html="require(`~/assets/icons/x.svg?include`)"
         ></div>
       </button>
     </div>

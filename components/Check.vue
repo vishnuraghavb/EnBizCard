@@ -3,7 +3,7 @@
     <div class="relative" style="line-height: 0">
       <input
         v-model="downloadCheckList[index].checked"
-        class="checkbox cursor-pointer appearance-none h-12 w-12 border-gray-500 rounded shadow hover:border-green-600 border-4 transition-colors duration-200"
+        class="checkbox cursor-pointer appearance-none h-12 w-12 border-gray-500 rounded  hover:border-green-600 border-4 transition-colors duration-200"
         type="checkbox"
         :id="'check' + index"
       />

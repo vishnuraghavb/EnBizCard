@@ -25,7 +25,7 @@
         ref="cryptoQR"
         v-show="showCrypto"
         v-on-clickaway="() => closeCryptoQR()"
-        class="absolute right-0 bottom-0 w-48 bg-white shadow-md z-10 rounded m-12 p-4"
+        class="absolute right-0 bottom-0 w-48 bg-white z-10 rounded m-12 p-4"
       ></div>
     </transition>
     <button

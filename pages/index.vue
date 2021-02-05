@@ -151,7 +151,7 @@
                 v-for="(action, index) in actions.primaryActions"
                 :key="index"
                 @click="addAction('primaryActions', index)"
-                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer shadow hover:scale-110 transform transition-transform duration-200"
+                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer  hover:scale-110 transform transition-transform duration-200"
                 :style="{
                   backgroundColor: `${colors.buttonBg.color}`,
                 }"
@@ -183,7 +183,7 @@
                 v-for="(action, index) in actions.secondaryActions"
                 :key="index"
                 @click="addAction('secondaryActions', index)"
-                class="p-3 flex-shrink-0 mt-6 mr-6 rounded-full cursor-pointer shadow hover:scale-110 transform transition-transform duration-200"
+                class="p-3 flex-shrink-0 mt-6 mr-6 rounded-full cursor-pointer  hover:scale-110 transform transition-transform duration-200"
                 :style="{ backgroundColor: action.color }"
                 :title="
                   action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
@@ -212,7 +212,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500 shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded-full cursor-pointer bg-gray-500  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addFeature()"
                     aria-label="Add section"
                   >
@@ -247,7 +247,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500 shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded-full cursor-pointer bg-gray-500  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addEmbed()"
                     aria-label="Add section"
                   >
@@ -275,7 +275,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500 shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded-full cursor-pointer bg-gray-500  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addProduct()"
                     aria-label="Add section"
                   >
@@ -318,7 +318,7 @@
                 />
                 <label
                   for="toggle"
-                  class="toggle-label block overflow-hidden h-12 rounded-full bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200 shadow focus:border-green-600"
+                  class="toggle-label block overflow-hidden h-12 rounded-full bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200  focus:border-green-600"
                 ></label>
               </div>
               <label for="toggle">{{
@@ -340,7 +340,7 @@
         >
           <div
             id="device"
-            class="bg-gray-900 device-curve rounded-lg w-full sm:max-w-sm shadow-lg sm:mt-10 sm:mb-20"
+            class="bg-gray-900 device-curve rounded-lg w-full sm:max-w-sm sm:mt-10 sm:mb-20"
           >
             <h2 class="text-2xl text-center py-3 font-extrabold text-gray-200">
               Preview
@@ -349,7 +349,7 @@
               id="browserFrame"
               class="overflow-hidden rounded-lg mx-2 pb-8 flex flex-col"
             >
-              <div id="topBar" class="topbar bg-gray-800 shadow-sm z-10">
+              <div id="topBar" class="topbar bg-gray-800 z-10">
                 <div id="searchField" class="pt-6 pl-2 pb-2 flex items-center">
                   <input
                     type="text"
@@ -402,7 +402,7 @@
         <button
           ref="downloadPackage"
           @click="downloadPackage"
-          class="inline-block bg-gray-700 text-lg uppercase font-extrabold text-white px-8 py-6 rounded mt-12 shadow-md select-none transition-colors duration-200"
+          class="inline-block bg-gray-700 text-lg uppercase font-extrabold text-white px-8 py-6 rounded mt-12 select-none transition-colors duration-200"
           :class="
             downloadChecked
               ? 'bg-green-600 cursor-pointer focus:bg-green-500 hover:bg-green-500'
@@ -537,19 +537,19 @@ export default {
       },
       colors: {
         mainBg: {
-          color: `#ffffff`,
+          color: `#eee`,
           openPalette: false,
         },
         logoBg: {
-          color: `#000000`,
+          color: `#000`,
           openPalette: false,
         },
         buttonBg: {
-          color: `#000000`,
+          color: `#000`,
           openPalette: false,
         },
         cardBg: {
-          color: `#f1f3f5`,
+          color: `#ddd`,
           openPalette: false,
         },
       },

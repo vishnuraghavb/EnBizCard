@@ -46,33 +46,35 @@
             z-index: 3;
             cursor: pointer;
           }
+          .closeBtnColor{
+            {{hasLightBG('mainBg') && 'filter:invert(1)'}}
+          }
+          .shareAction{
+            {{hasLightBG('logoBg') && 'filter:invert(1)'}}
+          }
           .action{
             color:#fff;
             {{hasLightBG('buttonBg') ? 'filter:invert(1)' : null}}
           }
-
-          .shareAction{
-            {{hasLightBG('logoBg') ? 'filter:invert(1)' : null}}
-          }
           .card{
-            {{hasLightBG('cardBg') ? null : 'filter:invert(1)'}}
+            {{hasLightBG('cardBg') && 'color:#000 !important'}}
           }
           .text{
-            {{hasLightBG('mainBg') ? null : 'filter:invert(1)'}}
+            {{hasLightBG('mainBg') ? 'color:#000 !important' : 'color:#fff !important'}}
           }
         </style>
       </head>
       <body>
-        <div 
+        <div
           id="shareContainer"
           ref="shareContainer"
           :style="`backgroundColor: ${colors.mainBg.color}; visibility: hidden; top: 2rem; opacity: 0;`"
         >
           <div id="closeBtnContainer">
-            <a id="closeBtn" @click="closePublicKey()" class="text">
+            <a id="closeBtn" @click="closePublicKey()" class="closeBtnColor">
               <div
                 class="icon"
-                v-html="require(`~/assets/icons/remove.svg?include`)"
+                v-html="require(`~/assets/icons/close.svg?include`)"
               ></div>
             </a>
           </div>
@@ -96,8 +98,9 @@
                 ><div
                   class="icon action"
                   v-html="require(`~/assets/icons/download.svg?include`)"
-                ></div
-              ><span class="action">Download</span></a>
+                ></div>
+                <span class="action">Download</span></a
+              >
             </div>
             <div id="copyURL" ref="copyURL">
               <p class="text">
@@ -111,17 +114,14 @@
                 ><div
                   class="icon action"
                   v-html="require(`~/assets/icons/copy.svg?include`)"
-                ></div
-              ><span class="action">Copy URL</span></a>
+                ></div>
+                <span class="action">Copy URL</span></a
+              >
             </div>
             <div id="displayQRCode" ref="displayQRCode">
               <div id="qrcode"></div>
-              <h2 class="text">
-                Scan this QR Code
-              </h2>
-              <p class="text">
-                to view my Business Card
-              </p>
+              <h2 class="text">Scan this QR Code</h2>
+              <p class="text">to view my Business Card</p>
             </div>
           </div>
         </div>
@@ -136,18 +136,13 @@
           />
           <div id="actions" :style="{ display: PreviewMode ? 'flex' : 'none' }">
             <div id="shareActions">
-              <a
-                id="share"
-                @click.prevent.capture="sharingAlert()"
-              >
+              <a id="share" @click.prevent.capture="sharingAlert()">
                 <div
                   class="icon shareAction"
                   v-html="require(`~/assets/icons/share.svg?include`)"
                 ></div>
               </a>
-              <a
-                id="showQRCode"
-                @click.prevent.capture="sharingAlert()"
+              <a id="showQRCode" @click.prevent.capture="sharingAlert()"
                 ><div
                   class="icon shareAction"
                   v-html="require(`~/assets/icons/qrcode.svg?include`)"
@@ -176,7 +171,11 @@
               "
               alt="Photo"
             />
-
+            <div
+              v-else
+              class="img"
+              :style="{ backgroundColor: `${colors.mainBg.color}` }"
+            ></div>
             <div id="profileInfo">
               <p class="name text">
                 {{ businessInfo.name }}
@@ -186,12 +185,17 @@
               </p>
             </div>
           </div>
-          <p class="bizDescription text" v-if="businessInfo.businessDescription">{{ businessInfo.businessDescription }}
+          <p
+            class="bizDescription text"
+            v-if="businessInfo.businessDescription"
+          >
+            {{ businessInfo.businessDescription }}
           </p>
           <div id="contactBtns">
             <div
               class="contactBtnContainer"
-              v-for="(item, index) in primaryActions" :key="'pa'+index"
+              v-for="(item, index) in primaryActions"
+              :key="'pa' + index"
             >
               <div class="contactBtn">
                 <a
@@ -217,26 +221,28 @@
             </div>
             <div id="ctaContainer">
               <a
-              id="downloadVcard"
-              :href="PreviewMode ? '' : `${username}.vcf`"
-              download
-              target="_blank"
-              :style="{ backgroundColor: `${colors.buttonBg.color}` }"
-              @click.prevent="downloadVcard"
-              aria-label="Add to Contacts"
-            >
-              <div
-                class="icon action"
-                v-html="require(`~/assets/icons/user-plus.svg?include`)"
-              ></div>
-              <p class="action">
-                Add to Contacts
-              </p>
-            </a>
+                id="downloadVcard"
+                :href="PreviewMode ? '' : `${username}.vcf`"
+                download
+                target="_blank"
+                :style="{ backgroundColor: `${colors.buttonBg.color}` }"
+                @click.prevent="downloadVcard"
+                aria-label="Add to Contacts"
+              >
+                <div
+                  class="icon action"
+                  v-html="require(`~/assets/icons/user-plus.svg?include`)"
+                ></div>
+                <p class="action">Add to Contacts</p>
+              </a>
             </div>
           </div>
           <div id="socialBtns">
-            <div class="socialBtnContainer" v-for="(item, index) in secondaryActions" :key="'sa'+index">
+            <div
+              class="socialBtnContainer"
+              v-for="(item, index) in secondaryActions"
+              :key="'sa' + index"
+            >
               <div class="socialBtn">
                 <a
                   :href="item.value"
@@ -253,18 +259,27 @@
               </div>
             </div>
           </div>
-          <div class="contentContainer" v-for="(item, index) in featured" :key="'fc'+index">
-            <h2 class="sectionTitle text">{{item.title}}</h2>
-            <div :class="item.type" v-for="(item, i) in item.content" :key="i" :style="{ backgroundColor: `${colors.cardBg.color}` }">
+          <div
+            class="contentContainer"
+            v-for="(item, index) in featured"
+            :key="'fc' + index"
+          >
+            <h2 class="sectionTitle text">{{ item.title }}</h2>
+            <div
+              :class="item.type"
+              v-for="(item, i) in item.content"
+              :key="i"
+              :style="{ backgroundColor: `${colors.cardBg.color}` }"
+            >
               <div v-if="item.type == 'image'">
                 <img
-                v-if="item.dataURI"
-                :src="
-                  PreviewMode
-                    ? item.dataURI
-                    : `./featured/${getTitle(item.title)}.${item.format}`
-                "
-                alt="Product image"
+                  v-if="item.dataURI"
+                  :src="
+                    PreviewMode
+                      ? item.dataURI
+                      : `./featured/${getTitle(item.title)}.${item.format}`
+                  "
+                  alt="Product image"
                 />
                 <div class="infoControls">
                   <p class="title card">
@@ -273,7 +288,7 @@
                 </div>
               </div>
               <MediaPlayer
-                v-if="item.type  == 'music' || item.type  == 'video'"
+                v-if="item.type == 'music' || item.type == 'video'"
                 ref="mediaPlayer"
                 :media="item"
                 :type="item.type"
@@ -282,7 +297,7 @@
                 :PreviewMode="PreviewMode"
               />
               <DocumentDownloader
-                v-if="item.type  == 'document'"
+                v-if="item.type == 'document'"
                 :media="item"
                 :type="item.type"
                 :colors="colors"
@@ -290,14 +305,39 @@
               />
             </div>
           </div>
-          <div class="contentContainer" v-for="(item, index) in getEmbedContent" :key="'ec'+index">
-            <h2 class="sectionTitle text">{{item.title}}</h2>
-            <div class="embedContent" style="position:relative;padding-top:56.25%;" v-for="(item, index) in item.content" :key="index">
-              <iframe  :src="stripAttr(item)" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" allow="layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'; camera 'none'; microphone 'none'"></iframe>
+          <div
+            class="contentContainer"
+            v-for="(item, index) in getEmbedContent"
+            :key="'ec' + index"
+          >
+            <h2 class="sectionTitle text">{{ item.title }}</h2>
+            <div
+              class="embedContent"
+              style="position: relative; padding-top: 56.25%"
+              v-for="(item, index) in item.content"
+              :key="index"
+            >
+              <iframe
+                :src="stripAttr(item)"
+                frameborder="0"
+                allowfullscreen
+                style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                "
+                allow="layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'; camera 'none'; microphone 'none'"
+              ></iframe>
             </div>
           </div>
-          <div class="contentContainer" v-for="(item, index) in products" :key="'pc'+index">
-            <h2 class="sectionTitle text">{{item.title}}</h2>
+          <div
+            class="contentContainer"
+            v-for="(item, index) in products"
+            :key="'pc' + index"
+          >
+            <h2 class="sectionTitle text">{{ item.title }}</h2>
             <ProductShowcase
               :products="item.content"
               :colors="colors"
@@ -306,10 +346,14 @@
             />
           </div>
         </main>
-        <footer v-if="footerCredit" :style="{ backgroundColor: `${colors.mainBg.color}` }">
+        <footer
+          v-if="footerCredit"
+          :style="{ backgroundColor: `${colors.mainBg.color}` }"
+        >
           <div class="text">
             Created with
             <a
+              class="text"
               href="https://dbizcard.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
@@ -318,9 +362,11 @@
           </div>
         </footer>
         <script v-if="!PreviewMode" src="./qrcode.min.js"></script>
+        <!-- prettier-ignore -->
         <script v-if="!PreviewMode">
           let sC=document.getElementById("shareContainer"),cBtn=document.getElementById("closeBtn"),cURL=document.getElementById("copyURL"),cSURL=document.getElementById("copyShareURL"),dQR=document.getElementById("displayQRCode"),qrc=document.getElementById("qrcode"),s=document.getElementById("share"),sQRC=document.getElementById("showQRCode"),pKI=document.getElementById("pubKeyInfo"),sPK=document.getElementById("showPubKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#actions").style.display="flex",qrc.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(sC),cURL.style.display="flex",dN(dQR),pKI&&dN(pKI)}),sQRC.addEventListener("click",()=>{tC(sC),dQR.style.display="block",dN(cURL),pKI&&dN(pKI)}),sPK&&sPK.addEventListener("click",()=>{tC(sC),pKI&&(pKI.style.display="flex"),dN(cURL),dN(dQR)}),cBtn.addEventListener("click",()=>tC(sC)),cSURL.addEventListener("click",async()=>{let e=cSURL.querySelectorAll(".action")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});
         </script>
+        <!-- prettier-ignore -->
         <script
           v-if="
             !PreviewMode && (featured.length)
@@ -376,23 +422,25 @@ export default {
     getFeaturedMusic() {
       return this.featured.music
     },
-    getEmbedContent(){
-      return this.embedContent.map(e=>{
-        return{
-          title: e.title,
-          content: e.content.filter(f=>this.stripAttr(f))
-        }
-      }).filter(e=>e)
+    getEmbedContent() {
+      return this.embedContent
+        .map((e) => {
+          return {
+            title: e.title,
+            content: e.content.filter((f) => this.stripAttr(f)),
+          }
+        })
+        .filter((e) => e)
     },
   },
   methods: {
-    getTitle(e){
+    getTitle(e) {
       return e.toLowerCase().split(' ').join('_')
     },
-    stripAttr(val){
-      if(/<iframe/.test(val)) {
-      let iframe = val.match(/<iframe(.*)\/iframe>/)[0]
-      return iframe.match(/src="?([^"\s]+)"/)[1]
+    stripAttr(val) {
+      if (/<iframe/.test(val)) {
+        let iframe = val.match(/<iframe(.*)\/iframe>/)[0]
+        return iframe.match(/src="?([^"\s]+)"/)[1]
       } else return null
     },
     toggleContainer(e) {
@@ -454,7 +502,7 @@ export default {
     width: 100%;
     padding: 0;
     max-width: 30rem;
-    color: #000;
+    color: #fff;
     font-family: sans-serif;
     position: relative;
   }
@@ -491,7 +539,7 @@ export default {
   #copyURL,
   #pubKeyInfo {
     p {
-      margin: 2rem 2em 0;
+      margin: 1rem 2em 0;
       line-height: 1.5;
       text-align: center;
     }
@@ -525,7 +573,7 @@ export default {
     }
   }
   #qrcode {
-    margin: 2rem;
+    margin: 1rem 2rem 2rem;
     padding: 2rem;
     background: #fff;
     border-radius: 0.5rem;
@@ -571,8 +619,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -5rem;
-    img {
+    margin-top: -4.5rem;
+    img,
+    .img {
       width: 7rem;
       height: 7rem;
       border-radius: 100%;
@@ -605,7 +654,7 @@ export default {
     font-size: 0.875rem;
     white-space: pre-line;
     line-height: 1.5;
-    margin-top: 1rem;
+    margin: 1rem;
   }
   #contactBtns,
   #socialBtns {
@@ -635,21 +684,14 @@ export default {
       font-size: 0.875rem;
     }
   }
-a{
-  text-decoration: none;
-  user-select: none;
-}
- a:not(#closeBtn){
-    box-shadow: 0 1px 4px -1px rgba(#000, 0.2);
-      &:hover,&:focus{
-        box-shadow:none;
-      }
+  a {
+    text-decoration: none;
+    user-select: none;
   }
-  #ctaContainer{
+  #ctaContainer {
     display: flex;
     justify-content: center;
     width: 100%;
-
   }
   #downloadVcard {
     display: flex;
@@ -678,7 +720,7 @@ a{
     flex-direction: column;
     justify-content: center;
   }
-  .sectionTitle{
+  .sectionTitle {
     font-weight: 700;
     text-align: center;
     font-size: 1.5rem;
@@ -722,19 +764,19 @@ a{
     width: 100%;
     box-sizing: border-box;
   }
-  .productContent{
-    .description{
+  .productContent {
+    .description {
       margin: -1rem 0 0;
       font-size: 0.875rem;
       white-space: pre-line;
       line-height: 1.5;
     }
-    .price{
+    .price {
       margin: 2rem 0 0;
       font-size: 1.25rem;
       font-weight: 700;
     }
-    .label{
+    .label {
       display: inline-block;
       font-size: 1rem;
       margin-top: 1rem;
@@ -742,9 +784,9 @@ a{
       letter-spacing: 1px;
       padding: 0.75rem 1.5rem;
       line-height: 0;
-      .action{
+      .action {
         margin: 0;
-      }    
+      }
     }
   }
   .title {
@@ -790,12 +832,11 @@ a{
     padding: 1.5rem 1.5rem 2rem;
     div {
       margin-top: 1rem;
-      font-size: 1rem;
+      font-size: 0.75rem;
       text-align: center;
-      color: #000;
       a {
         text-decoration: underline;
-        color: #000;
+        color: inherit;
       }
     }
   }

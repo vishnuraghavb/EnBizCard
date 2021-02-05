@@ -3,7 +3,7 @@
     <div class="flex items-center">
       <div
         :style="{ backgroundColor: colors[name].color }"
-        class="w-12 h-12 rounded-full mr-3 shadow relative cursor-pointer"
+        class="w-12 h-12 rounded-full mr-3  relative cursor-pointer"
         tabindex="0"
         @click.self="colors[name].openPalette = !colors[name].openPalette"
         @keypress.space.enter.prevent="
@@ -61,8 +61,7 @@ export default {
   transform: scale(0);
 }
 .hu-color-picker {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
   &.light {
     background: #4a5568;
     .color-type {
@@ -99,7 +98,7 @@ export default {
       grid-template-columns: repeat(5, 30px);
       grid-column-gap: 0.5rem;
       .item {
-        box-shadow: 0 0 1px rgba(#000, 0.2);
+        box-shadow: none;
         margin: 0;
         width: auto;
         height: 30px;

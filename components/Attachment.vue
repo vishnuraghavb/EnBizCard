@@ -20,7 +20,7 @@
       />
       <button
         v-if="!imageAttached"
-        class="p-3 rounded-full bg-gray-500 cursor-pointer shadow hover:bg-green-600 focus:bg-green-600 transition-colors duration-200 "
+        class="p-3 rounded-full bg-gray-500 cursor-pointer  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200 "
         @click="loadImage(type)" :aria-label="label"
       >
         <input

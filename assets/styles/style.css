@@ -3,7 +3,7 @@ body {
   width: 100%;
   padding: 0;
   max-width: 30rem;
-  color: #000;
+  color: #fff;
   font-family: sans-serif;
   position: relative;
 }
@@ -58,7 +58,7 @@ body {
 
 #copyURL p,
 #pubKeyInfo p {
-  margin: 2rem 2em 0;
+  margin: 1rem 2em 0;
   line-height: 1.5;
   text-align: center;
 }
@@ -103,10 +103,10 @@ body {
 }
 
 #qrcode {
-  margin: 2rem;
+  margin: 1rem 2rem 2rem;
   padding: 2rem;
   background: #fff;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 header {
@@ -179,10 +179,11 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: -5rem;
+  margin-top: -4.5rem;
 }
 
-#profile img {
+#profile img,
+#profile .img {
   width: 7rem;
   height: 7rem;
   border-radius: 100%;
@@ -229,7 +230,7 @@ main {
   font-size: 0.875rem;
   white-space: pre-line;
   line-height: 1.5;
-  margin-top: 1rem;
+  margin: 1rem;
 }
 
 #contactBtns,
@@ -287,16 +288,6 @@ a {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-}
-
-a:not(#closeBtn) {
-  -webkit-box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.2);
-}
-
-a:not(#closeBtn):hover, a:not(#closeBtn):focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 #ctaContainer {
@@ -422,7 +413,7 @@ video {
 }
 
 .productContent .description {
-  margin: 0;
+  margin: -1rem 0 0;
   font-size: 0.875rem;
   white-space: pre-line;
   line-height: 1.5;
@@ -444,9 +435,14 @@ video {
   line-height: 0;
 }
 
+.productContent .label .action {
+  margin: 0;
+}
+
 .title {
   font-size: 1.125rem;
   font-weight: 700;
+  margin: 0 0 0.5rem;
 }
 
 .artistAlbum,
@@ -504,13 +500,12 @@ footer {
 
 footer div {
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 0.75rem;
   text-align: center;
-  color: #000;
 }
 
 footer div a {
   text-decoration: underline;
-  color: #000;
+  color: inherit;
 }
 /*# sourceMappingURL=style.css.map */

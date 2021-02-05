@@ -12,7 +12,7 @@
           <a
             href="https://www.paypal.com/paypalme/vishnuraghav"
             target="_blank"
-            class="inline-block p-3 flex-shrink-0 mr-3 rounded-full cursor-pointer shadow focus:shadow-none"
+            class="inline-block p-3 flex-shrink-0 mr-3 rounded-full cursor-pointer"
             title="Donate via PayPal"
             style="background: #003087;"
           >
@@ -28,7 +28,7 @@
             <div
               v-show="showUPI"
               v-on-clickaway="() => closeUPIQR()"
-              class="absolute text-center left-0 bottom-0 w-48 bg-white shadow-md z-10 rounded m-12 p-4"
+              class="absolute text-center left-0 bottom-0 w-48 bg-white  z-10 rounded m-12 p-4"
             >
               <div ref="upiQR"></div>
               <p class="mt-2 font-extrabold text-gray-900">Scan to donate via UPI</p>
@@ -41,7 +41,7 @@
             tabindex="0"
             ref="upiLink"
             target="_blank"
-            class="inline-block p-3 bg-gray-200 flex-shrink-0 mr-3 rounded-full cursor-pointer shadow"
+            class="inline-block p-3 bg-gray-200 flex-shrink-0 mr-3 rounded-full cursor-pointer"
             title="Donate via UPI"
           >
             <div
