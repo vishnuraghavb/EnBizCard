@@ -3,8 +3,8 @@
 @import 'tailwindcss/utilities';
 
 .field-container {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0;
+  margin-right: 0;
 }
 .toggle-switch:checked {
   @apply right-0;
@@ -39,5 +39,9 @@
 @media (min-width: 640px) {
   .max-hd {
     max-height: 60vh;
+  }
+  .field-container {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
 }

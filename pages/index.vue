@@ -30,15 +30,15 @@
           <li>&bull;&ensp;No user tracking and data collection</li>
           <li>&bull;&ensp;Works offline</li>
         </ul>
-        <div class="px-4 mt-16">
+        <div class="px-4 mt-16 flex items-center">
           <a
-            class="font-extrabold p-4 mr-1 text-gray-900 bg-gray-500 rounded hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+            class="font-extrabold flex-shrink-0 p-4 mr-2 text-gray-900 bg-gray-500 rounded hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
             href="/demo"
             target="_blank"
             rel="noopener noreferrer"
             >View Demo</a
           >
-          or create your own below
+          <p>or create your own below</p>
         </div>
         <div id="steps" class="px-4 mt-20">
           <div id="step-1" class="mt-16">
