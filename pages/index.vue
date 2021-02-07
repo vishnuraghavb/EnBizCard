@@ -33,7 +33,7 @@
         <div class="px-4 mt-16">
           <a
             class="font-extrabold p-4 mr-1 text-gray-900 bg-gray-500 rounded hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
-            href="https://dbizcard.vercel.app/demo"
+            href="/demo"
             target="_blank"
             rel="noopener noreferrer"
             >View Demo</a
