@@ -19,17 +19,28 @@
             Digital Business Card Generator
           </h1>
         </header>
-        <p class="mt-2 px-4">
+        <h4 class="mt-8 px-4 font-extrabold">Stop printing. Start hosting!</h4>
+        <p class="px-4">
           Quickly generate an interactive and responsive HTML-based digital
           business card, that can be hosted with your website.
         </p>
-        <ul class="mt-8 font-extrabold px-4">
+        <ul class="mt-4 px-4">
           <li>&bull;&ensp;100% Free and open-source</li>
           <li>&bull;&ensp;No sign-up required</li>
           <li>&bull;&ensp;No user tracking and data collection</li>
           <li>&bull;&ensp;Works offline</li>
         </ul>
-        <div id="steps" class="px-4">
+        <div class="px-4 mt-16">
+          <a
+            class="font-extrabold p-4 mr-1 text-gray-900 bg-gray-500 rounded hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+            href="https://dbizcard.vercel.app/demo"
+            target="_blank"
+            rel="noopener noreferrer"
+            >View Demo</a
+          >
+          or create your own below
+        </div>
+        <div id="steps" class="px-4 mt-20">
           <div id="step-1" class="mt-16">
             <h2 class="font-extrabold text-2xl">Image attachments</h2>
             <div class="field-container">
@@ -212,7 +223,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addFeature()"
                     aria-label="Add section"
                   >
@@ -247,7 +258,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addEmbed()"
                     aria-label="Add section"
                   >
@@ -275,7 +286,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addProduct()"
                     aria-label="Add section"
                   >
@@ -314,11 +325,11 @@
                   aria-label="Toggle footer credit"
                   id="toggle"
                   v-model="footerCredit"
-                  class="toggle-switch absolute block w-10 h-10 m-1 rounded-full bg-gray-900 border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200"
+                  class="toggle-switch absolute block w-10 h-10 m-1 rounded bg-gray-900 border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200"
                 />
                 <label
                   for="toggle"
-                  class="toggle-label block overflow-hidden h-12 rounded-full bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200 focus:border-green-600"
+                  class="toggle-label block overflow-hidden h-12 rounded bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200 focus:border-green-600"
                 ></label>
               </div>
               <label for="toggle">{{

@@ -45,7 +45,7 @@
           />
         </div>
         <button
-          class="p-1 m-2 rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+          class="p-1 m-2 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
           @click="loadFile()"
           :aria-label="label"
           :title="fileAttached ? label : ''"

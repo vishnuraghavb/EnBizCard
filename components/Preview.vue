@@ -318,7 +318,6 @@
                 :src="stripAttr(item)"
                 frameborder="0"
                 allowfullscreen
-                allow="layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'; camera 'none'; microphone 'none'"
               ></iframe>
             </div>
           </div>

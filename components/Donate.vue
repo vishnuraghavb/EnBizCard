@@ -12,7 +12,7 @@
           <a
             href="https://www.paypal.com/paypalme/vishnuraghav"
             target="_blank"
-            class="inline-block p-3 flex-shrink-0 mr-3 rounded-full cursor-pointer"
+            class="inline-block p-3 flex-shrink-0 mr-3 rounded cursor-pointer"
             title="Donate via PayPal"
             style="background: #003087;"
           >
@@ -41,7 +41,7 @@
             tabindex="0"
             ref="upiLink"
             target="_blank"
-            class="inline-block p-3 bg-gray-200 flex-shrink-0 mr-3 rounded-full cursor-pointer"
+            class="inline-block p-3 bg-gray-200 flex-shrink-0 mr-3 rounded cursor-pointer"
             title="Donate via UPI"
           >
             <div

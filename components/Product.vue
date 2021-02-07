@@ -43,7 +43,7 @@
     </div>
     <div class="flex flex-wrap items-center mt-4">
       <button
-        class="p-1 m-2  rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+        class="p-1 m-2  rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
         aria-label="Add product"
         @click="addField()"
       >

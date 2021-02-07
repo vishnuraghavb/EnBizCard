@@ -3,7 +3,7 @@
     <div class="flex items-center">
       <div
         :style="{ backgroundColor: colors[name].color }"
-        class="w-12 h-12 rounded-full mr-3  relative cursor-pointer"
+        class="w-12 h-12 rounded mr-3  relative cursor-pointer"
         tabindex="0"
         @click.self="colors[name].openPalette = !colors[name].openPalette"
         @keypress.space.enter.prevent="

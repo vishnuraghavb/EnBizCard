@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full mt-6 bg-gray-700 p-4 rounded ">
+  <div class="flex flex-col w-full mt-6 bg-gray-700 p-4 rounded">
     <div class="flex justify-between">
       <div class="flex items-center w-full">
         <div
@@ -62,7 +62,7 @@
     </div>
     <div class="flex flex-wrap items-center mt-4">
       <button
-        class="p-1 m-2  rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+        class="p-1 m-2 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
         aria-label="Add field"
         @click="addField()"
       >

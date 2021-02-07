@@ -1,7 +1,7 @@
 <template>
   <div class="crypto flex mt-6 relative">
     <div
-      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded-full"
+      class="p-3 flex-shrink-0 bg-gray-900 mr-3 rounded"
       :style="{ backgroundColor: `${crypto.bg}` }"
       :title="crypto.title"
     >
