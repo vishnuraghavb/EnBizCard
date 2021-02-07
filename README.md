@@ -26,10 +26,15 @@ Digital Business Card Generator is a free and open-source front-end web applicat
 
 ## Highlights
 
-- Share it with anyone, unlimited times
-- No limit on attachments
+- Zero limitations
 - You own your data
 - Private by design
+
+## Future
+
+Check out the [roadmap](https://github.com/vishnuraghavb/dbizcard/projects/1) to see the upcoming features of Digital Business Card Generator.
+
+Your feedback and suggestions are very important to make this the best. If you have an idea to improvement, [do let me know](#having-issues-suggestions-and-feedback). I'm always open to ideas ;)
 
 ## Having issues, suggestions and feedback?
 
@@ -38,12 +43,6 @@ You can,
 - [Create an issue here](https://github.com/vishnuraghavb/dbizcard/issues)
 - [Join the Telegram group](http://t.me/dbizcard) (quicker replies and best for discussion)
 - Contact me at apps@vishnuraghav.com
-
-## Future
-
-Check out the [roadmap](https://github.com/vishnuraghavb/dbizcard/projects/1) to see the upcoming features of Digital Business Card Generator.
-
-Your feedback and suggestions are very important to make this the best. If you have an idea to improvement, [do let me know](#having-issues-suggestions-and-feedback). I'm always open to ideas ;)
 
 ## Assets
 
@@ -57,7 +56,7 @@ Your feedback and suggestions are very important to make this the best. If you h
 
 ## Support me
 
-<a href="https://www.vishnuraghav.com/donate/"><img alt="Donate to Vishnu Raghav" src="static/donate.svg" width="207"></a>
+<a href="https://www.vishnuraghav.com/donate/"><img alt="Donate to Vishnu Raghav" src="/static/donate.svg" width="207"></a>
 
 ## License
 
@@ -77,3 +76,5 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
+
+## [Donate the author](https://www.vishnuraghav.com/donate/)
