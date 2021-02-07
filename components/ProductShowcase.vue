@@ -29,7 +29,7 @@
           class="label"
           :style="{
             backgroundColor: `${colors.buttonBg.color}`,
-            lineHeight: PreviewMode ? 'inherit' : '2rem',
+            lineHeight: PreviewMode ? 'inherit' : '1.5rem',
           }"
           target="_blank"
           :href="item.link"
