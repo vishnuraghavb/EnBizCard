@@ -1,2 +1,7 @@
 liberapay: vishnuraghavb
-custom: ['https://www.vishnuraghav.com/donate','https://paypal.me/vishnuraghav']
+custom:
+  [
+    'https://www.vishnuraghav.com/donate',
+    'https://paypal.me/vishnuraghav',
+    'https://www.instamojo.com/@vishnuraghavb/l4bcfc4a306fa43cbb5a7a051cda8d645',
+  ]

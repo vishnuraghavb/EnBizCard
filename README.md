@@ -1,8 +1,15 @@
-# Digital Business Card Generator
+<p align="center"><a href="https://dbizcard.vercel.app/"><img src="assets/images/featureGraphic.png" width="100%"></a></p>
 
-Digital Business Card Generator is a free and open-source front-end web application that lets you to quickly generate an interactive and responsive HTML-based digital business card that can be hosted with your website.
+<h3 align="center">Stop printing, start hosting!</h3>
+<p align="center">Digital Business Card Generator is a free and open-source front-end web application that lets you to quickly generate an interactive and responsive HTML-based digital business card that can be hosted with your website.</p>
+<h4 align="center"><a href="https://dbizcard.vercel.app/demo">Check out the demo</a> | <a href="https://dbizcard.vercel.app">Create your own</a></h4>
 
-## [Check out the demo](https://dbizcard.vercel.app/demo)
+---
+
+<p align="center">
+<a href="https://www.gnu.org/licenses/agpl-3.0" alt="License: GPLv3"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue"></a> <a href="https://github.com/vishnuraghavb/dbizcard/issues" alt="GitHub issues"><img src="https://img.shields.io/github/issues/vishnuraghavb/dbizcard?label=Issues"></a> <a href="https://liberapay.com/vishnuraghavb/donate" alt="Translation Status"><img src="https://img.shields.io/liberapay/patrons/vishnuraghavb.svg?logo=liberapay"></a> <a href="https://www.vishnuraghav.com/donate" alt="Donate"><img src="https://img.shields.io/badge/Donate%20to-Vishnu%20Raghav-brightgreen"></a></p>
+
+---
 
 ## Goals
 
@@ -17,7 +24,7 @@ Digital Business Card Generator is a free and open-source front-end web applicat
 - Click to contact via Phone, WhatsApp, Email, etc
 - Direct vCard download (lets user download your contact information to their phone)
 - Social media links
-- PGP public key sharing with fingerprint support
+- PGP public key sharing with fingerprint
 - Easily share your card from any mobile device with either a link or QR-code
 - Group your contents using sections
 - Feature your product images, artworks, music releases, video showreels, brochures
@@ -34,7 +41,7 @@ Digital Business Card Generator is a free and open-source front-end web applicat
 
 Check out the [roadmap](https://github.com/vishnuraghavb/dbizcard/projects/1) to see the upcoming features of Digital Business Card Generator.
 
-Your feedback and suggestions are very important to make this the best. If you have an idea to improvement, [do let me know](#having-issues-suggestions-and-feedback). I'm always open to ideas ;)
+Your feedback and suggestions are very important. If you have an idea to improve Digital Business Card Generator, [do let me know](#having-issues-suggestions-and-feedback). I'm always open to ideas ;)
 
 ## Having issues, suggestions and feedback?
 
@@ -53,10 +60,6 @@ You can,
 ### External scripts
 
 - [QRCode-SVG](https://github.com/papnkukn/qrcode-svg)
-
-## Support me
-
-<a href="https://www.vishnuraghav.com/donate/"><img alt="Donate to Vishnu Raghav" src="/static/donate.svg" width="207"></a>
 
 ## License
 
@@ -77,4 +80,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 
-## [Donate the author](https://www.vishnuraghav.com/donate/)
+## Support me
+
+<a href="https://www.vishnuraghav.com/donate/"><img alt="Donate to Vishnu Raghav" src="assets/images/donate.svg" width="207"></a>
