@@ -1,6 +1,6 @@
 <p align="center"><a href="https://dbizcard.vercel.app/"><img src="assets/images/featureGraphic.png" width="100%"></a></p>
 
-<h3 align="center">Stop printing, start hosting!</h3>
+<h3 align="center">Stop printing. Start hosting!</h3>
 <p align="center">Digital Business Card Generator is a free and open-source front-end web application that lets you to quickly generate an interactive and responsive HTML-based digital business card that can be hosted with your website.</p>
 <h4 align="center"><a href="https://dbizcard.vercel.app/demo">Check out the demo</a> | <a href="https://dbizcard.vercel.app">Create your own</a></h4>
 

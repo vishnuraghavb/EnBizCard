@@ -834,22 +834,13 @@ export default {
       embedContent: [
         {
           title: 'Section title',
-          content: [''],
+          content: [],
         },
       ],
       products: [
         {
           title: 'Section title',
-          content: [
-            {
-              image: null,
-              title: null,
-              description: null,
-              price: null,
-              label: null,
-              link: null,
-            },
-          ],
+          content: [],
         },
       ],
       footerCredit: true,

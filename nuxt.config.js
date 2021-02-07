@@ -19,7 +19,7 @@ export default {
     // ogUrl: false,
     ogTitle: 'Digital Business Card Generator - Free & Open-Source',
     ogDescription:
-      'Quickly generate an interactive and responsive HTML-based digital business card, that can be hosted with your website.',
+      'Stop printing. Start hosting! Quickly generate an interactive and responsive HTML-based digital business card, that can be hosted with your website.',
     ogSiteName: 'Digital Business Card Generator - Free & Open-Source',
     theme_color: '#38A169',
     author: 'Vishnu Raghav',
@@ -35,7 +35,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Quickly generate an interactive and responsive HTML-based digital business card, that can be hosted with your website.',
+          'Stop printing. Start hosting! Quickly generate an interactive and responsive HTML-based digital business card, that can be hosted with your website.',
       },
       {
         hid: 'msapplication-TileColor',
@@ -230,7 +230,4 @@ export default {
   robots: {
     UserAgent: '*',
   },
-  // router: {
-  //   base: '/digital-business-card-generator/',
-  // },
 }
