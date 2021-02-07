@@ -25,16 +25,15 @@
 - Direct vCard download (lets user download your contact information to their phone)
 - Social media links
 - PGP public key sharing with fingerprint
-- Easily share your card from any mobile device with either a link or QR-code
-- Group your contents using sections
-- Feature your product images, artworks, music releases, video showreels, brochures
-- Embed all kinds of HTML content (that means you can now add YouTube videos)
-- Showcase your products, services or anything upto your imagination
+- Easily share your card using QR-code or link
+- Feature images, artworks, music releases, video showreels, brochures and much more
+- Embed any kind of HTML content (that means you can now add YouTube videos)
+- Showcase products, services or anything up to your imagination
 
 ## Highlights
 
 - Zero limitations
-- You own your data
+- Your data belongs to you
 - Private by design
 
 ## Future
