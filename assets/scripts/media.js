@@ -1,4 +1,4 @@
-let pC = document.querySelectorAll('.playerControl'),
+let pC = document.querySelectorAll('.pCtrl'),
   pP = document.querySelectorAll('.playPause'),
   srcs = document.querySelectorAll('.source')
 srcs.forEach((e) => {

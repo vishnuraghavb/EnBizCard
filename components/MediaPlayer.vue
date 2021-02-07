@@ -1,5 +1,5 @@
 <template>
-  <div class="mediaPlayerContainer">
+  <div class="mediaC">
     <video
       v-show="type == 'video'"
       controlsList="nodownload nofullscreen noremoteplayback"
@@ -19,7 +19,7 @@
         "
       />
     </video>
-    <img v-show="type == 'music'"
+    <img v-if="type == 'music'"
       :src="
         PreviewMode
           ? media.coverDataURI
@@ -27,17 +27,17 @@
       "
       alt="cover"
     />
-    <div class="infoControls">
+    <div class="controls">
       <p class="title card">
         {{ media.title }}
       </p>
-      <p class="artistAlbum card" v-if="media.artist">
+      <p class="mediaInfo card" v-if="media.artist">
         <span>{{ media.artist }}</span>
         <span v-if="media.album"> - {{ media.album }}</span>
       </p>
       <div
-        class="playerControl"
-        ref="playerControl"
+        class="pCtrl"
+        ref="pCtrl"
         :style="{ display: PreviewMode ? 'flex' : 'none' }"
       >
         <output class="currentTime card" ref="bubble">00:00</output>
@@ -110,7 +110,7 @@ export default {
     },
   },
   mounted() {
-    this.$refs.playerControl.style.display = 'flex'
+    this.$refs.pCtrl.style.display = 'flex'
   },
 }
 </script>

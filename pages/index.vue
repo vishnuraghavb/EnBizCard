@@ -151,7 +151,7 @@
                 v-for="(action, index) in actions.primaryActions"
                 :key="index"
                 @click="addAction('primaryActions', index)"
-                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer  hover:scale-110 transform transition-transform duration-200"
+                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer hover:scale-110 transform transition-transform duration-200"
                 :style="{
                   backgroundColor: `${colors.buttonBg.color}`,
                 }"
@@ -183,7 +183,7 @@
                 v-for="(action, index) in actions.secondaryActions"
                 :key="index"
                 @click="addAction('secondaryActions', index)"
-                class="p-3 flex-shrink-0 mt-6 mr-6 rounded-full cursor-pointer  hover:scale-110 transform transition-transform duration-200"
+                class="p-3 flex-shrink-0 mt-6 mr-6 rounded-full cursor-pointer hover:scale-110 transform transition-transform duration-200"
                 :style="{ backgroundColor: action.color }"
                 :title="
                   action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
@@ -212,7 +212,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addFeature()"
                     aria-label="Add section"
                   >
@@ -247,7 +247,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addEmbed()"
                     aria-label="Add section"
                   >
@@ -275,7 +275,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded-full cursor-pointer bg-gray-500  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded-full cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
                     @click="addProduct()"
                     aria-label="Add section"
                   >
@@ -318,7 +318,7 @@
                 />
                 <label
                   for="toggle"
-                  class="toggle-label block overflow-hidden h-12 rounded-full bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200  focus:border-green-600"
+                  class="toggle-label block overflow-hidden h-12 rounded-full bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200 focus:border-green-600"
                 ></label>
               </div>
               <label for="toggle">{{
@@ -417,10 +417,8 @@
       </div>
     </div>
     <Donate />
-    <StyleSheet ref="stylesheet" v-show="false" />
-    <Vcard ref="vCard" v-show="false" :vCard="vCard" />
-    <ReadMe ref="readme" v-show="false" :name="username" />
-    <QRCode ref="qrcode" v-show="false" />
+    <Vcard ref="vCard" :vCard="vCard" />
+    <ReadMe ref="readme" :name="username" />
     <footer class="py-8 mx-4 mt-24">
       <p class="text-gray-500 text-sm">
         <a
@@ -478,12 +476,12 @@ import Preview from '@/components/Preview'
 import Check from '@/components/Check'
 import Donate from '@/components/Donate'
 
-import StyleSheet from '@/components/StyleSheet'
 import ReadMe from '@/components/ReadMe'
 import Vcard from '@/components/Vcard'
-import QRCode from '@/components/QRCode'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
+import QRCode from '!!raw-loader!~/static/qrcode.min.js'
+import Theme1 from '!!raw-loader!~/assets/styles/T1.min.css'
 export default {
   components: {
     Modal,
@@ -496,10 +494,8 @@ export default {
     Preview,
     Check,
     Donate,
-    StyleSheet,
     ReadMe,
     Vcard,
-    QRCode,
   },
 
   data() {
@@ -516,8 +512,7 @@ export default {
           checked: false,
         },
         {
-          label:
-            'I have verified that all the information provided here are correct',
+          label: 'I have removed all unused and empty fields or sections',
           checked: false,
         },
       ],
@@ -1063,25 +1058,42 @@ export default {
       if (this.downloadChecked) {
         this.PreviewMode = false
         setTimeout(() => {
+          let el = new DOMParser().parseFromString(
+            this.$refs.html.$refs.html.outerHTML,
+            'text/html'
+          )
+          let styleLink = document.createElement('link')
+          styleLink.rel = 'stylesheet'
+          styleLink.href = './style.min.css'
+          el.querySelector('head').appendChild(styleLink)
+          let qrcode = document.createElement('script')
+          qrcode.src = './qrcode.min.js'
+          el.querySelector('body').appendChild(qrcode)
+          let modals = document.createElement('script')
+          modals.innerText =
+            'let m=document.getElementById("modal"),c=document.getElementById("close"),ki=document.getElementById("keyInfo"),cv=document.getElementById("copyView"),curl=document.getElementById("copyURL"),qrv=document.getElementById("qrView"),qr=document.getElementById("qr"),s=document.getElementById("share"),sqr=document.getElementById("showQR"),sk=document.getElementById("showKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#topActions").style.display="flex",qr.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(m),cv.style.display="flex",dN(qrv),ki&&dN(ki)}),sqr.addEventListener("click",()=>{tC(m),qrv.style.display="block",dN(cv),ki&&dN(ki)}),sk&&sk.addEventListener("click",()=>{tC(m),ki&&(ki.style.display="flex"),dN(cv),dN(qrv)}),c.addEventListener("click",()=>tC(m)),curl.addEventListener("click",async()=>{let e=curl.querySelectorAll(".action")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});'
+          el.querySelector('body').appendChild(modals)
+          let mediaHandler = document.createElement('script')
+          mediaHandler.innerText =
+            'let pC=document.querySelectorAll(".pCtrl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),c=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",c.style.display="none");let o=Math.floor(e/60),y=Math.floor(e%60);o.toString().length<2&&(o="0"+o),y.toString().length<2&&(y="0"+y),r.value=o+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",c.style.display="block"):(srcs[l].pause(),c.style.display="none",a.style.display="block")})});'
+          if (this.featured.length)
+            el.querySelector('body').appendChild(mediaHandler)
           let html = new Blob(
-            [`<!DOCTYPE html>${this.$refs.html.$refs.html.outerHTML}`],
+            [`<!DOCTYPE html>${el.documentElement.outerHTML}`],
             {
               type: 'text/html',
             }
           )
-          let css = new Blob(
-            [this.$refs.stylesheet.$refs.stylesheet.innerText],
-            {
-              type: 'text/css',
-            }
-          )
+          let css = new Blob([Theme1], {
+            type: 'text/css',
+          })
           let vCard = new Blob([this.$refs.vCard.$refs.vCard.innerText], {
             type: 'text/plain',
           })
           let README = new Blob([this.$refs.readme.$refs.readme.innerText], {
             type: 'text/plain',
           })
-          let qrcode = new Blob([this.$refs.qrcode.$refs.qrcode.innerText], {
+          let qrScript = new Blob([QRCode], {
             type: 'application/javascript',
           })
           let name = this.businessInfo.name
@@ -1089,8 +1101,8 @@ export default {
           let zip = new JSZip()
           zip.folder(username).file('index.html', html)
           zip.folder(username).file('style.min.css', css)
+          zip.folder(username).file('qrcode.min.js', qrScript)
           zip.file('README.txt', README)
-          zip.folder(username).file('qrcode.min.js', qrcode)
           if (this.images.logo.url) {
             zip.folder(username).file(
               `logo.${this.images.logo.format}`,
@@ -1108,7 +1120,9 @@ export default {
                 this.images.photo.resized
               )
           }
-          if (this.featured.length) {
+          let hasFeaturedContent = this.featured.filter((e) => e.content.length)
+            .length
+          if (this.featured.length && hasFeaturedContent) {
             this.featured.forEach((item, index) => {
               item.content.forEach((item, i) => {
                 zip
@@ -1133,13 +1147,15 @@ export default {
           if (this.products.length) {
             this.products.forEach((item, index) => {
               item.content.forEach((item, i) => {
-                zip
-                  .folder(username)
-                  .folder('products')
-                  .file(
-                    `${this.getTitle(item.image.title)}.${item.image.format}`,
-                    item.image.file
-                  )
+                if (item.image) {
+                  zip
+                    .folder(username)
+                    .folder('products')
+                    .file(
+                      `${this.getTitle(item.image.title)}.${item.image.format}`,
+                      item.image.file
+                    )
+                }
               })
             })
           }

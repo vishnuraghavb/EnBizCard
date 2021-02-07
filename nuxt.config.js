@@ -67,7 +67,7 @@ export default {
         href: '/safari-pinned-tab.svg',
       },
     ],
-    script: [{src:'/qrcode.min.js'}],
+    script: [{ src: '/qrcode.min.js' }],
   },
   manifest: {
     name: 'Digital Business Card Generator - Free & Open-Source',
@@ -206,7 +206,23 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    extend(config, ctx) {
+      config.module.rules.push({
+        // enforce: 'pre',
+        test: /\.min.css|\.min.js$/,
+        use: [
+          {
+            loader: 'raw-loader',
+            options: {
+              esModule: false,
+            },
+          },
+        ],
+        exclude: /(node_modules)/,
+      })
+    },
+  },
   generate: {
     dir: 'public',
     fallback: true,

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="product"
+      class="content"
       v-for="(item, i) in products"
       :key="i"
       :style="{ backgroundColor: `${colors.cardBg.color}` }"
@@ -15,11 +15,11 @@
         "
         alt="Product image"
       />
-      <div class="infoControls productContent">
+      <div class="controls prodInfo">
         <p class="title card">
           {{ item.title }}
         </p>
-        <p class="description card">
+        <p class="desc card">
           {{ item.description }}
         </p>
         <p class="price card">
@@ -29,7 +29,7 @@
           class="label"
           :style="{
             backgroundColor: `${colors.buttonBg.color}`,
-            lineHeight: PreviewMode ? 'inherit' : 0,
+            lineHeight: PreviewMode ? 'inherit' : '2rem',
           }"
           target="_blank"
           :href="item.link"

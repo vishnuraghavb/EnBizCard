@@ -18,25 +18,22 @@
   background-color: #38a169;
   border-color: #38a169;
 }
-/* .checkbox:checked + img {
-  filter: invert(1);
-} */
+
 .device-curve {
   border-radius: 2rem;
 }
 .max-hd {
-  /* max-height: 60vh; */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 .max-hd::-webkit-scrollbar {
   display: none;
 }
-.device-viewport {
+.theme-one {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.device-viewport::-webkit-scrollbar {
+.theme-one::-webkit-scrollbar {
   display: none;
 }
 @media (min-width: 640px) {

@@ -14,7 +14,7 @@
         />
         <button
           v-else
-          class="p-3 h-12 w-12 box-border rounded cursor-pointer border border-dashed border-gray-500 hover:border-gray-900 transition-colors duration-200"
+          class="p-3 h-12 w-12 box-border rounded cursor-pointer border border-dashed border-gray-900 hover:border-gray-500 transition-colors duration-200"
           @click="loadFile(i)"
           aria-label="Attach product image"
           title="Attach product image"

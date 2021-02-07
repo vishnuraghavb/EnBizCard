@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="device-viewport"
-    class="rounded-b-lg overflow-y-scroll max-hd sm:max-hm"
-  >
+  <div id="Theme1" class="rounded-b-lg overflow-y-scroll max-hd sm:max-hm">
     <html
       ref="html"
       lang="en"
@@ -20,7 +17,6 @@
             '/' != window.location.href.slice(-1) &&
             window.location.replace(window.location.href + '/')
         </script>
-        <link v-if="!PreviewMode" rel="stylesheet" href="./style.min.css" />
         <title>{{ businessInfo.name }}'s Digital Business Card</title>
         <style>
           input[type='range']::-moz-range-track {
@@ -49,7 +45,7 @@
           .closeBtnColor{
             {{hasLightBG('mainBg') && 'filter:invert(1)'}}
           }
-          .shareAction{
+          .topAction{
             {{hasLightBG('logoBg') && 'filter:invert(1)'}}
           }
           .action{
@@ -60,26 +56,27 @@
             {{hasLightBG('cardBg') && 'color:#000 !important'}}
           }
           .text{
+            text-align: center;
             {{hasLightBG('mainBg') ? 'color:#000 !important' : 'color:#fff !important'}}
           }
         </style>
       </head>
       <body>
         <div
-          id="shareContainer"
-          ref="shareContainer"
+          id="modal"
+          ref="modal"
           :style="`backgroundColor: ${colors.mainBg.color}; visibility: hidden; top: 2rem; opacity: 0;`"
         >
-          <div id="closeBtnContainer">
-            <a id="closeBtn" @click="closePublicKey()" class="closeBtnColor">
+          <div id="closeModal">
+            <a id="close" @click="closePublicKey()" class="closeBtnColor">
               <div
                 class="icon"
                 v-html="require(`~/assets/icons/close.svg?include`)"
               ></div>
             </a>
           </div>
-          <div id="shareContent">
-            <div id="pubKeyInfo">
+          <div id="modalView">
+            <div id="keyInfo">
               <p class="text">
                 You can download my public key and use it to send me encrypted
                 messages
@@ -90,7 +87,7 @@
                 "
                 download
                 target="_blank"
-                id="downloadKey"
+                id="dlKey"
                 @click.prevent.capture="downloadKey()"
                 :style="{
                   backgroundColor: `${colors.buttonBg.color}`,
@@ -102,12 +99,12 @@
                 <span class="action">Download</span></a
               >
             </div>
-            <div id="copyURL" ref="copyURL">
+            <div id="copyView" ref="copyView">
               <p class="text">
                 You can copy my Business Card URL and share it via any medium
               </p>
               <a
-                id="copyShareURL"
+                id="copyURL"
                 :style="{
                   backgroundColor: `${colors.buttonBg.color}`,
                 }"
@@ -118,8 +115,8 @@
                 <span class="action">Copy URL</span></a
               >
             </div>
-            <div id="displayQRCode" ref="displayQRCode">
-              <div id="qrcode"></div>
+            <div id="qrView" ref="qrView">
+              <div id="qr"></div>
               <h2 class="text">Scan this QR Code</h2>
               <p class="text">to view my Business Card</p>
             </div>
@@ -134,27 +131,30 @@
             "
             alt="Logo"
           />
-          <div id="actions" :style="{ display: PreviewMode ? 'flex' : 'none' }">
-            <div id="shareActions">
+          <div
+            id="topActions"
+            :style="{ display: PreviewMode ? 'flex' : 'none' }"
+          >
+            <div>
               <a id="share" @click.prevent.capture="sharingAlert()">
                 <div
-                  class="icon shareAction"
+                  class="icon topAction"
                   v-html="require(`~/assets/icons/share.svg?include`)"
                 ></div>
               </a>
-              <a id="showQRCode" @click.prevent.capture="sharingAlert()"
+              <a id="showQR" @click.prevent.capture="sharingAlert()"
                 ><div
-                  class="icon shareAction"
+                  class="icon topAction"
                   v-html="require(`~/assets/icons/qrcode.svg?include`)"
                 ></div>
               </a>
             </div>
             <a
               v-if="pubKeyIsValid"
-              id="showPubKey"
-              @click.prevent.capture="showPubKey()"
+              id="showKey"
+              @click.prevent.capture="showKey()"
               ><div
-                class="icon shareAction"
+                class="icon topAction"
                 v-html="require(`~/assets/icons/key.svg?include`)"
               ></div>
             </a>
@@ -176,7 +176,7 @@
               class="img"
               :style="{ backgroundColor: `${colors.mainBg.color}` }"
             ></div>
-            <div id="profileInfo">
+            <div id="info">
               <p class="name text">
                 {{ businessInfo.name }}
               </p>
@@ -185,19 +185,16 @@
               </p>
             </div>
           </div>
-          <p
-            class="bizDescription text"
-            v-if="businessInfo.businessDescription"
-          >
+          <p class="desc text" v-if="businessInfo.businessDescription">
             {{ businessInfo.businessDescription }}
           </p>
-          <div id="contactBtns">
+          <div class="actions">
             <div
-              class="contactBtnContainer"
+              class="actionsC"
               v-for="(item, index) in primaryActions"
               :key="'pa' + index"
             >
-              <div class="contactBtn">
+              <div class="actionBtn">
                 <a
                   :href="`${item.href ? item.href + item.value : item.value}`"
                   target="_blank"
@@ -219,9 +216,9 @@
                 </p>
               </div>
             </div>
-            <div id="ctaContainer">
+            <div id="cta">
               <a
-                id="downloadVcard"
+                id="dlVcard"
                 :href="PreviewMode ? '' : `${username}.vcf`"
                 download
                 target="_blank"
@@ -237,13 +234,13 @@
               </a>
             </div>
           </div>
-          <div id="socialBtns">
+          <div class="actions secActions">
             <div
-              class="socialBtnContainer"
+              class="actionsC"
               v-for="(item, index) in secondaryActions"
               :key="'sa' + index"
             >
-              <div class="socialBtn">
+              <div class="actionBtn secBtn">
                 <a
                   :href="item.value"
                   target="_blank"
@@ -260,12 +257,13 @@
             </div>
           </div>
           <div
-            class="contentContainer"
+            class="attachments"
             v-for="(item, index) in featured"
             :key="'fc' + index"
           >
-            <h2 class="sectionTitle text">{{ item.title }}</h2>
+            <h2 class="section text">{{ item.title }}</h2>
             <div
+              class="content"
               :class="item.type"
               v-for="(item, i) in item.content"
               :key="i"
@@ -281,7 +279,7 @@
                   "
                   alt="Product image"
                 />
-                <div class="infoControls">
+                <div class="controls">
                   <p class="title card">
                     {{ item.title }}
                   </p>
@@ -306,14 +304,13 @@
             </div>
           </div>
           <div
-            class="contentContainer"
+            class="attachments"
             v-for="(item, index) in getEmbedContent"
             :key="'ec' + index"
           >
-            <h2 class="sectionTitle text">{{ item.title }}</h2>
+            <h2 class="section text">{{ item.title }}</h2>
             <div
-              class="embedContent"
-              style="position: relative; padding-top: 56.25%"
+              class="content embedded"
               v-for="(item, index) in item.content"
               :key="index"
             >
@@ -321,23 +318,16 @@
                 :src="stripAttr(item)"
                 frameborder="0"
                 allowfullscreen
-                style="
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                "
                 allow="layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'; camera 'none'; microphone 'none'"
               ></iframe>
             </div>
           </div>
           <div
-            class="contentContainer"
+            class="attachments"
             v-for="(item, index) in products"
             :key="'pc' + index"
           >
-            <h2 class="sectionTitle text">{{ item.title }}</h2>
+            <h2 class="section text">{{ item.title }}</h2>
             <ProductShowcase
               :products="item.content"
               :colors="colors"
@@ -349,31 +339,17 @@
         <footer
           v-if="footerCredit"
           :style="{ backgroundColor: `${colors.mainBg.color}` }"
+          class="text"
         >
-          <div class="text">
-            Created with
-            <a
-              class="text"
-              href="https://dbizcard.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Digital Business Card Generator</a
-            >
-          </div>
+          Created with
+          <a
+            class="text"
+            href="https://dbizcard.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Digital Business Card Generator</a
+          >
         </footer>
-        <script v-if="!PreviewMode" src="./qrcode.min.js"></script>
-        <!-- prettier-ignore -->
-        <script v-if="!PreviewMode">
-          let sC=document.getElementById("shareContainer"),cBtn=document.getElementById("closeBtn"),cURL=document.getElementById("copyURL"),cSURL=document.getElementById("copyShareURL"),dQR=document.getElementById("displayQRCode"),qrc=document.getElementById("qrcode"),s=document.getElementById("share"),sQRC=document.getElementById("showQRCode"),pKI=document.getElementById("pubKeyInfo"),sPK=document.getElementById("showPubKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#actions").style.display="flex",qrc.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(sC),cURL.style.display="flex",dN(dQR),pKI&&dN(pKI)}),sQRC.addEventListener("click",()=>{tC(sC),dQR.style.display="block",dN(cURL),pKI&&dN(pKI)}),sPK&&sPK.addEventListener("click",()=>{tC(sC),pKI&&(pKI.style.display="flex"),dN(cURL),dN(dQR)}),cBtn.addEventListener("click",()=>tC(sC)),cSURL.addEventListener("click",async()=>{let e=cSURL.querySelectorAll(".action")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});
-        </script>
-        <!-- prettier-ignore -->
-        <script
-          v-if="
-            !PreviewMode && (featured.length)
-          "
-        >
-          let pC=document.querySelectorAll(".playerControl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),o=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",o.style.display="none");let c=Math.floor(e/60),y=Math.floor(e%60);c.toString().length<2&&(c="0"+c),y.toString().length<2&&(y="0"+y),r.value=c+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",o.style.display="block"):(srcs[l].pause(),o.style.display="none",a.style.display="block")})});
-        </script>
       </body>
     </html>
   </div>
@@ -438,7 +414,7 @@ export default {
       return e.toLowerCase().split(' ').join('_')
     },
     stripAttr(val) {
-      if (/<iframe/.test(val)) {
+      if (/<iframe(.*)\/iframe>/.test(val)) {
         let iframe = val.match(/<iframe(.*)\/iframe>/)[0]
         return iframe.match(/src="?([^"\s]+)"/)[1]
       } else return null
@@ -454,15 +430,15 @@ export default {
             e.style.visibility = 'hidden'
           }, 200))
     },
-    showPubKey() {
-      let shareContainer = this.$refs.shareContainer
-      let copyURL = this.$refs.copyURL
-      let displayQRCode = this.$refs.displayQRCode
-      this.toggleContainer(shareContainer)
-      copyURL.style.display = displayQRCode.style.display = 'none'
+    showKey() {
+      let modal = this.$refs.modal
+      let copyView = this.$refs.copyView
+      let qrView = this.$refs.qrView
+      this.toggleContainer(modal)
+      copyView.style.display = qrView.style.display = 'none'
     },
     closePublicKey() {
-      this.toggleContainer(shareContainer)
+      this.toggleContainer(modal)
     },
     sharingAlert() {
       this.showAlert(
@@ -496,7 +472,7 @@ export default {
 }
 </script>
 <style lang="scss">
-#device-viewport {
+#Theme1 {
   body {
     margin: 0 auto;
     width: 100%;
@@ -506,7 +482,7 @@ export default {
     font-family: sans-serif;
     position: relative;
   }
-  #shareContainer {
+  #modal {
     position: absolute;
     z-index: 1;
     width: 100%;
@@ -514,12 +490,12 @@ export default {
     transition: top 0.2s ease-out, opacity 0.1s ease-out;
     transform: translateZ(0);
   }
-  #closeBtnContainer {
+  #closeModal {
     display: flex;
     justify-content: flex-end;
     margin: 1rem 1rem 0 0;
   }
-  #closeBtn {
+  #close {
     padding: 0.75rem;
     cursor: pointer;
     line-height: 0;
@@ -528,24 +504,24 @@ export default {
     width: 1.5rem;
     height: 1.5rem;
   }
-  #shareContent,
-  #copyURL,
-  #displayQRCode,
-  #pubKeyInfo {
+  #modalView,
+  #copyView,
+  #qrView,
+  #keyInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  #copyURL,
-  #pubKeyInfo {
+  #copyView,
+  #keyInfo {
     p {
       margin: 1rem 2em 0;
       line-height: 1.5;
       text-align: center;
     }
   }
-  #copyShareURL,
-  #downloadKey {
+  #copyURL,
+  #dlKey {
     display: inline-flex;
     align-items: center;
     border-radius: 5rem;
@@ -556,7 +532,7 @@ export default {
       margin-left: 0.5rem;
     }
   }
-  #displayQRCode {
+  #qrView {
     text-align: center;
     width: 100%;
     h2,
@@ -564,15 +540,13 @@ export default {
       padding: 0 2rem;
     }
     h2 {
-      font-weight: 700;
-      font-size: 1.5rem;
       margin: 0;
     }
     p {
       margin-top: 0.5rem;
     }
   }
-  #qrcode {
+  #qr {
     margin: 1rem 2rem 2rem;
     padding: 2rem;
     background: #fff;
@@ -594,13 +568,16 @@ export default {
     pointer-events: none;
     user-select: none;
   }
-  #actions {
+  #topActions {
     flex-direction: row-reverse;
     justify-content: space-between;
     position: absolute;
     left: 1rem;
     right: 0;
     top: 1rem;
+    & > div {
+      display: flex;
+    }
     a {
       padding: 0.75rem;
       cursor: pointer;
@@ -608,9 +585,6 @@ export default {
       line-height: 0;
       margin-right: 1rem;
     }
-  }
-  #shareActions {
-    display: flex;
   }
   main {
     padding: 1rem;
@@ -630,7 +604,7 @@ export default {
       user-select: none;
     }
   }
-  #profileInfo {
+  #info {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -649,26 +623,22 @@ export default {
     margin: 0.25rem 0 0 0;
   }
 
-  .bizDescription {
-    text-align: center;
+  .desc {
     font-size: 0.875rem;
     white-space: pre-line;
     line-height: 1.5;
     margin: 1rem;
   }
-  #contactBtns,
-  #socialBtns {
+  .actions {
     margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-  .contactBtnContainer,
-  .socialBtnContainer {
+  .actionsC {
     width: 33.33%;
   }
-  .contactBtn,
-  .socialBtn {
+  .actionBtn {
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -684,16 +654,22 @@ export default {
       font-size: 0.875rem;
     }
   }
+  .secActions {
+    margin-top: 1.25rem;
+  }
+  .secBtn {
+    padding: 1rem;
+  }
   a {
     text-decoration: none;
     user-select: none;
   }
-  #ctaContainer {
+  #cta {
     display: flex;
     justify-content: center;
     width: 100%;
   }
-  #downloadVcard {
+  #dlVcard {
     display: flex;
     align-items: center;
     border-radius: 5rem;
@@ -708,33 +684,22 @@ export default {
       margin: 0;
     }
   }
-  #socialBtns {
-    margin-top: 1.25rem;
-  }
-  .socialBtn {
-    padding: 1rem;
-  }
-  .contentContainer {
+  .attachments {
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .sectionTitle {
+  .section {
     font-weight: 700;
     text-align: center;
     font-size: 1.5rem;
-    margin: 3rem 1.5rem 1.5rem;
+    margin: 3rem 1rem 1rem;
   }
-  .image,
-  .music,
-  .video,
-  .document,
-  .embedContent,
-  .product {
+  .content {
     overflow: hidden;
     border-radius: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     img {
       display: block;
       pointer-events: none;
@@ -742,13 +707,22 @@ export default {
       width: 100%;
     }
   }
-
+  .embedded {
+    position: relative;
+    padding-top: 56.25%;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
   .music,
   .video {
     width: 100%;
   }
-  .mediaPlayerContainer,
-  .documentContainer {
+  .mediaC {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -757,36 +731,32 @@ export default {
   video {
     width: 100%;
   }
-  .infoControls {
+  .controls {
     padding: 2rem 1rem;
     font-size: 0.875rem;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
   }
-  .productContent {
-    .description {
+  .prodInfo {
+    .desc {
       margin: -1rem 0 0;
-      font-size: 0.875rem;
-      white-space: pre-line;
-      line-height: 1.5;
     }
-    .price {
-      margin: 2rem 0 0;
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
-    .label {
-      display: inline-block;
-      font-size: 1rem;
-      margin-top: 1rem;
-      border-radius: 5rem;
-      letter-spacing: 1px;
-      padding: 0.75rem 1.5rem;
-      line-height: 0;
-      .action {
-        margin: 0;
-      }
+  }
+  .price {
+    margin: 2rem 0 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .label {
+    display: inline-block;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border-radius: 5rem;
+    letter-spacing: 1px;
+    padding: 0.75rem 1.5rem;
+    p {
+      margin: 0;
     }
   }
   .title {
@@ -794,18 +764,17 @@ export default {
     font-weight: 700;
     margin: 0 0 0.5rem;
   }
-  .artistAlbum,
-  .fileSize {
+  .mediaInfo {
     margin: 0;
   }
-  .playerControl,
-  .downloadDocument {
+  .pCtrl,
+  .docDl {
     display: none;
     flex-direction: column;
     align-items: center;
     width: 100%;
   }
-  .downloadDocument {
+  .docDl {
     display: flex;
   }
   .seekBar {
@@ -818,7 +787,7 @@ export default {
     cursor: pointer;
   }
   .playPause,
-  .downloadBtn {
+  .dlBtn {
     margin: 2rem 0.5rem 0;
     padding: 0.75rem;
     border-radius: 5rem;
@@ -829,15 +798,12 @@ export default {
     display: none;
   }
   footer {
-    padding: 1.5rem 1.5rem 2rem;
-    div {
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      text-align: center;
-      a {
-        text-decoration: underline;
-        color: inherit;
-      }
+    padding: 2.5rem 1.5rem 2rem;
+    font-size: 0.75rem;
+    text-align: center;
+    a {
+      text-decoration: underline;
+      color: inherit;
     }
   }
 }

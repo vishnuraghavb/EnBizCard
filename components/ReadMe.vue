@@ -1,5 +1,5 @@
 <template>
-  <pre ref="readme">
+  <pre ref="readme" v-show="false">
 -----------------------------------------------------------------------
 Thank you for using Digital Business Card Generator!
 -----------------------------------------------------------------------

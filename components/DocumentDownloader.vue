@@ -1,6 +1,6 @@
 <template>
-  <div class="documentContainer">
-    <div class="documentPreview">
+  <div class="mediaC">
+    <div>
       <img
         :src="
           PreviewMode
@@ -10,14 +10,14 @@
         :alt="media.title"
       />
     </div>
-    <div class="infoControls">
+    <div class="controls">
       <p class="title card">
         {{ media.title }}
       </p>
-      <p class="fileSize card">PDF - {{ media.filesize }}</p>
-      <div class="downloadDocument">
+      <p class="mediaInfo card">PDF - {{ media.filesize }}</p>
+      <div class="docDl">
         <a
-          class="downloadBtn"
+          class="dlBtn"
           @click.prevent="downloadDocument()"
           :style="{
             backgroundColor: `${colors.buttonBg.color}`,

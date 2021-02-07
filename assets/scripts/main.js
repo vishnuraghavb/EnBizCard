@@ -1,13 +1,13 @@
-let sC = document.getElementById('shareContainer'),
-  cBtn = document.getElementById('closeBtn'),
-  cURL = document.getElementById('copyURL'),
-  cSURL = document.getElementById('copyShareURL'),
-  dQR = document.getElementById('displayQRCode'),
-  qrc = document.getElementById('qrcode'),
+let m = document.getElementById('modal'),
+  c = document.getElementById('close'),
+  ki = document.getElementById('keyInfo'),
+  cv = document.getElementById('copyView'),
+  curl = document.getElementById('copyURL'),
+  qrv = document.getElementById('qrView'),
+  qr = document.getElementById('qr'),
   s = document.getElementById('share'),
-  sQRC = document.getElementById('showQRCode'),
-  pKI = document.getElementById('pubKeyInfo'),
-  sPK = document.getElementById('showPubKey')
+  sqr = document.getElementById('showQR'),
+  sk = document.getElementById('showKey')
 
 function tC(e) {
   '2rem' == e.style.top
@@ -24,8 +24,8 @@ function dN(value) {
   value.style.display = 'none'
 }
 window.addEventListener('load', () => {
-  ;(document.querySelector('#actions').style.display = 'flex'),
-    (qrc.innerHTML = new QRCode({
+  ;(document.querySelector('#topActions').style.display = 'flex'),
+    (qr.innerHTML = new QRCode({
       content: window.location.href,
       container: 'svg-viewbox',
       join: !0,
@@ -42,31 +42,22 @@ navigator.canShare
       })
     })
   : s.addEventListener('click', () => {
-      tC(sC),
-        (cURL.style.display = 'flex'),
-        dN(dQR),
-        pKI ? dN(pKI) : null
+      tC(m), (cv.style.display = 'flex'), dN(qrv), ki ? dN(ki) : null
     })
 
-sQRC.addEventListener('click', () => {
-  tC(sC),
-    (dQR.style.display = 'block'),
-    dN(cURL),
-    pKI ? dN(pKI) : null
+sqr.addEventListener('click', () => {
+  tC(m), (qrv.style.display = 'block'), dN(cv), ki ? dN(ki) : null
 })
 
-if (sPK) {
-  sPK.addEventListener('click', () => {
-    tC(sC),
-      pKI ? (pKI.style.display = 'flex') : null,
-      dN(cURL),
-      dN(dQR)
+if (sk) {
+  sk.addEventListener('click', () => {
+    tC(m), ki ? (ki.style.display = 'flex') : null, dN(cv), dN(qrv)
   })
 }
 
-cBtn.addEventListener('click', () => tC(sC)),
-  cSURL.addEventListener('click', async () => {
-    let action = cSURL.querySelectorAll('.action')[1]
+c.addEventListener('click', () => tC(m)),
+  curl.addEventListener('click', async () => {
+    let action = curl.querySelectorAll('.action')[1]
     await navigator.clipboard.writeText(window.location.href).then((e) => {
       action.innerText = 'Copied'
       setTimeout(() => {
