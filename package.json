@@ -11,23 +11,27 @@
   "dependencies": {
     "@aceforth/nuxt-optimized-images": "^1.4.0",
     "@caohenghu/vue-colorpicker": "^1.2.4",
-    "@nuxtjs/pwa": "^3.3.4",
+    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/robots": "^2.4.2",
     "file-saver": "^2.0.5",
     "id3-parser": "^2.0.0",
-    "jszip": "^3.5.0",
-    "nuxt": "^2.13.0",
+    "jszip": "^3.6.0",
+    "nuxt": "^2.14.12",
     "vue-clickaway2": "^2.3.2"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^2.1.1",
+    "@nuxtjs/tailwindcss": "^3.4.2",
+    "@tailwindcss/postcss7-compat": "^2.0.3",
+    "autoprefixer": "^9.8.6",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.3.1",
     "imagemin-svgo": "^8.0.0",
     "node-sass": "^4.14.1",
-    "pdfjs-dist": "^2.5.207",
+    "pdfjs-dist": "^2.6.347",
+    "postcss": "^7.0.35",
     "prettier": "^2.2.1",
     "raw-loader": "^4.0.2",
-    "sass-loader": "^9.0.3"
+    "sass-loader": "^9.0.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   }
 }

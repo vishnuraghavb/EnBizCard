@@ -1,8 +1,8 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.field-container {
+.stepC {
   margin-left: 0;
   margin-right: 0;
 }
@@ -18,13 +18,14 @@
   background-color: #38a169;
   border-color: #38a169;
 }
-
-.device-curve {
+#device {
   border-radius: 2rem;
+  width: 100%;
 }
 .max-hd {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  max-height: 100vh;
 }
 .max-hd::-webkit-scrollbar {
   display: none;
@@ -36,12 +37,30 @@
 .theme-one::-webkit-scrollbar {
   display: none;
 }
+.footer {
+  display: flex;
+}
+.stepC.actions {
+  display: grid;
+  grid-gap: 1.5rem;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fill, minmax(3rem, auto));
+}
+
 @media (min-width: 640px) {
-  .max-hd {
-    max-height: 60vh;
+  .footer {
+    display: none;
   }
-  .field-container {
+  .max-hd {
+    max-height: 38rem;
+  }
+  .stepC {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+  }
+}
+@media (min-width: 480px) {
+  #device {
+    max-width: 24rem;
   }
 }

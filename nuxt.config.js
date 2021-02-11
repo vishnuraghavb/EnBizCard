@@ -3,7 +3,7 @@ export default {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'spa',
+  ssr: false,
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -17,17 +17,17 @@ export default {
     ogType: 'website',
     ogImage: '/maskable_512.png',
     // ogUrl: false,
-    ogTitle: 'Digital Business Card Generator - Free & Open-Source',
+    ogTitle: 'EnBizCard - An Open-Source Digital Business Card Generator',
     ogDescription:
-      'Stop printing. Start hosting! Quickly generate an interactive and responsive HTML-based digital business card, that can be hosted with your website.',
-    ogSiteName: 'Digital Business Card Generator - Free & Open-Source',
-    theme_color: '#38A169',
+      'EnBizCard helps you create interactive and responsive HTML-based digital business card that can be hosted with your website.',
+    ogSiteName: 'EnBizCard - An Open-Source Digital Business Card Generator',
+    theme_color: '#111827',
     author: 'Vishnu Raghav',
     lang: 'en',
-    name: 'Digital Business Card Generator - Free & Open-Source',
+    name: 'EnBizCard - An Open-Source Digital Business Card Generator',
   },
   head: {
-    title: 'Digital Business Card Generator - Free & Open-Source',
+    title: 'EnBizCard - An Open-Source Digital Business Card Generator',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -35,13 +35,13 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Stop printing. Start hosting! Quickly generate an interactive and responsive HTML-based digital business card, that can be hosted with your website.',
+          'EnBizCard helps you create interactive and responsive HTML-based digital business card that can be hosted with your website.',
       },
       {
         hid: 'msapplication-TileColor',
         name: 'msapplication-TileColor',
         property: 'msapplication-TileColor',
-        content: '#38A169',
+        content: '#111827',
       },
       {
         hid: 'msapplication-TileImage',
@@ -54,7 +54,17 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico',
+        href: '/favicon.ico?v=2',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        href: '/favicon-16x16.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        href: '/favicon-32x32.png',
       },
       {
         rel: 'apple-touch-icon',
@@ -63,19 +73,19 @@ export default {
       },
       {
         rel: 'mask-icon',
-        color: '#38A169',
+        color: '#111827',
         href: '/safari-pinned-tab.svg',
       },
     ],
     script: [{ src: '/qrcode.min.js' }],
   },
   manifest: {
-    name: 'Digital Business Card Generator - Free & Open-Source',
-    short_name: 'Digital Business Card Generator',
+    name: 'EnBizCard - An Open-Source Digital Business Card Generator',
+    short_name: 'EnBizCard',
     start_url: '/',
     display: 'standalone',
-    theme_color: '#38A169',
-    background_color: '#ffffff',
+    theme_color: '#111827',
+    background_color: '#111827',
     display: 'standalone',
     icons: [
       {
