@@ -4,7 +4,6 @@ body {
   padding: 0;
   max-width: 30rem;
   color: #fff;
-  font-family: sans-serif;
   position: relative;
 }
 #modal {
@@ -40,8 +39,7 @@ body {
 #copyView,
 #keyInfo {
   p {
-    margin: 1rem 2em 0;
-    line-height: 1.5;
+    margin: 1rem 2em 2rem;
     text-align: center;
   }
 }
@@ -50,7 +48,6 @@ body {
   display: inline-flex;
   align-items: center;
   border-radius: 5rem;
-  margin-top: 2rem;
   padding: 0.75rem 1.5rem;
   cursor: pointer;
   span {
@@ -58,17 +55,9 @@ body {
   }
 }
 #qrView {
-  text-align: center;
-  width: 100%;
   h2,
   p {
-    padding: 0 2rem;
-  }
-  h2 {
-    margin: 0;
-  }
-  p {
-    margin-top: 0.5rem;
+    margin: 0 2rem 0.5rem;
   }
 }
 #qr {
@@ -87,6 +76,7 @@ header {
   box-sizing: border-box;
 }
 #logo {
+  min-height: 6rem;
   max-height: 6rem;
   text-align: center;
   color: gray;
@@ -118,15 +108,14 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -4.5rem;
-  img,
-  .img {
+  img {
     width: 7rem;
     height: 7rem;
     border-radius: 100%;
     text-align: center;
     pointer-events: none;
     user-select: none;
+    margin-top: -4.5rem;
   }
 }
 #info {
@@ -139,7 +128,7 @@ main {
   word-break: break-word;
 }
 .name {
-  font-weight: 700;
+  font-weight: bold;
   font-size: 1.25rem;
   margin: 0;
 }
@@ -147,12 +136,16 @@ main {
   font-size: 1rem;
   margin: 0.25rem 0 0 0;
 }
-
-.desc {
+.desc,
+.textC {
   font-size: 0.875rem;
   white-space: pre-line;
   line-height: 1.5;
   margin: 1rem;
+}
+.textC {
+  font-size: 1rem;
+  margin: 2rem 1rem;
 }
 .actions {
   margin-top: 2rem;
@@ -179,7 +172,7 @@ main {
     font-size: 0.875rem;
   }
 }
-.secActions {
+.secondary {
   margin-top: 1.25rem;
 }
 .secBtn {
@@ -216,7 +209,7 @@ a {
   justify-content: center;
 }
 .section {
-  font-weight: 700;
+  font-weight: bold;
   text-align: center;
   font-size: 1.5rem;
   margin: 3rem 1rem 1rem;
@@ -271,7 +264,7 @@ video {
 .price {
   margin: 2rem 0 0;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: bold;
 }
 .label {
   display: inline-block;
@@ -286,7 +279,7 @@ video {
 }
 .title {
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: bold;
   margin: 0 0 0.5rem;
 }
 .mediaInfo {
@@ -325,7 +318,6 @@ video {
 footer {
   padding: 2.5rem 1.5rem 2rem;
   font-size: 0.75rem;
-  text-align: center;
   a {
     text-decoration: underline;
     color: inherit;

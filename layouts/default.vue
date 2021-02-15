@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #2d3748;">
+  <div class="bg-gray-900">
     <Nuxt />
   </div>
 </template>
@@ -27,5 +27,24 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+.drop-enter-active,
+.drop-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.drop-enter,
+.drop-leave-to {
+  transform: translateY(-100%);
+}
+.fade-enter-active,
+.fade-leave-active {
+  backface-visibility: hidden;
+  transition: transform 0.4s ease, opacity 0.2s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 </style>

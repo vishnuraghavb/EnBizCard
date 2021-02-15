@@ -1,45 +1,53 @@
 <template>
   <div class="flex mt-6">
-    <div
-      v-if="imageAttached"
-      class="w-12 h-12 p-3 mr-2"
-      v-html="
-        require(`~/assets/icons/${
-          type == 'logo' ? 'brand' : 'photo'
-        }.svg?include`)
-      "
-      :title="`${type == 'logo' ? 'Brand logo' : 'Card holder\'s photo'}`"
-    ></div>
     <div class="flex flex-wrap items-center">
       <img
-        class="h-12 rounded border-2 p-1 border-gray-800 transition-colors duration-200 hover:border-red-600 cursor-pointer"
+        class="w-12 h-12 rounded object-contain"
         v-if="imageAttached"
         :src="content[type].url"
-        @click="content[type].url = null"
-        :title="`Click to remove ${type}`"
+        :title="`${type == 'logo' ? 'Brand logo' : 'Card holder\'s photo'}`"
       />
       <button
         v-if="!imageAttached"
-        class="p-3 rounded bg-gray-500 cursor-pointer  hover:bg-green-600 focus:bg-green-600 transition-colors duration-200 "
-        @click="loadImage(type)" :aria-label="label"
+        class="p-3 rounded bg-gray-700 cursor-pointer hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+        @click="attachFile(null, type, false)"
+        :class="
+          dragOver ? 'bg-gray-900 outline-white' : 'bg-gray-700 border-none'
+        "
+        :aria-label="label"
+        @drop.prevent="attachFile($event, type, true)"
+        @dragleave.prevent.self="dragOver = false"
+        @dragover.prevent.self="dragOver = true"
       >
         <input
           :ref="`import${type}`"
           type="file"
           :accept="`.png,.jpg,.jpeg${type == 'logo' ? ',.svg' : ''}`"
           v-show="false"
-          @change="imageLoaded($event, type)"
+          @change="fileLoaded($event, type, false)"
           @click="$event.target.files = null"
         />
         <div
-          class="w-6 h-6"
+          class="w-6 h-6 pointer-events-none"
           v-html="require(`~/assets/icons/add.svg?include`)"
         ></div>
       </button>
       <p v-if="!imageAttached" class="ml-3 leading-none">
         {{ label
-        }}<span class="text-sm text-gray-500"><br />{{ description }}</span>
+        }}<span class="text-sm text-gray-400"><br />{{ description }}</span>
       </p>
+      <button
+        v-else
+        class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+        @click="content[type].url = null"
+        :aria-label="`Remove ${type}`"
+        :title="`Remove ${type}`"
+      >
+        <div
+          class="w-6 h-6"
+          v-html="require(`~/assets/icons/x.svg?include`)"
+        ></div>
+      </button>
     </div>
   </div>
 </template>
@@ -54,17 +62,36 @@ export default {
     'resizeImage',
     'showAlert',
   ],
+  data() {
+    return {
+      dragOver: false,
+    }
+  },
   computed: {
     imageAttached() {
       return this.content[this.type].url ? true : false
     },
   },
   methods: {
-    loadImage(type) {
-      this.$refs[`import${type}`].click()
+    attachFile(e, type, dropped) {
+      dropped
+        ? (this.fileLoaded(e, type, true), (this.dragOver = false))
+        : this.$refs[`import${type}`].click()
     },
-    imageLoaded(e, type) {
-      let file = e.target.files[0]
+    fileLoaded(e, type, dropped) {
+      if (
+        (dropped && e.dataTransfer.files.length) ||
+        (!dropped && e.target.files.length)
+      ) {
+        let file = dropped ? e.dataTransfer.files[0] : e.target.files[0]
+        if (type == 'logo' && file.type.match(/image\/(svg\+xml|png|jpeg)/)) {
+          this.imageLoaded(file, type)
+        } else if (file.type.match(/image\/(png|jpeg)/)) {
+          this.imageLoaded(file, type)
+        }
+      }
+    },
+    imageLoaded(file, type) {
       let reader = new FileReader()
       reader.onload = (f) => {
         let dataURI = f.target.result
@@ -79,14 +106,14 @@ export default {
           img.onload = () => {
             img.width != img.height
               ? this.showAlert(
-                  'Looks like its not a square photo.\n\nPlease use an image editor to crop the photo to 1:1 and re-attach the same.\n\nA stretched photo could make you look unprofessional.'
+                  'Looks like its not a square photo.\n\nPlease use an image editor to crop the photo to 1:1 and re-attach the same.'
                 )
               : null
           }
         }
         this.content[type] = {
           url: dataURI,
-          blob: e.target.files[0],
+          blob: file,
           format,
         }
         if (this.content[type].format.match(/(png|jpg|jpeg)/)) {

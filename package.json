@@ -17,7 +17,8 @@
     "id3-parser": "^2.0.0",
     "jszip": "^3.6.0",
     "nuxt": "^2.14.12",
-    "vue-clickaway2": "^2.3.2"
+    "vue-clickaway2": "^2.3.2",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^3.4.2",

@@ -1,356 +1,322 @@
 <template>
-  <div id="Theme1" class="rounded-b-lg overflow-y-scroll max-hd sm:max-hm">
-    <html
-      ref="html"
-      lang="en"
-      :style="{ backgroundColor: `${colors.logoBg.color}` }"
-    >
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta v-if="!PreviewMode" name="robots" content="noindex, nofollow" />
-        <meta name="author" content="Digital Business Card Generator" />
-        <meta name="url" content="https://dbizcard.vercel.app/" />
-        <meta name="designer" content="Vishnu Raghav B" />
-        <script>
-          'http' == window.location.href.substr(0, 4) &&
-            '/' != window.location.href.slice(-1) &&
-            window.location.replace(window.location.href + '/')
-        </script>
-        <title>{{ businessInfo.name }}'s Digital Business Card</title>
-        <style>
-          input[type='range']::-moz-range-track {
-            background: none;
-          }
-          input[type='range']::-moz-range-thumb {
-            -moz-appearance: none;
-            width: 3rem;
-            height: 3rem;
-            border-radius: 100%;
-            border: none;
-            background: {{colors.buttonBg.color}};
-            z-index: 3;
-            cursor: pointer;
-          }
-          input[type='range']::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 3rem;
-            height: 3rem;
-            border-radius: 100%;
-            border: none;
-            background: {{colors.buttonBg.color}};
-            z-index: 3;
-            cursor: pointer;
-          }
-          .closeBtnColor{
-            {{hasLightBG('mainBg') && 'filter:invert(1)'}}
-          }
-          .topAction{
-            {{hasLightBG('logoBg') && 'filter:invert(1)'}}
-          }
-          .action{
-            color:#fff;
-            {{hasLightBG('buttonBg') ? 'filter:invert(1)' : null}}
-          }
-          .card{
-            {{hasLightBG('cardBg') && 'color:#000 !important'}}
-          }
-          .text{
-            text-align: center;
-            {{hasLightBG('mainBg') ? 'color:#000 !important' : 'color:#fff !important'}}
-          }
-        </style>
-      </head>
-      <body>
-        <div
-          id="modal"
-          ref="modal"
-          :style="`backgroundColor: ${colors.mainBg.color}; visibility: hidden; top: 2rem; opacity: 0;`"
-        >
-          <div id="closeModal">
-            <a id="close" @click="closePublicKey()" class="closeBtnColor">
-              <div
-                class="icon"
-                v-html="require(`~/assets/icons/close.svg?include`)"
-              ></div>
-            </a>
-          </div>
-          <div id="modalView">
-            <div id="keyInfo">
-              <p class="text">
-                You can download my public key and use it to send me encrypted
-                messages
-              </p>
-              <a
-                :href="
-                  PreviewMode ? '' : `${businessInfo.name}'s public key.asc`
-                "
-                download
-                target="_blank"
-                id="dlKey"
-                @click.prevent.capture="downloadKey()"
-                :style="{
-                  backgroundColor: `${colors.buttonBg.color}`,
-                }"
-                ><div
-                  class="icon action"
-                  v-html="require(`~/assets/icons/download.svg?include`)"
-                ></div>
-                <span class="action">Download</span></a
-              >
-            </div>
-            <div id="copyView" ref="copyView">
-              <p class="text">
-                You can copy my Business Card URL and share it via any medium
-              </p>
-              <a
-                id="copyURL"
-                :style="{
-                  backgroundColor: `${colors.buttonBg.color}`,
-                }"
-                ><div
-                  class="icon action"
-                  v-html="require(`~/assets/icons/copy.svg?include`)"
-                ></div>
-                <span class="action">Copy URL</span></a
-              >
-            </div>
-            <div id="qrView" ref="qrView">
-              <div id="qr"></div>
-              <h2 class="text">Scan this QR Code</h2>
-              <p class="text">to view my Business Card</p>
-            </div>
-          </div>
-        </div>
-        <header>
-          <img
-            id="logo"
-            v-if="images.logo.url"
-            :src="
-              PreviewMode ? images.logo.url : `./logo.${images.logo.format}`
-            "
-            alt="Logo"
+  <div
+    class="overflow-y-scroll max-hd border-t-0 border-4 border-black bg-gray-900"
+  >
+    <div id="Theme1">
+      <html
+        ref="html"
+        lang="en"
+        :style="{ backgroundColor: `${colors.logoBg.color}` }"
+      >
+        <head>
+          <meta charset="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
           />
+          <meta v-if="!PreviewMode" name="robots" content="noindex, nofollow" />
+          <meta
+            name="author"
+            content="EnBizCard - An Open-Source Digital Business Card Generator"
+          />
+          <meta name="url" content="https://enbizcard.vercel.app/" />
+          <meta name="designer" content="Vishnu Raghav" />
+          <!-- prettier-ignore -->
+          <script>
+            "http"==window.location.href.substr(0,4)&&"/"!=window.location.href.slice(-1)&&window.location.replace(window.location.href+"/");
+          </script>
+          <link v-if="getCssHref" :href="getCssHref" rel="stylesheet" />
+          <title>{{ genInfo.name }}'s Digital Business Card</title>
+          <style>
+            #body{ font-family: sans-serif; } input[type='range']::-moz-range-track { background: none; } input[type='range']::-moz-range-thumb { -moz-appearance: none; width: 3rem; height: 3rem; border-radius: 100%; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 3rem; height: 3rem; border-radius: 100%; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } .closeBtnColor{ {{hasLightBG('mainBg') && 'filter:invert(1)'}} } .topAction{ {{hasLightBG('logoBg') && 'filter:invert(1)'}} } .action{ color:#fff; {{hasLightBG('buttonBg') ? 'filter:invert(1)' : null}} } .card{ {{hasLightBG('cardBg') && 'color:#000 !important'}} } .text{ text-align: center;line-height: 1.5;{{hasLightBG('mainBg') ? 'color:#000 !important' : 'color:#fff !important'}} }
+          </style>
+          <style v-if="getCssHref">
+            #body{
+            {{genInfo.fontCss && getFontFamily}}
+            }
+          </style>
+          {{
+            !PreviewMode && genInfo.tracker ? getTrackingCode : null
+          }}
+        </head>
+        <body id="body">
           <div
-            id="topActions"
-            :style="{ display: PreviewMode ? 'flex' : 'none' }"
+            id="modal"
+            ref="modal"
+            :style="`backgroundColor: ${colors.mainBg.color}; visibility: hidden; top: 2rem; opacity: 0;`"
           >
-            <div>
-              <a id="share" @click.prevent.capture="sharingAlert()">
+            <div id="closeModal">
+              <a id="close" @click="closePublicKey()" class="closeBtnColor">
                 <div
-                  class="icon topAction"
-                  v-html="require(`~/assets/icons/share.svg?include`)"
-                ></div>
-              </a>
-              <a id="showQR" @click.prevent.capture="sharingAlert()"
-                ><div
-                  class="icon topAction"
-                  v-html="require(`~/assets/icons/qrcode.svg?include`)"
+                  class="icon"
+                  v-html="require(`~/assets/icons/close.svg?include`)"
                 ></div>
               </a>
             </div>
-            <a
-              v-if="pubKeyIsValid"
-              id="showKey"
-              @click.prevent.capture="showKey()"
-              ><div
-                class="icon topAction"
-                v-html="require(`~/assets/icons/key.svg?include`)"
-              ></div>
-            </a>
-          </div>
-        </header>
-        <main :style="{ backgroundColor: `${colors.mainBg.color}` }">
-          <div id="profile">
-            <img
-              v-if="images.photo.url"
-              :src="
-                PreviewMode
-                  ? images.photo.url
-                  : `./photo.${images.photo.format}`
-              "
-              alt="Photo"
-            />
-            <div
-              v-else
-              class="img"
-              :style="{ backgroundColor: `${colors.mainBg.color}` }"
-            ></div>
-            <div id="info">
-              <p class="name text">
-                {{ businessInfo.name }}
-              </p>
-              <p class="jobtitle text">
-                {{ businessInfo.jobTitle }}
-              </p>
-            </div>
-          </div>
-          <p class="desc text" v-if="businessInfo.businessDescription">
-            {{ businessInfo.businessDescription }}
-          </p>
-          <div class="actions">
-            <div
-              class="actionsC"
-              v-for="(item, index) in primaryActions"
-              :key="'pa' + index"
-            >
-              <div class="actionBtn">
+            <div id="modalView">
+              <div id="keyInfo">
+                <p class="text">
+                  Download my public key to send encrypted messages to me
+                </p>
                 <a
-                  :href="`${item.href ? item.href + item.value : item.value}`"
+                  :href="PreviewMode ? '' : `${genInfo.name}'s public key.asc`"
+                  download
                   target="_blank"
-                  rel="noopener noreferrer"
+                  id="dlKey"
+                  @click.prevent.capture="downloadKey()"
                   :style="{
                     backgroundColor: `${colors.buttonBg.color}`,
                   }"
-                  :aria-label="item.name"
-                >
-                  <div
+                  tabindex="-1"
+                  ><div
                     class="icon action"
-                    v-html="require(`~/assets/icons/${item.name}.svg?include`)"
+                    v-html="require(`~/assets/icons/download.svg?include`)"
+                  ></div>
+                  <span class="action">Download Public Key</span></a
+                >
+              </div>
+              <div id="copyView" ref="copyView">
+                <p class="text">
+                  Copy and send the URL to share my Business Card
+                </p>
+                <a
+                  id="copyURL"
+                  :style="{
+                    backgroundColor: `${colors.buttonBg.color}`,
+                  }"
+                  ><div
+                    class="icon action"
+                    v-html="require(`~/assets/icons/copy.svg?include`)"
+                  ></div>
+                  <span class="action">Copy URL</span></a
+                >
+              </div>
+              <div id="qrView" ref="qrView">
+                <div id="qr"></div>
+                <h2 class="text">Scan the QR Code</h2>
+                <p class="text">to view my Business Card on your device</p>
+              </div>
+            </div>
+          </div>
+          <header>
+            <img
+              id="logo"
+              v-if="images.logo.url"
+              :src="
+                PreviewMode ? images.logo.url : `./logo.${images.logo.format}`
+              "
+              alt="Logo"
+            />
+            <div
+              id="topActions"
+              :style="{ display: PreviewMode ? 'flex' : 'none' }"
+            >
+              <div>
+                <a id="share" @click.prevent.capture="sharingAlert()">
+                  <div
+                    class="icon topAction"
+                    v-html="require(`~/assets/icons/share.svg?include`)"
                   ></div>
                 </a>
-                <p class="text">
-                  {{
-                    item.name.substr(0, 1).toUpperCase() + item.name.slice(1)
-                  }}
+                <a id="showQR" @click.prevent.capture="sharingAlert()"
+                  ><div
+                    class="icon topAction"
+                    v-html="require(`~/assets/icons/qrcode.svg?include`)"
+                  ></div>
+                </a>
+              </div>
+              <a
+                v-if="pubKeyIsValid"
+                id="showKey"
+                @click.prevent.capture="showKey()"
+                ><div
+                  class="icon topAction"
+                  v-html="require(`~/assets/icons/key.svg?include`)"
+                ></div>
+              </a>
+            </div>
+          </header>
+          <main :style="{ backgroundColor: `${colors.mainBg.color}` }">
+            <div id="profile">
+              <img
+                v-if="images.photo.url"
+                :src="
+                  PreviewMode
+                    ? images.photo.url
+                    : `./photo.${images.photo.format}`
+                "
+                alt="Photo"
+              />
+              <div id="info">
+                <p class="name text">
+                  {{ genInfo.name }}
+                </p>
+                <p class="jobtitle text">
+                  {{ genInfo.title }}
                 </p>
               </div>
             </div>
-            <div id="cta">
-              <a
-                id="dlVcard"
-                :href="PreviewMode ? '' : `${username}.vcf`"
-                download
-                target="_blank"
-                :style="{ backgroundColor: `${colors.buttonBg.color}` }"
-                @click.prevent="downloadVcard"
-                aria-label="Add to Contacts"
+            <p class="desc text" v-if="genInfo.desc">
+              {{ genInfo.desc }}
+            </p>
+            <div class="actions">
+              <div
+                class="actionsC"
+                v-for="(item, index) in primaryActions"
+                :key="'pa' + index"
               >
-                <div
-                  class="icon action"
-                  v-html="require(`~/assets/icons/user-plus.svg?include`)"
-                ></div>
-                <p class="action">Add to Contacts</p>
-              </a>
-            </div>
-          </div>
-          <div class="actions secActions">
-            <div
-              class="actionsC"
-              v-for="(item, index) in secondaryActions"
-              :key="'sa' + index"
-            >
-              <div class="actionBtn secBtn">
-                <a
-                  :href="item.value"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  :style="{ backgroundColor: item.color }"
-                  :aria-label="item.name"
-                >
-                  <div
-                    class="icon"
-                    v-html="require(`~/assets/icons/${item.name}.svg?include`)"
-                  ></div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div
-            class="attachments"
-            v-for="(item, index) in featured"
-            :key="'fc' + index"
-          >
-            <h2 class="section text">{{ item.title }}</h2>
-            <div
-              class="content"
-              :class="item.type"
-              v-for="(item, i) in item.content"
-              :key="i"
-              :style="{ backgroundColor: `${colors.cardBg.color}` }"
-            >
-              <div v-if="item.type == 'image'">
-                <img
-                  v-if="item.dataURI"
-                  :src="
-                    PreviewMode
-                      ? item.dataURI
-                      : `./featured/${getTitle(item.title)}.${item.format}`
-                  "
-                  alt="Product image"
-                />
-                <div class="controls">
-                  <p class="title card">
-                    {{ item.title }}
+                <div class="actionBtn">
+                  <a
+                    :href="`${item.href ? item.href + item.value : item.value}`"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    :style="{
+                      backgroundColor: `${colors.buttonBg.color}`,
+                    }"
+                    :aria-label="item.name"
+                  >
+                    <div
+                      class="icon action"
+                      v-html="
+                        require(`~/assets/icons/${item.name}.svg?include`)
+                      "
+                    ></div>
+                  </a>
+                  <p class="text">
+                    {{
+                      item.name.substr(0, 1).toUpperCase() + item.name.slice(1)
+                    }}
                   </p>
                 </div>
               </div>
-              <MediaPlayer
-                v-if="item.type == 'music' || item.type == 'video'"
-                ref="mediaPlayer"
-                :media="item"
-                :type="item.type"
-                :colors="colors"
-                :togglePlay="togglePlay"
-                :PreviewMode="PreviewMode"
-              />
-              <DocumentDownloader
-                v-if="item.type == 'document'"
-                :media="item"
-                :type="item.type"
-                :colors="colors"
-                :PreviewMode="PreviewMode"
-              />
+              <div id="cta">
+                <a
+                  id="dlVcard"
+                  :href="PreviewMode ? '' : `${username}.vcf`"
+                  download
+                  target="_blank"
+                  :style="{ backgroundColor: `${colors.buttonBg.color}` }"
+                  @click.prevent="downloadVcard"
+                  aria-label="Add to Contacts"
+                >
+                  <div
+                    class="icon action"
+                    v-html="require(`~/assets/icons/user-plus.svg?include`)"
+                  ></div>
+                  <p class="action">Add to Contacts</p>
+                </a>
+              </div>
             </div>
-          </div>
-          <div
-            class="attachments"
-            v-for="(item, index) in getEmbedContent"
-            :key="'ec' + index"
-          >
-            <h2 class="section text">{{ item.title }}</h2>
+            <div class="actions secondary">
+              <div
+                class="actionsC"
+                v-for="(item, index) in secondaryActions"
+                :key="'sa' + index"
+              >
+                <div class="actionBtn secBtn">
+                  <a
+                    :href="item.value"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    :style="{ backgroundColor: item.color }"
+                    :aria-label="item.name"
+                  >
+                    <div
+                      class="icon"
+                      v-html="
+                        require(`~/assets/icons/${item.name}.svg?include`)
+                      "
+                    ></div>
+                  </a>
+                </div>
+              </div>
+            </div>
             <div
-              class="content embedded"
-              v-for="(item, index) in item.content"
-              :key="index"
+              class="attachments"
+              v-for="(item, index) in featured"
+              :key="'fc' + index"
             >
-              <iframe
-                :src="stripAttr(item)"
-                frameborder="0"
-                allowfullscreen
-              ></iframe>
+              <h2 class="section text">{{ item.title }}</h2>
+              <div v-for="(item, i) in item.content" :key="i">
+                <div
+                  v-if="item.contentType == 'media'"
+                  class="content"
+                  :class="item.type"
+                  :style="{ backgroundColor: `${colors.cardBg.color}` }"
+                >
+                  <div v-if="item.type == 'image'">
+                    <img
+                      v-if="item.dataURI"
+                      :src="
+                        PreviewMode
+                          ? item.dataURI
+                          : `./media/${getTitle(item.title)}.${item.format}`
+                      "
+                      alt="Product image"
+                    />
+                    <div class="controls">
+                      <p class="title card">
+                        {{ item.title }}
+                      </p>
+                    </div>
+                  </div>
+                  <MediaPlayer
+                    v-if="item.type == 'music' || item.type == 'video'"
+                    ref="mediaPlayer"
+                    :media="item"
+                    :type="item.type"
+                    :colors="colors"
+                    :togglePlay="togglePlay"
+                    :PreviewMode="PreviewMode"
+                  />
+                  <DocumentDownloader
+                    v-if="item.type == 'document'"
+                    :media="item"
+                    :type="item.type"
+                    :colors="colors"
+                    :PreviewMode="PreviewMode"
+                  />
+                </div>
+                <ProductShowcase
+                  v-else-if="item.contentType == 'product' && item.title"
+                  :product="item"
+                  :colors="colors"
+                  :PreviewMode="PreviewMode"
+                />
+                <div
+                  v-else-if="item.contentType == 'text' && item.value"
+                  class="content text"
+                  :style="{ backgroundColor: `${colors.cardBg.color}` }"
+                >
+                  <p class="textC card">{{ item.value }}</p>
+                </div>
+                <div v-else-if="stripAttr(item)" class="content embedded">
+                  <iframe
+                    :src="stripAttr(item)"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
             </div>
-          </div>
-          <div
-            class="attachments"
-            v-for="(item, index) in products"
-            :key="'pc' + index"
-          >
-            <h2 class="section text">{{ item.title }}</h2>
-            <ProductShowcase
-              :products="item.content"
-              :colors="colors"
-              :index="index"
-              :PreviewMode="PreviewMode"
-            />
-          </div>
-        </main>
-        <footer
-          v-if="footerCredit"
-          :style="{ backgroundColor: `${colors.mainBg.color}` }"
-          class="text"
-        >
-          Created with
-          <a
+          </main>
+          <footer
+            v-if="footerCredit"
+            :style="{ backgroundColor: `${colors.mainBg.color}` }"
             class="text"
-            href="https://dbizcard.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Digital Business Card Generator</a
           >
-        </footer>
-      </body>
-    </html>
+            Created with
+            <a
+              class="text"
+              href="https://enbizcard.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >EnBizCard</a
+            >
+          </footer>
+        </body>
+      </html>
+    </div>
   </div>
 </template>
 
@@ -361,11 +327,9 @@ import ProductShowcase from './ProductShowcase'
 export default {
   props: [
     'username',
-    'businessInfo',
+    'genInfo',
     'images',
     'featured',
-    'embedContent',
-    'products',
     'colors',
     'primaryActions',
     'secondaryActions',
@@ -375,7 +339,6 @@ export default {
     'footerCredit',
     'showAlert',
     'hasLightBG',
-    'publicKey',
     'pubKeyIsValid',
   ],
   components: {
@@ -398,7 +361,7 @@ export default {
       return this.featured.music
     },
     getEmbedContent() {
-      return this.embedContent
+      return this.embedded
         .map((e) => {
           return {
             title: e.title,
@@ -406,6 +369,34 @@ export default {
           }
         })
         .filter((e) => e)
+    },
+    getCssHref() {
+      if (this.genInfo.fontLink) {
+        let html = new DOMParser().parseFromString(
+          this.genInfo.fontLink,
+          'text/html'
+        )
+        let link = Array.from(html.getElementsByTagName('link')).filter(
+          (e) => e.getAttribute('rel') == 'stylesheet'
+        )
+        return link.length && link[0].getAttribute('href')
+      }
+      return false
+    },
+    getFontFamily() {
+      let regex = /^font-family[^;]*/
+      let css = this.genInfo.fontCss.replace(/\s+/, '')
+      if (regex.test(css)) {
+        return css.match(/^font-family[^;]*/)[0]
+      }
+    },
+    getTrackingCode() {
+      let regex = /<script[^<]*<\/script>/g
+      let tracker = this.genInfo.tracker
+      if (regex.test(tracker)) {
+        let scripts = tracker.match(regex)
+        return scripts.length && scripts.join()
+      }
     },
   },
   methods: {
@@ -418,6 +409,7 @@ export default {
         return iframe.match(/src="?([^"\s]+)"/)[1]
       } else return null
     },
+
     toggleContainer(e) {
       '2rem' == e.style.top
         ? ((e.style.visibility = 'visible'),
@@ -437,11 +429,12 @@ export default {
       copyView.style.display = qrView.style.display = 'none'
     },
     closePublicKey() {
+      let modal = this.$refs.modal
       this.toggleContainer(modal)
     },
     sharingAlert() {
       this.showAlert(
-        'You are able to share your business card after completing the hosting process\n\nCheck out the <a class="underline hover:text-green-600 transition-colors duration-200"  href="https://dbizcard.vercel.app/demo/"  target="_blank" rel="noopener noreferrer">demo</a> to test the functionality.'
+        'You are able to share your business card after completing the hosting process.\n\nCheck out the <a class="underline font-extrabold text-green-600 hover:text-green-500 transition-colors duration-200" href="/demo" target="_blank">demo</a> to test the functionality.'
       )
     },
     togglePlay(ref) {
@@ -478,7 +471,6 @@ export default {
     padding: 0;
     max-width: 30rem;
     color: #fff;
-    font-family: sans-serif;
     position: relative;
   }
   #modal {
@@ -514,8 +506,7 @@ export default {
   #copyView,
   #keyInfo {
     p {
-      margin: 1rem 2em 0;
-      line-height: 1.5;
+      margin: 1rem 2em 2rem;
       text-align: center;
     }
   }
@@ -524,7 +515,6 @@ export default {
     display: inline-flex;
     align-items: center;
     border-radius: 5rem;
-    margin-top: 2rem;
     padding: 0.75rem 1.5rem;
     cursor: pointer;
     span {
@@ -532,17 +522,9 @@ export default {
     }
   }
   #qrView {
-    text-align: center;
-    width: 100%;
     h2,
     p {
-      padding: 0 2rem;
-    }
-    h2 {
-      margin: 0;
-    }
-    p {
-      margin-top: 0.5rem;
+      margin: 0 2rem 0.5rem;
     }
   }
   #qr {
@@ -561,6 +543,7 @@ export default {
     box-sizing: border-box;
   }
   #logo {
+    min-height: 6rem;
     max-height: 6rem;
     text-align: center;
     color: gray;
@@ -592,15 +575,14 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -4.5rem;
-    img,
-    .img {
+    img {
       width: 7rem;
       height: 7rem;
       border-radius: 100%;
       text-align: center;
       pointer-events: none;
       user-select: none;
+      margin-top: -4.5rem;
     }
   }
   #info {
@@ -613,7 +595,7 @@ export default {
     word-break: break-word;
   }
   .name {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 1.25rem;
     margin: 0;
   }
@@ -621,12 +603,16 @@ export default {
     font-size: 1rem;
     margin: 0.25rem 0 0 0;
   }
-
-  .desc {
+  .desc,
+  .textC {
     font-size: 0.875rem;
     white-space: pre-line;
     line-height: 1.5;
     margin: 1rem;
+  }
+  .textC {
+    font-size: 1rem;
+    margin: 2rem 1rem;
   }
   .actions {
     margin-top: 2rem;
@@ -653,7 +639,7 @@ export default {
       font-size: 0.875rem;
     }
   }
-  .secActions {
+  .secondary {
     margin-top: 1.25rem;
   }
   .secBtn {
@@ -690,7 +676,7 @@ export default {
     justify-content: center;
   }
   .section {
-    font-weight: 700;
+    font-weight: bold;
     text-align: center;
     font-size: 1.5rem;
     margin: 3rem 1rem 1rem;
@@ -745,7 +731,7 @@ export default {
   .price {
     margin: 2rem 0 0;
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: bold;
   }
   .label {
     display: inline-block;
@@ -760,7 +746,7 @@ export default {
   }
   .title {
     font-size: 1.125rem;
-    font-weight: 700;
+    font-weight: bold;
     margin: 0 0 0.5rem;
   }
   .mediaInfo {
@@ -799,7 +785,6 @@ export default {
   footer {
     padding: 2.5rem 1.5rem 2rem;
     font-size: 0.75rem;
-    text-align: center;
     a {
       text-decoration: underline;
       color: inherit;

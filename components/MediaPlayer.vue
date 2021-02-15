@@ -15,7 +15,7 @@
         :src="
           PreviewMode
             ? media.dataURI + '#t=0.2'
-            : `./featured/${getTitle(media.title)}.${media.format}`
+            : `./media/${getTitle(media.title)}.${media.format}`
         "
       />
     </video>
@@ -23,7 +23,7 @@
       :src="
         PreviewMode
           ? media.coverDataURI
-          : `./featured/${getTitle(media.title)}.${media.coverFormat}`
+          : `./media/${getTitle(media.title)}.${media.coverFormat}`
       "
       alt="cover"
     />

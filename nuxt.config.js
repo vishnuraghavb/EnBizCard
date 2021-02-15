@@ -19,7 +19,7 @@ export default {
     // ogUrl: false,
     ogTitle: 'EnBizCard - An Open-Source Digital Business Card Generator',
     ogDescription:
-      'EnBizCard helps you create interactive and responsive HTML-based digital business card that can be hosted with your website.',
+      'EnBizCard helps you create beautiful, responsive HTML-based digital business cards that can be hosted on your website.',
     ogSiteName: 'EnBizCard - An Open-Source Digital Business Card Generator',
     theme_color: '#111827',
     author: 'Vishnu Raghav',
@@ -35,7 +35,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'EnBizCard helps you create interactive and responsive HTML-based digital business card that can be hosted with your website.',
+          'EnBizCard helps you create beautiful, responsive HTML-based digital business cards that can be hosted on your website.',
       },
       {
         hid: 'msapplication-TileColor',
@@ -217,9 +217,8 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
-    extend(config, ctx) {
+    extend(config) {
       config.module.rules.push({
-        // enforce: 'pre',
         test: /\.min.css|\.min.js$/,
         use: [
           {
@@ -231,6 +230,24 @@ export default {
         ],
         exclude: /(node_modules)/,
       })
+    },
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        collapseInlineTagWhitespace: true,
+        collapseWhitespace: true,
+        html5: true,
+        decodeEntities: true,
+        minifyCSS: true,
+        minifyJS: true,
+        processConditionalComments: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        sortClassName: true,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+      },
     },
   },
   generate: {

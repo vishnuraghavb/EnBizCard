@@ -1,49 +1,114 @@
 <template>
   <div
-    class="container relative bg-gray-800 mx-auto mt-16 max-w-screen-lg text-gray-100 md:px-4"
+    ref="container"
+    class="container relative bg-gray-900 mx-auto text-gray-100"
+    style="max-width: 960px"
   >
     <Modal
       v-if="content"
       @click.native.self="content = null"
       @scroll.native="content = null"
       :content="content"
+      :clearContent="clearContent"
     />
+    <transition name="drop">
+      <div
+        v-if="inView || showPreview"
+        class="fixed top-0 w-full z-30 bg-gray-900 justify-between items-center flex md:hidden"
+      >
+        <div
+          class="logo w-16 m-4"
+          v-html="require(`~/assets/icons/logo.svg?include`)"
+        ></div>
+        <button
+          class="p-3 mx-4 font-extrabold rounded focus:outline-none select-none"
+          :class="showPreview ? 'bg-gray-700' : 'bg-green-600'"
+          @click="!opening && togglePreview()"
+        >
+          {{ showPreview ? 'Close preview' : 'Open preview' }}
+        </button>
+      </div>
+    </transition>
+    <transition name="fade">
+      <Preview
+        v-show="showPreview"
+        class="fixed top-20 w-full bottom-0 z-20 border-none rounded-b-none"
+        ref="html"
+        :username="username"
+        :genInfo="genInfo"
+        :images="images"
+        :featured="featured"
+        :colors="colors"
+        :primaryActions="primaryActions"
+        :secondaryActions="secondaryActions"
+        :PreviewMode="PreviewMode"
+        :downloadVcard="downloadVcard"
+        :footerCredit="footerCredit"
+        :showAlert="showAlert"
+        :hasLightBG="hasLightBG"
+        :downloadKey="downloadKey"
+        :pubKeyIsValid="pubKeyIsValid"
+      />
+    </transition>
+
+    <div class="px-4">
+      <div class="flex items-start justify-between pt-8">
+        <div
+          class="logo w-24"
+          v-html="require(`~/assets/icons/logo.svg?include`)"
+          title="EnBizCard - An Open-Source Digital Business Card Generator"
+        ></div>
+        <a
+          class="font-extrabold tracking-wide leading-none flex-shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+          href="https://www.vishnuraghav.com/donate"
+          target="_blank"
+          >Donate</a
+        >
+      </div>
+      <h1
+        class="text-3xl md:text-5xl font-extrabold mt-24 md:mt-48 md:leading-tight"
+      >
+        Why Pay When Your Website Can Host Your Digital Business Cards for Free!
+      </h1>
+      <p class="mt-8 text-lg md:text-xl w-full md:w-3/4 text-gray-200">
+        EnBizCard helps you create beautiful, responsive HTML&#8209;based
+        digital business cards that can be hosted on your website.
+      </p>
+      <ul class="mt-4 text-gray-400">
+        <li>-&ensp;No sign-up required</li>
+        <li>-&ensp;100% free and open-source</li>
+        <li>-&ensp;No user tracking and data collection</li>
+        <li>-&ensp;Works offline</li>
+      </ul>
+      <div class="mt-4 flex flex-wrap items-center">
+        <button
+          class="font-extrabold leading-none text-lg tracking-wide select-none flex-shrink-0 p-5 mt-2 mr-2 text-white bg-green-600 rounded hover:bg-green-500 focus:bg-green-500 transition-colors duration-200 focus:outline-none"
+          @click="create()"
+        >
+          Create your own
+        </button>
+        <a
+          class="font-extrabold leading-none text-lg tracking-wide flex-shrink-0 p-5 mt-2 text-white bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
+          href="/demo"
+          target="_blank"
+          >View demo</a
+        >
+      </div>
+      <p class="mt-6">
+        Read the
+        <NuxtLink
+          to="/hosting-guide"
+          class="cursor-pointer underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+          >Hosting Guide</NuxtLink
+        >
+      </p>
+    </div>
     <div class="md:grid md:grid-cols-2">
-      <div>
-        <header class="px-4">
-          <div
-            class="logo w-32"
-            v-html="require(`~/assets/icons/logo.svg?include`)"
-          ></div>
-          <h1 class="text-4xl font-extrabold leading-tight mt-4">
-            Digital Business Card Generator
-          </h1>
-        </header>
-        <h4 class="mt-8 px-4 font-extrabold">Stop printing. Start hosting!</h4>
-        <p class="px-4">
-          Quickly generate an interactive and responsive HTML-based digital
-          business card, that can be hosted with your website.
-        </p>
-        <ul class="mt-4 px-4">
-          <li>&bull;&ensp;100% Free and open-source</li>
-          <li>&bull;&ensp;No sign-up required</li>
-          <li>&bull;&ensp;No user tracking and data collection</li>
-          <li>&bull;&ensp;Works offline</li>
-        </ul>
-        <div class="px-4 mt-16 flex items-center">
-          <a
-            class="font-extrabold flex-shrink-0 p-4 mr-2 text-gray-900 bg-gray-500 rounded hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
-            href="/demo"
-            target="_blank"
-            rel="noopener noreferrer"
-            >View Demo</a
-          >
-          <p>or create your own below</p>
-        </div>
-        <div id="steps" class="px-4 mt-20">
-          <div id="step-1" class="mt-16">
+      <div class="mt-8">
+        <div class="px-4 mt-24">
+          <div ref="create" id="step-1" class="pt-8">
             <h2 class="font-extrabold text-2xl">Image attachments</h2>
-            <div class="field-container">
+            <div class="stepC">
               <Attachment
                 :content="images"
                 type="logo"
@@ -63,53 +128,53 @@
             </div>
           </div>
           <div id="step-2" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Business information</h2>
-            <div class="field-container mt-6">
+            <h2 class="font-extrabold text-2xl">General information</h2>
+            <div class="stepC mt-6">
               <label for="fullname" class="ml-4">Full name</label>
               <input
                 id="fullname"
                 spellcheck="false"
                 type="text"
-                v-model="businessInfo.name"
-                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
+                v-model="genInfo.name"
+                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               />
             </div>
-            <div class="field-container mt-6">
+            <div class="stepC mt-6">
               <label for="job-title" class="ml-4">Job title</label>
               <input
                 id="job-title"
                 type="text"
                 spellcheck="true"
-                v-model="businessInfo.jobTitle"
-                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
+                v-model="genInfo.title"
+                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               />
             </div>
-            <div class="field-container mt-6">
+            <div class="stepC mt-6">
               <label for="business-name" class="ml-4">Business name</label>
               <input
                 id="business-name"
                 spellcheck="false"
                 type="text"
-                v-model="businessInfo.businessName"
-                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
+                v-model="genInfo.biz"
+                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               />
             </div>
-            <div class="field-container mt-6">
+            <div class="stepC mt-6">
               <label for="business-description" class="ml-4"
                 >Business description
               </label>
               <textarea
                 id="business-description"
-                :value="businessInfo.businessDescription"
-                @input="businessInfo.businessDescription = $event.target.value"
-                class="block mt-2 px-4 py-3 w-full bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 resize-none hover:border-green-600"
+                :value="genInfo.desc"
+                @input="genInfo.desc = $event.target.value"
+                class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
                 rows="5"
               ></textarea>
             </div>
-            <div class="field-container relative mt-6">
+            <div class="stepC relative mt-6">
               <label for="pgp-public-key" class="flex justify-between ml-4"
                 >Public key<span
-                  v-if="businessInfo.publicKey"
+                  v-if="genInfo.key"
                   class="mr-4"
                   :class="pubKeyIsValid ? 'text-green-600' : 'text-orange-600'"
                   >{{ pubKeyIsValid ? '' : 'Invalid schema' }}</span
@@ -117,17 +182,17 @@
               </label>
               <textarea
                 id="pgp-public-key"
-                v-model="businessInfo.publicKey"
-                class="block mt-2 px-4 py-3 w-full bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 resize-none hover:border-green-600"
+                v-model="genInfo.key"
+                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
                 rows="5"
                 spellcheck="false"
                 placeholder="Paste PGP PUBLIC KEY BLOCK here"
               ></textarea>
             </div>
-            <div class="field-container relative mt-6">
-              <label for="pgp-public-key" class="flex justify-between ml-4"
+            <div class="stepC relative mt-6">
+              <label for="pgp-fingerprint" class="flex justify-between ml-4"
                 >Public key fingerprint<span
-                  v-if="businessInfo.fingerprint"
+                  v-if="genInfo.fp"
                   class="mr-4"
                   :class="
                     fingerprintIsValid ? 'text-green-600' : 'text-orange-600'
@@ -139,8 +204,8 @@
                 id="pgp-fingerprint"
                 spellcheck="false"
                 type="text"
-                v-model="businessInfo.fingerprint"
-                class="mt-2 px-4 w-full h-12 bg-gray-900 placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-green-600 hover:border-green-600"
+                v-model="genInfo.fp"
+                class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
                 placeholder="Paste 40 character fingerprint here"
               />
             </div>
@@ -157,12 +222,12 @@
               :buttonBg="colors.buttonBg.color"
               :removeAction="removeAction"
             />
-            <div class="field-container flex flex-wrap">
+            <div class="stepC actions mt-6">
               <button
                 v-for="(action, index) in actions.primaryActions"
                 :key="index"
                 @click="addAction('primaryActions', index)"
-                class="p-3 flex-shrink-0 bg-gray-900 mt-6 mr-6 rounded-full cursor-pointer hover:scale-110 transform transition-transform duration-200"
+                class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
                 :style="{
                   backgroundColor: `${colors.buttonBg.color}`,
                 }"
@@ -189,12 +254,12 @@
               :index="index"
               :removeAction="removeAction"
             />
-            <div class="field-container flex flex-wrap">
+            <div class="stepC actions mt-6">
               <button
                 v-for="(action, index) in actions.secondaryActions"
                 :key="index"
                 @click="addAction('secondaryActions', index)"
-                class="p-3 flex-shrink-0 mt-6 mr-6 rounded-full cursor-pointer hover:scale-110 transform transition-transform duration-200"
+                class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
                 :style="{ backgroundColor: action.color }"
                 :title="
                   action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
@@ -208,9 +273,9 @@
             </div>
           </div>
           <div id="step-5" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Feature content</h2>
-            <div class="field-container">
-              <Feature
+            <h2 class="font-extrabold text-2xl">Featured content</h2>
+            <div class="stepC">
+              <Featured
                 v-for="(content, index) in featured"
                 :key="index"
                 :featured="featured"
@@ -223,7 +288,7 @@
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
-                    class="p-3 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
+                    class="p-3 rounded bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
                     @click="addFeature()"
                     aria-label="Add section"
                   >
@@ -235,74 +300,64 @@
                   <p class="ml-3 leading-none">Add section</p>
                 </div>
               </div>
-              <!-- <p
-                class="mt-6 border px-4 py-2 rounded border-gray-600 text-gray-500"
+              <p
+                class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
               >
-                Add a section to attach images, music, videos and documents to
-                your business card.
-                <br />
-                <br />
-                Supported file formats: jpeg, png, mp3, mp4, webm, pdf
-              </p> -->
+                Supported media file formats: jpeg, png, mp3, mp4, webm and pdf
+              </p>
             </div>
           </div>
           <div id="step-6" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Embed content</h2>
-            <div class="field-container">
-              <Embed
-                v-for="(item, index) in embedContent"
-                :key="index"
-                :index="index"
-                :embedContent="embedContent"
-              />
-              <div class="flex mt-6">
-                <div class="flex flex-wrap items-center">
-                  <button
-                    class="p-3 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
-                    @click="addEmbed()"
-                    aria-label="Add section"
-                  >
-                    <div
-                      class="w-6 h-6"
-                      v-html="require(`~/assets/icons/add.svg?include`)"
-                    ></div>
-                  </button>
-                  <p class="ml-3 leading-none">Add section</p>
+            <h2 class="font-extrabold text-2xl">Enable footer credit?</h2>
+            <div class="stepC mt-6">
+              <div class="flex items-center">
+                <div
+                  class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
+                  :class="{
+                    'bg-green-600 hover:bg-green-500 focus:bg-green-500': footerCredit,
+                  }"
+                  tabindex="0"
+                  @click="footerCredit = !footerCredit"
+                  @keypress.space.enter.prevent="footerCredit = !footerCredit"
+                >
+                  <input
+                    type="checkbox"
+                    name="toggle"
+                    aria-label="Toggle footer credit"
+                    id="toggle"
+                    v-model="footerCredit"
+                    class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
+                    tabindex="-1"
+                  />
                 </div>
+                <p>{{ footerCredit ? 'Yes, for sure!' : 'No, thanks' }}</p>
               </div>
+              <p
+                class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
+              >
+                Footer credit lets others to use this Service. Help support this
+                project by enabling the footer credit.
+              </p>
             </div>
           </div>
           <div id="step-7" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Product catalogue</h2>
-            <div class="field-container">
-              <Product
-                v-for="(item, index) in products"
-                :key="index"
-                :index="index"
-                :products="products"
-                :showAlert="showAlert"
-                :resizeImage="resizeImage"
-              />
-              <div class="flex mt-6">
-                <div class="flex flex-wrap items-center">
-                  <button
-                    class="p-3 rounded cursor-pointer bg-gray-500 hover:bg-green-600 focus:bg-green-600 transition-colors duration-200"
-                    @click="addProduct()"
-                    aria-label="Add section"
-                  >
-                    <div
-                      class="w-6 h-6"
-                      v-html="require(`~/assets/icons/add.svg?include`)"
-                    ></div>
-                  </button>
-                  <p class="ml-3 leading-none">Add section</p>
-                </div>
-              </div>
+            <h2 class="font-extrabold text-2xl">Themes (coming soon)</h2>
+            <div class="stepC mt-3 flex flex-wrap">
+              <button
+                class="w-12 h-12 rounded mt-3 mr-3 bg-green-600 hover:bg-green-500 focus:bg-green-500 font-extrabold focus:outline-none transition-colors duration-200"
+              >
+                T1
+              </button>
+              <button
+                class="w-12 h-12 rounded mt-3 mr-3 text-black bg-gray-700 font-extrabold focus:outline-none transition-colors duration-200"
+              >
+                T2
+              </button>
             </div>
           </div>
           <div id="step-8" class="mt-16">
             <h2 class="font-extrabold text-2xl">Colour customisation</h2>
-            <div class="field-container">
+            <div class="stepC">
               <Colour name="logoBg" label="Logo background" :colors="colors" />
               <Colour name="mainBg" label="Main background" :colors="colors" />
               <Colour
@@ -314,75 +369,105 @@
             </div>
           </div>
           <div id="step-9" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Enable footer credit?</h2>
-            <div class="field-container mt-6">
-              <div
-                class="relative inline-block w-24 mr-3 align-middle select-none transition duration-200 ease-in"
+            <h2 class="font-extrabold text-2xl">Fonts</h2>
+            <div class="stepC mt-6">
+              <label for="font-link" class="ml-4">Web font embed code</label>
+              <textarea
+                id="font-link"
+                v-model="genInfo.fontLink"
+                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+                rows="3"
+                spellcheck="false"
+                :placeholder="`Eg.: <link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
+              ></textarea>
+            </div>
+            <div class="stepC mt-6">
+              <label for="font-css" class="ml-4">Web font CSS rule</label>
+              <input
+                spellcheck="false"
+                type="text"
+                id="font-css"
+                v-model="genInfo.fontCss"
+                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+                :placeholder="`Eg.: font-family: 'Poppins', sans-serif;`"
+              />
+            </div>
+            <p
+              class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
+            >
+              Supports web fonts from services such as Google Fonts, Adobe
+              Typekit, etc. Make sure to get the embed link for both regular and
+              bold font variants from the same font family.
+            </p>
+          </div>
+          <div id="step-10" class="mt-16">
+            <h2 class="font-extrabold text-2xl">Analytics</h2>
+            <div class="stepC mt-6">
+              <textarea
+                id="pgp-public-key"
+                v-model="genInfo.tracker"
+                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+                rows="5"
+                spellcheck="false"
+                placeholder="Paste tracking code here"
+              ></textarea>
+              <p
+                class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
               >
-                <input
-                  type="checkbox"
-                  name="toggle"
-                  aria-label="Toggle footer credit"
-                  id="toggle"
-                  v-model="footerCredit"
-                  class="toggle-switch absolute block w-10 h-10 m-1 rounded bg-gray-900 border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200"
-                />
-                <label
-                  for="toggle"
-                  class="toggle-label block overflow-hidden h-12 rounded bg-gray-500 hover:bg-green-600 cursor-pointer transition-colors duration-200 focus:border-green-600"
-                ></label>
-              </div>
-              <label for="toggle">{{
-                footerCredit ? 'Yes, for sure!' : 'No, thanks'
-              }}</label>
-              <p class="text-gray-500 mt-6">
-                Footer credit is nothing but a backlink which lets others to use
-                this Service. You can help getting the word out by enabling the
-                footer credit.
+                You can add tracking code from service such as Matomo, Clicky,
+                Google Analytics etc.
               </p>
             </div>
           </div>
+          <Download
+            :downloadCheckList="downloadCheckList"
+            :downloadChecked="downloadChecked"
+            :downloadPackage="downloadPackage"
+          />
+          <Help />
         </div>
       </div>
-      <div id="preview-container" class="relative w-full sm:h-full mt-20">
+      <div
+        id="preview-container"
+        class="relative w-full mt-20 sm:mt-0 hidden md:block"
+        tabindex="-1"
+      >
         <div
           id="preview"
-          class="flex flex-col items-center justify-center sm:sticky sm:top-0"
+          class="flex flex-col items-center justify-center sm:sticky sm:top-0 md:mx-6 lg:mx-12"
+          tabindex="-1"
         >
-          <div
-            id="device"
-            class="bg-gray-900 device-curve rounded-lg w-full sm:max-w-sm sm:mt-10 sm:mb-20"
-          >
-            <h2 class="text-2xl text-center py-3 font-extrabold text-gray-200">
-              Preview
+          <div id="device" class="bg-black rounded sm:mt-10">
+            <h2 class="text-center py-4 font-extrabold text-gray-200">
+              LIVE PREVIEW
             </h2>
-            <div
-              id="browserFrame"
-              class="overflow-hidden rounded-lg mx-2 pb-8 flex flex-col"
-            >
-              <div id="topBar" class="topbar bg-gray-800 z-10">
-                <div id="searchField" class="pt-6 pl-2 pb-2 flex items-center">
+            <div id="browserFrame" class="overflow-hidden flex flex-col">
+              <div
+                id="topBar"
+                class="topbar border-r-4 border-l-4 border-black bg-gray-900 z-10"
+              >
+                <div id="searchField" class="p-2 flex items-center">
                   <input
                     type="text"
-                    class="pl-4 h-12 w-full bg-gray-900 rounded text-gray-500"
+                    class="pl-4 h-12 w-full bg-black rounded text-gray-500"
                     aria-label="vCard URL"
                     disabled
                     :value="'yoursite/vcard/' + username + '/'"
+                    tabindex="-1"
                   />
                   <div
-                    class="w-6 mx-4"
+                    class="w-6 ml-2"
                     v-html="require(`~/assets/icons/ellipsis.svg?include`)"
                   ></div>
                 </div>
               </div>
               <Preview
+                class="rounded-b-2xl"
                 ref="html"
                 :username="username"
-                :businessInfo="businessInfo"
+                :genInfo="genInfo"
                 :images="images"
                 :featured="featured"
-                :embedContent="embedContent"
-                :products="products"
                 :colors="colors"
                 :primaryActions="primaryActions"
                 :secondaryActions="secondaryActions"
@@ -391,7 +476,6 @@
                 :footerCredit="footerCredit"
                 :showAlert="showAlert"
                 :hasLightBG="hasLightBG"
-                :publicKey="businessInfo.publicKey"
                 :downloadKey="downloadKey"
                 :pubKeyIsValid="pubKeyIsValid"
               />
@@ -400,78 +484,8 @@
         </div>
       </div>
     </div>
-    <div id="downloadSection" class="mt-16 px-4">
-      <h2 class="font-extrabold text-2xl">Download</h2>
-      <div class="field-container">
-        <Check
-          v-for="(item, index) in downloadCheckList"
-          :downloadCheckList="downloadCheckList"
-          :item="item"
-          :key="index"
-          :index="index"
-        />
-        <button
-          ref="downloadPackage"
-          @click="downloadPackage"
-          class="inline-block bg-gray-700 text-lg uppercase font-extrabold text-white px-8 py-6 rounded mt-12 select-none transition-colors duration-200"
-          :class="
-            downloadChecked
-              ? 'bg-green-600 cursor-pointer focus:bg-green-500 hover:bg-green-500'
-              : 'cursor-not-allowed'
-          "
-        >
-          Download Package
-        </button>
-        <p class="text-gray-500 mt-6">
-          Extract the package and follow the instructions in the README.txt file
-        </p>
-      </div>
-    </div>
-    <Donate />
     <Vcard ref="vCard" :vCard="vCard" />
-    <ReadMe ref="readme" :name="username" />
-    <footer class="py-8 mx-4 mt-24">
-      <p class="text-gray-500 text-sm">
-        <a
-          class="underline hover:text-green-600 transition-colors duration-200"
-          href="http://t.me/dbizcard"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Join the Telegram group</a
-        >
-        for reporting issues, suggestions and feedback
-      </p>
-      <hr class="border-t-2 border-gray-700 mt-4" />
-      <div class="flex justify-start items-center mt-8">
-        <div
-          class="logo w-16 mr-2 self-start"
-          v-html="require(`~/assets/icons/logo.svg?include`)"
-        ></div>
-        <div>
-          <p class="font-extrabold leading-tight">
-            Digital Business Card Generator
-          </p>
-          <p class="text-gray-500 text-xs">
-            by
-            <a
-              class="underline hover:text-green-600 transition-colors duration-200"
-              href="https://www.vishnuraghav.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Vishnu&nbsp;Raghav</a
-            >
-            | AGPLv3 |
-            <a
-              class="underline hover:text-green-600 transition-colors duration-200"
-              href="https://github.com/vishnuraghavb/dbizcard"
-              target="_blank"
-              rel="noopener noreferrer"
-              >View&nbsp;Source</a
-            >
-          </p>
-        </div>
-      </div>
-    </footer>
+    <Footer />
   </div>
 </template>
 
@@ -479,18 +493,17 @@
 import Modal from '@/components/Modal'
 import Attachment from '@/components/Attachment'
 import Action from '@/components/Action'
-import Feature from '@/components/Feature'
-import Embed from '@/components/Embed'
-import Product from '@/components/Product'
+import Featured from '@/components/Featured'
 import Colour from '@/components/Colour'
 import Preview from '@/components/Preview'
-import Check from '@/components/Check'
-import Donate from '@/components/Donate'
+import Download from '@/components/Download'
+import Help from '@/components/Help'
+import Footer from '@/components/Footer'
 
-import ReadMe from '@/components/ReadMe'
 import Vcard from '@/components/Vcard'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
+// let minify = require('html-minifier').minify
 import QRCode from '!!raw-loader!~/static/qrcode.min.js'
 import Theme1 from '!!raw-loader!~/assets/styles/T1.min.css'
 export default {
@@ -498,14 +511,12 @@ export default {
     Modal,
     Attachment,
     Action,
-    Feature,
-    Embed,
-    Product,
+    Featured,
     Colour,
     Preview,
-    Check,
-    Donate,
-    ReadMe,
+    Download,
+    Help,
+    Footer,
     Vcard,
   },
 
@@ -518,12 +529,11 @@ export default {
           checked: false,
         },
         {
-          label:
-            'I have verified that all the links are working correctly in the Preview',
+          label: 'I have verified that all the links are working correctly',
           checked: false,
         },
         {
-          label: 'I have removed all unused and empty fields or sections',
+          label: 'I have removed all unused fields and sections',
           checked: false,
         },
       ],
@@ -542,30 +552,33 @@ export default {
         },
       },
       colors: {
-        mainBg: {
-          color: `#eee`,
+        logoBg: {
+          color: `#1F2937`,
           openPalette: false,
         },
-        logoBg: {
-          color: `#000`,
+        mainBg: {
+          color: `#F9FAFB`,
           openPalette: false,
         },
         buttonBg: {
-          color: `#000`,
+          color: `#374151`,
           openPalette: false,
         },
         cardBg: {
-          color: `#ddd`,
+          color: `#E5E7EB`,
           openPalette: false,
         },
       },
-      businessInfo: {
+      genInfo: {
         name: null,
-        jobTitle: null,
-        businessName: null,
-        businessDescription: null,
-        publicKey: null,
-        fingerprint: null,
+        title: null,
+        biz: null,
+        desc: null,
+        key: null,
+        fp: null,
+        tracker: null,
+        fontLink: null,
+        fontCss: null,
       },
       primaryActions: [],
       secondaryActions: [],
@@ -834,6 +847,20 @@ export default {
             color: '#003087',
             label: 'PayPal.me URL',
           },
+          {
+            name: 'patreon',
+            placeholder: 'https://patreon.com/username',
+            value: null,
+            color: '#FF424D',
+            label: 'Patreon URL',
+          },
+          {
+            name: 'open-collective',
+            placeholder: 'https://opencollective.com/username',
+            value: null,
+            color: '#fff',
+            label: 'Open Collective URL',
+          },
         ],
       },
       featured: [
@@ -842,55 +869,36 @@ export default {
           content: [],
         },
       ],
-      embedContent: [
-        {
-          title: 'Section title',
-          content: [],
-        },
-      ],
-      products: [
-        {
-          title: 'Section title',
-          content: [],
-        },
-      ],
       footerCredit: true,
       PreviewMode: true,
       content: null,
+      inView: false,
+      showPreview: false,
+      scrollPos: null,
+      opening: false,
     }
   },
   computed: {
     pubKeyIsValid() {
-      if (this.businessInfo.publicKey) {
-        if (
-          !this.businessInfo.publicKey.match(
-            /^(-----BEGIN PGP PUBLIC KEY BLOCK-----)/
-          )
-        )
+      if (this.genInfo.key) {
+        if (!this.genInfo.key.match(/^(-----BEGIN PGP PUBLIC KEY BLOCK-----)/))
           return false
 
-        if (
-          !this.businessInfo.publicKey.match(
-            /(-----END PGP PUBLIC KEY BLOCK-----)$/
-          )
-        )
+        if (!this.genInfo.key.match(/(-----END PGP PUBLIC KEY BLOCK-----)$/))
           return false
 
         return true
       } else return false
     },
     fingerprintIsValid() {
-      return (
-        this.businessInfo.fingerprint &&
-        this.businessInfo.fingerprint.match(/^[a-zA-Z0-9]{40}$/)
-      )
+      return this.genInfo.fp && this.genInfo.fp.match(/^[a-zA-Z0-9]{40}$/)
     },
     downloadChecked() {
       return this.downloadCheckList.filter((e) => e.checked).length == 3
     },
     username() {
-      return this.businessInfo.name
-        ? this.businessInfo.name.toLowerCase().replace(/\W+/g, '')
+      return this.genInfo.name
+        ? this.genInfo.name.toLowerCase().replace(/\W+/g, '')
         : 'username'
     },
     vCard() {
@@ -905,19 +913,48 @@ export default {
         .filter((e) => e)[0]
       let randomNumber = Math.floor(100000 + Math.random() * 900000)
       return {
-        FN: this.businessInfo.name,
-        TITLE: this.businessInfo.jobTitle,
-        ORG: this.businessInfo.businessName,
+        FN: this.genInfo.name,
+        TITLE: this.genInfo.title,
+        ORG: this.genInfo.biz,
         TEL1: phoneNumbers[0],
         TEL2: phoneNumbers[1],
         EMAIL: email,
         URL: website,
-        KEY: this.businessInfo.fingerprint,
-        UID: `dbizcard-${randomNumber}`,
+        KEY: this.genInfo.fp,
+        UID: `enbizcard-${randomNumber}`,
       }
     },
   },
   methods: {
+    togglePreview() {
+      this.opening = true
+      let c = this.$refs.container
+      if (this.showPreview) {
+        c.classList.remove('overflow-y-hidden', 'h-screen')
+        window.scrollTo(0, this.scrollPos)
+        this.opening = false
+      } else {
+        this.scrollPos = window.scrollY
+        setTimeout(() => {
+          c.classList.add('overflow-y-hidden', 'h-screen')
+          this.opening = false
+        }, 400)
+      }
+      this.showPreview = !this.showPreview
+    },
+    checkView() {
+      let e = this.$refs.create
+      if (e) {
+        let top = e.getBoundingClientRect().top
+        this.inView = this.showPreview ? true : top < 0
+      }
+    },
+    clearContent() {
+      this.content = null
+    },
+    create() {
+      this.$refs.create.scrollIntoView({ behavior: 'smooth' })
+    },
     getTitle(e) {
       return e.toLowerCase().split(' ').join('_')
     },
@@ -925,27 +962,6 @@ export default {
       this.featured.push({
         title: 'Section title',
         content: [],
-      })
-    },
-    addEmbed() {
-      this.embedContent.push({
-        title: 'Section title',
-        content: [''],
-      })
-    },
-    addProduct() {
-      this.products.push({
-        title: 'Section title',
-        content: [
-          {
-            image: null,
-            title: null,
-            description: null,
-            price: null,
-            label: null,
-            link: null,
-          },
-        ],
       })
     },
     hasLightBG(e) {
@@ -980,12 +996,12 @@ export default {
       saveAs(window.URL.createObjectURL(blob), `${this.username}.vcf`)
     },
     downloadKey() {
-      let blob = new Blob([this.businessInfo.publicKey], {
+      let blob = new Blob([this.genInfo.key], {
         type: 'text/plain',
       })
       saveAs(
         window.URL.createObjectURL(blob),
-        `${this.businessInfo.name}'s public key.asc`
+        `${this.genInfo.name}'s public key.asc`
       )
     },
     async resizeImage(type, index1, index2) {
@@ -998,7 +1014,7 @@ export default {
         } else if (type == 'music') {
           file = await this.featured[index1].content[index2].cover
         } else if (type == 'product') {
-          file = await this.products[index1].content[index2].image.file
+          file = await this.featured[index1].content[index2].image.file
         }
       } else {
         file = this.images[type].blob
@@ -1043,7 +1059,7 @@ export default {
                 } else if (type == 'music') {
                   vm.featured[index1].content[index2].cover = image
                 } else if (type == 'product') {
-                  vm.products[index1].content[index2].image.file = image
+                  vm.featured[index1].content[index2].image.file = image
                 }
               } else {
                 vm.images[type].resized = image
@@ -1092,19 +1108,24 @@ export default {
           let vCard = new Blob([this.$refs.vCard.$refs.vCard.innerText], {
             type: 'text/plain',
           })
-          let README = new Blob([this.$refs.readme.$refs.readme.innerText], {
-            type: 'text/plain',
-          })
+          let guide = new Blob(
+            [
+              '<html><head><meta http-equiv="refresh" content="0; url=https://enbizcard.vercel.app/hosting-guide" /></head></html>',
+            ],
+            {
+              type: 'text/html',
+            }
+          )
           let qrScript = new Blob([QRCode], {
             type: 'application/javascript',
           })
-          let name = this.businessInfo.name
+          let name = this.genInfo.name
           let username = this.username
           let zip = new JSZip()
           zip.folder(username).file('index.html', html)
           zip.folder(username).file('style.min.css', css)
           zip.folder(username).file('qrcode.min.js', qrScript)
-          zip.file('README.txt', README)
+          zip.file('Hosting-Guide.html', guide)
           if (this.images.logo.url) {
             zip.folder(username).file(
               `logo.${this.images.logo.format}`,
@@ -1127,32 +1148,27 @@ export default {
           if (this.featured.length && hasFeaturedContent) {
             this.featured.forEach((item, index) => {
               item.content.forEach((item, i) => {
-                zip
-                  .folder(username)
-                  .folder('featured')
-                  .file(
-                    `${this.getTitle(item.title)}.${item.format}`,
-                    item.file
-                  )
-                if (item.type.match(/music|document/gi)) {
+                if (item.contentType == 'media') {
                   zip
                     .folder(username)
-                    .folder('featured')
+                    .folder('media')
                     .file(
-                      `${this.getTitle(item.title)}.${item.coverFormat}`,
-                      item.cover
+                      `${this.getTitle(item.title)}.${item.format}`,
+                      item.file
                     )
-                }
-              })
-            })
-          }
-          if (this.products.length) {
-            this.products.forEach((item, index) => {
-              item.content.forEach((item, i) => {
-                if (item.image) {
+                  if (item.type.match(/music|document/gi)) {
+                    zip
+                      .folder(username)
+                      .folder('media')
+                      .file(
+                        `${this.getTitle(item.title)}.${item.coverFormat}`,
+                        item.cover
+                      )
+                  }
+                } else if (item.contentType == 'product' && item.image) {
                   zip
                     .folder(username)
-                    .folder('products')
+                    .folder('media')
                     .file(
                       `${this.getTitle(item.image.title)}.${item.image.format}`,
                       item.image.file
@@ -1164,10 +1180,7 @@ export default {
           if (this.pubKeyIsValid) {
             zip
               .folder(username)
-              .file(
-                `${this.businessInfo.name}'s public key.asc`,
-                this.businessInfo.publicKey
-              )
+              .file(`${this.genInfo.name}'s public key.asc`, this.genInfo.key)
           }
           zip.folder(username).file(`${username}.vcf`, vCard)
           zip
@@ -1177,10 +1190,16 @@ export default {
             .then(function (zip) {
               saveAs(zip, `${name}'s Digital Business Card.zip`)
             })
+          this.showAlert(
+            'Your Download Has Been Started!\n\nExtract the downloaded ZIP file and follow the <NuxtLink to="/hosting-guide" class="cursor-pointer underline font-extrabold text-green-600 hover:text-green-500 transition-colors duration-200">Hosting&nbsp;Guide</NuxtLink> to get your digital business card online.\n\nIf you find this service valuable to you or your business, please consider donating.\n<a class="inline-block font-extrabold tracking-wide leading-none flex-shrink-0 p-3  text-white bg-green-600 rounded hover:bg-green-500 focus:bg-green-500 transition-colors duration-200 mt-4" href="https://www.vishnuraghav.com/donate/" target="_blank">Donate</a>'
+          )
           this.PreviewMode = true
         }, 250)
       }
     },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.checkView)
   },
 }
 </script>

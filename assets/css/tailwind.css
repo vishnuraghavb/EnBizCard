@@ -10,16 +10,8 @@
   @apply right-0;
   right: 0;
 }
-.toggle-switch:checked + .toggle-label {
-  @apply bg-green-600;
-  background-color: #38a169;
-}
-.checkbox:checked {
-  background-color: #38a169;
-  border-color: #38a169;
-}
 #device {
-  border-radius: 2rem;
+  border-radius: 1rem;
   width: 100%;
 }
 .max-hd {
@@ -48,19 +40,13 @@
 }
 
 @media (min-width: 640px) {
-  .footer {
-    display: none;
-  }
-  .max-hd {
-    max-height: 38rem;
-  }
   .stepC {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
 }
-@media (min-width: 480px) {
-  #device {
-    max-width: 24rem;
+@media (min-width: 768px) {
+  .max-hd {
+    max-height: 38rem;
   }
 }

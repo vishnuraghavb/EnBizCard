@@ -3,16 +3,16 @@
     <div class="flex items-center">
       <div
         :style="{ backgroundColor: colors[name].color }"
-        class="w-12 h-12 rounded mr-3  relative cursor-pointer"
+        class="w-12 h-12 rounded mr-3 relative cursor-pointer transition-colors duration-200 focus:outline-none focus:ring ring-gray-100"
         tabindex="0"
         @click.self="colors[name].openPalette = !colors[name].openPalette"
-        @keypress.space.enter.prevent="
+        @keydown.space.enter.esc.prevent="
           colors[name].openPalette = !colors[name].openPalette
         "
       >
         <transition name="palette">
           <div
-            class="absolute mt-12 ml-12 z-10"
+            class="absolute mt-14 ml-14 z-10"
             v-show="colors[name].openPalette"
             v-on-clickaway="() => closeColourPalette(name)"
           >
@@ -24,7 +24,7 @@
           </div>
         </transition>
       </div>
-      <p class="">{{ label }}</p>
+      <p>{{ label }}</p>
     </div>
   </div>
 </template>
@@ -63,19 +63,19 @@ export default {
 .hu-color-picker {
   box-shadow: none;
   &.light {
-    background: #4a5568;
+    background: #2d3748;
     .color-type {
       .name {
-        background: #2d3748;
+        background: #4a5568;
         color: #fff;
       }
       .value {
-        background: #1a202c;
+        background: #000;
         color: #fff;
       }
     }
   }
-  .color-show{
+  .color-show {
     display: none;
   }
   & > div:nth-last-child(-2n + 2),

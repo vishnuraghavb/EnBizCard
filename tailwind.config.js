@@ -11,7 +11,10 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['group-focus', 'checked'],
+      borderColor: ['checked'],
+    },
   },
   plugins: [],
 }
