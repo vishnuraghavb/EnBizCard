@@ -21,6 +21,14 @@
           />
           <meta name="url" content="https://enbizcard.vercel.app/" />
           <meta name="designer" content="Vishnu Raghav" />
+          <meta
+            property="og:title"
+            :content="`${genInfo.name}'s Digital Business Card`"
+          />
+          <meta
+            property="twitter:title"
+            :content="`${genInfo.name}'s Digital Business Card`"
+          />
           <!-- prettier-ignore -->
           <script>
             "http"==window.location.href.substr(0,4)&&"/"!=window.location.href.slice(-1)&&window.location.replace(window.location.href+"/");
@@ -35,9 +43,6 @@
             {{genInfo.fontCss && getFontFamily}}
             }
           </style>
-          {{
-            !PreviewMode && genInfo.tracker ? getTrackingCode : null
-          }}
         </head>
         <body id="body">
           <div
@@ -56,7 +61,7 @@
             <div id="modalView">
               <div id="keyInfo">
                 <p class="text">
-                  Download my public key to send encrypted messages to me
+                  Use my public key to send me encrypted messages
                 </p>
                 <a
                   :href="PreviewMode ? '' : `${genInfo.name}'s public key.asc`"
@@ -72,7 +77,7 @@
                     class="icon action"
                     v-html="require(`~/assets/icons/download.svg?include`)"
                   ></div>
-                  <span class="action">Download Public Key</span></a
+                  <span class="action">Download Key</span></a
                 >
               </div>
               <div id="copyView" ref="copyView">
@@ -94,7 +99,7 @@
               <div id="qrView" ref="qrView">
                 <div id="qr"></div>
                 <h2 class="text">Scan the QR Code</h2>
-                <p class="text">to view my Business Card on your device</p>
+                <p class="text">to view my Business Card on another device</p>
               </div>
             </div>
           </div>
@@ -102,9 +107,7 @@
             <img
               id="logo"
               v-if="images.logo.url"
-              :src="
-                PreviewMode ? images.logo.url : `./logo.${images.logo.format}`
-              "
+              :src="PreviewMode ? images.logo.url : `./logo.${images.logo.ext}`"
               alt="Logo"
             />
             <div
@@ -141,9 +144,7 @@
               <img
                 v-if="images.photo.url"
                 :src="
-                  PreviewMode
-                    ? images.photo.url
-                    : `./photo.${images.photo.format}`
+                  PreviewMode ? images.photo.url : `./photo.${images.photo.ext}`
                 "
                 alt="Photo"
               />
@@ -250,7 +251,7 @@
                       :src="
                         PreviewMode
                           ? item.dataURI
-                          : `./media/${getTitle(item.title)}.${item.format}`
+                          : `./media/${getTitle(item.title)}.${item.ext}`
                       "
                       alt="Product image"
                     />
@@ -388,14 +389,6 @@ export default {
       let css = this.genInfo.fontCss.replace(/\s+/, '')
       if (regex.test(css)) {
         return css.match(/^font-family[^;]*/)[0]
-      }
-    },
-    getTrackingCode() {
-      let regex = /<script[^<]*<\/script>/g
-      let tracker = this.genInfo.tracker
-      if (regex.test(tracker)) {
-        let scripts = tracker.match(regex)
-        return scripts.length && scripts.join()
       }
     },
   },
@@ -543,7 +536,6 @@ export default {
     box-sizing: border-box;
   }
   #logo {
-    min-height: 6rem;
     max-height: 6rem;
     text-align: center;
     color: gray;

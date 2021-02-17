@@ -25,120 +25,142 @@
         ></div>
       </button>
     </div>
-    <draggable v-model="featured[index].content" class="mt-4" handle=".drag">
-      <div v-for="(item, i) in featured[index].content" :key="i">
-        <div
-          class="flex items-center mt-2 mr-4"
-          v-if="item.contentType == 'media'"
-        >
-          <button
-            class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
-            tabindex="-1"
+    <draggable
+      v-model="featured[index].content"
+      class="mt-4"
+      handle=".drag"
+      animation="1"
+      ghostClass="ghost"
+    >
+      <transition-group name="list">
+        <div v-for="(item, i) in featured[index].content" :key="'item' + i">
+          <div
+            class="flex items-center mt-2"
+            v-if="item.contentType == 'media'"
           >
-            <div
-              class="w-6 h-6"
-              v-html="require(`~/assets/icons/drag.svg?include`)"
-            ></div>
-          </button>
-          <img
-            class="w-12 h-12 rounded mr-3 object-contain flex-shrink-0"
-            v-if="item.type == 'image' ? item.dataURI : item.coverDataURI"
-            :src="item.type == 'image' ? item.dataURI : item.coverDataURI"
-            :alt="item.title"
-          />
-          <!-- prettier-ignore -->
-          <p class="w-full leading-none whitespace-pre overflow-x-hidden">{{ item.name }}</p>
-          <button
-            class="p-1 m-2 self-end flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
-            @click="removeItem(i)"
-            aria-label="Remove media"
-            title="Remove media"
-          >
-            <div
-              class="w-6 h-6"
-              v-html="require(`~/assets/icons/x.svg?include`)"
-            ></div>
-          </button>
-        </div>
-        <ProductCard
-          v-else-if="item.contentType == 'product'"
-          :featured="featured"
-          :item="item"
-          :index="index"
-          :i="i"
-          :resizeImage="resizeImage"
-          :showAlert="showAlert"
-        />
-        <div
-          class="flex items-center mt-2 mr-4"
-          v-else-if="item.contentType == 'text'"
-        >
-          <button
-            class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
-            tabindex="-1"
-          >
-            <div
-              class="w-6 h-6"
-              v-html="require(`~/assets/icons/drag.svg?include`)"
-            ></div>
-          </button>
-          <div class="w-full">
-            <textarea
-              class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent placeholder-gray-600 transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-              ref="text"
-              aria-label="Type text content here"
-              title="Type text content here"
-              v-model="featured[index].content[i].value"
-              placeholder="Type text content here"
-              rows="5"
-            ></textarea>
-          </div>
-          <button
-            class="p-1 m-2 mt-4 flex-shrink-0 focus:outline-none rounded self-start hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
-            @click="removeItem(i)"
-            aria-label="Remove text"
-            title="Remove text"
-          >
-            <div
-              class="w-6 h-6"
-              v-html="require(`~/assets/icons/x.svg?include`)"
-            ></div>
-          </button>
-        </div>
-        <div class="flex items-center mt-2 mr-4" v-else>
-          <button
-            class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
-            tabindex="-1"
-          >
-            <div
-              class="w-6 h-6"
-              v-html="require(`~/assets/icons/drag.svg?include`)"
-            ></div>
-          </button>
-          <div class="w-full">
-            <input
-              class="px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
-              ref="link"
-              type="text"
-              aria-label="Paste HTML embed link here"
-              title="Paste HTML embed link here"
-              v-model="featured[index].content[i]"
-              placeholder="Paste HTML embed link here"
+            <button
+              class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
+              tabindex="-1"
+            >
+              <div
+                class="w-6 h-6"
+                v-html="require(`~/assets/icons/drag.svg?include`)"
+              ></div>
+            </button>
+            <img
+              class="w-12 h-12 rounded mr-3 object-contain flex-shrink-0"
+              v-if="
+                item.type == 'image'
+                  ? item.dataURI
+                  : item.coverDataURI
+                  ? item.coverDataURI
+                  : false
+              "
+              :src="item.type == 'image' ? item.dataURI : item.coverDataURI"
+              :alt="item.title"
             />
+            <a
+              v-else
+              class="w-12 h-12 mr-3 bg-gray-900 flex items-center justify-center text-center text-xs rounded flex-shrink-0 leading-none select-none cursor-pointer"
+              target="_blank"
+              href="https://duckduckgo.com/?q=Add+ID3+tags+to+mp3+file"
+            >
+              {{ item.info }}
+            </a>
+            <!-- prettier-ignore -->
+            <p class="w-full leading-none whitespace-pre overflow-x-hidden">{{ item.name }}</p>
+            <button
+              class="p-1 m-2 self-end flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              @click="removeItem(i)"
+              aria-label="Remove media"
+              title="Remove media"
+            >
+              <div
+                class="w-6 h-6"
+                v-html="require(`~/assets/icons/x.svg?include`)"
+              ></div>
+            </button>
           </div>
-          <button
-            class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
-            @click="removeItem(i)"
-            aria-label="Remove field"
-            title="Remove field"
+          <ProductCard
+            v-else-if="item.contentType == 'product'"
+            :featured="featured"
+            :item="item"
+            :index="index"
+            :i="i"
+            :resizeImage="resizeImage"
+            :showAlert="showAlert"
+          />
+          <div
+            class="flex items-center mt-2"
+            v-else-if="item.contentType == 'text'"
           >
-            <div
-              class="w-6 h-6"
-              v-html="require(`~/assets/icons/x.svg?include`)"
-            ></div>
-          </button>
+            <button
+              class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
+              tabindex="-1"
+            >
+              <div
+                class="w-6 h-6"
+                v-html="require(`~/assets/icons/drag.svg?include`)"
+              ></div>
+            </button>
+            <div class="w-full">
+              <textarea
+                class="block px-4 py-3 w-full bg-black rounded border border-transparent placeholder-gray-600 transition-colors duration-200 focus:outline-none focus:border-gray-500 resize-none hover:border-gray-500"
+                ref="text"
+                aria-label="Type text content here"
+                title="Type text content here"
+                v-model="featured[index].content[i].value"
+                placeholder="Type text content here"
+                rows="5"
+              ></textarea>
+            </div>
+            <button
+              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              @click="removeItem(i)"
+              aria-label="Remove text"
+              title="Remove text"
+            >
+              <div
+                class="w-6 h-6"
+                v-html="require(`~/assets/icons/x.svg?include`)"
+              ></div>
+            </button>
+          </div>
+          <div class="flex items-center mt-2" v-else>
+            <button
+              class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
+              tabindex="-1"
+            >
+              <div
+                class="w-6 h-6"
+                v-html="require(`~/assets/icons/drag.svg?include`)"
+              ></div>
+            </button>
+            <div class="w-full">
+              <input
+                class="px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
+                ref="link"
+                type="text"
+                aria-label="Paste HTML embed link here"
+                title="Paste HTML embed link here"
+                v-model="featured[index].content[i]"
+                placeholder="Paste HTML embed link here"
+              />
+            </div>
+            <button
+              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              @click="removeItem(i)"
+              aria-label="Remove field"
+              title="Remove field"
+            >
+              <div
+                class="w-6 h-6"
+                v-html="require(`~/assets/icons/x.svg?include`)"
+              ></div>
+            </button>
+          </div>
         </div>
-      </div>
+      </transition-group>
     </draggable>
     <div
       class="grid grid-flow-row sm:grid-cols-2 gap-2 w-full p-2"
@@ -280,6 +302,10 @@ export default {
         contentType: 'text',
         value: null,
       })
+      let texts = this.featured[this.index].content.filter(
+        (e) => e.contentType == 'text'
+      )
+      setTimeout(() => this.$refs.text[texts.length - 1].focus(), 50)
     },
     fileLoaded(e, dropped) {
       if (
@@ -293,7 +319,7 @@ export default {
         if (file) {
           switch (type) {
             case 'image':
-              this.imageLoaded(file, type)
+              this.imageLoaded(file, type, mimetype)
               break
             case 'music':
               this.musicLoaded(file, type)
@@ -320,22 +346,29 @@ export default {
       this.featured[this.index].content.splice(i, 1)
     },
     // Images
-    imageLoaded(file, type) {
+    imageLoaded(file, type, mime) {
       let title = this.getFileName(file)
       let reader = new FileReader()
       reader.onload = (f) => {
         let dataURI = f.target.result
+        let ext = dataURI
+          .split(',')[0]
+          .split(':')[1]
+          .split('/')[1]
+          .match(/^\w+/g)[0]
         this.featured[this.index].content.push({
           name: file.name,
+          title,
           dataURI,
           file,
           type,
           contentType: 'media',
-          format: 'jpeg',
-          title,
+          ext,
+          mime,
         })
         this.resizeImage(
           type,
+          mime,
           this.index,
           this.featured[this.index].content.length - 1
         )
@@ -344,11 +377,12 @@ export default {
     },
 
     // Music
-    async musicLoaded(file, type) {
+    musicLoaded(file, type) {
       this.extractTags(file, type)
         .then((f) => {
           this.resizeImage(
             type,
+            'image/jpeg',
             this.index,
             this.featured[this.index].content.length - 1
           )
@@ -368,7 +402,7 @@ export default {
                   name: file.name,
                   cover,
                   coverDataURI,
-                  coverFormat: 'jpeg',
+                  coverExt: 'jpeg',
                   title: tag.title,
                   artist: tag.artist,
                   album: tag.album,
@@ -376,7 +410,7 @@ export default {
                   type,
                   contentType: 'media',
                   file,
-                  format: 'mp3',
+                  ext: 'mp3',
                 })
                 let loadTags = setInterval(() => {
                   if (
@@ -389,15 +423,31 @@ export default {
                   }
                 }, 500)
               } else {
-                this.showAlert(
-                  'Looks like this mp3 file has no album art.\n\nMusic with no album art can make you look unprofessional. So, please re-attach the file after adding an album art.\n\n<b>Pro-tip</b>: A professionally designed album art or cover image can help your music stand out.'
-                )
+                this.featured[this.index].content.push({
+                  name: file.name,
+                  title: tag.title,
+                  artist: tag.artist,
+                  album: tag.album,
+                  dataURI: URL.createObjectURL(file),
+                  type,
+                  contentType: 'media',
+                  file,
+                  ext: 'mp3',
+                  info: 'No Thumb',
+                })
                 reject()
               }
             } else {
-              this.showAlert(
-                'Looks like this mp3 file has no ID3 tags.\n\nMusic with no ID3 tags can make you look unprofessional. So, please re-attach the file after adding some tag information.'
-              )
+              this.featured[this.index].content.push({
+                name: file.name,
+                title: this.getFileName(file),
+                dataURI: URL.createObjectURL(file),
+                type,
+                contentType: 'media',
+                file,
+                ext: 'mp3',
+                info: 'No ID3 Tag',
+              })
               reject()
             }
           })
@@ -435,13 +485,13 @@ export default {
         vm.featured[vm.index].content.push({
           name: file.name,
           coverDataURI,
-          coverFormat: 'jpeg',
+          coverExt: 'jpeg',
           dataURI,
           file,
           title,
           type,
           contentType: 'media',
-          format: 'mp4',
+          ext: 'mp4',
         })
       }
       if (uA && uA.length == 2) {
@@ -523,13 +573,13 @@ export default {
                 name: file.name,
                 cover,
                 coverDataURI,
-                coverFormat: 'jpeg',
+                coverExt: 'jpeg',
                 file,
                 filesize,
                 title,
                 type,
                 contentType: 'media',
-                format: 'pdf',
+                ext: 'pdf',
               })
             })
           })

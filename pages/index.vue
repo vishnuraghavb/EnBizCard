@@ -6,8 +6,7 @@
   >
     <Modal
       v-if="content"
-      @click.native.self="content = null"
-      @scroll.native="content = null"
+      @click.native.self="clearContent"
       :content="content"
       :clearContent="clearContent"
     />
@@ -21,7 +20,7 @@
           v-html="require(`~/assets/icons/logo.svg?include`)"
         ></div>
         <button
-          class="p-3 mx-4 font-extrabold rounded focus:outline-none select-none"
+          class="p-3 mx-4 font-extrabold rounded tracking-wide focus:outline-none select-none"
           :class="showPreview ? 'bg-gray-700' : 'bg-green-600'"
           @click="!opening && togglePreview()"
         >
@@ -114,7 +113,7 @@
                 type="logo"
                 :resizeImage="resizeImage"
                 label="Attach brand logo"
-                description="recommended format: svg or png"
+                description="suggested format: svg, png or gif"
                 :showAlert="showAlert"
               />
               <Attachment
@@ -122,7 +121,7 @@
                 type="photo"
                 :resizeImage="resizeImage"
                 label="Attach photo"
-                description="recommended: a square photo"
+                description="suggested format: jpeg, png or gif"
                 :showAlert="showAlert"
               />
             </div>
@@ -168,7 +167,7 @@
                 :value="genInfo.desc"
                 @input="genInfo.desc = $event.target.value"
                 class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="5"
+                rows="4"
               ></textarea>
             </div>
             <div class="stepC relative mt-6">
@@ -184,7 +183,7 @@
                 id="pgp-public-key"
                 v-model="genInfo.key"
                 class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="5"
+                rows="4"
                 spellcheck="false"
                 placeholder="Paste PGP PUBLIC KEY BLOCK here"
               ></textarea>
@@ -212,16 +211,19 @@
           </div>
           <div id="step-3" class="mt-16">
             <h2 class="font-extrabold text-2xl">Primary actions</h2>
-            <Action
-              v-for="(item, index) in primaryActions"
-              :key="index"
-              name="primaryActions"
-              :type="primaryActions"
-              :item="item"
-              :index="index"
-              :buttonBg="colors.buttonBg.color"
-              :removeAction="removeAction"
-            />
+            <transition-group type="transition" name="list">
+              <Action
+                v-for="(item, index) in primaryActions"
+                :key="'item' + index"
+                name="primaryActions"
+                :type="primaryActions"
+                :item="item"
+                :index="index"
+                :buttonBg="colors.buttonBg.color"
+                :removeAction="removeAction"
+              />
+            </transition-group>
+
             <div class="stepC actions mt-6">
               <button
                 v-for="(action, index) in actions.primaryActions"
@@ -245,15 +247,17 @@
           </div>
           <div id="step-4" class="mt-16">
             <h2 class="font-extrabold text-2xl">Secondary actions</h2>
-            <Action
-              v-for="(item, index) in secondaryActions"
-              :key="index"
-              name="secondaryActions"
-              :type="secondaryActions"
-              :item="item"
-              :index="index"
-              :removeAction="removeAction"
-            />
+            <transition-group type="transition" name="list">
+              <Action
+                v-for="(item, index) in secondaryActions"
+                :key="'item' + index"
+                name="secondaryActions"
+                :type="secondaryActions"
+                :item="item"
+                :index="index"
+                :removeAction="removeAction"
+              />
+            </transition-group>
             <div class="stepC actions mt-6">
               <button
                 v-for="(action, index) in actions.secondaryActions"
@@ -275,16 +279,19 @@
           <div id="step-5" class="mt-16">
             <h2 class="font-extrabold text-2xl">Featured content</h2>
             <div class="stepC">
-              <Featured
-                v-for="(content, index) in featured"
-                :key="index"
-                :featured="featured"
-                :resizeImage="resizeImage"
-                :index="index"
-                label="Attach content"
-                mimetypes="image/jpeg, image/png, audio/mpeg, video/mp4, video/webm, application/pdf"
-                :showAlert="showAlert"
-              />
+              <transition-group type="transition" name="list">
+                <Featured
+                  v-for="(content, index) in featured"
+                  :key="'content' + index"
+                  :featured="featured"
+                  :resizeImage="resizeImage"
+                  :index="index"
+                  label="Attach content"
+                  mimetypes="image/jpeg, image/png, audio/mpeg, video/mp4, video/webm, application/pdf"
+                  :showAlert="showAlert"
+                />
+              </transition-group>
+
               <div class="flex mt-6">
                 <div class="flex flex-wrap items-center">
                   <button
@@ -300,9 +307,7 @@
                   <p class="ml-3 leading-none">Add section</p>
                 </div>
               </div>
-              <p
-                class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
-              >
+              <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
                 Supported media file formats: jpeg, png, mp3, mp4, webm and pdf
               </p>
             </div>
@@ -320,23 +325,23 @@
                   @click="footerCredit = !footerCredit"
                   @keypress.space.enter.prevent="footerCredit = !footerCredit"
                 >
-                  <input
-                    type="checkbox"
-                    name="toggle"
-                    aria-label="Toggle footer credit"
-                    id="toggle"
-                    v-model="footerCredit"
-                    class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
-                    tabindex="-1"
-                  />
+                  <transition name="slide">
+                    <input
+                      type="checkbox"
+                      name="toggle"
+                      aria-label="Toggle footer credit"
+                      id="toggle"
+                      v-model="footerCredit"
+                      class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
+                      tabindex="-1"
+                    />
+                  </transition>
                 </div>
                 <p>{{ footerCredit ? 'Yes, for sure!' : 'No, thanks' }}</p>
               </div>
-              <p
-                class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
-              >
-                Footer credit lets others to use this Service. Help support this
-                project by enabling the footer credit.
+              <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+                Footer credit lets others to use this Service. You can support
+                this project by enabling the footer credit.
               </p>
             </div>
           </div>
@@ -349,7 +354,7 @@
                 T1
               </button>
               <button
-                class="w-12 h-12 rounded mt-3 mr-3 text-black bg-gray-700 font-extrabold focus:outline-none transition-colors duration-200"
+                class="w-12 h-12 rounded mt-3 mr-3 text-black bg-gray-700 font-extrabold focus:outline-none transition-colors duration-200 cursor-default"
               >
                 T2
               </button>
@@ -376,7 +381,7 @@
                 id="font-link"
                 v-model="genInfo.fontLink"
                 class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="3"
+                rows="4"
                 spellcheck="false"
                 :placeholder="`Eg.: <link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
               ></textarea>
@@ -392,12 +397,10 @@
                 :placeholder="`Eg.: font-family: 'Poppins', sans-serif;`"
               />
             </div>
-            <p
-              class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
-            >
-              Supports web fonts from services such as Google Fonts, Adobe
-              Typekit, etc. Make sure to get the embed link for both regular and
-              bold font variants from the same font family.
+            <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              Supports services such as Google Fonts, Adobe Typekit, etc. Make
+              sure to get the embed link for both regular and bold font variants
+              from the same font family.
             </p>
           </div>
           <div id="step-10" class="mt-16">
@@ -407,15 +410,12 @@
                 id="pgp-public-key"
                 v-model="genInfo.tracker"
                 class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="5"
+                rows="4"
                 spellcheck="false"
                 placeholder="Paste tracking code here"
               ></textarea>
-              <p
-                class="mt-6 border px-3 py-2 rounded border-gray-700 text-gray-400"
-              >
-                You can add tracking code from service such as Matomo, Clicky,
-                Google Analytics etc.
+              <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+                Supports services such as Clicky, Matomo, Google Analytics etc.
               </p>
             </div>
           </div>
@@ -499,15 +499,16 @@ import Preview from '@/components/Preview'
 import Download from '@/components/Download'
 import Help from '@/components/Help'
 import Footer from '@/components/Footer'
+import Cropper from '@/components/Cropper'
 
 import Vcard from '@/components/Vcard'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
-// let minify = require('html-minifier').minify
 import QRCode from '!!raw-loader!~/static/qrcode.min.js'
 import Theme1 from '!!raw-loader!~/assets/styles/T1.min.css'
 export default {
   components: {
+    Cropper,
     Modal,
     Attachment,
     Action,
@@ -541,13 +542,15 @@ export default {
         logo: {
           url: null,
           blob: null,
-          format: null,
+          ext: null,
+          mime: null,
           resized: null,
         },
         photo: {
           url: null,
           blob: null,
-          format: null,
+          ext: null,
+          mime: null,
           resized: null,
         },
       },
@@ -1004,7 +1007,7 @@ export default {
         `${this.genInfo.name}'s public key.asc`
       )
     },
-    async resizeImage(type, index1, index2) {
+    async resizeImage(type, mime, index1, index2) {
       let vm = this
       let reader = new FileReader()
       let file
@@ -1017,7 +1020,7 @@ export default {
           file = await this.featured[index1].content[index2].image.file
         }
       } else {
-        file = this.images[type].blob
+        file = await this.images[type].blob
       }
       let canvas = document.createElement('canvas')
       let ctx = canvas.getContext('2d')
@@ -1051,8 +1054,10 @@ export default {
           }
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
           canvas.toBlob(
-            function (blob) {
-              let image = new File([blob], type)
+            (blob) => {
+              let image = new File([blob], type, {
+                type: mime,
+              })
               if (index2 >= 0) {
                 if (type == 'image') {
                   vm.featured[index1].content[index2].file = image
@@ -1065,12 +1070,23 @@ export default {
                 vm.images[type].resized = image
               }
             },
-            'image/jpeg',
+            mime,
             0.8
           )
         }
       }
       reader.readAsDataURL(file)
+    },
+    getTrackingCode() {
+      let regex = /<script[^<]*<\/script>/g
+      let tracker = this.genInfo.tracker
+      if (regex.test(tracker)) {
+        let scripts = tracker.match(regex)
+        let temp = document.createElement('div')
+        temp.innerHTML = tracker
+        return scripts.length && temp
+      }
+      return false
     },
     downloadPackage() {
       if (this.downloadChecked) {
@@ -1080,22 +1096,36 @@ export default {
             this.$refs.html.$refs.html.outerHTML,
             'text/html'
           )
+
+          // Inject stylesheets
           let styleLink = document.createElement('link')
           styleLink.rel = 'stylesheet'
           styleLink.href = './style.min.css'
           el.querySelector('head').appendChild(styleLink)
+
+          // Inject qrcode script
           let qrcode = document.createElement('script')
           qrcode.src = './qrcode.min.js'
           el.querySelector('body').appendChild(qrcode)
+
+          // Inject general script
           let modals = document.createElement('script')
           modals.innerText =
             'let m=document.getElementById("modal"),c=document.getElementById("close"),ki=document.getElementById("keyInfo"),cv=document.getElementById("copyView"),curl=document.getElementById("copyURL"),qrv=document.getElementById("qrView"),qr=document.getElementById("qr"),s=document.getElementById("share"),sqr=document.getElementById("showQR"),sk=document.getElementById("showKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#topActions").style.display="flex",qr.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(m),cv.style.display="flex",dN(qrv),ki&&dN(ki)}),sqr.addEventListener("click",()=>{tC(m),qrv.style.display="block",dN(cv),ki&&dN(ki)}),sk&&sk.addEventListener("click",()=>{tC(m),ki&&(ki.style.display="flex"),dN(cv),dN(qrv)}),c.addEventListener("click",()=>tC(m)),curl.addEventListener("click",async()=>{let e=curl.querySelectorAll(".action")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});'
           el.querySelector('body').appendChild(modals)
+
+          // Inject media script
           let mediaHandler = document.createElement('script')
           mediaHandler.innerText =
             'let pC=document.querySelectorAll(".pCtrl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),c=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",c.style.display="none");let o=Math.floor(e/60),y=Math.floor(e%60);o.toString().length<2&&(o="0"+o),y.toString().length<2&&(y="0"+y),r.value=o+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",c.style.display="block"):(srcs[l].pause(),c.style.display="none",a.style.display="block")})});'
           if (this.featured.length)
             el.querySelector('body').appendChild(mediaHandler)
+
+          // Inject tracking scripts
+          let tracker = this.getTrackingCode()
+          while (tracker.firstChild) el.head.appendChild(tracker.firstChild)
+
+          // Create blobs
           let html = new Blob(
             [`<!DOCTYPE html>${el.documentElement.outerHTML}`],
             {
@@ -1119,70 +1149,74 @@ export default {
           let qrScript = new Blob([QRCode], {
             type: 'application/javascript',
           })
-          let name = this.genInfo.name
+
+          // Prepare files
           let username = this.username
           let zip = new JSZip()
           zip.folder(username).file('index.html', html)
           zip.folder(username).file('style.min.css', css)
           zip.folder(username).file('qrcode.min.js', qrScript)
           zip.file('Hosting-Guide.html', guide)
-          if (this.images.logo.url) {
-            zip.folder(username).file(
-              `logo.${this.images.logo.format}`,
 
-              this.images.logo.format == 'svg'
-                ? this.images.logo.blob
-                : this.images.logo.resized
-            )
+          // Image attachments
+          for (const key in this.images) {
+            if (this.images[key].url) {
+              zip
+                .folder(username)
+                .file(
+                  `${key}.${this.images[key].ext}`,
+                  this.images[key].resized
+                )
+            }
           }
-          if (this.images.photo.url) {
-            zip
-              .folder(username)
-              .file(
-                `photo.${this.images.photo.format}`,
-                this.images.photo.resized
-              )
-          }
+
+          // Featured content
           let hasFeaturedContent = this.featured.filter((e) => e.content.length)
             .length
-          if (this.featured.length && hasFeaturedContent) {
-            this.featured.forEach((item, index) => {
-              item.content.forEach((item, i) => {
+          if (hasFeaturedContent) {
+            this.featured.forEach((item) => {
+              item.content.forEach((item) => {
                 if (item.contentType == 'media') {
                   zip
                     .folder(username)
                     .folder('media')
-                    .file(
-                      `${this.getTitle(item.title)}.${item.format}`,
-                      item.file
-                    )
+                    .file(`${this.getTitle(item.title)}.${item.ext}`, item.file)
                   if (item.type.match(/music|document/gi)) {
-                    zip
-                      .folder(username)
-                      .folder('media')
-                      .file(
-                        `${this.getTitle(item.title)}.${item.coverFormat}`,
-                        item.cover
-                      )
+                    if (!item.info) {
+                      zip
+                        .folder(username)
+                        .folder('media')
+                        .file(
+                          `${this.getTitle(item.title)}.${item.coverExt}`,
+                          item.cover
+                        )
+                    }
                   }
                 } else if (item.contentType == 'product' && item.image) {
                   zip
                     .folder(username)
                     .folder('media')
                     .file(
-                      `${this.getTitle(item.image.title)}.${item.image.format}`,
+                      `${this.getTitle(item.image.title)}.${item.image.ext}`,
                       item.image.file
                     )
                 }
               })
             })
           }
+
+          //  Public key
+          let name = this.genInfo.name
           if (this.pubKeyIsValid) {
             zip
               .folder(username)
-              .file(`${this.genInfo.name}'s public key.asc`, this.genInfo.key)
+              .file(`${name}'s public key.asc`, this.genInfo.key)
           }
+
+          // VCARD
           zip.folder(username).file(`${username}.vcf`, vCard)
+
+          // Final ZIP file
           zip
             .generateAsync({
               type: 'blob',
@@ -1190,9 +1224,6 @@ export default {
             .then(function (zip) {
               saveAs(zip, `${name}'s Digital Business Card.zip`)
             })
-          this.showAlert(
-            'Your Download Has Been Started!\n\nExtract the downloaded ZIP file and follow the <NuxtLink to="/hosting-guide" class="cursor-pointer underline font-extrabold text-green-600 hover:text-green-500 transition-colors duration-200">Hosting&nbsp;Guide</NuxtLink> to get your digital business card online.\n\nIf you find this service valuable to you or your business, please consider donating.\n<a class="inline-block font-extrabold tracking-wide leading-none flex-shrink-0 p-3  text-white bg-green-600 rounded hover:bg-green-500 focus:bg-green-500 transition-colors duration-200 mt-4" href="https://www.vishnuraghav.com/donate/" target="_blank">Donate</a>'
-          )
           this.PreviewMode = true
         }, 250)
       }
@@ -1200,6 +1231,9 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.checkView)
+    // window.onbeforeunload = function () {
+    //   return 'Your work will be lost.'
+    // }
   },
 }
 </script>

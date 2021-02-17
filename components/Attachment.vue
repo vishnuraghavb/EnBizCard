@@ -1,5 +1,15 @@
 <template>
   <div class="flex mt-6">
+    <transition name="list">
+      <Cropper
+        v-if="showCropper"
+        :src="tempURL"
+        @closeCropper="closeCropper"
+        :content="content"
+        :mime="mime"
+        :resizeImage="resizeImage"
+      />
+    </transition>
     <div class="flex flex-wrap items-center">
       <img
         class="w-12 h-12 rounded object-contain"
@@ -22,7 +32,7 @@
         <input
           :ref="`import${type}`"
           type="file"
-          :accept="`.png,.jpg,.jpeg${type == 'logo' ? ',.svg' : ''}`"
+          :accept="`.png,.jpg,.jpeg,.gif,.webp${type == 'logo' ? ',.svg' : ''}`"
           v-show="false"
           @change="fileLoaded($event, type, false)"
           @click="$event.target.files = null"
@@ -65,6 +75,9 @@ export default {
   data() {
     return {
       dragOver: false,
+      showCropper: false,
+      tempURL: null,
+      mime: null,
     }
   },
   computed: {
@@ -73,6 +86,9 @@ export default {
     },
   },
   methods: {
+    closeCropper() {
+      this.showCropper = false
+    },
     attachFile(e, type, dropped) {
       dropped
         ? (this.fileLoaded(e, type, true), (this.dragOver = false))
@@ -84,40 +100,50 @@ export default {
         (!dropped && e.target.files.length)
       ) {
         let file = dropped ? e.dataTransfer.files[0] : e.target.files[0]
-        if (type == 'logo' && file.type.match(/image\/(svg\+xml|png|jpeg)/)) {
-          this.imageLoaded(file, type)
-        } else if (file.type.match(/image\/(png|jpeg)/)) {
-          this.imageLoaded(file, type)
+        let mime = file.type
+        if (
+          type == 'logo' &&
+          file.type.match(/image\/(svg\+xml|png|jpeg|gif|webp)/)
+        ) {
+          this.imageLoaded(file, type, mime)
+        } else if (file.type.match(/image\/(png|jpeg|gif|webp)/)) {
+          this.imageLoaded(file, type, mime)
+        } else {
+          if (type == 'logo') {
+            this.showAlert(
+              'Unsupported file format.\nOnly jpeg, png, webp, gif and svg file can be attached.'
+            )
+          } else {
+            this.showAlert(
+              'Unsupported file format.\nOnly jpeg, png, webp and gif file can be attached.'
+            )
+          }
         }
       }
     },
-    imageLoaded(file, type) {
+    imageLoaded(file, type, mime) {
       let reader = new FileReader()
       reader.onload = (f) => {
         let dataURI = f.target.result
-        let format = dataURI
+        let ext = dataURI
           .split(',')[0]
           .split(':')[1]
           .split('/')[1]
           .match(/^\w+/g)[0]
-        if (type == 'photo') {
-          let img = new Image()
-          img.src = dataURI
-          img.onload = () => {
-            img.width != img.height
-              ? this.showAlert(
-                  'Looks like its not a square photo.\n\nPlease use an image editor to crop the photo to 1:1 and re-attach the same.'
-                )
-              : null
+        if (type == 'logo' || mime.match(/gif|webp/)) {
+          this.content[type] = {
+            url: dataURI,
+            blob: file,
+            ext,
+            mime,
+            resized: file,
           }
-        }
-        this.content[type] = {
-          url: dataURI,
-          blob: file,
-          format,
-        }
-        if (this.content[type].format.match(/(png|jpg|jpeg)/)) {
-          this.resizeImage(type)
+          if (!mime.match(/svg|gif|webp/)) this.resizeImage(type, mime)
+        } else {
+          this.content.photo.ext = ext
+          this.mime = mime
+          this.tempURL = dataURI
+          this.showCropper = true
         }
       }
       reader.readAsDataURL(file)

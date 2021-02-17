@@ -6,7 +6,7 @@
         PreviewMode
           ? product.image.dataURI
           : `./media/${getTitle(product.image.title)}.${
-              product.image.format
+              product.image.ext
             }`
       "
       alt="Product image"

@@ -53,7 +53,7 @@ export default {
 <style lang="scss">
 .palette-enter-active,
 .palette-leave-active {
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease;
   transform-origin: left top;
 }
 .palette-enter,

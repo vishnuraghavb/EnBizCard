@@ -5,7 +5,7 @@
         :src="
           PreviewMode
             ? media.coverDataURI
-            : `./featured/${getTitle(media.title)}.${media.coverFormat}`
+            : `./media/${getTitle(media.title)}.${media.coverExt}`
         "
         :alt="media.title"
       />
@@ -23,9 +23,7 @@
             backgroundColor: `${colors.buttonBg.color}`,
           }"
           :href="
-            PreviewMode
-              ? ''
-              : `./featured/${getTitle(media.title)}.${media.format}`
+            PreviewMode ? '' : `./media/${getTitle(media.title)}.${media.ext}`
           "
           download
           target="_blank"

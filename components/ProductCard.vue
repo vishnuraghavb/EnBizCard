@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mt-2 mr-4">
+  <div class="flex items-center mt-2">
     <button
       class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
       tabindex="-1"
@@ -58,23 +58,12 @@
             placeholder="Product title"
           />
         </div>
-        <button
-          class="p-1 ml-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
-          @click="removeItem(i)"
-          aria-label="Remove product"
-          title="Remove product"
-        >
-          <div
-            class="w-6 h-6"
-            v-html="require(`~/assets/icons/x.svg?include`)"
-          ></div>
-        </button>
       </div>
       <textarea
         name="description"
         placeholder="Product description"
         class="pDescription block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 resize-none hover:border-gray-500"
-        rows="3"
+        rows="2"
         v-model="item.description"
       ></textarea>
       <input
@@ -101,6 +90,17 @@
         />
       </div>
     </div>
+    <button
+      class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
+      @click="removeItem(i)"
+      aria-label="Remove product"
+      title="Remove product"
+    >
+      <div
+        class="w-6 h-6"
+        v-html="require(`~/assets/icons/x.svg?include`)"
+      ></div>
+    </button>
   </div>
 </template>
 
@@ -134,24 +134,34 @@ export default {
         let mimetype = file.type
         this.dragOver = false
         if (file && mimetype.match(/image\/jpeg|image\/png/gi)) {
-          this.imageLoaded(file, i)
-        } else this.showAlert('Only jpeg and png files can be attached')
+          this.imageLoaded(file, i, mimetype)
+        } else
+          this.showAlert(
+            'Unsupported file format.\nOnly jpeg and png files can be attached.'
+          )
       } else this.dragOver = false
     },
-    imageLoaded(file, i) {
+    imageLoaded(file, i, mime) {
       let title = this.getFileName(file)
       let reader = new FileReader()
       reader.onload = (f) => {
         let dataURI = f.target.result
+        let ext = dataURI
+          .split(',')[0]
+          .split(':')[1]
+          .split('/')[1]
+          .match(/^\w+/g)[0]
         this.featured[this.index].content[i].image = {
           dataURI,
           file,
           type: 'image',
-          format: 'jpeg',
+          ext,
+          mime,
           title,
         }
         this.resizeImage(
           'product',
+          mime,
           this.index,
           this.featured[this.index].content.length - 1
         )

@@ -15,15 +15,16 @@
         :src="
           PreviewMode
             ? media.dataURI + '#t=0.2'
-            : `./media/${getTitle(media.title)}.${media.format}`
+            : `./media/${getTitle(media.title)}.${media.ext}`
         "
       />
     </video>
-    <img v-if="type == 'music'"
+    <img
+      v-if="type == 'music' && media.coverDataURI"
       :src="
         PreviewMode
           ? media.coverDataURI
-          : `./media/${getTitle(media.title)}.${media.coverFormat}`
+          : `./media/${getTitle(media.title)}.${media.coverExt}`
       "
       alt="cover"
     />

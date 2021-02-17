@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:EnBizCard;;;;
+FN:EnBizCard
+ORG:EnBizCard - An Open-Source Digital Business Card Generator
+TITLE:An Open-Source Digital Business Card Generator 
+TEL;TYPE=work,pref:9876543210
+TEL;TYPE=work:
+EMAIL;TYPE=work:apps@vishnuraghav.com
+URL:https://enbizcard.vercel.app/
+KEY:OPENPGP4FPR:E62C45D676568839D9400FAE67360EC2DEB07BB7
+UID:enbizcard-857131
+END:VCARD
