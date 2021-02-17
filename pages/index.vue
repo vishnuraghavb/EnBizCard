@@ -405,7 +405,7 @@
               class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               rows="4"
               spellcheck="false"
-              :placeholder="`Eg.: <link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
+              :placeholder="`<link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
             ></textarea>
           </div>
           <div class="stepC mt-6">
@@ -416,7 +416,7 @@
               id="font-css"
               v-model="genInfo.fontCss"
               class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-              :placeholder="`Eg.: font-family: 'Poppins', sans-serif;`"
+              :placeholder="`font-family: 'Poppins', sans-serif;`"
             />
           </div>
           <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
