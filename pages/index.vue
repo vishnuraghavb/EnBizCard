@@ -103,114 +103,119 @@
       </p>
     </div>
     <div class="md:grid md:grid-cols-2">
-      <div class="mt-8">
-        <div class="px-4 mt-24">
-          <div ref="create" id="step-1" class="pt-8">
-            <h2 class="font-extrabold text-2xl">Image attachments</h2>
-            <div class="stepC">
-              <Attachment
-                :content="images"
-                type="logo"
-                :resizeImage="resizeImage"
-                label="Attach brand logo"
-                description="suggested format: svg, png or gif"
-                :showAlert="showAlert"
-              />
-              <Attachment
-                :content="images"
-                type="photo"
-                :resizeImage="resizeImage"
-                label="Attach photo"
-                description="suggested format: jpeg, png or gif"
-                :showAlert="showAlert"
-              />
-            </div>
+      <div class="px-4 mt-32">
+        <div ref="create" id="step-1" class="pt-8">
+          <h2 class="font-extrabold text-2xl">Image attachments</h2>
+          <div class="stepC">
+            <Attachment
+              :content="images"
+              type="logo"
+              :resizeImage="resizeImage"
+              label="Attach brand logo"
+              description="suggested format: svg, png or gif"
+              :showAlert="showAlert"
+            />
+            <Attachment
+              :content="images"
+              type="photo"
+              :resizeImage="resizeImage"
+              label="Attach photo"
+              description="suggested format: jpeg, png or gif"
+              :showAlert="showAlert"
+            />
           </div>
-          <div id="step-2" class="mt-16">
-            <h2 class="font-extrabold text-2xl">General information</h2>
-            <div class="stepC mt-6">
-              <label for="fullname" class="ml-4">Full name</label>
-              <input
-                id="fullname"
-                spellcheck="false"
-                type="text"
-                v-model="genInfo.name"
-                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
-              />
-            </div>
-            <div class="stepC mt-6">
-              <label for="job-title" class="ml-4">Job title</label>
-              <input
-                id="job-title"
-                type="text"
-                spellcheck="true"
-                v-model="genInfo.title"
-                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
-              />
-            </div>
-            <div class="stepC mt-6">
-              <label for="business-name" class="ml-4">Business name</label>
-              <input
-                id="business-name"
-                spellcheck="false"
-                type="text"
-                v-model="genInfo.biz"
-                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
-              />
-            </div>
-            <div class="stepC mt-6">
-              <label for="business-description" class="ml-4"
-                >Business description
-              </label>
-              <textarea
-                id="business-description"
-                :value="genInfo.desc"
-                @input="genInfo.desc = $event.target.value"
-                class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="4"
-              ></textarea>
-            </div>
-            <div class="stepC relative mt-6">
-              <label for="pgp-public-key" class="flex justify-between ml-4"
-                >Public key<span
-                  v-if="genInfo.key"
-                  class="mr-4"
-                  :class="pubKeyIsValid ? 'text-green-600' : 'text-orange-600'"
-                  >{{ pubKeyIsValid ? '' : 'Invalid schema' }}</span
-                >
-              </label>
-              <textarea
-                id="pgp-public-key"
-                v-model="genInfo.key"
-                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="4"
-                spellcheck="false"
-                placeholder="Paste PGP PUBLIC KEY BLOCK here"
-              ></textarea>
-            </div>
-            <div class="stepC relative mt-6">
-              <label for="pgp-fingerprint" class="flex justify-between ml-4"
-                >Public key fingerprint<span
-                  v-if="genInfo.fp"
-                  class="mr-4"
-                  :class="
-                    fingerprintIsValid ? 'text-green-600' : 'text-orange-600'
-                  "
-                  >{{ fingerprintIsValid ? '' : 'Invalid fingerprint' }}</span
-                >
-              </label>
-              <input
-                id="pgp-fingerprint"
-                spellcheck="false"
-                type="text"
-                v-model="genInfo.fp"
-                class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
-                placeholder="Paste 40 character fingerprint here"
-              />
-            </div>
+        </div>
+        <div id="step-2" class="mt-16">
+          <h2 class="font-extrabold text-2xl">General information</h2>
+          <div class="stepC mt-6">
+            <label for="fullname" class="ml-4">Full name</label>
+            <input
+              id="fullname"
+              spellcheck="false"
+              type="text"
+              v-model="genInfo.name"
+              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+            />
           </div>
-          <div id="step-3" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Primary actions</h2>
+          <div class="stepC mt-6">
+            <label for="job-title" class="ml-4">Job title</label>
+            <input
+              id="job-title"
+              type="text"
+              spellcheck="true"
+              v-model="genInfo.title"
+              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+            />
+          </div>
+          <div class="stepC mt-6">
+            <label for="business-name" class="ml-4">Business name</label>
+            <input
+              id="business-name"
+              spellcheck="false"
+              type="text"
+              v-model="genInfo.biz"
+              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+            />
+          </div>
+          <div class="stepC mt-6">
+            <label for="business-description" class="ml-4"
+              >Business description
+            </label>
+            <textarea
+              id="business-description"
+              :value="genInfo.desc"
+              @input="genInfo.desc = $event.target.value"
+              class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              rows="4"
+            ></textarea>
+          </div>
+          <div class="stepC relative mt-6">
+            <label for="pgp-public-key" class="flex justify-between ml-4"
+              >Public key<span
+                v-if="genInfo.key"
+                class="mr-4"
+                :class="pubKeyIsValid ? 'text-green-600' : 'text-orange-600'"
+                >{{ pubKeyIsValid ? '' : 'Invalid schema' }}</span
+              >
+            </label>
+            <textarea
+              id="pgp-public-key"
+              v-model="genInfo.key"
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              rows="4"
+              spellcheck="false"
+              placeholder="Paste PGP PUBLIC KEY BLOCK here"
+            ></textarea>
+          </div>
+          <div class="stepC relative mt-6">
+            <label for="pgp-fingerprint" class="flex justify-between ml-4"
+              >Public key fingerprint<span
+                v-if="genInfo.fp"
+                class="mr-4"
+                :class="
+                  fingerprintIsValid ? 'text-green-600' : 'text-orange-600'
+                "
+                >{{ fingerprintIsValid ? '' : 'Invalid fingerprint' }}</span
+              >
+            </label>
+            <input
+              id="pgp-fingerprint"
+              spellcheck="false"
+              type="text"
+              v-model="genInfo.fp"
+              class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              placeholder="Paste 40 character fingerprint here"
+            />
+          </div>
+        </div>
+        <div id="step-3" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Primary actions</h2>
+          <draggable
+            v-model="primaryActions"
+            handle=".drag"
+            animation="1"
+            ghostClass="ghost"
+          >
             <transition-group type="transition" name="list">
               <Action
                 v-for="(item, index) in primaryActions"
@@ -223,30 +228,40 @@
                 :removeAction="removeAction"
               />
             </transition-group>
+          </draggable>
 
-            <div class="stepC actions mt-6">
-              <button
-                v-for="(action, index) in actions.primaryActions"
-                :key="index"
-                @click="addAction('primaryActions', index)"
-                class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
-                :style="{
-                  backgroundColor: `${colors.buttonBg.color}`,
-                }"
-                :title="
-                  action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
-                "
-                :aria-label="action.name"
-              >
-                <div
-                  class="w-6 h-6 action"
-                  v-html="require(`~/assets/icons/${action.name}.svg?include`)"
-                ></div>
-              </button>
-            </div>
+          <div
+            class="stepC actions mt-6 border-gray-800"
+            :class="{ 'border-t pt-6': primaryActions.length }"
+          >
+            <button
+              v-for="(action, index) in actions.primaryActions"
+              :key="index"
+              @click="addAction('primaryActions', index)"
+              class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
+              :style="{
+                backgroundColor: `${colors.buttonBg.color}`,
+              }"
+              :title="
+                action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
+              "
+              :aria-label="action.name"
+            >
+              <div
+                class="w-6 h-6 action"
+                v-html="require(`~/assets/icons/${action.name}.svg?include`)"
+              ></div>
+            </button>
           </div>
-          <div id="step-4" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Secondary actions</h2>
+        </div>
+        <div id="step-4" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Secondary actions</h2>
+          <draggable
+            v-model="secondaryActions"
+            handle=".drag"
+            animation="1"
+            ghostClass="ghost"
+          >
             <transition-group type="transition" name="list">
               <Action
                 v-for="(item, index) in secondaryActions"
@@ -256,29 +271,36 @@
                 :item="item"
                 :index="index"
                 :removeAction="removeAction"
-              />
-            </transition-group>
-            <div class="stepC actions mt-6">
-              <button
-                v-for="(action, index) in actions.secondaryActions"
-                :key="index"
-                @click="addAction('secondaryActions', index)"
-                class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
-                :style="{ backgroundColor: action.color }"
-                :title="
-                  action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
-                "
-              >
-                <div
-                  class="w-6 h-6"
-                  v-html="require(`~/assets/icons/${action.name}.svg?include`)"
-                ></div>
-              </button>
-            </div>
+              /> </transition-group
+          ></draggable>
+          <div class="stepC actions mt-6 border-gray-800"
+          :class="{ 'border-t pt-6': secondaryActions.length }">
+            <button
+              v-for="(action, index) in actions.secondaryActions"
+              :key="index"
+              @click="addAction('secondaryActions', index)"
+              class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
+              :style="{ backgroundColor: action.color }"
+              :title="
+                action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
+              "
+            >
+              <div
+                class="w-6 h-6"
+                v-html="require(`~/assets/icons/${action.name}.svg?include`)"
+              ></div>
+            </button>
           </div>
-          <div id="step-5" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Featured content</h2>
-            <div class="stepC">
+        </div>
+        <div id="step-5" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Featured content</h2>
+          <div class="stepC">
+            <draggable
+              v-model="featured"
+              handle=".drag"
+              animation="1"
+              ghostClass="ghost"
+            >
               <transition-group type="transition" name="list">
                 <Featured
                   v-for="(content, index) in featured"
@@ -289,143 +311,142 @@
                   label="Attach content"
                   mimetypes="image/jpeg, image/png, audio/mpeg, video/mp4, video/webm, application/pdf"
                   :showAlert="showAlert"
-                />
-              </transition-group>
+                /> </transition-group
+            ></draggable>
 
-              <div class="flex mt-6">
-                <div class="flex flex-wrap items-center">
-                  <button
-                    class="p-3 rounded bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
-                    @click="addFeature()"
-                    aria-label="Add section"
-                  >
-                    <div
-                      class="w-6 h-6"
-                      v-html="require(`~/assets/icons/add.svg?include`)"
-                    ></div>
-                  </button>
-                  <p class="ml-3 leading-none">Add section</p>
-                </div>
-              </div>
-              <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
-                Supported media file formats: jpeg, png, mp3, mp4, webm and pdf
-              </p>
-            </div>
-          </div>
-          <div id="step-6" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Enable footer credit?</h2>
-            <div class="stepC mt-6">
-              <div class="flex items-center">
-                <div
-                  class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
-                  :class="{
-                    'bg-green-600 hover:bg-green-500 focus:bg-green-500': footerCredit,
-                  }"
-                  tabindex="0"
-                  @click="footerCredit = !footerCredit"
-                  @keypress.space.enter.prevent="footerCredit = !footerCredit"
+            <div class="flex mt-6">
+              <div class="flex flex-wrap items-center">
+                <button
+                  class="p-3 rounded bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+                  @click="addFeature()"
+                  aria-label="Add section"
                 >
-                  <transition name="slide">
-                    <input
-                      type="checkbox"
-                      name="toggle"
-                      aria-label="Toggle footer credit"
-                      id="toggle"
-                      v-model="footerCredit"
-                      class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
-                      tabindex="-1"
-                    />
-                  </transition>
-                </div>
-                <p>{{ footerCredit ? 'Yes, for sure!' : 'No, thanks' }}</p>
+                  <div
+                    class="w-6 h-6"
+                    v-html="require(`~/assets/icons/add.svg?include`)"
+                  ></div>
+                </button>
+                <p class="ml-3 leading-none">Add section</p>
               </div>
-              <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
-                Footer credit lets others to use this Service. You can support
-                this project by enabling the footer credit.
-              </p>
-            </div>
-          </div>
-          <div id="step-7" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Themes (coming soon)</h2>
-            <div class="stepC mt-3 flex flex-wrap">
-              <button
-                class="w-12 h-12 rounded mt-3 mr-3 bg-green-600 hover:bg-green-500 focus:bg-green-500 font-extrabold focus:outline-none transition-colors duration-200"
-              >
-                T1
-              </button>
-              <button
-                class="w-12 h-12 rounded mt-3 mr-3 text-black bg-gray-700 font-extrabold focus:outline-none transition-colors duration-200 cursor-default"
-              >
-                T2
-              </button>
-            </div>
-          </div>
-          <div id="step-8" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Colour customisation</h2>
-            <div class="stepC">
-              <Colour name="logoBg" label="Logo background" :colors="colors" />
-              <Colour name="mainBg" label="Main background" :colors="colors" />
-              <Colour
-                name="buttonBg"
-                label="Button background"
-                :colors="colors"
-              />
-              <Colour name="cardBg" label="Card background" :colors="colors" />
-            </div>
-          </div>
-          <div id="step-9" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Fonts</h2>
-            <div class="stepC mt-6">
-              <label for="font-link" class="ml-4">Web font embed code</label>
-              <textarea
-                id="font-link"
-                v-model="genInfo.fontLink"
-                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="4"
-                spellcheck="false"
-                :placeholder="`Eg.: <link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
-              ></textarea>
-            </div>
-            <div class="stepC mt-6">
-              <label for="font-css" class="ml-4">Web font CSS rule</label>
-              <input
-                spellcheck="false"
-                type="text"
-                id="font-css"
-                v-model="genInfo.fontCss"
-                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                :placeholder="`Eg.: font-family: 'Poppins', sans-serif;`"
-              />
             </div>
             <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
-              Supports services such as Google Fonts, Adobe Typekit, etc. Make
-              sure to get the embed link for both regular and bold font variants
-              from the same font family.
+              Supported media file formats: jpeg, png, mp3, mp4, webm and pdf
             </p>
           </div>
-          <div id="step-10" class="mt-16">
-            <h2 class="font-extrabold text-2xl">Analytics</h2>
-            <div class="stepC mt-6">
-              <textarea
-                id="pgp-public-key"
-                v-model="genInfo.tracker"
-                class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-                rows="4"
-                spellcheck="false"
-                placeholder="Paste tracking code here"
-              ></textarea>
-              <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
-                Supports services such as Clicky, Matomo, Google Analytics etc.
-              </p>
-            </div>
-          </div>
-          <Download
-            :downloadCheckList="downloadCheckList"
-            :downloadChecked="downloadChecked"
-            :downloadPackage="downloadPackage"
-          />
-          <Help />
         </div>
+        <div id="step-6" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Enable footer credit?</h2>
+          <div class="stepC mt-6">
+            <div class="flex items-center">
+              <div
+                class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
+                :class="{
+                  'bg-green-600 hover:bg-green-500 focus:bg-green-500': footerCredit,
+                }"
+                tabindex="0"
+                @click="footerCredit = !footerCredit"
+                @keypress.space.enter.prevent="footerCredit = !footerCredit"
+              >
+                <transition name="slide">
+                  <input
+                    type="checkbox"
+                    name="toggle"
+                    aria-label="Toggle footer credit"
+                    id="toggle"
+                    v-model="footerCredit"
+                    class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
+                    tabindex="-1"
+                  />
+                </transition>
+              </div>
+              <p>{{ footerCredit ? 'Yes, for sure!' : 'No, thanks' }}</p>
+            </div>
+            <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              Footer credit lets others to use this Service. You can support
+              this project by enabling the footer credit.
+            </p>
+          </div>
+        </div>
+        <div id="step-7" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Themes (coming soon)</h2>
+          <div class="stepC mt-3 flex flex-wrap">
+            <button
+              class="w-12 h-12 rounded mt-3 mr-3 bg-green-600 hover:bg-green-500 focus:bg-green-500 font-extrabold focus:outline-none transition-colors duration-200"
+            >
+              T1
+            </button>
+            <button
+              class="w-12 h-12 rounded mt-3 mr-3 text-black bg-gray-700 font-extrabold focus:outline-none transition-colors duration-200 cursor-default"
+            >
+              T2
+            </button>
+          </div>
+        </div>
+        <div id="step-8" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Colour customisation</h2>
+          <div class="stepC">
+            <Colour name="logoBg" label="Logo background" :colors="colors" />
+            <Colour name="mainBg" label="Main background" :colors="colors" />
+            <Colour
+              name="buttonBg"
+              label="Button background"
+              :colors="colors"
+            />
+            <Colour name="cardBg" label="Card background" :colors="colors" />
+          </div>
+        </div>
+        <div id="step-9" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Fonts</h2>
+          <div class="stepC mt-6">
+            <label for="font-link" class="ml-4">Web font embed code</label>
+            <textarea
+              id="font-link"
+              v-model="genInfo.fontLink"
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              rows="4"
+              spellcheck="false"
+              :placeholder="`Eg.: <link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
+            ></textarea>
+          </div>
+          <div class="stepC mt-6">
+            <label for="font-css" class="ml-4">Web font CSS rule</label>
+            <input
+              spellcheck="false"
+              type="text"
+              id="font-css"
+              v-model="genInfo.fontCss"
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              :placeholder="`Eg.: font-family: 'Poppins', sans-serif;`"
+            />
+          </div>
+          <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+            Supports services such as Google Fonts, Adobe Typekit, etc. Make
+            sure to get the embed link for both regular and bold font variants
+            from the same font family.
+          </p>
+        </div>
+        <div id="step-10" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Analytics</h2>
+          <div class="stepC mt-6">
+            <textarea
+              id="pgp-public-key"
+              v-model="genInfo.tracker"
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              rows="4"
+              spellcheck="false"
+              placeholder="Paste tracking code here"
+            ></textarea>
+            <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              Supports services such as Clicky, Matomo, Google Analytics etc.
+            </p>
+          </div>
+        </div>
+        <Download
+          :downloadCheckList="downloadCheckList"
+          :downloadChecked="downloadChecked"
+          :downloadPackage="downloadPackage"
+        />
+        <Help />
       </div>
       <div
         id="preview-container"
@@ -503,6 +524,8 @@ import Cropper from '@/components/Cropper'
 
 import Vcard from '@/components/Vcard'
 import JSZip from 'jszip'
+import draggable from 'vuedraggable'
+
 import { saveAs } from 'file-saver'
 import QRCode from '!!raw-loader!~/static/qrcode.min.js'
 import Theme1 from '!!raw-loader!~/assets/styles/T1.min.css'
@@ -519,6 +542,7 @@ export default {
     Help,
     Footer,
     Vcard,
+    draggable,
   },
 
   data() {

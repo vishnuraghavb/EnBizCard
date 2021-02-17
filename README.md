@@ -4,7 +4,7 @@
 <!-- <h3 align="center">Your Website Can Host Your Digital Business Cards for FREE!</h3> -->
 <h3 align="center">Why Pay When Your Digital Business Cards Can Be Hosted on Your Website for Free!</h3>
 <p align="center">EnBizCard helps you create interactive and responsive HTML-based digital business cards that can be hosted with your website.</p>
-<h3 align="center"><a href="https://enbizcard.vercel.app">Open Website</a></h3>
+<h3 align="center"><a href="https://enbizcard.vercel.app">Open App</a> | <a href="https://enbizcard.vercel.app">View demo</a></h3>
 
 ---
 

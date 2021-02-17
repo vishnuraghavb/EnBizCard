@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center mt-2">
     <button
-      class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
+      class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
       tabindex="-1"
     >
       <div

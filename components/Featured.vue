@@ -2,6 +2,15 @@
   <div class="flex flex-col w-full mt-6 bg-gray-800 rounded">
     <div class="flex justify-between">
       <div class="flex items-center w-full">
+        <button
+          class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
+          tabindex="-1"
+        >
+          <div
+            class="w-6 h-6"
+            v-html="require(`~/assets/icons/drag.svg?include`)"
+          ></div>
+        </button>
         <div class="w-full">
           <input
             class="px-4 w-full h-12 bg-transparent placeholder-gray-600 transition-colors duration-200 border-b border-black focus:outline-none focus:border-gray-500 hover:border-gray-500"
@@ -26,7 +35,8 @@
       </button>
     </div>
     <draggable
-      v-model="featured[index].content"
+      group="featured"
+      :list="featured[index].content"
       class="mt-4"
       handle=".drag"
       animation="1"
@@ -39,7 +49,7 @@
             v-if="item.contentType == 'media'"
           >
             <button
-              class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
+              class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
               tabindex="-1"
             >
               <div
@@ -95,7 +105,7 @@
             v-else-if="item.contentType == 'text'"
           >
             <button
-              class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
+              class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
               tabindex="-1"
             >
               <div
@@ -128,7 +138,7 @@
           </div>
           <div class="flex items-center mt-2" v-else>
             <button
-              class="p-1 m-2 flex-shrink-0 focus:outline-none drag cursor-move"
+              class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
               tabindex="-1"
             >
               <div

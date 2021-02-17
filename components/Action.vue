@@ -1,5 +1,14 @@
 <template>
   <div class="stepC flex mt-6">
+    <button
+      class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
+      tabindex="-1"
+    >
+      <div
+        class="w-6 h-6"
+        v-html="require(`~/assets/icons/drag.svg?include`)"
+      ></div>
+    </button>
     <div
       class="p-3 flex-shrink-0 mr-3 rounded-full"
       :style="{
