@@ -41,6 +41,7 @@
         <br /><a
           class="inline-block font-extrabold tracking-wide leading-none flex-shrink-0 p-3 text-white bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 mt-4"
           href="https://www.vishnuraghav.com/donate/"
+          rel="noreferrer"
           target="_blank"
           >Donate</a
         >

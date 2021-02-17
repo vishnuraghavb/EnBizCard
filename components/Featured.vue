@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full mt-6 bg-gray-800 rounded">
     <div class="flex justify-between">
       <div class="flex items-center w-full">
-        <button
+        <div
           class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
           tabindex="-1"
         >
@@ -10,7 +10,7 @@
             class="w-6 h-6"
             v-html="require(`~/assets/icons/drag.svg?include`)"
           ></div>
-        </button>
+        </div>
         <div class="w-full">
           <input
             class="px-4 w-full h-12 bg-transparent placeholder-gray-600 transition-colors duration-200 border-b border-black focus:outline-none focus:border-gray-500 hover:border-gray-500"

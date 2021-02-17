@@ -64,37 +64,40 @@
                   Use my public key to send me encrypted messages
                 </p>
                 <a
-                  :href="PreviewMode ? '' : `${genInfo.name}'s public key.asc`"
+                  :href="!PreviewMode && `./${genInfo.name}'s public key.asc`"
                   download
                   target="_blank"
                   id="dlKey"
+                  rel="noreferrer"
                   @click.prevent.capture="downloadKey()"
                   :style="{
                     backgroundColor: `${colors.buttonBg.color}`,
                   }"
                   tabindex="-1"
-                  ><div
+                >
+                  <div
                     class="icon action"
                     v-html="require(`~/assets/icons/download.svg?include`)"
                   ></div>
-                  <span class="action">Download Key</span></a
-                >
+                  <span class="action">Download Key</span>
+                </a>
               </div>
               <div id="copyView" ref="copyView">
                 <p class="text">
                   Copy and send the URL to share my Business Card
                 </p>
-                <a
+                <button
                   id="copyURL"
                   :style="{
                     backgroundColor: `${colors.buttonBg.color}`,
                   }"
-                  ><div
+                >
+                  <div
                     class="icon action"
                     v-html="require(`~/assets/icons/copy.svg?include`)"
                   ></div>
-                  <span class="action">Copy URL</span></a
-                >
+                  <span class="action">Copy URL</span>
+                </button>
               </div>
               <div id="qrView" ref="qrView">
                 <div id="qr"></div>
@@ -192,8 +195,9 @@
               </div>
               <div id="cta">
                 <a
-                  id="dlVcard"
-                  :href="PreviewMode ? '' : `${username}.vcf`"
+                  id="vcard"
+                  rel="noreferrer"
+                  :href="!PreviewMode && `${username}.vcf`"
                   download
                   target="_blank"
                   :style="{ backgroundColor: `${colors.buttonBg.color}` }"
@@ -509,6 +513,8 @@ export default {
     align-items: center;
     border-radius: 5rem;
     padding: 0.75rem 1.5rem;
+    border: none;
+    outline: none;
     cursor: pointer;
     span {
       margin-left: 0.5rem;
@@ -646,7 +652,7 @@ export default {
     justify-content: center;
     width: 100%;
   }
-  #dlVcard {
+  #vcard {
     display: flex;
     align-items: center;
     border-radius: 5rem;

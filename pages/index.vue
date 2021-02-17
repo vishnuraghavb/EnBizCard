@@ -61,6 +61,7 @@
           class="font-extrabold tracking-wide leading-none flex-shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
           href="https://www.vishnuraghav.com/donate"
           target="_blank"
+          rel="noreferrer"
           >Donate</a
         >
       </div>
@@ -273,8 +274,10 @@
                 :removeAction="removeAction"
               /> </transition-group
           ></draggable>
-          <div class="stepC actions mt-6 border-gray-800"
-          :class="{ 'border-t pt-6': secondaryActions.length }">
+          <div
+            class="stepC actions mt-6 border-gray-800"
+            :class="{ 'border-t pt-6': secondaryActions.length }"
+          >
             <button
               v-for="(action, index) in actions.secondaryActions"
               :key="index"
@@ -429,7 +432,8 @@
           <h2 class="font-extrabold text-2xl">Analytics</h2>
           <div class="stepC mt-6">
             <textarea
-              id="pgp-public-key"
+              id="tracking-code"
+              aria-label="tracking-code"
               v-model="genInfo.tracker"
               class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               rows="4"

@@ -11,8 +11,10 @@
         "
         type="checkbox"
         :id="'check' + index"
+        aria-label="checkbox"
       />
       <img
+        alt="checkmark"
         src="~/assets/icons/check.svg"
         class="absolute top-0 left-0 m-3 z-10 pointer-events-none select-none transition-opacity duration-200"
         :class="item.checked ? 'opacity-100' : 'opacity-20'"
