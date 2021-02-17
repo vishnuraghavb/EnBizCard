@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "HOST=192.168.1.7 nuxt",
     "build": "nuxt build",
-    "export": "nuxt export",
-    "generate": "nuxt build && nuxt export"
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@aceforth/nuxt-optimized-images": "^1.4.0",
@@ -25,13 +25,10 @@
     "@nuxtjs/tailwindcss": "^3.4.2",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9.8.6",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.3.1",
     "imagemin-svgo": "^8.0.0",
     "node-sass": "^4.14.1",
     "pdfjs-dist": "^2.6.347",
     "postcss": "^7.0.35",
-    "prettier": "^2.2.1",
     "raw-loader": "^4.0.2",
     "sass-loader": "^9.0.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
