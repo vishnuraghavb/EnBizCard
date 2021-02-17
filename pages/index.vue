@@ -455,12 +455,10 @@
       <div
         id="preview-container"
         class="relative w-full mt-20 sm:mt-0 hidden md:block"
-        tabindex="-1"
       >
         <div
           id="preview"
           class="flex flex-col items-center justify-center sm:sticky sm:top-0 md:mx-6 lg:mx-12"
-          tabindex="-1"
         >
           <div id="device" class="bg-black rounded sm:mt-10">
             <h2 class="text-center py-4 font-extrabold text-gray-200">
