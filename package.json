@@ -30,7 +30,7 @@
     "pdfjs-dist": "^2.6.347",
     "postcss": "^7.0.35",
     "raw-loader": "^4.0.2",
-    "sass-loader": "^9.0.3",
+    "sass-loader": "^10.1.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   }
 }
