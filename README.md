@@ -9,16 +9,15 @@
 ---
 
 <p align="center">
-<a href="https://www.gnu.org/licenses/agpl-3.0" alt="License: GPLv3"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue"></a> <a href="https://github.com/vishnuraghavb/enbizcard/issues" alt="GitHub issues"><img src="https://img.shields.io/github/issues/vishnuraghavb/enbizcard?label=Issues"></a> <a href="https://liberapay.com/vishnuraghavb/donate" alt="Translation Status"><img src="https://img.shields.io/liberapay/patrons/vishnuraghavb.svg?logo=liberapay"></a> <a href="https://www.vishnuraghav.com/donate" alt="Donate"><img src="https://img.shields.io/badge/Donate%20to-Vishnu%20Raghav-brightgreen"></a></p>
+<a href="https://www.gnu.org/licenses/agpl-3.0" alt="License: GPLv3"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue"></a> <a href="https://github.com/vishnuraghavb/EnBizCard/issues" alt="GitHub issues"><img src="https://img.shields.io/github/issues/vishnuraghavb/EnBizCard?label=Issues"></a> <a href="https://liberapay.com/vishnuraghavb/donate" alt="Translation Status"><img src="https://img.shields.io/liberapay/patrons/vishnuraghavb.svg?logo=liberapay"></a> <a href="https://www.vishnuraghav.com/donate" alt="Donate"><img src="https://img.shields.io/badge/Donate%20to-Vishnu%20Raghav-brightgreen"></a></p>
 
 ---
 
 ## Goals
 
-- Easily create digital business cards
+- Minimize the cost of paying third-party services to host your digital business cards
 - Elegant design and functionality
 - Quick and easy setup
-- Discourage paper business cards and save trees
 
 ## Features
 
@@ -41,7 +40,7 @@
 
 ## Future
 
-Check out the [roadmap](https://github.com/vishnuraghavb/enbizcard/projects/1) to see the upcoming features of Digital Business Card Generator.
+Check out the [roadmap](https://github.com/vishnuraghavb/EnBizCard/projects/1) to see the upcoming features of Digital Business Card Generator.
 
 Your feedback and suggestions are very important. If you have an idea to improve Digital Business Card Generator, [do let me know](#having-issues-suggestions-and-feedback). I'm always open to ideas ;)
 
@@ -49,25 +48,22 @@ Your feedback and suggestions are very important. If you have an idea to improve
 
 You can,
 
-- [Create an issue here](https://github.com/vishnuraghavb/enbizcard/issues)
+- [Create an issue here](https://github.com/vishnuraghavb/EnBizCard/issues)
 - [Join the Telegram group](http://t.me/enbizcard) (quicker replies and best for discussion)
 - Contact me at apps@vishnuraghav.com
 
 ## Assets
 
 - [Boxicons](https://boxicons.com/)
-- [Feather](https://feathericons.com)
+- [Feather icons](https://feathericons.com)
 - Logo and some icons by [Vishnu Raghav](https://www.vishnuraghav.com/)
-
-### External scripts
-
 - [QRCode-SVG](https://github.com/papnkukn/qrcode-svg)
 
 ## License
 
 ```
 EnBizCard - An Open-Source Digital Business Card Generator
-Copyright (C) 2020  Vishnu Raghav B
+Copyright (C) 2021  Vishnu Raghav B
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
