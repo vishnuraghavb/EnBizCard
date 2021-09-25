@@ -23,11 +23,8 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.2.1",
-    "@tailwindcss/postcss7-compat": "^2.0.3",
     "node-sass": "^5.0.0",
-    "pdfjs-dist": "^2.6.347",
     "raw-loader": "^4.0.2",
-    "sass-loader": "^10.1.1",
-    "worker-loader": "^3.0.8"
+    "sass-loader": "^10.1.1"
   }
 }

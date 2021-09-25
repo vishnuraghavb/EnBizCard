@@ -182,7 +182,7 @@
                     <div
                       class="icon action"
                       v-html="
-                        require(`~/assets/icons/${item.name}.svg?include`)
+                        require(`~/assets/icons/${item.icon}.svg?include`)
                       "
                     ></div>
                   </a>
@@ -229,7 +229,7 @@
                     <div
                       class="icon"
                       v-html="
-                        require(`~/assets/icons/${item.name}.svg?include`)
+                        require(`~/assets/icons/${item.icon}.svg?include`)
                       "
                     ></div>
                   </a>

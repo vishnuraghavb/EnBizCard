@@ -13,7 +13,19 @@
         </div>
         <div class="w-full">
           <input
-            class="px-4 w-full h-12 bg-transparent placeholder-gray-600 transition-colors duration-200 border-b border-black focus:outline-none focus:border-gray-500 hover:border-gray-500"
+            class="
+              px-4
+              w-full
+              h-12
+              bg-transparent
+              placeholder-gray-600
+              transition-colors
+              duration-200
+              border-b border-black
+              focus:outline-none
+              focus:border-gray-500
+              hover:border-gray-500
+            "
             type="text"
             name="section title"
             placeholder="Section title"
@@ -23,7 +35,17 @@
         </div>
       </div>
       <button
-        class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+        class="
+          p-1
+          m-2
+          flex-shrink-0
+          focus:outline-none
+          rounded
+          hover:bg-gray-700
+          focus:bg-gray-700
+          transition-colors
+          duration-200
+        "
         @click="featured.splice(index, 1)"
         aria-label="Remove section"
         title="Remove section"
@@ -71,7 +93,21 @@
             />
             <a
               v-else
-              class="w-12 h-12 mr-3 bg-gray-900 flex items-center justify-center text-center text-xs rounded flex-shrink-0 leading-none select-none cursor-pointer"
+              class="
+                w-12
+                h-12
+                mr-3
+                bg-gray-900
+                flex
+                items-center
+                justify-center
+                text-center text-xs
+                rounded
+                flex-shrink-0
+                leading-none
+                select-none
+                cursor-pointer
+              "
               target="_blank"
               href="https://duckduckgo.com/?q=Add+ID3+tags+to+mp3+file"
             >
@@ -80,7 +116,18 @@
             <!-- prettier-ignore -->
             <p class="w-full leading-none whitespace-pre overflow-x-hidden">{{ item.name }}</p>
             <button
-              class="p-1 m-2 self-end flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              class="
+                p-1
+                m-2
+                self-end
+                flex-shrink-0
+                focus:outline-none
+                rounded
+                hover:bg-gray-700
+                focus:bg-gray-700
+                transition-colors
+                duration-200
+              "
               @click="removeItem(i)"
               aria-label="Remove media"
               title="Remove media"
@@ -115,7 +162,22 @@
             </button>
             <div class="w-full">
               <textarea
-                class="block px-4 py-3 w-full bg-black rounded border border-transparent placeholder-gray-600 transition-colors duration-200 focus:outline-none focus:border-gray-500 resize-none hover:border-gray-500"
+                class="
+                  block
+                  px-4
+                  py-3
+                  w-full
+                  bg-black
+                  rounded
+                  border border-transparent
+                  placeholder-gray-600
+                  transition-colors
+                  duration-200
+                  focus:outline-none
+                  focus:border-gray-500
+                  resize-none
+                  hover:border-gray-500
+                "
                 ref="text"
                 aria-label="Type text content here"
                 title="Type text content here"
@@ -125,7 +187,17 @@
               ></textarea>
             </div>
             <button
-              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              class="
+                p-1
+                m-2
+                flex-shrink-0
+                focus:outline-none
+                rounded
+                hover:bg-gray-700
+                focus:bg-gray-700
+                transition-colors
+                duration-200
+              "
               @click="removeItem(i)"
               aria-label="Remove text"
               title="Remove text"
@@ -148,7 +220,20 @@
             </button>
             <div class="w-full">
               <input
-                class="px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
+                class="
+                  px-4
+                  w-full
+                  h-12
+                  bg-black
+                  placeholder-gray-600
+                  rounded
+                  border border-transparent
+                  transition-colors
+                  duration-200
+                  focus:outline-none
+                  focus:border-gray-500
+                  hover:border-gray-500
+                "
                 ref="link"
                 type="text"
                 aria-label="Paste HTML embed link here"
@@ -158,7 +243,17 @@
               />
             </div>
             <button
-              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              class="
+                p-1
+                m-2
+                flex-shrink-0
+                focus:outline-none
+                rounded
+                hover:bg-gray-700
+                focus:bg-gray-700
+                transition-colors
+                duration-200
+              "
               @click="removeItem(i)"
               aria-label="Remove field"
               title="Remove field"
@@ -177,7 +272,20 @@
       :class="{ 'mt-4': hasContent }"
     >
       <button
-        class="flex sm:flex-col items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+        class="
+          flex
+          sm:flex-col
+          items-center
+          p-3
+          rounded
+          cursor-pointer
+          bg-gray-700
+          hover:bg-gray-600
+          focus:bg-gray-600
+          transition-colors
+          duration-200
+          focus:outline-none
+        "
         @click="attachMedia()"
         aria-label="Attach media"
         :class="
@@ -202,7 +310,20 @@
         <p class="sm:mt-2 leading-none pointer-events-none">Attach media</p>
       </button>
       <button
-        class="flex sm:flex-col items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+        class="
+          flex
+          sm:flex-col
+          items-center
+          p-3
+          rounded
+          cursor-pointer
+          bg-gray-700
+          hover:bg-gray-600
+          focus:bg-gray-600
+          transition-colors
+          duration-200
+          focus:outline-none
+        "
         @click="addText()"
         aria-label="Add text"
       >
@@ -213,7 +334,20 @@
         <p class="sm:mt-2 leading-none">Add text</p>
       </button>
       <button
-        class="flex sm:flex-col items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+        class="
+          flex
+          sm:flex-col
+          items-center
+          p-3
+          rounded
+          cursor-pointer
+          bg-gray-700
+          hover:bg-gray-600
+          focus:bg-gray-600
+          transition-colors
+          duration-200
+          focus:outline-none
+        "
         @click="addLink()"
         aria-label="Embed link"
       >
@@ -224,7 +358,20 @@
         <p class="sm:mt-2 leading-none">Embed link</p>
       </button>
       <button
-        class="flex sm:flex-col items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+        class="
+          flex
+          sm:flex-col
+          items-center
+          p-3
+          rounded
+          cursor-pointer
+          bg-gray-700
+          hover:bg-gray-600
+          focus:bg-gray-600
+          transition-colors
+          duration-200
+          focus:outline-none
+        "
         @click="addProduct()"
         aria-label="Add product"
       >
@@ -241,8 +388,8 @@
 <script>
 import { convertFileToBuffer } from 'id3-parser/lib/universal/helpers'
 import { parse } from 'id3-parser'
-const pdfjs = require('pdfjs-dist/build/pdf.min')
-const pdfjsWorker = require('pdfjs-dist/build/pdf.worker.entry')
+const pdfjs = require('~/assets/scripts/pdfjs-dist')
+const pdfjsWorker = require('~/assets/scripts/pdfjs-dist/build/pdf.worker.entry')
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
 pdfjs.disableWorker = true
 pdfjs.workerSrc = false

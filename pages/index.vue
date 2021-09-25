@@ -13,14 +13,32 @@
     <transition name="drop">
       <div
         v-if="inView || showPreview"
-        class="fixed top-0 w-full z-30 bg-gray-900 justify-between items-center flex md:hidden"
+        class="
+          fixed
+          top-0
+          w-full
+          z-30
+          bg-gray-900
+          justify-between
+          items-center
+          flex
+          md:hidden
+        "
       >
         <div
           class="logo w-16 m-4"
           v-html="require(`~/assets/icons/logo.svg?include`)"
         ></div>
         <button
-          class="p-3 mx-4 font-extrabold rounded tracking-wide focus:outline-none select-none"
+          class="
+            p-3
+            mx-4
+            font-extrabold
+            rounded
+            tracking-wide
+            focus:outline-none
+            select-none
+          "
           :class="showPreview ? 'bg-gray-700' : 'bg-green-600'"
           @click="!opening && togglePreview()"
         >
@@ -58,7 +76,21 @@
           title="EnBizCard - An Open-Source Digital Business Card Generator"
         ></div>
         <a
-          class="font-extrabold tracking-wide leading-none flex-shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+          class="
+            font-extrabold
+            tracking-wide
+            leading-none
+            flex-shrink-0
+            p-3
+            border-2
+            text-white
+            border-gray-700
+            rounded
+            hover:bg-gray-700
+            focus:bg-gray-700
+            transition-colors
+            duration-200
+          "
           href="https://www.vishnuraghav.com/donate"
           target="_blank"
           rel="noreferrer"
@@ -66,7 +98,14 @@
         >
       </div>
       <h1
-        class="text-3xl md:text-5xl font-extrabold mt-24 md:mt-48 md:leading-tight"
+        class="
+          text-3xl
+          md:text-5xl
+          font-extrabold
+          mt-24
+          md:mt-48
+          md:leading-tight
+        "
       >
         Why Pay When Your Website Can Host Your Digital Business Cards for Free!
       </h1>
@@ -82,13 +121,46 @@
       </ul>
       <div class="mt-4 flex flex-wrap items-center">
         <button
-          class="font-extrabold leading-none text-lg tracking-wide select-none flex-shrink-0 p-5 mt-2 mr-2 text-white bg-green-600 rounded hover:bg-green-500 focus:bg-green-500 transition-colors duration-200 focus:outline-none"
+          class="
+            font-extrabold
+            leading-none
+            text-lg
+            tracking-wide
+            select-none
+            flex-shrink-0
+            p-5
+            mt-2
+            mr-2
+            text-white
+            bg-green-600
+            rounded
+            hover:bg-green-500
+            focus:bg-green-500
+            transition-colors
+            duration-200
+            focus:outline-none
+          "
           @click="create()"
         >
           Create your own
         </button>
         <a
-          class="font-extrabold leading-none text-lg tracking-wide flex-shrink-0 p-5 mt-2 text-white bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
+          class="
+            font-extrabold
+            leading-none
+            text-lg
+            tracking-wide
+            flex-shrink-0
+            p-5
+            mt-2
+            text-white
+            bg-gray-700
+            rounded
+            hover:bg-gray-600
+            focus:bg-gray-600
+            transition-colors
+            duration-200
+          "
           href="/demo"
           target="_blank"
           >View demo</a
@@ -98,7 +170,16 @@
         Read the
         <NuxtLink
           to="/hosting-guide"
-          class="cursor-pointer underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+          class="
+            cursor-pointer
+            underline
+            font-extrabold
+            text-green-600
+            hover:text-green-500
+            focus:text-green-500
+            transition-colors
+            duration-200
+          "
           >Hosting Guide</NuxtLink
         >
       </p>
@@ -135,7 +216,20 @@
               spellcheck="false"
               type="text"
               v-model="genInfo.name"
-              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              class="
+                mt-2
+                px-4
+                w-full
+                h-12
+                bg-black
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                hover:border-gray-600
+              "
             />
           </div>
           <div class="stepC mt-6">
@@ -145,7 +239,20 @@
               type="text"
               spellcheck="true"
               v-model="genInfo.title"
-              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              class="
+                mt-2
+                px-4
+                w-full
+                h-12
+                bg-black
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                hover:border-gray-600
+              "
             />
           </div>
           <div class="stepC mt-6">
@@ -155,7 +262,20 @@
               spellcheck="false"
               type="text"
               v-model="genInfo.biz"
-              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              class="
+                mt-2
+                px-4
+                w-full
+                h-12
+                bg-black
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                hover:border-gray-600
+              "
             />
           </div>
           <div class="stepC mt-6">
@@ -166,7 +286,22 @@
               id="business-description"
               :value="genInfo.desc"
               @input="genInfo.desc = $event.target.value"
-              class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              class="
+                block
+                mt-2
+                px-4
+                py-3
+                w-full
+                bg-black
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                resize-none
+                hover:border-gray-600
+              "
               rows="4"
             ></textarea>
           </div>
@@ -182,7 +317,23 @@
             <textarea
               id="pgp-public-key"
               v-model="genInfo.key"
-              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              class="
+                block
+                mt-2
+                px-4
+                py-3
+                w-full
+                bg-black
+                placeholder-gray-600
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                resize-none
+                hover:border-gray-600
+              "
               rows="4"
               spellcheck="false"
               placeholder="Paste PGP PUBLIC KEY BLOCK here"
@@ -204,7 +355,21 @@
               spellcheck="false"
               type="text"
               v-model="genInfo.fp"
-              class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              class="
+                mt-2
+                px-4
+                w-full
+                h-12
+                bg-black
+                placeholder-gray-600
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                hover:border-gray-600
+              "
               placeholder="Paste 40 character fingerprint here"
             />
           </div>
@@ -239,7 +404,17 @@
               v-for="(action, index) in actions.primaryActions"
               :key="index"
               @click="addAction('primaryActions', index)"
-              class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
+              class="
+                p-3
+                flex-shrink-0
+                rounded-full
+                hover:scale-125
+                focus:scale-125
+                transform
+                transition-transform
+                duration-200
+                focus:outline-none
+              "
               :style="{
                 backgroundColor: `${colors.buttonBg.color}`,
               }"
@@ -250,7 +425,7 @@
             >
               <div
                 class="w-6 h-6 action"
-                v-html="require(`~/assets/icons/${action.name}.svg?include`)"
+                v-html="require(`~/assets/icons/${action.icon}.svg?include`)"
               ></div>
             </button>
           </div>
@@ -282,7 +457,17 @@
               v-for="(action, index) in actions.secondaryActions"
               :key="index"
               @click="addAction('secondaryActions', index)"
-              class="p-3 flex-shrink-0 rounded-full hover:scale-125 focus:scale-125 transform transition-transform duration-200 focus:outline-none"
+              class="
+                p-3
+                flex-shrink-0
+                rounded-full
+                hover:scale-125
+                focus:scale-125
+                transform
+                transition-transform
+                duration-200
+                focus:outline-none
+              "
               :style="{ backgroundColor: action.color }"
               :title="
                 action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
@@ -290,7 +475,7 @@
             >
               <div
                 class="w-6 h-6"
-                v-html="require(`~/assets/icons/${action.name}.svg?include`)"
+                v-html="require(`~/assets/icons/${action.icon}.svg?include`)"
               ></div>
             </button>
           </div>
@@ -320,7 +505,16 @@
             <div class="flex mt-6">
               <div class="flex flex-wrap items-center">
                 <button
-                  class="p-3 rounded bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+                  class="
+                    p-3
+                    rounded
+                    bg-gray-700
+                    hover:bg-gray-600
+                    focus:bg-gray-600
+                    transition-colors
+                    duration-200
+                    focus:outline-none
+                  "
                   @click="addFeature()"
                   aria-label="Add section"
                 >
@@ -342,9 +536,28 @@
           <div class="stepC mt-6">
             <div class="flex items-center">
               <div
-                class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
+                class="
+                  relative
+                  group
+                  inline-block
+                  w-24
+                  h-12
+                  mr-3
+                  align-middle
+                  select-none
+                  transition
+                  duration-200
+                  ease-in
+                  bg-gray-700
+                  rounded
+                  hover:bg-gray-600
+                  focus:bg-gray-600
+                  cursor-pointer
+                  focus:outline-none
+                "
                 :class="{
-                  'bg-green-600 hover:bg-green-500 focus:bg-green-500': footerCredit,
+                  'bg-green-600 hover:bg-green-500 focus:bg-green-500':
+                    footerCredit,
                 }"
                 tabindex="0"
                 @click="footerCredit = !footerCredit"
@@ -357,7 +570,22 @@
                     aria-label="Toggle footer credit"
                     id="toggle"
                     v-model="footerCredit"
-                    class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
+                    class="
+                      toggle-switch
+                      absolute
+                      block
+                      w-10
+                      h-10
+                      m-1
+                      rounded
+                      border-4 border-transparent
+                      appearance-none
+                      cursor-pointer
+                      transition-colors
+                      duration-200
+                      focus:outline-none
+                      bg-white
+                    "
                     tabindex="-1"
                   />
                 </transition>
@@ -374,12 +602,38 @@
           <h2 class="font-extrabold text-2xl">Themes (coming soon)</h2>
           <div class="stepC mt-3 flex flex-wrap">
             <button
-              class="w-12 h-12 rounded mt-3 mr-3 bg-green-600 hover:bg-green-500 focus:bg-green-500 font-extrabold focus:outline-none transition-colors duration-200"
+              class="
+                w-12
+                h-12
+                rounded
+                mt-3
+                mr-3
+                bg-green-600
+                hover:bg-green-500
+                focus:bg-green-500
+                font-extrabold
+                focus:outline-none
+                transition-colors
+                duration-200
+              "
             >
               T1
             </button>
             <button
-              class="w-12 h-12 rounded mt-3 mr-3 text-black bg-gray-700 font-extrabold focus:outline-none transition-colors duration-200 cursor-default"
+              class="
+                w-12
+                h-12
+                rounded
+                mt-3
+                mr-3
+                text-black
+                bg-gray-700
+                font-extrabold
+                focus:outline-none
+                transition-colors
+                duration-200
+                cursor-default
+              "
             >
               T2
             </button>
@@ -405,7 +659,23 @@
             <textarea
               id="font-link"
               v-model="genInfo.fontLink"
-              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              class="
+                block
+                mt-2
+                px-4
+                py-3
+                w-full
+                bg-black
+                placeholder-gray-600
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                resize-none
+                hover:border-gray-600
+              "
               rows="4"
               spellcheck="false"
               :placeholder="`<link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
@@ -418,7 +688,23 @@
               type="text"
               id="font-css"
               v-model="genInfo.fontCss"
-              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              class="
+                block
+                mt-2
+                px-4
+                py-3
+                w-full
+                bg-black
+                placeholder-gray-600
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                resize-none
+                hover:border-gray-600
+              "
               :placeholder="`font-family: 'Poppins', sans-serif;`"
             />
           </div>
@@ -435,7 +721,23 @@
               id="tracking-code"
               aria-label="tracking-code"
               v-model="genInfo.tracker"
-              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              class="
+                block
+                mt-2
+                px-4
+                py-3
+                w-full
+                bg-black
+                placeholder-gray-600
+                rounded
+                border border-transparent
+                transition-colors
+                duration-200
+                focus:outline-none
+                focus:border-gray-600
+                resize-none
+                hover:border-gray-600
+              "
               rows="4"
               spellcheck="false"
               placeholder="Paste tracking code here"
@@ -458,7 +760,15 @@
       >
         <div
           id="preview"
-          class="flex flex-col items-center justify-center sm:sticky sm:top-0 md:mx-6 lg:mx-12"
+          class="
+            flex flex-col
+            items-center
+            justify-center
+            sm:sticky
+            sm:top-0
+            md:mx-6
+            lg:mx-12
+          "
         >
           <div id="device" class="bg-black rounded sm:mt-10">
             <h2 class="text-center py-4 font-extrabold text-gray-200">
@@ -467,7 +777,12 @@
             <div id="browserFrame" class="overflow-hidden flex flex-col">
               <div
                 id="topBar"
-                class="topbar border-r-4 border-l-4 border-black bg-gray-900 z-10"
+                class="
+                  topbar
+                  border-r-4 border-l-4 border-black
+                  bg-gray-900
+                  z-10
+                "
               >
                 <div id="searchField" class="p-2 flex items-center">
                   <input
@@ -614,52 +929,68 @@ export default {
       actions: {
         primaryActions: [
           {
-            name: 'call',
+            name: 'Mobile',
+            icon: 'call',
             href: 'tel:',
-            placeholder: '+91 XXXXX XXXXX',
+            placeholder: '+XX XXXXX XXXXX',
             value: null,
             label: 'Phone number',
           },
           {
-            name: 'call',
+            name: 'Work',
+            icon: 'call',
             href: 'tel:',
-            placeholder: '+91 XXXXX XXXXX',
+            placeholder: '+XX XXXXX XXXXX',
             value: null,
             label: 'Phone number',
           },
           {
-            name: 'whatsapp',
+            name: 'Home',
+            icon: 'call',
+            href: 'tel:',
+            placeholder: 'XXXX XXXXXXX',
+            value: null,
+            label: 'Phone number',
+          },
+          {
+            name: 'Whatsapp',
+            icon: 'whatsapp',
             placeholder: 'https://wa.me/userid',
             value: null,
             label: 'WhatsApp profile URL',
           },
           {
-            name: 'telegram',
+            name: 'Telegram',
+            icon: 'telegram',
             placeholder: 'https://t.me/username',
             value: null,
             label: 'Telegram profile URL',
           },
           {
-            name: 'email',
+            name: 'Email',
+            icon: 'email',
             href: 'mailto:',
             placeholder: 'info@example.com',
             value: null,
             label: 'Email address',
           },
           {
-            name: 'website',
+            name: 'Website',
+            icon: 'website',
             placeholder: 'https://example.com',
             value: null,
             label: 'Website URL',
           },
           {
-            name: 'store',
+            name: 'Store',
+            icon: 'store',
             placeholder: 'https://example.com/storeID',
             value: null,
             label: 'Online Store URL',
           },
           {
-            name: 'locate',
+            name: 'Locate',
+            icon: 'locate',
             placeholder: 'https://osm.org/go/location',
             value: null,
             label: 'Map location URL',
@@ -667,228 +998,268 @@ export default {
         ],
         secondaryActions: [
           {
-            name: 'instagram',
+            name: 'Instagram',
+            icon: 'instagram',
             placeholder: 'https://instagram.com/username',
             value: null,
             color: '#405de6',
             label: 'Instagram profile URL',
           },
           {
-            name: 'pixelfed',
+            name: 'Pixelfed',
+            icon: 'pixelfed',
             placeholder: 'https://pixelfed.social/username',
             value: null,
             color: '#8d59a8',
             label: 'Pixelfed profile URL',
           },
           {
-            name: 'facebook',
+            name: 'Facebook',
+            icon: 'facebook',
             placeholder: 'https://facebook.com/pagename',
             value: null,
             color: '#1877f2',
             label: 'Facebook page URL',
           },
           {
-            name: 'diaspora',
+            name: 'Diaspora',
+            icon: 'diaspora',
             placeholder: 'https://diaspora.social/username',
             value: null,
             color: '#000000',
             label: 'Diaspora profile URL',
           },
           {
-            name: 'friendica',
+            name: 'Friendica',
+            icon: 'friendica',
             placeholder: 'https://friendica.social/username',
             value: null,
             color: '#1d6e9a',
             label: 'Friendica profile URL',
           },
           {
-            name: 'twitter',
+            name: 'Twitter',
+            icon: 'twitter',
             placeholder: 'https://twitter.com/username',
             value: null,
             color: '#1da1f2',
             label: 'Twitter profile URL',
           },
           {
-            name: 'mastodon',
+            name: 'Mastodon',
+            icon: 'mastodon',
             placeholder: 'https://mastodon.social/@username',
             value: null,
             color: '#2b90d9',
             label: 'Mastodon profile URL',
           },
           {
-            name: 'linkedin',
+            name: 'LinkedIn',
+            icon: 'linkedin',
             placeholder: 'https://linkedin.com/username',
             value: null,
             color: '#0077b5',
             label: 'Linkedin profile URL',
           },
           {
-            name: 'youtube',
+            name: 'YouTube',
+            icon: 'youtube',
             placeholder: 'https://youtube.com/channelname',
             value: null,
             color: '#ff0000',
             label: 'Youtube channel URL',
           },
           {
-            name: 'vimeo',
+            name: 'Vimeo',
+            icon: 'vimeo',
             placeholder: 'https://vimeo.com/channelname',
             value: null,
             color: '#1ab7ea',
             label: 'Vimeo channel URL',
           },
           {
-            name: 'peertube',
+            name: 'Peertube',
+            icon: 'peertube',
             placeholder: 'https://peertube.video/channelname',
             value: null,
             color: '#ffffff',
             label: 'Peertube channel URL',
           },
           {
-            name: 'pinterest',
+            name: 'Pinterest',
+            icon: 'pinterest',
             placeholder: 'https://pinterest.com/username',
             value: null,
             color: '#bd081c',
             label: 'Pinterest profile URL',
           },
           {
-            name: 'behance',
+            name: 'Behance',
+            icon: 'behance',
             placeholder: 'https://behance.net/username',
             value: null,
             color: '#1769ff',
             label: 'Behance profile URL',
           },
           {
-            name: 'dribbble',
+            name: 'Dribbble',
+            icon: 'dribbble',
             placeholder: 'https://dribbble.com/username',
             value: null,
             color: '#ea4c89',
             label: 'Dribbble profile URL',
           },
           {
-            name: 'reddit',
+            name: 'Reddit',
+            icon: 'reddit',
             placeholder: 'https://reddit.com/username',
             value: null,
             color: '#ff5700',
             label: 'Reddit profile URL',
           },
           {
-            name: 'vk',
+            name: 'VK',
+            icon: 'vk',
             placeholder: 'https://vk.com/pagename',
             value: null,
             color: '#4a76a8',
             label: 'VK page URL',
           },
           {
-            name: 'snapchat',
+            name: 'Snapchat',
+            icon: 'snapchat',
             placeholder: 'https://snapchat.com/username',
             value: null,
             color: '#fffc00',
             label: 'Snapchat profile URL',
           },
           {
-            name: 'tumblr',
+            name: 'Tumblr',
+            icon: 'tumblr',
             placeholder: 'https://username.tumblr.com',
             value: null,
             color: '#2c4762',
             label: 'Tumblr blog URL',
           },
           {
-            name: 'quora',
+            name: 'Quora',
+            icon: 'quora',
             placeholder: 'https://quora.com/username',
             value: null,
             color: '#a82400',
             label: 'Quora profile URL',
           },
           {
-            name: 'medium',
+            name: 'Medium',
+            icon: 'medium',
             placeholder: 'https://medium.com/publication_name',
             value: null,
             color: '#000000',
             label: 'Medium publication',
           },
           {
-            name: 'discord',
+            name: 'Discord',
+            icon: 'discord',
             placeholder: 'https://discord.com/username',
             value: null,
             color: '#7289da',
             label: 'Discord profile URL',
           },
           {
-            name: 'twitch',
+            name: 'Twitch',
+            icon: 'twitch',
             placeholder: 'https://twitch.tv/username',
             value: null,
             color: '#9146ff',
             label: 'Twitch profile URL',
           },
           {
-            name: 'spotify',
+            name: 'Spotify',
+            icon: 'spotify',
             placeholder: 'https://spotify.com/username',
             value: null,
             color: '#1ed760',
             label: 'Spotify profile URL',
           },
           {
-            name: 'soundcloud',
+            name: 'Soundcloud',
+            icon: 'soundcloud',
             placeholder: 'https://soundcloud.com/username',
             value: null,
             color: '#ff3300',
             label: 'Soundcloud profile URL',
           },
           {
-            name: 'funkwhale',
+            name: 'Funkwhale',
+            icon: 'funkwhale',
             placeholder: 'https://funkwhale.audio/username',
             value: null,
             color: '#ffffff',
             label: 'Funkwhale profile URL',
           },
           {
-            name: 'github',
+            name: 'GitHub',
+            icon: 'github',
             placeholder: 'https://github.com/username',
             value: null,
             color: '#333',
             label: 'Github profile URL',
           },
           {
-            name: 'gitlab',
+            name: 'GitLab',
+            icon: 'gitlab',
             placeholder: 'https://gitlab.com/username',
             value: null,
             color: '#554488 ',
             label: 'Gitlab profile URL',
           },
           {
-            name: 'codeberg',
+            name: 'Codeberg',
+            icon: 'codeberg',
             placeholder: 'https://codeberg.org/username',
             value: null,
             color: '#2185d0',
             label: 'Codeberg profile URL',
           },
           {
-            name: 'yelp',
+            name: 'Yelp',
+            icon: 'yelp',
             placeholder: 'https://yelp.com/bizname',
             value: null,
             color: '#fff',
             label: 'Yelp page URL',
           },
           {
-            name: 'paypal',
+            name: 'PayPal',
+            icon: 'paypal',
             placeholder: 'https://paypal.me/username',
             value: null,
             color: '#003087',
             label: 'PayPal.me URL',
           },
           {
-            name: 'patreon',
+            name: 'Patreon',
+            icon: 'patreon',
             placeholder: 'https://patreon.com/username',
             value: null,
             color: '#FF424D',
             label: 'Patreon URL',
           },
           {
-            name: 'open-collective',
+            name: 'Open-Collective',
+            icon: 'open-collective',
             placeholder: 'https://opencollective.com/username',
             value: null,
             color: '#fff',
             label: 'Open Collective URL',
+          },
+          {
+            name: 'TikTok',
+            icon: 'tiktok',
+            placeholder: 'https://tiktok.com/username',
+            value: null,
+            color: '#fff',
+            label: 'TikTok profile URL',
           },
         ],
       },
@@ -1197,8 +1568,9 @@ export default {
           }
 
           // Featured content
-          let hasFeaturedContent = this.featured.filter((e) => e.content.length)
-            .length
+          let hasFeaturedContent = this.featured.filter(
+            (e) => e.content.length
+          ).length
           if (hasFeaturedContent) {
             this.featured.forEach((item) => {
               item.content.forEach((item) => {
