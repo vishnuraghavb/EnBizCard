@@ -1,22 +1,25 @@
 <template>
-<pre v-show="false" ref="vCard">
+  <pre v-show="false" ref="vCard">
 BEGIN:VCARD
 VERSION:3.0
 N:{{ vCard.FN }};;;;
 FN:{{ vCard.FN }}
 ORG:{{ vCard.ORG }}
 TITLE:{{ vCard.TITLE }}
-TEL;TYPE=work,pref:{{ vCard.TEL1 }}
-TEL;TYPE=work:{{ vCard.TEL2 }}
-EMAIL;TYPE=work:{{ vCard.EMAIL }}
+TEL;TYPE=CELL:{{ vCard.CELL }}
+TEL;TYPE=WORK:{{ vCard.WORK }}
+TEL;TYPE=HOME:{{ vCard.HOME }}
+EMAIL;TYPE=WORK:{{ vCard.EMAIL }}
 URL:{{ vCard.URL }}
-KEY:OPENPGP4FPR:{{ vCard.KEY }}
+KEY;TYPE=PGP;ENCODING=b:{{ vCard.KEY }}
+PHOTO;TYPE={{ vCard.PHOTO.type }};ENCODING=b:{{ vCard.PHOTO.data }}
 UID:{{ vCard.UID }}
-END:VCARD</pre>
+END:VCARD</pre
+  >
 </template>
 
 <script>
 export default {
-  props: [ 'vCard' ],
+  props: ['vCard'],
 }
 </script>

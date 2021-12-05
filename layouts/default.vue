@@ -62,9 +62,9 @@ html {
 }
 .stepC.actions {
   display: grid;
-  grid-gap: 1.5rem;
+  grid-gap: 0.5rem;
   justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, minmax(3rem, auto));
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
 }
 .ghost {
   opacity: 0.5;
@@ -78,12 +78,6 @@ html {
 }
 
 // Responsive
-@media (min-width: 640px) {
-  .stepC {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
-}
 @media (min-width: 768px) {
   .max-hd {
     max-height: 38rem;

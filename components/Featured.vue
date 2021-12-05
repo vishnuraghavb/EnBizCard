@@ -13,19 +13,7 @@
         </div>
         <div class="w-full">
           <input
-            class="
-              px-4
-              w-full
-              h-12
-              bg-transparent
-              placeholder-gray-600
-              transition-colors
-              duration-200
-              border-b border-black
-              focus:outline-none
-              focus:border-gray-500
-              hover:border-gray-500
-            "
+            class="px-4 w-full h-12 bg-transparent placeholder-gray-600 transition-colors duration-200 border-b border-black focus:outline-none focus:border-gray-500 hover:border-gray-500"
             type="text"
             name="section title"
             placeholder="Section title"
@@ -35,17 +23,7 @@
         </div>
       </div>
       <button
-        class="
-          p-1
-          m-2
-          flex-shrink-0
-          focus:outline-none
-          rounded
-          hover:bg-gray-700
-          focus:bg-gray-700
-          transition-colors
-          duration-200
-        "
+        class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
         @click="featured.splice(index, 1)"
         aria-label="Remove section"
         title="Remove section"
@@ -80,7 +58,7 @@
               ></div>
             </button>
             <img
-              class="w-12 h-12 rounded mr-3 object-contain flex-shrink-0"
+              class="w-12 h-12 rounded-l object-contain flex-shrink-0 bg-gray-700"
               v-if="
                 item.type == 'image'
                   ? item.dataURI
@@ -93,41 +71,26 @@
             />
             <a
               v-else
-              class="
-                w-12
-                h-12
-                mr-3
-                bg-gray-900
-                flex
-                items-center
-                justify-center
-                text-center text-xs
-                rounded
-                flex-shrink-0
-                leading-none
-                select-none
-                cursor-pointer
-              "
+              class="w-12 h-12 bg-gray-900 flex items-center justify-center text-center text-xs rounded-l flex-shrink-0 leading-none select-none cursor-pointer"
               target="_blank"
               href="https://duckduckgo.com/?q=Add+ID3+tags+to+mp3+file"
             >
               {{ item.info }}
             </a>
-            <!-- prettier-ignore -->
-            <p class="w-full leading-none whitespace-pre overflow-x-hidden">{{ item.name }}</p>
+            <div class="w-full">
+              <input
+                class="px-4 w-full h-12 bg-black placeholder-gray-600 rounded-r border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
+                type="text"
+                aria-label="Media title"
+                title="Media title"
+                v-model="featured[index].content[i].title"
+                placeholder="Media title"
+              />
+            </div>
+            <!-- prettier-ignore
+            <p class="w-full leading-none whitespace-pre overflow-x-hidden">{{ item.name }}</p> -->
             <button
-              class="
-                p-1
-                m-2
-                self-end
-                flex-shrink-0
-                focus:outline-none
-                rounded
-                hover:bg-gray-700
-                focus:bg-gray-700
-                transition-colors
-                duration-200
-              "
+              class="p-1 m-2 self-end flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
               @click="removeItem(i)"
               aria-label="Remove media"
               title="Remove media"
@@ -162,42 +125,17 @@
             </button>
             <div class="w-full">
               <textarea
-                class="
-                  block
-                  px-4
-                  py-3
-                  w-full
-                  bg-black
-                  rounded
-                  border border-transparent
-                  placeholder-gray-600
-                  transition-colors
-                  duration-200
-                  focus:outline-none
-                  focus:border-gray-500
-                  resize-none
-                  hover:border-gray-500
-                "
+                class="block px-4 py-3 w-full bg-black rounded border border-transparent placeholder-gray-600 transition-colors duration-200 focus:outline-none focus:border-gray-500 resize-none hover:border-gray-500"
                 ref="text"
-                aria-label="Type text content here"
-                title="Type text content here"
+                aria-label="Enter text here"
+                title="Enter text here"
                 v-model="featured[index].content[i].value"
-                placeholder="Type text content here"
+                placeholder="Enter text here"
                 rows="5"
               ></textarea>
             </div>
             <button
-              class="
-                p-1
-                m-2
-                flex-shrink-0
-                focus:outline-none
-                rounded
-                hover:bg-gray-700
-                focus:bg-gray-700
-                transition-colors
-                duration-200
-              "
+              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
               @click="removeItem(i)"
               aria-label="Remove text"
               title="Remove text"
@@ -220,40 +158,17 @@
             </button>
             <div class="w-full">
               <input
-                class="
-                  px-4
-                  w-full
-                  h-12
-                  bg-black
-                  placeholder-gray-600
-                  rounded
-                  border border-transparent
-                  transition-colors
-                  duration-200
-                  focus:outline-none
-                  focus:border-gray-500
-                  hover:border-gray-500
-                "
+                class="px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
                 ref="link"
                 type="text"
-                aria-label="Paste HTML embed link here"
-                title="Paste HTML embed link here"
+                aria-label="Paste embed code here"
+                title="Paste embed code here"
                 v-model="featured[index].content[i]"
-                placeholder="Paste HTML embed link here"
+                placeholder="Paste embed code here"
               />
             </div>
             <button
-              class="
-                p-1
-                m-2
-                flex-shrink-0
-                focus:outline-none
-                rounded
-                hover:bg-gray-700
-                focus:bg-gray-700
-                transition-colors
-                duration-200
-              "
+              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
               @click="removeItem(i)"
               aria-label="Remove field"
               title="Remove field"
@@ -268,26 +183,13 @@
       </transition-group>
     </draggable>
     <div
-      class="grid grid-flow-row sm:grid-cols-2 gap-2 w-full p-2"
+      class="grid grid-flow-row grid-cols-1 xs:grid-cols-2 gap-2 w-full p-2"
       :class="{ 'mt-4': hasContent }"
     >
       <button
-        class="
-          flex
-          sm:flex-col
-          items-center
-          p-3
-          rounded
-          cursor-pointer
-          bg-gray-700
-          hover:bg-gray-600
-          focus:bg-gray-600
-          transition-colors
-          duration-200
-          focus:outline-none
-        "
+        class="flex items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
         @click="attachMedia()"
-        aria-label="Attach media"
+        aria-label="Add media"
         :class="
           dragOver ? 'bg-gray-900 outline-white' : 'bg-gray-700 border-none'
         "
@@ -304,82 +206,43 @@
           @click="$event.target.files = null"
         />
         <div
-          class="w-6 h-6 mr-2 sm:mr-0 pointer-events-none"
+          class="w-6 h-6 mr-3"
           v-html="require(`~/assets/icons/file.svg?include`)"
         ></div>
-        <p class="sm:mt-2 leading-none pointer-events-none">Attach media</p>
+        <p class="leading-none">Add media</p>
       </button>
       <button
-        class="
-          flex
-          sm:flex-col
-          items-center
-          p-3
-          rounded
-          cursor-pointer
-          bg-gray-700
-          hover:bg-gray-600
-          focus:bg-gray-600
-          transition-colors
-          duration-200
-          focus:outline-none
-        "
-        @click="addText()"
-        aria-label="Add text"
-      >
-        <div
-          class="w-6 h-6 mr-2 sm:mr-0"
-          v-html="require(`~/assets/icons/text.svg?include`)"
-        ></div>
-        <p class="sm:mt-2 leading-none">Add text</p>
-      </button>
-      <button
-        class="
-          flex
-          sm:flex-col
-          items-center
-          p-3
-          rounded
-          cursor-pointer
-          bg-gray-700
-          hover:bg-gray-600
-          focus:bg-gray-600
-          transition-colors
-          duration-200
-          focus:outline-none
-        "
+        class="flex items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
         @click="addLink()"
-        aria-label="Embed link"
+        aria-label="Embed media"
       >
         <div
-          class="w-6 h-6 mr-2 sm:mr-0"
+          class="w-6 h-6 mr-3"
           v-html="require(`~/assets/icons/code.svg?include`)"
         ></div>
-        <p class="sm:mt-2 leading-none">Embed link</p>
+        <p class="leading-none">Embed media</p>
       </button>
       <button
-        class="
-          flex
-          sm:flex-col
-          items-center
-          p-3
-          rounded
-          cursor-pointer
-          bg-gray-700
-          hover:bg-gray-600
-          focus:bg-gray-600
-          transition-colors
-          duration-200
-          focus:outline-none
-        "
+        class="flex items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
         @click="addProduct()"
         aria-label="Add product"
       >
         <div
-          class="w-6 h-6 mr-2 sm:mr-0"
-          v-html="require(`~/assets/icons/box.svg?include`)"
+          class="w-6 h-6 mr-3"
+          v-html="require(`~/assets/icons/product.svg?include`)"
         ></div>
-        <p class="sm:mt-2 leading-none">Add product</p>
+        <p class="leading-none">Add product</p>
+      </button>
+      <button
+        class="flex items-center p-3 rounded cursor-pointer bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
+        @click="addText()"
+        aria-label="Add text"
+      >
+        <div
+          class="w-6 h-6 mr-3"
+          v-html="require(`~/assets/icons/text.svg?include`)"
+        ></div>
+        <p class="leading-none text-left">Add text</p>
       </button>
     </div>
   </div>
@@ -398,14 +261,7 @@ import draggable from 'vuedraggable'
 import ProductCard from './ProductCard'
 
 export default {
-  props: [
-    'featured',
-    'mimetypes',
-    'label',
-    'index',
-    'resizeImage',
-    'showAlert',
-  ],
+  props: ['featured', 'mimetypes', 'index', 'resizeImage', 'showAlert'],
   data() {
     return {
       dragOver: false,

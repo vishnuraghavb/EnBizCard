@@ -2,7 +2,7 @@
   <div
     class="overflow-y-scroll max-hd border-t-0 border-4 border-black bg-gray-900"
   >
-    <div id="Theme1">
+    <div :id="`Theme${theme}`">
       <html
         ref="html"
         lang="en"
@@ -36,7 +36,7 @@
           <link v-if="getCssHref" :href="getCssHref" rel="stylesheet" />
           <title>{{ genInfo.name }}'s Digital Business Card</title>
           <style>
-            #body{ font-family: sans-serif; } input[type='range']::-moz-range-track { background: none; } input[type='range']::-moz-range-thumb { -moz-appearance: none; width: 3rem; height: 3rem; border-radius: 100%; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 3rem; height: 3rem; border-radius: 100%; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } .closeBtnColor{ {{hasLightBG('mainBg') && 'filter:invert(1)'}} } .topAction{ {{hasLightBG('logoBg') && 'filter:invert(1)'}} } .action{ color:#fff; {{hasLightBG('buttonBg') ? 'filter:invert(1)' : null}} } .card{ {{hasLightBG('cardBg') && 'color:#000 !important'}} } .text{ text-align: center;line-height: 1.5;{{hasLightBG('mainBg') ? 'color:#000 !important' : 'color:#fff !important'}} }
+            #body{ font-family: sans-serif; } input[type='range']::-moz-range-track { background: none; } input[type='range']::-moz-range-thumb { -moz-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: {{theme === 1? '100%': '0.25rem'}}; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: {{theme === 1? '100%': '0.25rem'}}; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } .closeBtnColor{ {{hasLightBG('mainBg') && 'filter:invert(1)'}} } .topAction{ {{hasLightBG('logoBg') && 'filter:invert(1)'}} } .action{ color:#fff; {{hasLightBG('buttonBg') ? 'filter:invert(1)' : null}} } .card{ {{hasLightBG('cardBg') && 'color:#000 !important'}} } .text{ text-align: center;line-height: 1.5;{{hasLightBG('mainBg') ? 'color:#000 !important' : 'color:#fff !important'}} }
           </style>
           <style v-if="getCssHref">
             #body{
@@ -158,6 +158,9 @@
                 <p class="jobtitle text">
                   {{ genInfo.title }}
                 </p>
+                <p class="bizname text">
+                  {{ genInfo.biz }}
+                </p>
               </div>
             </div>
             <p class="desc text" v-if="genInfo.desc">
@@ -202,13 +205,13 @@
                   target="_blank"
                   :style="{ backgroundColor: `${colors.buttonBg.color}` }"
                   @click.prevent="downloadVcard"
-                  aria-label="Add to Contacts"
+                  aria-label="Save Contact"
                 >
                   <div
                     class="icon action"
-                    v-html="require(`~/assets/icons/user-plus.svg?include`)"
+                    v-html="require(`~/assets/icons/add-user.svg?include`)"
                   ></div>
-                  <p class="action">Add to Contacts</p>
+                  <p class="action">Save Contact</p>
                 </a>
               </div>
             </div>
@@ -220,7 +223,7 @@
               >
                 <div class="actionBtn secBtn">
                   <a
-                    :href="item.value"
+                    :href="`${item.href ? item.href + item.value : item.value}`"
                     target="_blank"
                     rel="noopener noreferrer"
                     :style="{ backgroundColor: item.color }"
@@ -329,6 +332,8 @@
 import MediaPlayer from './MediaPlayer'
 import DocumentDownloader from './DocumentDownloader'
 import ProductShowcase from './ProductShowcase'
+import { mapState } from 'vuex'
+
 export default {
   props: [
     'username',
@@ -362,6 +367,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['theme']),
     getFeaturedMusic() {
       return this.featured.music
     },
@@ -512,7 +518,7 @@ export default {
     display: inline-flex;
     align-items: center;
     border-radius: 5rem;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 1.5rem;
     border: none;
     outline: none;
     cursor: pointer;
@@ -598,8 +604,13 @@ export default {
     margin: 0;
   }
   .jobtitle {
-    font-size: 1rem;
+    font-size: 0.875rem;
     margin: 0.25rem 0 0 0;
+  }
+  .bizname {
+    font-size: 0.875rem;
+    margin: 0.5rem 0 0 0;
+    opacity: 0.6;
   }
   .desc,
   .textC {
@@ -629,7 +640,7 @@ export default {
     justify-content: center;
     a {
       border-radius: 100%;
-      padding: 0.75rem;
+      padding: 1rem;
       line-height: 0;
     }
     p {
@@ -657,7 +668,7 @@ export default {
     align-items: center;
     border-radius: 5rem;
     margin-top: 1.5rem;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 1.5rem;
     cursor: pointer;
     line-height: 0;
     .icon {
@@ -676,8 +687,356 @@ export default {
   .section {
     font-weight: bold;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin: 3rem 1rem 1rem;
+  }
+  .content {
+    overflow: hidden;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    img {
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      width: 100%;
+    }
+  }
+  .embedded {
+    position: relative;
+    padding-top: 56.25%;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .music,
+  .video {
+    width: 100%;
+  }
+  .mediaC {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  video {
+    width: 100%;
+  }
+  .controls {
+    padding: 1rem;
+    font-size: 0.875rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .prodInfo {
+    .desc {
+      margin: -1rem 0 0;
+    }
+  }
+  .price {
+    margin: 2rem 0 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  .label {
+    display: inline-block;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border-radius: 5rem;
+    letter-spacing: 1px;
+    padding: 0.75rem 1.5rem;
+    p {
+      margin: 0;
+    }
+  }
+  .title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .mediaInfo {
+    margin: 0.5rem 0 0;
+  }
+  .pCtrl,
+  .docDl {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  output {
+    margin-top: 0.5rem;
+    opacity: 0.75;
+  }
+  .docDl {
+    display: flex;
+  }
+  .seekBar {
+    width: 100%;
+    height: 0.5rem;
+    margin: 2rem 0;
+    border-radius: 5rem;
+    background: #adb5bd;
+    appearance: none;
+    cursor: pointer;
+  }
+  .playPause,
+  .dlBtn {
+    margin: 0 0.5rem 0.5rem;
+    padding: 1rem;
+    border-radius: 5rem;
+    line-height: 0;
+    cursor: pointer;
+  }
+  .pause {
+    display: none;
+  }
+  footer {
+    padding: 2.5rem 1.5rem 2rem;
+    font-size: 0.75rem;
+    a {
+      text-decoration: underline;
+      color: inherit;
+    }
+  }
+}
+#Theme2 {
+  body {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0;
+    max-width: 30rem;
+    color: #fff;
+    position: relative;
+  }
+  #modal {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    bottom: 0;
+    transition: top 0.2s ease-out, opacity 0.1s ease-out;
+    transform: translateZ(0);
+  }
+  #closeModal {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 1rem 0 0;
+  }
+  #close {
+    padding: 0.75rem;
+    cursor: pointer;
+    line-height: 0;
+  }
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  #modalView,
+  #copyView,
+  #qrView,
+  #keyInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0.5rem;
+  }
+  #copyView,
+  #keyInfo {
+    p {
+      margin: 1rem 2em 2rem;
+      text-align: center;
+    }
+  }
+  #copyURL,
+  #dlKey {
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+    span {
+      margin-left: 0.5rem;
+    }
+  }
+  #qrView {
+    h2,
+    p {
+      margin: 0 2rem 0.5rem;
+    }
+  }
+  #qr {
+    margin: 1rem 2rem 2rem;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 0.5rem;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 6rem 3rem;
+    box-sizing: border-box;
+  }
+  #logo {
+    max-height: 6rem;
+    text-align: center;
+    color: gray;
+    pointer-events: none;
+    user-select: none;
+  }
+  #topActions {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    position: absolute;
+    left: 1rem;
+    right: 0;
+    top: 1rem;
+    & > div {
+      display: flex;
+    }
+    a {
+      padding: 0.75rem;
+      cursor: pointer;
+      border-radius: 100%;
+      line-height: 0;
+      margin-right: 1rem;
+    }
+  }
+  main {
+    padding: 1rem;
+  }
+  #profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    img {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      pointer-events: none;
+      user-select: none;
+      margin-top: -4.5rem;
+    }
+  }
+  #info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 1rem;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+  .name {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  .jobtitle {
+    font-size: 0.875rem;
+    margin: 0.25rem 0 0 0;
+  }
+  .bizname {
+    font-size: 0.875rem;
+    margin: 0.5rem 0 0 0;
+    opacity: 0.6;
+  }
+  .desc {
+    text-align: left;
+  }
+  .desc,
+  .textC {
+    font-size: 0.875rem;
+    white-space: pre-line;
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  .textC {
+    font-size: 1rem;
+    margin: 1rem;
+  }
+  .actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .actionsC {
+    width: 33.33%;
+  }
+  .actionBtn {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    a {
+      border-radius: 0.5rem;
+      padding: 1rem;
+      line-height: 0;
+      display: flex;
+      justify-content: center;
+    }
+    p {
+      margin: 0.5rem 0 0;
+      font-size: 0.875rem;
+    }
+  }
+  .secondary {
+    margin-top: 1.25rem;
+  }
+  .secBtn {
+    padding: 1rem;
+  }
+  a {
+    text-decoration: none;
+    user-select: none;
+  }
+  #cta {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  #vcard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    line-height: 0;
+    .icon {
+      margin-right: 0.5rem;
+    }
+    p {
+      margin: 0;
+    }
+  }
+  .attachments {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .section {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin: 3rem 0 1rem;
+    border-left: solid 0.25rem;
+    padding: 0.5rem;
+    text-align: left;
   }
   .content {
     overflow: hidden;
@@ -715,9 +1074,8 @@ export default {
     width: 100%;
   }
   .controls {
-    padding: 2rem 1rem;
-    font-size: 0.875rem;
-    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
     width: 100%;
     box-sizing: border-box;
   }
@@ -735,26 +1093,27 @@ export default {
     display: inline-block;
     font-size: 1rem;
     margin-top: 1rem;
-    border-radius: 5rem;
-    letter-spacing: 1px;
+    border-radius: 0.25rem;
     padding: 0.75rem 1.5rem;
+    width: 100%;
+    text-align: center;
     p {
       margin: 0;
     }
   }
   .title {
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: bold;
-    margin: 0 0 0.5rem;
+    margin: 0;
   }
   .mediaInfo {
-    margin: 0;
+    margin: 0.5rem 0 0;
   }
   .pCtrl,
   .docDl {
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
   }
   .docDl {
@@ -763,26 +1122,35 @@ export default {
   .seekBar {
     width: 100%;
     height: 0.5rem;
-    margin-top: 2rem;
-    border-radius: 5rem;
+    margin: 2.25rem 0 1.25rem;
+    border-radius: 0.5rem;
     background: #adb5bd;
     appearance: none;
     cursor: pointer;
+    order: 1;
   }
   .playPause,
   .dlBtn {
-    margin: 2rem 0.5rem 0;
-    padding: 0.75rem;
-    border-radius: 5rem;
+    margin: 1rem 0 0;
+    padding: 1rem;
+    border-radius: 0.25rem;
     line-height: 0;
     cursor: pointer;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
   }
   .pause {
     display: none;
   }
+  output {
+    margin-top: 0.5rem;
+    opacity: 0.75;
+  }
   footer {
-    padding: 2.5rem 1.5rem 2rem;
+    padding: 2.5rem 1rem 1.5rem;
     font-size: 0.75rem;
+    text-align: left;
     a {
       text-decoration: underline;
       color: inherit;

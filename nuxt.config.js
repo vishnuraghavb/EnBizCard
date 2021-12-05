@@ -204,9 +204,10 @@ export default {
     optimizeImages: true,
     optimizeImagesInDev: true,
     defaultImageLoader: 'img-loader',
-    svgo: {
-      // enable/disable svgo plugins here
+    optipng: {
+      optimizationLevel: 7,
     },
+    svgo: {},
   },
   /*
    ** Nuxt.js modules

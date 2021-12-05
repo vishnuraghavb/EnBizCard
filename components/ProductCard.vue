@@ -26,8 +26,8 @@
             v-else
             class="p-3 h-12 w-12 box-border rounded cursor-pointer border border-dashed border-black hover:border-gray-400 focus:border-gray-400 transition-colors duration-200 focus:outline-none"
             @click="loadFile(i)"
-            aria-label="Attach product image"
-            title="Attach product image"
+            aria-label="Add product image"
+            title="Add product image"
             :class="dragOver ? 'outline-white' : ''"
             @drop.prevent="fileLoaded($event, i, true)"
             @dragleave.prevent.self="dragOver = false"
@@ -53,8 +53,8 @@
             ref="input"
             type="text"
             v-model="item.title"
-            aria-label="Product title"
-            title="Product title"
+            aria-label="Enter product title"
+            title="Enter product title"
             placeholder="Product title"
           />
         </div>
@@ -65,6 +65,8 @@
         class="pDescription block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 resize-none hover:border-gray-500"
         rows="2"
         v-model="item.description"
+        aria-label="Enter product description"
+        title="Enter product description"
       ></textarea>
       <input
         type="text"
@@ -72,6 +74,8 @@
         class="pPrice px-4 h-12 mt-2 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
         placeholder="Price"
         v-model="item.price"
+        aria-label="Enter product price"
+        title="Enter product price"
       />
       <div class="grid grid-cols-2 gap-x-2">
         <input
@@ -80,6 +84,8 @@
           class="pLink px-4 h-12 mt-2 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
           placeholder="Button link"
           v-model="item.link"
+          aria-label="Enter button link"
+          title="Enter button link"
         />
         <input
           type="text"
@@ -87,6 +93,8 @@
           class="pLabel px-4 h-12 mt-2 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
           placeholder="Button label"
           v-model="item.label"
+          aria-label="Enter button label"
+          title="Enter button label"
         />
       </div>
     </div>

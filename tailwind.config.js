@@ -8,12 +8,17 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '360px',
+      },
+    },
   },
   variants: {
     extend: {
       backgroundColor: ['group-focus', 'checked'],
       borderColor: ['checked'],
+      brightness: ['hover', 'focus'],
     },
   },
   plugins: [],

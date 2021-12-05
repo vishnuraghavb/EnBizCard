@@ -134,8 +134,13 @@ main {
   margin: 0;
 }
 .jobtitle {
-  font-size: 1rem;
+  font-size: 0.875rem;
   margin: 0.25rem 0 0 0;
+}
+.bizname {
+  font-size: 0.875rem;
+  margin: 0.5rem 0 0 0;
+  opacity: 0.6;
 }
 .desc,
 .textC {
@@ -217,7 +222,7 @@ a {
 }
 .content {
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   margin-top: 1rem;
   img {
     display: block;

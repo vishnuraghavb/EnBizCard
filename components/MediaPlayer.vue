@@ -64,7 +64,7 @@
           <div
             class="icon pause action"
             ref="pause"
-            v-html="require(`~/assets/icons/stop.svg?include`)"
+            v-html="require(`~/assets/icons/pause.svg?include`)"
           ></div>
         </a>
       </div>
