@@ -10,12 +10,12 @@
         :alt="media.title"
       />
     </div>
-    <div class="controls">
-      <p class="title card">
+    <div class="controls cardColor">
+      <p class="title">
         {{ media.title }}
       </p>
-      <p class="mediaInfo card">PDF - {{ media.filesize }}</p>
       <div class="docDl">
+        <p class="fileSize sub">PDF - {{ media.filesize }}</p>
         <a
           class="dlBtn"
           @click.prevent="downloadDocument()"
@@ -29,7 +29,7 @@
           target="_blank"
         >
           <div
-            class="icon action"
+            class="icon iconColor"
             v-html="require(`~/assets/icons/download.svg?include`)"
           ></div>
         </a>

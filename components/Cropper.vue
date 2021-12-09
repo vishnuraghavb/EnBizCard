@@ -70,7 +70,7 @@ export default {
       responsive: true,
       viewMode: 2,
       highlight: false,
-      rotatable: false,
+      rotatable: true,
     })
   },
 }

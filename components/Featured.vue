@@ -18,6 +18,7 @@
             name="section title"
             placeholder="Section title"
             v-model="featured[index].title"
+            autocapitalize="words"
             title="Type your own section title"
           />
         </div>
@@ -82,13 +83,12 @@
                 class="px-4 w-full h-12 bg-black placeholder-gray-600 rounded-r border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-500 hover:border-gray-500"
                 type="text"
                 aria-label="Media title"
+                autocapitalize="words"
                 title="Media title"
                 v-model="featured[index].content[i].title"
                 placeholder="Media title"
               />
             </div>
-            <!-- prettier-ignore
-            <p class="w-full leading-none whitespace-pre overflow-x-hidden">{{ item.name }}</p> -->
             <button
               class="p-1 m-2 self-end flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
               @click="removeItem(i)"

@@ -28,11 +28,11 @@
       "
       alt="cover"
     />
-    <div class="controls">
-      <p class="title card">
+    <div class="controls cardColor">
+      <p class="title">
         {{ media.title }}
       </p>
-      <p class="mediaInfo card" v-if="media.artist">
+      <p class="sub" v-if="media.artist">
         <span>{{ media.artist }}</span>
         <span v-if="media.album"> - {{ media.album }}</span>
       </p>
@@ -41,14 +41,7 @@
         ref="pCtrl"
         :style="{ display: PreviewMode ? 'flex' : 'none' }"
       >
-        <output class="currentTime card" ref="bubble">00:00</output>
-        <input
-          class="seekBar"
-          @change="setProgress($event)"
-          ref="seekbar"
-          type="range"
-          value="0"
-        />
+        <output class="currentTime sub" ref="bubble">00:00</output>
         <a
           class="playPause"
           :style="{
@@ -57,16 +50,23 @@
           @click="togglePlay($refs.mediaSource)"
         >
           <div
-            class="icon play action"
+            class="icon play iconColor"
             ref="play"
             v-html="require(`~/assets/icons/play.svg?include`)"
           ></div>
           <div
-            class="icon pause action"
+            class="icon pause iconColor"
             ref="pause"
             v-html="require(`~/assets/icons/pause.svg?include`)"
           ></div>
         </a>
+        <input
+          class="seekBar seekbarColor"
+          @change="setProgress($event)"
+          ref="seekbar"
+          type="range"
+          value="0"
+        />
       </div>
     </div>
   </div>

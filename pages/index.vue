@@ -106,7 +106,7 @@
     <div class="md:grid md:grid-cols-2">
       <div class="px-4 mt-32">
         <div ref="create" id="step-1" class="pt-8">
-          <h2 class="font-extrabold text-2xl">Header images</h2>
+          <h2 class="font-extrabold text-2xl">Header attachments</h2>
           <div class="stepC">
             <Attachment
               :content="images"
@@ -118,16 +118,24 @@
             />
             <Attachment
               :content="images"
-              type="photo"
+              type="cover"
               :resizeImage="resizeImage"
-              label="Add photo"
-              description="suggested format: jpeg, png or gif"
+              label="Add cover image"
+              description="suggested format: svg, jpeg, png or gif"
               :showAlert="showAlert"
             />
           </div>
         </div>
         <div id="step-2" class="mt-16">
-          <h2 class="font-extrabold text-2xl">General information</h2>
+          <h2 class="font-extrabold text-2xl">Contact information</h2>
+          <Attachment
+            :content="images"
+            type="photo"
+            :resizeImage="resizeImage"
+            label="Add photo"
+            description="suggested format: jpeg, png or gif"
+            :showAlert="showAlert"
+          />
           <div class="stepC mt-6">
             <label for="fullname" class="ml-4">Full name</label>
             <input
@@ -135,6 +143,7 @@
               spellcheck="false"
               type="text"
               v-model="genInfo.name"
+              autocapitalize="words"
               class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
             />
           </div>
@@ -144,6 +153,7 @@
               id="job-title"
               type="text"
               spellcheck="true"
+              autocapitalize="words"
               v-model="genInfo.title"
               class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
             />
@@ -155,6 +165,7 @@
               spellcheck="false"
               type="text"
               v-model="genInfo.biz"
+              autocapitalize="words"
               class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
             />
           </div>
@@ -236,7 +247,7 @@
             :class="{ 'border-t pt-6': primaryActions.length }"
           >
             <button
-              v-for="(action, index) in actions.primaryActions"
+              v-for="(action, index) in orderedPrimaryActions"
               :key="index"
               @click="addAction('primaryActions', index)"
               class="p-3 flex items-center flex-shrink-0 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none bg-gray-700"
@@ -281,7 +292,7 @@
             :class="{ 'border-t pt-6': secondaryActions.length }"
           >
             <button
-              v-for="(action, index) in actions.secondaryActions"
+              v-for="(action, index) in orderedSecondaryActions"
               :key="index"
               @click="addAction('secondaryActions', index)"
               class="p-3 flex items-center flex-shrink-0 rounded filter hover:brightness-125 focus:brightness-125 transition-all duration-200 focus:outline-none"
@@ -392,7 +403,7 @@
                   : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-600'
               "
             >
-              T1
+              A
             </button>
             <button
               @click="changeTheme(2)"
@@ -403,14 +414,25 @@
                   : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-600'
               "
             >
-              T2
+              B
+            </button>
+            <button
+              @click="changeTheme(3)"
+              class="w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200"
+              :class="
+                theme == 3
+                  ? 'bg-green-600'
+                  : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-600'
+              "
+            >
+              C
             </button>
           </div>
         </div>
         <div id="step-8" class="mt-16">
           <h2 class="font-extrabold text-2xl">Colours</h2>
           <div class="stepC">
-            <Colour name="logoBg" label="Logo background" :colors="colors" />
+            <Colour name="logoBg" label="Header background" :colors="colors" />
             <Colour name="mainBg" label="Main background" :colors="colors" />
             <Colour
               name="buttonBg"
@@ -457,6 +479,7 @@
         <div id="step-10" class="mt-16">
           <h2 class="font-extrabold text-2xl">Analytics</h2>
           <div class="stepC mt-6">
+            <label for="tracking-code" class="ml-4">Tracking code</label>
             <textarea
               id="tracking-code"
               aria-label="tracking-code"
@@ -558,6 +581,7 @@ import { saveAs } from 'file-saver'
 import QRCode from '!!raw-loader!~/static/qrcode.min.js'
 import Theme1 from '!!raw-loader!~/assets/styles/T1.min.css'
 import Theme2 from '!!raw-loader!~/assets/styles/T2.min.css'
+import Theme3 from '!!raw-loader!~/assets/styles/T3.min.css'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -608,10 +632,17 @@ export default {
           mime: null,
           resized: null,
         },
+        cover: {
+          url: null,
+          blob: null,
+          ext: null,
+          mime: null,
+          resized: null,
+        },
       },
       colors: {
         logoBg: {
-          color: `#1F2937`,
+          color: `#059669`,
           openPalette: false,
         },
         mainBg: {
@@ -649,6 +680,7 @@ export default {
             placeholder: '+XX XXXXX XXXXX',
             value: null,
             label: 'Mobile number',
+            order: 0,
           },
           {
             name: 'Office',
@@ -657,6 +689,7 @@ export default {
             placeholder: '+XX XXXXX XXXXX',
             value: null,
             label: 'Office number',
+            order: 1,
           },
           {
             name: 'Home',
@@ -665,6 +698,7 @@ export default {
             placeholder: '+XX XXXXX XXXXX',
             value: null,
             label: 'Home number',
+            order: 2,
           },
           {
             name: 'SMS',
@@ -673,6 +707,7 @@ export default {
             placeholder: '+XX XXXXX XXXXX',
             value: null,
             label: 'SMS mobile number',
+            order: 3,
           },
           {
             name: 'Email',
@@ -681,6 +716,7 @@ export default {
             placeholder: 'info@example.com',
             value: null,
             label: 'Email address',
+            order: 4,
           },
           {
             name: 'Website',
@@ -688,6 +724,7 @@ export default {
             placeholder: 'https://example.com',
             value: null,
             label: 'Website URL',
+            order: 5,
           },
           {
             name: 'Store',
@@ -695,6 +732,7 @@ export default {
             placeholder: 'https://example.com/storeID',
             value: null,
             label: 'Online Store URL',
+            order: 6,
           },
           {
             name: 'Location',
@@ -702,14 +740,9 @@ export default {
             placeholder: 'https://osm.org/go/location',
             value: null,
             label: 'Map location URL',
+            order: 7,
           },
-          {
-            name: 'Calendar',
-            icon: 'calendar',
-            placeholder: 'https://example.com/calendarID',
-            value: null,
-            label: 'Calendar URL',
-          },
+
           {
             name: 'Signal',
             icon: 'signal',
@@ -717,13 +750,7 @@ export default {
             placeholder: '+XX XXXXX XXXXX',
             value: null,
             label: 'Signal mobile number',
-          },
-          {
-            name: 'Whatsapp',
-            icon: 'whatsapp',
-            placeholder: 'https://wa.me/userID',
-            value: null,
-            label: 'WhatsApp profile URL',
+            order: 8,
           },
           {
             name: 'Telegram',
@@ -732,14 +759,7 @@ export default {
             placeholder: 'username',
             value: null,
             label: 'Telegram username',
-          },
-          {
-            name: 'Messenger',
-            icon: 'messenger',
-            href: 'https://m.me/',
-            placeholder: 'username',
-            value: null,
-            label: 'Messenger username',
+            order: 9,
           },
           {
             name: 'Matrix',
@@ -748,36 +768,70 @@ export default {
             placeholder: '@username:matrix.org',
             value: null,
             label: 'Matrix userID',
+            order: 10,
           },
-          // {
-          //   name: 'WeChat',
-          //   icon: 'wechat',
-          //   placeholder: 'weixin://dl/chat?userID',
-          //   value: null,
-          //   label: 'WeChat profile URL',
-          // },
-          // {
-          //   name: 'Line',
-          //   icon: 'line',
-          //   placeholder: 'https://line.me/ti/p/{LINE ID}',
-          //   value: null,
-          //   label: 'Line profile URL',
-          // },
-          // {
-          //   name: 'Viber',
-          //   icon: 'viber',
-          //   placeholder: 'viber://chat?number=+XXXXXXXXXXX',
-          //   value: null,
-          //   label: 'Viber profile URL',
-          // },
-          // {
-          //   name: 'Skype',
-          //   icon: 'skype',
-          //   href: 'skype:',
-          //   placeholder: 'username',
-          //   value: null,
-          //   label: 'Skype profile URL',
-          // },
+          {
+            name: 'Whatsapp',
+            icon: 'whatsapp',
+            placeholder: 'https://wa.me/userID',
+            value: null,
+            label: 'WhatsApp profile URL',
+            order: 11,
+          },
+          {
+            name: 'Messenger',
+            icon: 'messenger',
+            href: 'https://m.me/',
+            placeholder: 'username',
+            value: null,
+            label: 'Messenger username',
+            order: 12,
+          },
+          {
+            name: 'Skype',
+            icon: 'skype',
+            href: 'skype:',
+            hrefEnd: '?chat',
+            placeholder: 'username',
+            value: null,
+            label: 'Skype username',
+            order: 13,
+          },
+          {
+            name: 'Line',
+            icon: 'line',
+            href: 'https://line.me/ti/p/',
+            placeholder: 'LINE ID',
+            value: null,
+            label: 'Line profile ID',
+            order: 14,
+          },
+          {
+            name: 'Viber',
+            icon: 'viber',
+            href: 'viber://chat?number=',
+            placeholder: 'XX XXXXX XXXXX',
+            value: null,
+            label: 'Viber mobile number',
+            order: 15,
+          },
+          {
+            name: 'WeChat',
+            icon: 'wechat',
+            href: 'weixin://dl/chat?',
+            placeholder: 'WeChat ID',
+            value: null,
+            label: 'WeChat profile ID',
+            order: 16,
+          },
+          {
+            name: 'Calendar',
+            icon: 'calendar',
+            placeholder: 'https://example.com/calendarID',
+            value: null,
+            label: 'Calendar URL',
+            order: 17,
+          },
         ],
         secondaryActions: [
           {
@@ -933,7 +987,9 @@ export default {
           {
             name: 'Tumblr',
             icon: 'tumblr',
-            placeholder: 'https://username.tumblr.com',
+            href: 'https://',
+            hrefEnd: '.tumblr.com/',
+            placeholder: 'username',
             value: null,
             color: '#2c4762',
             label: 'Tumblr blog URL',
@@ -1114,6 +1170,16 @@ export default {
       return this.genInfo.name
         ? this.genInfo.name.toLowerCase().replace(/\W+/g, '')
         : 'username'
+    },
+    orderedPrimaryActions() {
+      return this.actions.primaryActions.sort((a, b) =>
+        a.order > b.order ? 1 : a.order < b.order ? -1 : 0
+      )
+    },
+    orderedSecondaryActions() {
+      return this.actions.secondaryActions.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      )
     },
     vCard() {
       const getNumber = (type) => {
@@ -1336,7 +1402,7 @@ export default {
           // Inject general script
           let modals = document.createElement('script')
           modals.innerText =
-            'let m=document.getElementById("modal"),c=document.getElementById("close"),ki=document.getElementById("keyInfo"),cv=document.getElementById("copyView"),curl=document.getElementById("copyURL"),qrv=document.getElementById("qrView"),qr=document.getElementById("qr"),s=document.getElementById("share"),sqr=document.getElementById("showQR"),sk=document.getElementById("showKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#topActions").style.display="flex",qr.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(m),cv.style.display="flex",dN(qrv),ki&&dN(ki)}),sqr.addEventListener("click",()=>{tC(m),qrv.style.display="block",dN(cv),ki&&dN(ki)}),sk&&sk.addEventListener("click",()=>{tC(m),ki&&(ki.style.display="flex"),dN(cv),dN(qrv)}),c.addEventListener("click",()=>tC(m)),curl.addEventListener("click",async()=>{let e=curl.querySelectorAll(".action")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});'
+            'let m=document.getElementById("modal"),c=document.getElementById("close"),ki=document.getElementById("keyView"),cv=document.getElementById("copyView"),curl=document.getElementById("copyURL"),qrv=document.getElementById("qrView"),qr=document.getElementById("qr"),s=document.getElementById("share"),sqr=document.getElementById("showQR"),sk=document.getElementById("showKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#topActions").style.display="flex",qr.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(m),cv.style.display="flex",dN(qrv),ki&&dN(ki)}),sqr.addEventListener("click",()=>{tC(m),qrv.style.display="block",dN(cv),ki&&dN(ki)}),sk&&sk.addEventListener("click",()=>{tC(m),ki&&(ki.style.display="flex"),dN(cv),dN(qrv)}),c.addEventListener("click",()=>tC(m)),curl.addEventListener("click",async()=>{let e=curl.querySelectorAll(".iconColor")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});'
           el.querySelector('body').appendChild(modals)
 
           // Inject media script
@@ -1364,6 +1430,9 @@ export default {
               break
             case 2:
               theme = Theme2
+              break
+            case 3:
+              theme = Theme3
               break
           }
           let css = new Blob([theme], {

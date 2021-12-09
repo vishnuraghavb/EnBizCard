@@ -1,6 +1,6 @@
 let m = document.getElementById('modal'),
   c = document.getElementById('close'),
-  ki = document.getElementById('keyInfo'),
+  ki = document.getElementById('keyView'),
   cv = document.getElementById('copyView'),
   curl = document.getElementById('copyURL'),
   qrv = document.getElementById('qrView'),
@@ -57,7 +57,7 @@ if (sk) {
 
 c.addEventListener('click', () => tC(m)),
   curl.addEventListener('click', async () => {
-    let action = curl.querySelectorAll('.action')[1]
+    let action = curl.querySelectorAll('.iconColor')[1]
     await navigator.clipboard.writeText(window.location.href).then((e) => {
       action.innerText = 'Copied'
       setTimeout(() => {

@@ -43,9 +43,9 @@ a {
   flex-direction: column;
   align-items: center;
   margin: 0 1rem;
+  text-align: center;
   p {
     margin: 2rem;
-    text-align: center;
   }
 }
 #copyURL,
@@ -54,7 +54,7 @@ a {
   width: 100%;
   align-items: center;
   justify-content: center;
-  border-radius: 5rem;
+  border-radius: 0.5rem;
   padding: 1rem 1.5rem;
   border: none;
   outline: none;
@@ -128,13 +128,12 @@ main {
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: start;
 }
 #profilePhoto {
   width: 10rem;
   height: 10rem;
-  border-radius: 100%;
+  border-radius: 0.5rem;
   box-sizing: content-box;
   pointer-events: none;
   user-select: none;
@@ -144,10 +143,11 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   margin-top: 1rem;
   line-height: 1.25;
   word-break: break-word;
+  padding: 0.25rem 1rem;
 }
 .name {
   font-weight: bold;
@@ -176,12 +176,11 @@ main {
 #cta {
   display: flex;
   align-items: center;
-  border-radius: 5rem;
+  border-radius: 0.5rem;
   margin-top: 2rem;
   padding: 1rem 1.5rem;
   cursor: pointer;
   line-height: 0;
-  width: 100%;
   justify-content: center;
   box-sizing: border-box;
   .icon {
@@ -194,31 +193,28 @@ main {
 .actions {
   width: 100%;
   margin-top: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.actionsC {
-  width: 33.33%;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
 }
 .actionBtn {
-  padding: 0.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   a {
-    border-radius: 100%;
+    border-radius: 0.5rem;
     padding: 1rem;
     line-height: 0;
   }
   p {
-    margin: 0.5rem 0 0;
+    margin: 0 0 0 0.75rem;
     font-size: 0.9rem;
+    white-space: nowrap;
   }
 }
-.secBtn {
-  padding: 1rem;
+.secondary {
+  grid-template-columns: repeat(auto-fill, minmax(3.5rem, 1fr));
 }
 
 // Featured Content
@@ -226,17 +222,17 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 2rem 0 0;
+  margin: 3rem 0 0;
 }
 .section {
   font-weight: bold;
-  text-align: center;
   font-size: 1.3rem;
-  padding: 1rem 0;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
 }
 .media {
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   margin-top: 1rem;
   img {
     display: block;
@@ -272,35 +268,40 @@ video {
 .controls {
   padding: 1rem;
   font-size: 0.9rem;
-  text-align: center;
   width: 100%;
   box-sizing: border-box;
 }
 .pCtrl,
 .docDl {
   display: none;
-  flex-direction: column;
   align-items: center;
+  justify-content: start;
   width: 100%;
+  margin: 1rem 0 0;
 }
 .docDl {
   display: flex;
 }
+.fileSize {
+  margin: 0 0 0 1rem;
+}
+.currentTime {
+  margin: 0 0.5rem 0 1rem;
+}
 .seekBar {
   width: 100%;
   height: 0.5rem;
-  margin: 1.5rem 0 0.5rem;
-  border-radius: 5rem;
+  border-radius: 0.5rem;
   appearance: none;
   cursor: pointer;
 }
 .playPause,
 .dlBtn {
-  margin: 1rem 0 0.5rem;
   padding: 1rem;
-  border-radius: 5rem;
+  border-radius: 0.5rem;
   line-height: 0;
   cursor: pointer;
+  order: -1;
 }
 .pause {
   display: none;
@@ -323,8 +324,8 @@ video {
 .label {
   display: inline-block;
   font-size: 1rem;
-  margin: 1rem 0 0.5rem;
-  border-radius: 5rem;
+  margin: 1rem 0 0;
+  border-radius: 0.5rem;
   letter-spacing: 1px;
   padding: 1rem 1.5rem;
   p {

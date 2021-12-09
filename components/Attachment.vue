@@ -15,7 +15,13 @@
         class="w-12 h-12 rounded object-contain"
         v-if="imageAttached"
         :src="content[type].url"
-        :title="`${type == 'logo' ? 'Brand logo' : 'Card holder\'s photo'}`"
+        :title="`${
+          type == 'logo'
+            ? 'Brand logo'
+            : type == 'photo'
+            ? 'Card holder\'s photo'
+            : 'Cover image'
+        }`"
       />
       <button
         v-if="!imageAttached"
@@ -32,7 +38,9 @@
         <input
           :ref="`import${type}`"
           type="file"
-          :accept="`.png,.jpg,.jpeg,.gif,.webp${type == 'logo' ? ',.svg' : ''}`"
+          :accept="`.png,.jpg,.jpeg,.gif,.webp${
+            type == 'logo' || type == 'cover' ? ',.svg' : ''
+          }`"
           v-show="false"
           @change="fileLoaded($event, type, false)"
           @click="$event.target.files = null"
@@ -102,14 +110,14 @@ export default {
         let file = dropped ? e.dataTransfer.files[0] : e.target.files[0]
         let mime = file.type
         if (
-          type == 'logo' &&
+          (type == 'logo' || type == 'cover') &&
           file.type.match(/image\/(svg\+xml|png|jpeg|gif|webp)/)
         ) {
           this.imageLoaded(file, type, mime)
         } else if (file.type.match(/image\/(png|jpeg|gif|webp)/)) {
           this.imageLoaded(file, type, mime)
         } else {
-          if (type == 'logo') {
+          if (type == 'logo' || type == 'cover') {
             this.showAlert(
               'Unsupported file format.\nOnly jpeg, png, webp, gif and svg file can be attached.'
             )
@@ -130,7 +138,7 @@ export default {
           .split(':')[1]
           .split('/')[1]
           .match(/^\w+/g)[0]
-        if (type == 'logo' || mime.match(/gif|webp/)) {
+        if (type == 'logo' || type == 'cover' || mime.match(/gif|webp/)) {
           this.content[type] = {
             url: dataURI,
             blob: file,

@@ -1,24 +1,22 @@
 <template>
-  <div class="content" :style="{ backgroundColor: `${colors.cardBg.color}` }">
+  <div class="media" :style="{ backgroundColor: `${colors.cardBg.color}` }">
     <img
       v-if="product.image"
       :src="
         PreviewMode
           ? product.image.dataURI
-          : `./media/${getTitle(product.image.title)}.${
-              product.image.ext
-            }`
+          : `./media/${getTitle(product.image.title)}.${product.image.ext}`
       "
       alt="Product image"
     />
-    <div class="controls prodInfo">
-      <p class="title card">
+    <div class="controls cardColor prodInfo">
+      <p class="title">
         {{ product.title }}
       </p>
-      <p v-if="product.description" class="desc card">
+      <p v-if="product.description" class="sub">
         {{ product.description }}
       </p>
-      <p v-if="product.price" class="price card">
+      <p v-if="product.price" class="price">
         {{ product.price }}
       </p>
       <a
@@ -30,7 +28,7 @@
         }"
         target="_blank"
         :href="product.link"
-        ><p class="action">{{ product.label }}</p></a
+        ><p class="iconColor">{{ product.label }}</p></a
       >
     </div>
   </div>
