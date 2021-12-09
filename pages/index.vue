@@ -199,7 +199,7 @@
               placeholder="Paste public key block here"
             ></textarea>
           </div>
-          <div class="stepC relative mt-6">
+          <!-- <div class="stepC relative mt-6">
             <label for="pgp-fingerprint" class="flex justify-between ml-4"
               >Public key fingerprint<span
                 v-if="genInfo.fp"
@@ -218,7 +218,7 @@
               class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               placeholder="Paste public key fingerprint here"
             />
-          </div>
+          </div> -->
         </div>
         <div id="step-3" class="mt-16">
           <h2 class="font-extrabold text-2xl">Primary actions</h2>
