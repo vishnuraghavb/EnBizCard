@@ -9,6 +9,11 @@ body {
 }
 p {
   line-height: 1.5;
+  margin: 0;
+}
+h2,
+h3 {
+  margin: 0;
 }
 .icon {
   width: 1.5rem;
@@ -167,7 +172,7 @@ main {
 }
 .sub {
   font-size: 0.9rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 0;
   opacity: 0.8;
 }
 .textC {

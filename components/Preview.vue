@@ -497,6 +497,11 @@ export default {
   }
   p {
     line-height: 1.5;
+    margin: 0;
+  }
+  h2,
+  h3 {
+    margin: 0;
   }
   .icon {
     width: 1.5rem;
@@ -531,6 +536,7 @@ export default {
     flex-direction: column;
     align-items: center;
     margin: 0 1rem;
+    text-align: center;
     p {
       margin: 2rem;
       text-align: center;
@@ -644,7 +650,7 @@ export default {
   }
   .bizname {
     font-size: 0.9rem;
-    margin: 0.5rem 0 0 0;
+    margin: 0.5rem 0 0;
     opacity: 0.8;
   }
   .sub,
@@ -655,7 +661,7 @@ export default {
   }
   .sub {
     font-size: 0.9rem;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0;
     opacity: 0.8;
   }
   .textC {
@@ -842,6 +848,11 @@ export default {
   }
   p {
     line-height: 1.5;
+    margin: 0;
+  }
+  h2,
+  h3 {
+    margin: 0;
   }
   .icon {
     width: 1.5rem;
@@ -1000,7 +1011,7 @@ export default {
   }
   .sub {
     font-size: 0.9rem;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0;
     opacity: 0.8;
   }
   .textC {
@@ -1187,6 +1198,11 @@ export default {
   }
   p {
     line-height: 1.5;
+    margin: 0;
+  }
+  h2,
+  h3 {
+    margin: 0;
   }
   .icon {
     width: 1.5rem;
@@ -1306,7 +1322,7 @@ export default {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
   }
   #profilePhoto {
     width: 10rem;
@@ -1321,7 +1337,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     margin-top: 1rem;
     line-height: 1.25;
     word-break: break-word;
@@ -1345,7 +1361,7 @@ export default {
   }
   .sub {
     font-size: 0.9rem;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0;
     opacity: 0.8;
   }
   .textC {
@@ -1379,7 +1395,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     a {
       border-radius: 0.5rem;
       padding: 1rem;
@@ -1453,7 +1469,7 @@ export default {
   .docDl {
     display: none;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     width: 100%;
     margin: 1rem 0 0;
   }

@@ -9,6 +9,11 @@ body {
 }
 p {
   line-height: 1.5;
+  margin: 0;
+}
+h2,
+h3 {
+  margin: 0;
 }
 .icon {
   width: 1.5rem;
@@ -43,6 +48,7 @@ a {
   flex-direction: column;
   align-items: center;
   margin: 0 1rem;
+  text-align: center;
   p {
     margin: 2rem;
     text-align: center;
@@ -156,7 +162,7 @@ main {
 }
 .bizname {
   font-size: 0.9rem;
-  margin: 0.5rem 0 0 0;
+  margin: 0.5rem 0 0;
   opacity: 0.8;
 }
 .sub,
@@ -167,7 +173,7 @@ main {
 }
 .sub {
   font-size: 0.9rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 0;
   opacity: 0.8;
 }
 .textC {
