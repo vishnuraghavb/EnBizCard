@@ -7,6 +7,7 @@
         @closeCropper="closeCropper"
         :content="content"
         :mime="mime"
+        :type="filetype"
         :resizeImage="resizeImage"
       />
     </transition>
@@ -86,6 +87,7 @@ export default {
       showCropper: false,
       tempURL: null,
       mime: null,
+      filetype: null,
     }
   },
   computed: {
@@ -130,6 +132,7 @@ export default {
       }
     },
     imageLoaded(file, type, mime) {
+      console.log(type, mime)
       let reader = new FileReader()
       reader.onload = (f) => {
         let dataURI = f.target.result
@@ -138,7 +141,7 @@ export default {
           .split(':')[1]
           .split('/')[1]
           .match(/^\w+/g)[0]
-        if (type == 'logo' || type == 'cover' || mime.match(/gif|webp/)) {
+        if (type == 'logo' || mime.match(/svg|gif|webp/)) {
           this.content[type] = {
             url: dataURI,
             blob: file,
@@ -148,7 +151,8 @@ export default {
           }
           if (!mime.match(/svg|gif|webp/)) this.resizeImage(type, mime)
         } else {
-          this.content.photo.ext = ext
+          this.content[type].ext = ext
+          this.filetype = type
           this.mime = mime
           this.tempURL = dataURI
           this.showCropper = true

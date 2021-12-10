@@ -31,7 +31,7 @@
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 export default {
-  props: ['src', 'mime', 'content', 'resizeImage'],
+  props: ['src', 'mime', 'content', 'resizeImage', 'type'],
   data() {
     return {
       cropper: {},
@@ -45,14 +45,14 @@ export default {
       let vm = this
       const canvas = this.cropper.getCroppedCanvas()
       let url = canvas.toDataURL(this.mime)
-      this.content.photo.url = url
-      this.content.photo.mime = this.mime
+      this.content[this.type].url = url
+      this.content[this.type].mime = this.mime
       canvas.toBlob(
         (blob) => {
-          vm.content.photo.blob = new File([blob], 'photo', {
+          vm.content[vm.type].blob = new File([blob], 'photo', {
             type: this.mime,
           })
-          vm.resizeImage('photo', vm.mime)
+          vm.resizeImage(vm.type, vm.mime)
           vm.$emit('closeCropper')
         },
         this.mime,
@@ -64,8 +64,8 @@ export default {
     this.image = this.$refs.image
     this.cropper = new Cropper(this.image, {
       zoomable: false,
-      scalable: true,
-      aspectRatio: 1,
+      scalable: false,
+      aspectRatio: this.type == 'photo' ? 1 : 3 / 2,
       autoCropArea: 1,
       responsive: true,
       viewMode: 2,
