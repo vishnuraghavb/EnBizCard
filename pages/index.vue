@@ -199,26 +199,6 @@
               placeholder="Paste public key block here"
             ></textarea>
           </div>
-          <!-- <div class="stepC relative mt-6">
-            <label for="pgp-fingerprint" class="flex justify-between ml-4"
-              >Public key fingerprint<span
-                v-if="genInfo.fp"
-                class="mr-4"
-                :class="fingerprintIsValid ? 'text-green-500' : 'text-red-600'"
-                >{{
-                  fingerprintIsValid ? 'Valid' : 'Invalid fingerprint'
-                }}</span
-              >
-            </label>
-            <input
-              id="pgp-fingerprint"
-              spellcheck="false"
-              type="text"
-              v-model="genInfo.fp"
-              class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
-              placeholder="Paste public key fingerprint here"
-            />
-          </div> -->
         </div>
         <div id="step-3" class="mt-16">
           <h2 class="font-extrabold text-2xl">Primary actions</h2>
@@ -664,7 +644,6 @@ export default {
         biz: null,
         desc: null,
         key: null,
-        fp: null,
         tracker: null,
         fontLink: null,
         fontCss: null,
@@ -1159,9 +1138,6 @@ export default {
 
         return true
       } else return false
-    },
-    fingerprintIsValid() {
-      return this.genInfo.fp && this.genInfo.fp.match(/^[a-zA-Z0-9]{40}$/)
     },
     downloadChecked() {
       return this.downloadCheckList.filter((e) => e.checked).length == 3
