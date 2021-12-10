@@ -721,6 +721,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     margin: 2rem 0 0;
+    width: 100%;
   }
   .section {
     font-weight: bold;
@@ -1071,6 +1072,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     margin: 2rem 0 0;
+    width: 100%;
   }
   .section {
     font-weight: bold;
@@ -1417,6 +1419,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     margin: 3rem 0 0;
+    width: 100%;
   }
   .section {
     font-weight: bold;
