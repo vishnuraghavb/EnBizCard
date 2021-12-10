@@ -25,10 +25,11 @@
 - Click to contact via Phone, WhatsApp, Email, etc
 - Direct vCard download (lets user download your contact information to their phone)
 - Social media links
-- PGP public key sharing with fingerprint
+- PGP public key sharing
 - Share your card with anyone using QR-code or link
 - Showcase images, artworks, music, videos, poems, brochures, products, services or anything up to your imagination
 - Embed any kind of HTML content (videos, music, maps, contact forms, you name it.)
+- Themes
 - Track your audience with analytics
 - Custom fonts
 
