@@ -1207,14 +1207,6 @@ export default {
         URL: website,
         KEY: key,
         UID: `EnBizCard-${randomNumber}`,
-        PHOTO: {
-          type: this.images.photo.ext
-            ? this.images.photo.ext.toUpperCase()
-            : null,
-          data: this.images.photo.url
-            ? this.images.photo.url.split(',')[1]
-            : null,
-        },
       }
     },
   },

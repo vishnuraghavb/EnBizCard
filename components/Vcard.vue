@@ -12,7 +12,6 @@ TEL;TYPE=HOME:{{ vCard.HOME }}
 EMAIL;TYPE=WORK:{{ vCard.EMAIL }}
 URL:{{ vCard.URL }}
 KEY;TYPE=PGP;ENCODING=b:{{ vCard.KEY }}
-PHOTO;TYPE={{ vCard.PHOTO.type }};ENCODING=b:{{ vCard.PHOTO.data }}
 UID:{{ vCard.UID }}
 END:VCARD</pre
   >
