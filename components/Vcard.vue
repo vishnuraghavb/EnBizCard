@@ -9,6 +9,7 @@ TITLE:{{ vCard.TITLE }}
 TEL;TYPE=CELL:{{ vCard.CELL }}
 TEL;TYPE=WORK:{{ vCard.WORK }}
 TEL;TYPE=HOME:{{ vCard.HOME }}
+TEL;TYPE=MSG:{{ vCard.SMS }}
 EMAIL;TYPE=WORK:{{ vCard.EMAIL }}
 URL:{{ vCard.URL }}
 KEY;TYPE=PGP;ENCODING=b:{{ vCard.KEY }}

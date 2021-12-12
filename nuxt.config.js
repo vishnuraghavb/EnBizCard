@@ -202,7 +202,7 @@ export default {
         : 'img/[contenthash:7]-[width].[ext]',
     handleImages: ['jpeg', 'png', 'svg', 'webp', 'gif'],
     optimizeImages: true,
-    optimizeImagesInDev: true,
+    optimizeImagesInDev: false,
     defaultImageLoader: 'img-loader',
     optipng: {
       optimizationLevel: 7,

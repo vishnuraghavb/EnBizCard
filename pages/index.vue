@@ -1179,6 +1179,7 @@ export default {
         CELL: getNumber('Mobile'),
         WORK: getNumber('Office'),
         HOME: getNumber('Home'),
+        SMS: getNumber('SMS'),
         EMAIL: email,
         URL: website,
         KEY: key,
