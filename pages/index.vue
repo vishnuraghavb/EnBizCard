@@ -148,6 +148,18 @@
             />
           </div>
           <div class="stepC mt-6">
+            <label for="fullname" class="ml-4">Gender pronouns</label>
+            <input
+              id="fullname"
+              spellcheck="false"
+              type="text"
+              v-model="genInfo.pronouns"
+              placeholder="He/Him/His"
+              autocapitalize="words"
+              class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+            />
+          </div>
+          <div class="stepC mt-6">
             <label for="job-title" class="ml-4">Job title</label>
             <input
               id="job-title"
@@ -640,6 +652,7 @@ export default {
       },
       genInfo: {
         name: null,
+        pronouns: null,
         title: null,
         biz: null,
         desc: null,

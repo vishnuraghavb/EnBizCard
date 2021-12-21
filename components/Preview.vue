@@ -166,6 +166,9 @@
               <p class="name">
                 {{ genInfo.name }}
               </p>
+              <p v-if="genInfo.pronouns" class="pronouns">
+                ({{ genInfo.pronouns }})
+              </p>
               <p class="jobtitle">
                 {{ genInfo.title }}
               </p>
@@ -648,6 +651,13 @@ export default {
     font-size: 1.5rem;
     margin: 0;
   }
+  .pronouns {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: normal;
+    margin: 0 0 0.5rem;
+  }
   .bizname {
     font-size: 0.9rem;
     margin: 0.5rem 0 0;
@@ -999,6 +1009,13 @@ export default {
     font-size: 1.5rem;
     margin: 0;
   }
+  .pronouns {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: normal;
+    margin: 0 0 0.5rem;
+  }
   .bizname {
     font-size: 0.9rem;
     margin: 0.5rem 0 0 0;
@@ -1349,6 +1366,13 @@ export default {
     font-weight: bold;
     font-size: 1.5rem;
     margin: 0;
+  }
+  .pronouns {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: normal;
+    margin: 0 0 0.5rem;
   }
   .bizname {
     font-size: 0.9rem;
