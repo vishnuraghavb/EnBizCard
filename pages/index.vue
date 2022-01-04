@@ -486,6 +486,25 @@
             </p>
           </div>
         </div>
+        <div id="step-11" class="mt-16">
+          <h2 class="font-extrabold text-2xl">Hosting</h2>
+          <div class="stepC mt-6">
+            <label for="font-css" class="ml-4">Hosted card URL</label>
+            <input
+              spellcheck="false"
+              type="text"
+              id="font-css"
+              v-model="hostedURL"
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
+              placeholder="https://yoursite/vcard/username"
+            />
+            <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              Only paste your hosting URL if you've already decided where you
+              want to host this digital business card. If you haven't decided
+              yet, please skip this step.
+            </p>
+          </div>
+        </div>
         <Download
           :downloadCheckList="downloadCheckList"
           :downloadChecked="downloadChecked"
@@ -516,7 +535,7 @@
                     class="pl-4 h-12 w-full bg-black rounded text-gray-500"
                     aria-label="vCard URL"
                     disabled
-                    :value="'yoursite/vcard/' + username + '/'"
+                    :value="'https://yoursite/vcard/' + username"
                     tabindex="-1"
                   />
                   <div
@@ -673,6 +692,7 @@ export default {
             value: null,
             label: 'Mobile number',
             order: 0,
+            isURL: 0,
           },
           {
             name: 'Office',
@@ -682,6 +702,7 @@ export default {
             value: null,
             label: 'Office number',
             order: 1,
+            isURL: 0,
           },
           {
             name: 'Home',
@@ -691,6 +712,7 @@ export default {
             value: null,
             label: 'Home number',
             order: 2,
+            isURL: 0,
           },
           {
             name: 'SMS',
@@ -700,6 +722,7 @@ export default {
             value: null,
             label: 'SMS mobile number',
             order: 3,
+            isURL: 0,
           },
           {
             name: 'Email',
@@ -717,6 +740,7 @@ export default {
             value: null,
             label: 'Website URL',
             order: 5,
+            isURL: 1,
           },
           {
             name: 'Store',
@@ -725,6 +749,7 @@ export default {
             value: null,
             label: 'Online Store URL',
             order: 6,
+            isURL: 1,
           },
           {
             name: 'Location',
@@ -733,6 +758,7 @@ export default {
             value: null,
             label: 'Map location URL',
             order: 7,
+            isURL: 1,
           },
 
           {
@@ -743,6 +769,7 @@ export default {
             value: null,
             label: 'Signal mobile number',
             order: 8,
+            isURL: 0,
           },
           {
             name: 'Telegram',
@@ -752,6 +779,7 @@ export default {
             value: null,
             label: 'Telegram username',
             order: 9,
+            isURL: 1,
           },
           {
             name: 'Matrix',
@@ -761,14 +789,16 @@ export default {
             value: null,
             label: 'Matrix userID',
             order: 10,
+            isURL: 1,
           },
           {
-            name: 'Whatsapp',
+            name: 'WhatsApp',
             icon: 'whatsapp',
             placeholder: 'https://wa.me/userID',
             value: null,
             label: 'WhatsApp profile URL',
             order: 11,
+            isURL: 1,
           },
           {
             name: 'Messenger',
@@ -778,6 +808,7 @@ export default {
             value: null,
             label: 'Messenger username',
             order: 12,
+            isURL: 1,
           },
           {
             name: 'Skype',
@@ -788,6 +819,7 @@ export default {
             value: null,
             label: 'Skype username',
             order: 13,
+            isURL: 1,
           },
           {
             name: 'Line',
@@ -797,6 +829,7 @@ export default {
             value: null,
             label: 'Line profile ID',
             order: 14,
+            isURL: 1,
           },
           {
             name: 'Viber',
@@ -806,6 +839,7 @@ export default {
             value: null,
             label: 'Viber mobile number',
             order: 15,
+            isURL: 1,
           },
           {
             name: 'WeChat',
@@ -815,6 +849,7 @@ export default {
             value: null,
             label: 'WeChat profile ID',
             order: 16,
+            isURL: 1,
           },
           {
             name: 'Calendar',
@@ -823,6 +858,7 @@ export default {
             value: null,
             label: 'Calendar URL',
             order: 17,
+            isURL: 1,
           },
         ],
         secondaryActions: [
@@ -1023,7 +1059,7 @@ export default {
           {
             name: 'Spotify',
             icon: 'spotify',
-            href: 'https://spotify.com/',
+            href: 'https://open.spotify.com/user/',
             placeholder: 'username',
             value: null,
             color: '#1ed760',
@@ -1140,6 +1176,7 @@ export default {
           content: [],
         },
       ],
+      hostedURL: null,
       footerCredit: true,
       PreviewMode: true,
       content: null,
@@ -1193,20 +1230,42 @@ export default {
       let website = this.primaryActions
         .map((e) => (e.name == 'Website' ? e.value : null))
         .filter((e) => e)[0]
+      let actions = [
+        ...this.primaryActions,
+        ...this.secondaryActions.map((e) => {
+          return { ...e, isURL: 1 }
+        }),
+      ]
+      let urls = actions
+        .map((e) => {
+          if (e.isURL && e.value) {
+            return {
+              title: e.name,
+              url:
+                (e.href ? e.href : '') + e.value + (e.hrefEnd ? e.hrefEnd : ''),
+            }
+          }
+          return false
+        })
+        .filter((e) => e)
       let key = this.pubKeyIsValid ? window.btoa(this.genInfo.key) : null
-      let randomNumber = Math.floor(1000000 + Math.random() * 900000)
+      let randomNumber = Math.floor(100000000 + Math.random() * 900000)
       return {
-        FN: this.genInfo.name,
-        TITLE: this.genInfo.title,
-        ORG: this.genInfo.biz,
-        CELL: getNumber('Mobile'),
-        WORK: getNumber('Office'),
-        HOME: getNumber('Home'),
-        SMS: getNumber('SMS'),
-        EMAIL: email,
-        URL: website,
-        KEY: key,
-        UID: `EnBizCard-${randomNumber}`,
+        fn: this.genInfo.name,
+        title: this.genInfo.title,
+        org: this.genInfo.biz,
+        cell: getNumber('Mobile'),
+        work: getNumber('Office'),
+        home: getNumber('Home'),
+        sms: getNumber('SMS'),
+        signal: getNumber('Signal'),
+        email,
+        hostedURL: this.hostedURL,
+        website,
+        urls,
+        key,
+        note: this.genInfo.desc,
+        uid: `EnBizCard-${randomNumber}`,
       }
     },
   },

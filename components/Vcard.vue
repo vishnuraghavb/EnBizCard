@@ -2,18 +2,22 @@
   <pre v-show="false" ref="vCard">
 BEGIN:VCARD
 VERSION:3.0
-N:{{ vCard.FN }};;;;
-FN:{{ vCard.FN }}
-ORG:{{ vCard.ORG }}
-TITLE:{{ vCard.TITLE }}
-TEL;TYPE=CELL:{{ vCard.CELL }}
-TEL;TYPE=WORK:{{ vCard.WORK }}
-TEL;TYPE=HOME:{{ vCard.HOME }}
-TEL;TYPE=MSG:{{ vCard.SMS }}
-EMAIL;TYPE=WORK:{{ vCard.EMAIL }}
-URL:{{ vCard.URL }}
-KEY;TYPE=PGP;ENCODING=b:{{ vCard.KEY }}
-UID:{{ vCard.UID }}
+N:{{ vCard.fn }};;;;
+FN:{{ vCard.fn }}
+ORG:{{ vCard.org }}
+TITLE:{{ vCard.title }}
+TEL;TYPE=CELL:{{ vCard.cell }}
+TEL;TYPE=WORK:{{ vCard.work }}
+TEL;TYPE=HOME:{{ vCard.home }}
+TEL;TYPE=MSG:{{ vCard.sms }}
+TEL;TYPE=SIGNAL:{{ vCard.signal }}
+EMAIL;TYPE=WORK:{{ vCard.email }}
+URL;TYPE=Digital Business Card:{{ vCard.hostedURL }}
+URL:{{ vCard.website }}
+{{ getURLs }}
+KEY;TYPE=PGP;ENCODING=b:{{ vCard.key }}
+NOTE:{{ vCard.note }}
+UID:{{ vCard.uid }}
 END:VCARD</pre
   >
 </template>
@@ -21,5 +25,12 @@ END:VCARD</pre
 <script>
 export default {
   props: ['vCard'],
+  computed: {
+    getURLs() {
+      return this.vCard.urls
+        .map((e) => `URL;TYPE=${e.title}:${e.url}`)
+        .join('\n')
+    },
+  },
 }
 </script>
