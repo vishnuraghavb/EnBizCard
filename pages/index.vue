@@ -934,10 +934,10 @@ export default {
             name: 'YouTube',
             icon: 'youtube',
             href: 'https://youtube.com/',
-            placeholder: 'channelname',
+            placeholder: 'channel name or ID',
             value: null,
             color: '#ff0000',
-            label: 'Youtube channelname',
+            label: 'Youtube channel name or ID',
           },
           {
             name: 'Vimeo',
