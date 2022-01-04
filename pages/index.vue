@@ -924,7 +924,7 @@ export default {
           {
             name: 'LinkedIn',
             icon: 'linkedin',
-            href: 'https://linkedin.com/',
+            href: 'https://linkedin.com/in/',
             placeholder: 'username',
             value: null,
             color: '#0077b5',
