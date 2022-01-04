@@ -794,7 +794,7 @@ export default {
           {
             name: 'WhatsApp',
             icon: 'whatsapp',
-            placeholder: 'https://wa.me/userID',
+            placeholder: 'https://wa.me/profileID',
             value: null,
             label: 'WhatsApp profile URL',
             order: 11,
