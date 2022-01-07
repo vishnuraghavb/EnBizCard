@@ -144,16 +144,29 @@
             Recommended profile photo size is 320 x 320 pixels, with an aspect
             ratio of 1:1
           </p>
-          <div class="stepC mt-6">
-            <label for="fullname" class="ml-4">Full name</label>
-            <input
-              id="fullname"
-              spellcheck="false"
-              type="text"
-              v-model="genInfo.name"
-              autocapitalize="words"
-              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
-            />
+          <div class="stepC mt-6 grid grid-cols-2 gap-4">
+            <div>
+              <label for="firstname" class="ml-4">First name</label>
+              <input
+                id="firstname"
+                spellcheck="false"
+                type="text"
+                v-model="genInfo.fname"
+                autocapitalize="words"
+                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              />
+            </div>
+            <div>
+              <label for="lastname" class="ml-4">Last name</label>
+              <input
+                id="lastname"
+                spellcheck="false"
+                type="text"
+                v-model="genInfo.lname"
+                autocapitalize="words"
+                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              />
+            </div>
           </div>
           <div class="stepC mt-6">
             <label for="fullname" class="ml-4">Gender pronouns</label>
@@ -678,7 +691,8 @@ export default {
         },
       },
       genInfo: {
-        name: null,
+        fname: null,
+        lname: null,
         pronouns: null,
         title: null,
         biz: null,
@@ -1197,6 +1211,11 @@ export default {
   },
   computed: {
     ...mapState(['theme']),
+    getFullname() {
+      let fn = this.genInfo.fname
+      let ln = this.genInfo.lname
+      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null
+    },
     pubKeyIsValid() {
       if (this.genInfo.key) {
         if (!this.genInfo.key.match(/^(-----BEGIN PGP PUBLIC KEY BLOCK-----)/))
@@ -1212,8 +1231,8 @@ export default {
       return this.downloadCheckList.filter((e) => e.checked).length == 3
     },
     username() {
-      return this.genInfo.name
-        ? this.genInfo.name.toLowerCase().replace(/\W+/g, '')
+      return this.getFullname
+        ? this.getFullname.toLowerCase().replace(/\W+/g, '')
         : 'username'
     },
     orderedPrimaryActions() {
@@ -1264,7 +1283,8 @@ export default {
       let key = this.pubKeyIsValid ? window.btoa(this.genInfo.key) : null
       let randomNumber = Math.floor(100000000 + Math.random() * 900000)
       return {
-        fn: this.genInfo.name,
+        fn: this.genInfo.fname,
+        ln: this.genInfo.lname,
         title: this.genInfo.title,
         org: this.genInfo.biz,
         cell: getNumber('Mobile'),
@@ -1359,7 +1379,7 @@ export default {
       })
       saveAs(
         window.URL.createObjectURL(blob),
-        `${this.genInfo.name}'s public key.asc`
+        `${this.getFullname}'s public key.asc`
       )
     },
     async resizeImage(type, mime, index1, index2) {
@@ -1574,7 +1594,7 @@ export default {
           }
 
           //  Public key
-          let name = this.genInfo.name
+          let name = this.getFullname
           if (this.pubKeyIsValid) {
             zip
               .folder(username)

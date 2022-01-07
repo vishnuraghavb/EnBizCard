@@ -23,18 +23,18 @@
           <meta name="designer" content="Vishnu Raghav" />
           <meta
             property="og:title"
-            :content="`${genInfo.name}'s Digital Business Card`"
+            :content="`${getFullname}'s Digital Business Card`"
           />
           <meta
             property="twitter:title"
-            :content="`${genInfo.name}'s Digital Business Card`"
+            :content="`${getFullname}'s Digital Business Card`"
           />
           <!-- prettier-ignore -->
           <script>
             "http"==window.location.href.substr(0,4)&&"/"!=window.location.href.slice(-1)&&window.location.replace(window.location.href+"/");
           </script>
           <link v-if="getCssHref" :href="getCssHref" rel="stylesheet" />
-          <title>{{ genInfo.name }}'s Digital Business Card</title>
+          <title>{{ getFullname }}'s Digital Business Card</title>
           <style>
             #body{ font-family: sans-serif; } input[type='range']::-moz-range-track { background: none; } input[type='range']::-moz-range-thumb { -moz-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: {{theme === 1? '100%': '0.25rem'}}; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: {{theme === 1? '100%': '0.25rem'}}; border: none; background: {{colors.buttonBg.color}}; z-index: 3; cursor: pointer; } .closeColor{ {{hasLightBG('mainBg') ? 'filter:invert(1) ':''}} } .topAction { {{ hasLightBG('logoBg') ? 'filter:invert(1) ':''}}} .iconColor{ color:#eee; {{hasLightBG('buttonBg') ? 'filter:invert(1)' : null}} } .cardColor{ {{hasLightBG('cardBg') && 'color:#222 !important'}} } .textColor{ {{hasLightBG('mainBg') ? 'color:#222 !important' : 'color:#eee !important'}} } .seekbarColor{  {{`background:${colors.buttonBg.color}80 !important`}} }
           </style>
@@ -64,7 +64,7 @@
                 Use my public key to send me encrypted messages
               </p>
               <a
-                :href="!PreviewMode && `./${genInfo.name}'s public key.asc`"
+                :href="!PreviewMode && `./${getFullname}'s public key.asc`"
                 download
                 target="_blank"
                 id="dlKey"
@@ -176,7 +176,7 @@
             />
             <div id="info" class="textColor">
               <p class="name">
-                {{ genInfo.name }}
+                {{ getFullname }}
               </p>
               <p v-if="genInfo.pronouns" class="pronouns">
                 ({{ genInfo.pronouns }})
@@ -393,6 +393,11 @@ export default {
   },
   computed: {
     ...mapState(['theme']),
+    getFullname() {
+      let fn = this.genInfo.fname
+      let ln = this.genInfo.lname
+      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null
+    },
     hasOnlyProfilePic() {
       return !(this.images.cover.url || this.images.logo.url)
     },

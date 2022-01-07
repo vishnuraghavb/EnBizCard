@@ -2,7 +2,7 @@
   <pre v-show="false" ref="vCard">
 BEGIN:VCARD
 VERSION:3.0
-N:{{ vCard.fn }};;;;
+N:{{ getSplitName }}
 FN:{{ vCard.fn }}
 ORG:{{ vCard.org }}
 TITLE:{{ vCard.title }}
@@ -30,6 +30,11 @@ export default {
       return this.vCard.urls
         .map((e) => `URL;TYPE=${e.title}:${e.url}`)
         .join('\n')
+    },
+    getSplitName() {
+      let fn = this.vCard.fn
+      let ln = this.vCard.ln
+      return `${ln ? ln : ''};${fn ? fn : ''};;;`
     },
   },
 }
