@@ -3,7 +3,7 @@
 BEGIN:VCARD
 VERSION:3.0
 N:{{ getSplitName }}
-FN:{{ vCard.fn }}
+FN:{{ getFullname }}
 ORG:{{ vCard.org }}
 TITLE:{{ vCard.title }}
 TEL;TYPE=CELL:{{ vCard.cell }}
@@ -35,6 +35,11 @@ export default {
       let fn = this.vCard.fn
       let ln = this.vCard.ln
       return `${ln ? ln : ''};${fn ? fn : ''};;;`
+    },
+    getFullname() {
+      let fn = this.vCard.fn
+      let ln = this.vCard.ln
+      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null
     },
   },
 }
