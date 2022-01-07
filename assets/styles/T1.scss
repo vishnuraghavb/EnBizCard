@@ -90,7 +90,6 @@ header {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  aspect-ratio: 1;
 }
 .headerImgC {
   display: grid;
@@ -103,7 +102,7 @@ header {
   grid-column: 1;
   grid-row: 1;
   width: 100%;
-  height: 100%;
+  height: 20rem;
   object-position: top center;
   object-fit: cover;
 }
@@ -119,6 +118,7 @@ header {
 #topActions {
   flex-direction: row-reverse;
   justify-content: space-between;
+  align-items: start;
   & > div {
     display: flex;
   }

@@ -149,11 +149,23 @@
                 :src="
                   PreviewMode ? images.logo.url : `./logo.${images.logo.ext}`
                 "
+                :style="{
+                  margin: images.photo.url
+                    ? images.cover.url
+                      ? '3rem 0 6rem'
+                      : '3rem 0 8rem'
+                    : '3rem 0',
+                }"
                 alt="Logo"
               />
             </div>
           </header>
-          <main :style="{ backgroundColor: `${colors.mainBg.color}` }">
+          <main
+            :style="{
+              backgroundColor: `${colors.mainBg.color}`,
+              marginTop: `${hasOnlyProfilePic ? '5rem' : '0'}`,
+            }"
+          >
             <img
               id="profilePhoto"
               v-if="images.photo.url"
@@ -381,6 +393,9 @@ export default {
   },
   computed: {
     ...mapState(['theme']),
+    hasOnlyProfilePic() {
+      return !(this.images.cover.url || this.images.logo.url)
+    },
     getFeaturedMusic() {
       return this.featured.music
     },
@@ -581,7 +596,6 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    aspect-ratio: 1;
   }
   .headerImgC {
     display: grid;
@@ -594,7 +608,7 @@ export default {
     grid-column: 1;
     grid-row: 1;
     width: 100%;
-    height: 100%;
+    height: 20rem;
     object-position: top center;
     object-fit: cover;
   }
@@ -610,6 +624,7 @@ export default {
   #topActions {
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: flex-start;
     & > div {
       display: flex;
     }
@@ -939,7 +954,6 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    aspect-ratio: 1;
   }
   .headerImgC {
     display: grid;
@@ -952,7 +966,7 @@ export default {
     grid-column: 1;
     grid-row: 1;
     width: 100%;
-    height: 100%;
+    height: 20rem;
     object-position: top center;
     object-fit: cover;
   }
@@ -968,6 +982,7 @@ export default {
   #topActions {
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: flex-start;
     & > div {
       display: flex;
     }
@@ -1297,7 +1312,6 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    aspect-ratio: 1;
   }
   .headerImgC {
     display: grid;
@@ -1310,7 +1324,7 @@ export default {
     grid-column: 1;
     grid-row: 1;
     width: 100%;
-    height: 100%;
+    height: 20rem;
     object-position: top center;
     object-fit: cover;
   }
@@ -1326,6 +1340,7 @@ export default {
   #topActions {
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: flex-start;
     & > div {
       display: flex;
     }
