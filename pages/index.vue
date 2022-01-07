@@ -1257,6 +1257,10 @@ export default {
           return false
         })
         .filter((e) => e)
+
+      let note = this.genInfo.desc
+        ? this.genInfo.desc.replace(/[\r\n]+/gm, '')
+        : null
       let key = this.pubKeyIsValid ? window.btoa(this.genInfo.key) : null
       let randomNumber = Math.floor(100000000 + Math.random() * 900000)
       return {
@@ -1273,7 +1277,7 @@ export default {
         website,
         urls,
         key,
-        note: this.genInfo.desc,
+        note,
         uid: `EnBizCard-${randomNumber}`,
       }
     },
