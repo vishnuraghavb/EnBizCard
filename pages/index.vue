@@ -120,10 +120,14 @@
               :content="images"
               type="cover"
               :resizeImage="resizeImage"
-              label="Add cover image"
+              label="Add cover photo"
               description="suggested format: svg, jpeg, png or gif"
               :showAlert="showAlert"
             />
+            <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              Recommended cover photo size is 960 x 640 pixels, with an aspect
+              ratio of 3:2
+            </p>
           </div>
         </div>
         <div id="step-2" class="mt-16">
@@ -132,10 +136,14 @@
             :content="images"
             type="photo"
             :resizeImage="resizeImage"
-            label="Add photo"
+            label="Add profile photo"
             description="suggested format: jpeg, png or gif"
             :showAlert="showAlert"
           />
+          <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+            Recommended profile photo size is 320 x 320 pixels, with an aspect
+            ratio of 1:1
+          </p>
           <div class="stepC mt-6">
             <label for="fullname" class="ml-4">Full name</label>
             <input
@@ -862,13 +870,14 @@ export default {
           },
         ],
         secondaryActions: [
+          // todo: Fix Instagram gradient icon preview
           {
             name: 'Instagram',
             icon: 'instagram',
             href: 'https://instagram.com/',
             placeholder: 'username',
             value: null,
-            color: '#405de6',
+            color: '#c32aa3',
             label: 'Instagram username',
           },
           {
@@ -1375,10 +1384,10 @@ export default {
             canvas.width = canvas.height = 320
           } else {
             if (type == 'logo') {
-              maxWidth = 1056
-              maxHeight = 288
+              maxWidth = 960
+              maxHeight = 192
             } else {
-              maxWidth = maxHeight = 1296
+              maxWidth = maxHeight = 960
             }
             let width = img.width
             let height = img.height
