@@ -89,7 +89,7 @@
               files and share the link to this
               <a
                 class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
-                href="https://enbizcard.vercel.app/hosting-guide"
+                href="https://enbizcard.vishnuraghav.com/hosting-guide"
                 target="_blank"
                 >Hosting Guide</a
               >.
