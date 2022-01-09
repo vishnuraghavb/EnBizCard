@@ -21,7 +21,7 @@
       <div
         class="w-6 h-6"
         :class="name == 'secondaryActions' ? null : 'action'"
-        v-html="require(`~/assets/icons/${item.icon}.svg?include`)"
+        v-html="getSVG(item)"
       ></div>
     </div>
     <div class="w-full">
@@ -50,8 +50,10 @@
 </template>
 
 <script>
+import utils from '@/mixins/utils'
 export default {
   props: ['name', 'item', 'index', 'type', 'buttonBg', 'removeAction'],
+  mixins: [utils],
   mounted() {
     this.$refs.input.focus()
   },

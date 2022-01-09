@@ -19,7 +19,7 @@
             name="author"
             content="EnBizCard - An Open-Source Digital Business Card Generator"
           />
-          <meta name="url" content="https://enbizcard.vercel.app/" />
+          <meta name="url" content="https://enbizcard.vishnuraghav.com/" />
           <meta name="designer" content="Vishnu Raghav" />
           <meta
             property="og:title"
@@ -252,12 +252,7 @@
                     :style="{ backgroundColor: item.color }"
                     :aria-label="item.name"
                   >
-                    <div
-                      class="icon"
-                      v-html="
-                        require(`~/assets/icons/${item.icon}.svg?include`)
-                      "
-                    ></div>
+                    <div class="icon" v-html="getSVG(item)"></div>
                   </a>
                 </div>
               </div>
@@ -341,7 +336,7 @@
             Created with
             <a
               class="textColor"
-              href="https://enbizcard.vercel.app/"
+              href="https://enbizcard.vishnuraghav.com/"
               target="_blank"
               rel="noopener noreferrer"
               >EnBizCard</a
@@ -357,6 +352,7 @@
 import MediaPlayer from './MediaPlayer'
 import DocumentDownloader from './DocumentDownloader'
 import ProductShowcase from './ProductShowcase'
+import utils from '@/mixins/utils'
 import { mapState } from 'vuex'
 
 export default {
@@ -376,6 +372,7 @@ export default {
     'hasLightBG',
     'pubKeyIsValid',
   ],
+  mixins: [utils],
   components: {
     MediaPlayer,
     DocumentDownloader,

@@ -207,7 +207,6 @@ export default {
     optipng: {
       optimizationLevel: 7,
     },
-    svgo: {},
   },
   /*
    ** Nuxt.js modules

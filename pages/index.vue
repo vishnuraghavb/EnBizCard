@@ -891,7 +891,9 @@ export default {
             href: 'https://instagram.com/',
             placeholder: 'username',
             value: null,
-            color: '#c32aa3',
+            color: '#ffffff',
+            light: 1,
+            gradientIcon: 1,
             label: 'Instagram username',
           },
           {
@@ -947,11 +949,11 @@ export default {
           {
             name: 'LinkedIn',
             icon: 'linkedin',
-            href: 'https://linkedin.com/in/',
-            placeholder: 'username',
+            href: 'https://linkedin.com/',
+            placeholder: 'in/username or company/companyname',
             value: null,
             color: '#0077b5',
-            label: 'Linkedin username',
+            label: 'Linkedin username or companyname',
           },
           {
             name: 'YouTube',
@@ -1190,6 +1192,15 @@ export default {
             color: '#fff',
             light: 1,
             label: 'Cash App username',
+          },
+          {
+            name: 'Siilo',
+            icon: 'siilo',
+            href: 'https://app.siilo.com/qr/',
+            placeholder: 'userid',
+            value: null,
+            color: '#17233b',
+            label: 'Siilo userid',
           },
         ],
       },
@@ -1527,7 +1538,7 @@ export default {
           })
           let guide = new Blob(
             [
-              '<html><head><meta http-equiv="refresh" content="0; url=https://enbizcard.vercel.app/hosting-guide" /></head></html>',
+              '<html><head><meta http-equiv="refresh" content="0; url=https://enbizcard.vishnuraghav.com/hosting-guide" /></head></html>',
             ],
             {
               type: 'text/html',
