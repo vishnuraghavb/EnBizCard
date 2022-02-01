@@ -257,4 +257,5 @@ export default {
   robots: {
     UserAgent: '*',
   },
+  telemetry: false,
 }
