@@ -1168,7 +1168,24 @@ export default {
             light: 1,
             label: 'Cash App username',
           },
-        ],
+          {
+            name: 'App Store',
+            icon: 'appstore',
+            href: 'https://apps.apple.com/mx/app/',
+            placeholder: 'App ID',
+            value: null,
+            color: '#17233b',
+            label: 'App Store AppID',
+          },
+          {
+            name: 'Play Store',
+            icon: 'playstore',
+            href: 'https://play.google.com/store/apps/details?id=',
+            placeholder: 'App ID',
+            value: null,
+            color: '#17233b',
+            label: 'Play Store AppID',
+          },],
       },
       featured: [
         {
