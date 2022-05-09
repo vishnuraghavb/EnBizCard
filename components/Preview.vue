@@ -258,7 +258,7 @@
                     :href="getHref(item)"
                     target="_blank"
                     rel="noopener noreferrer"
-                    :style="{ backgroundColor: item.color }"
+                    :style="{ background: item.color }"
                     :aria-label="item.name"
                   >
                     <div class="icon" v-html="getSVG(item)"></div>

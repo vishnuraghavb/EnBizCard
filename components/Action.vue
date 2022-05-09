@@ -12,7 +12,7 @@
     <div
       class="p-3 shrink-0 rounded-l"
       :style="{
-        backgroundColor: `${
+        background: `${
           name == 'secondaryActions' ? item.color : buttonBg
         }`,
       }"

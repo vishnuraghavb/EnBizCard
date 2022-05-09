@@ -613,7 +613,7 @@
                   duration-200
                   focus:outline-none
                 "
-                :style="{ backgroundColor: action.color }"
+                :style="{ background: action.color }"
                 :title="
                   action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
                 "
@@ -1652,10 +1652,27 @@ export default {
             name: 'Siilo',
             icon: 'siilo',
             href: 'https://app.siilo.com/qr/',
-            placeholder: 'userid',
+            placeholder: 'userID',
             value: null,
             color: '#17233b',
-            label: 'Siilo userid',
+            label: 'Siilo userID',
+          },
+          {
+            name: 'App Store',
+            icon: 'appstore',
+            placeholder: 'Developer/App URL',
+            value: null,
+            color: 'linear-gradient(#5fc9f8, #147efb)',
+            label: 'App Store Developer/App URL',
+          },
+          {
+            name: 'Play Store',
+            icon: 'playstore',
+            placeholder: 'Developer/App URL',
+            value: null,
+            color: '#fff',
+            light: 1,
+            label: 'Play Store Developer/App URL',
           },
         ],
       },
