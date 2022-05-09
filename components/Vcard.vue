@@ -5,6 +5,7 @@ VERSION:3.0
 N:{{ getSplitName }}
 FN:{{ getFullname }}
 ORG:{{ vCard.org }}
+ADR;TYPE=WORK:{{ vCard.addr }}
 TITLE:{{ vCard.title }}
 TEL;TYPE=CELL:{{ vCard.cell }}
 TEL;TYPE=WORK:{{ vCard.work }}

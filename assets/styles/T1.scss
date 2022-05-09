@@ -118,7 +118,7 @@ header {
 #topActions {
   flex-direction: row-reverse;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
   & > div {
     display: flex;
   }
@@ -171,6 +171,10 @@ main {
   font-size: 0.9rem;
   margin: 0.5rem 0 0;
   opacity: 0.8;
+}
+.bizaddr {
+  font-size: 0.8rem;
+  opacity: 0.6;
 }
 .sub,
 .textC {
@@ -261,7 +265,8 @@ main {
 }
 .embedded {
   position: relative;
-  padding-top: 56.25%;
+  padding-top: 100%;
+  // padding-top: 56.25%;
   iframe {
     position: absolute;
     top: 0;

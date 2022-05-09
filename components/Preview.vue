@@ -1,6 +1,11 @@
 <template>
   <div
-    class="overflow-y-scroll max-hd border-t-0 border-4 border-black bg-gray-900"
+    class="
+      overflow-y-scroll
+      max-hd
+      border-t-0 border-4 border-black
+      bg-gray-900
+    "
   >
     <div :id="`Theme${theme}`">
       <html
@@ -187,6 +192,9 @@
               </p>
               <p class="bizname">
                 {{ genInfo.biz }}
+              </p>
+              <p class="bizaddr" v-if="genInfo.addr">
+                {{ genInfo.addr }}
               </p>
             </div>
             <p class="sub textColor" v-if="genInfo.desc">
@@ -686,6 +694,10 @@ export default {
     margin: 0.5rem 0 0;
     opacity: 0.8;
   }
+  .bizaddr {
+    font-size: 0.8rem;
+    opacity: 0.6;
+  }
   .sub,
   .textC {
     font-size: 1rem;
@@ -1045,6 +1057,10 @@ export default {
     margin: 0.5rem 0 0 0;
     opacity: 0.8;
   }
+  .bizaddr {
+    font-size: 0.8rem;
+    opacity: 0.6;
+  }
   .sub,
   .textC {
     font-size: 1rem;
@@ -1403,6 +1419,10 @@ export default {
     font-size: 0.9rem;
     margin: 0.5rem 0 0 0;
     opacity: 0.8;
+  }
+  .bizaddr {
+    font-size: 0.8rem;
+    opacity: 0.6;
   }
   .sub,
   .textC {
