@@ -1,10 +1,10 @@
 <template>
-  <div id="donate" class="mt-16">
+  <div id="help" class="mt-16">
     <h2 class="font-extrabold text-2xl">
       Having issues, suggestions and feedback?
     </h2>
     <div class="stepC mt-6">
-      <div class="donateBtn flex items-center mt-6">
+      <div class="flex items-center mt-6">
         <a
           href="https://t.me/enbizcard"
           target="_blank"
