@@ -57,7 +57,7 @@
       </p>
       <button
         v-else
-        class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+        class="p-1 m-2 shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
         @click="content[type].url = null"
         :aria-label="`Remove ${type}`"
         :title="`Remove ${type}`"

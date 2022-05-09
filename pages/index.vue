@@ -21,7 +21,7 @@
         ></div>
         <button
           class="p-3 mx-4 font-extrabold rounded tracking-wide focus:outline-none select-none"
-          :class="showPreview ? 'bg-gray-700' : 'bg-green-600'"
+          :class="showPreview ? 'bg-gray-700' : 'bg-emerald-600'"
           @click="!opening && togglePreview()"
         >
           {{ showPreview ? 'Close preview' : 'Open preview' }}
@@ -58,7 +58,7 @@
           title="EnBizCard - An Open-Source Digital Business Card Generator"
         ></div>
         <a
-          class="font-extrabold tracking-wide leading-none flex-shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+          class="font-extrabold tracking-wide leading-none shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
           href="https://www.vishnuraghav.com/donate"
           target="_blank"
           rel="noreferrer"
@@ -82,13 +82,13 @@
       </ul>
       <div class="mt-4 flex flex-wrap items-center">
         <button
-          class="font-extrabold leading-none text-lg tracking-wide select-none flex-shrink-0 p-5 mt-2 mr-2 text-white bg-green-600 rounded hover:bg-green-500 focus:bg-green-500 transition-colors duration-200 focus:outline-none"
+          class="font-extrabold leading-none text-lg tracking-wide select-none shrink-0 p-5 mt-2 mr-2 text-white bg-emerald-600 rounded hover:bg-emerald-500 focus:bg-emerald-500 transition-colors duration-200 focus:outline-none"
           @click="create()"
         >
           Create your own
         </button>
         <a
-          class="font-extrabold leading-none text-lg tracking-wide flex-shrink-0 p-5 mt-2 text-white bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
+          class="font-extrabold leading-none text-lg tracking-wide shrink-0 p-5 mt-2 text-white bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
           href="/demo"
           target="_blank"
           >View demo</a
@@ -98,7 +98,7 @@
         Read the
         <NuxtLink
           to="/hosting-guide"
-          class="cursor-pointer underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+          class="cursor-pointer underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
           >Hosting Guide</NuxtLink
         >
       </p>
@@ -219,7 +219,7 @@
               >OpenPGP public key<span
                 v-if="genInfo.key"
                 class="mr-4"
-                :class="pubKeyIsValid ? 'text-green-500' : 'text-red-600'"
+                :class="pubKeyIsValid ? 'text-emerald-500' : 'text-red-600'"
                 >{{ pubKeyIsValid ? 'Valid' : 'Invalid schema' }}</span
               >
             </label>
@@ -263,14 +263,14 @@
               v-for="(action, index) in orderedPrimaryActions"
               :key="index"
               @click="addAction('primaryActions', index)"
-              class="p-3 flex items-center flex-shrink-0 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none bg-gray-700"
+              class="p-3 flex items-center shrink-0 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none bg-gray-700"
               :title="
                 action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
               "
               :aria-label="action.name"
             >
               <div
-                class="w-6 h-6 mr-3 flex-shrink-0"
+                class="w-6 h-6 mr-3 shrink-0"
                 v-html="require(`~/assets/icons/${action.icon}.svg?include`)"
               ></div>
               <p class="whitespace-nowrap">
@@ -308,14 +308,14 @@
               v-for="(action, index) in orderedSecondaryActions"
               :key="index"
               @click="addAction('secondaryActions', index)"
-              class="p-3 flex items-center flex-shrink-0 rounded filter hover:brightness-125 focus:brightness-125 transition-all duration-200 focus:outline-none"
+              class="p-3 flex items-center shrink-0 rounded hover:brightness-125 focus:brightness-125 transition-all duration-200 focus:outline-none"
               :style="{ backgroundColor: action.color }"
               :title="
                 action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
               "
             >
               <div
-                class="w-6 h-6 mr-3 flex-shrink-0"
+                class="w-6 h-6 mr-3 shrink-0"
                 v-html="require(`~/assets/icons/${action.icon}.svg?include`)"
               ></div>
               <p
@@ -377,7 +377,7 @@
               <div
                 class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
                 :class="{
-                  'bg-green-600 hover:bg-green-500 focus:bg-green-500':
+                  'bg-emerald-600 hover:bg-emerald-500 focus:bg-emerald-500':
                     footerCredit,
                 }"
                 tabindex="0"
@@ -412,7 +412,7 @@
               class="w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200"
               :class="
                 theme == 1
-                  ? 'bg-green-600'
+                  ? 'bg-emerald-600'
                   : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-600'
               "
             >
@@ -423,7 +423,7 @@
               class="w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200"
               :class="
                 theme == 2
-                  ? 'bg-green-600'
+                  ? 'bg-emerald-600'
                   : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-600'
               "
             >
@@ -434,7 +434,7 @@
               class="w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200"
               :class="
                 theme == 3
-                  ? 'bg-green-600'
+                  ? 'bg-emerald-600'
                   : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-600'
               "
             >

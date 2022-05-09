@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center mt-2">
     <button
-      class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
+      class="p-1 shrink-0 focus:outline-none drag cursor-move"
       tabindex="-1"
     >
       <div
@@ -11,9 +11,9 @@
     </button>
     <div class="flex flex-col items-center bg-gray-700 rounded p-2">
       <div class="flex items-center w-full">
-        <div id="imageContainer" class="mr-2 flex-shrink-0">
+        <div id="imageContainer" class="mr-2 shrink-0">
           <img
-            class="w-12 h-12 object-contain flex-shrink-0 border-2 rounded p-1 border-gray-700 transition-colors duration-200 hover:border-red-600 cursor-pointer"
+            class="w-12 h-12 object-contain shrink-0 border-2 rounded p-1 border-gray-700 transition-colors duration-200 hover:border-red-600 cursor-pointer"
             v-if="item.image && item.image.dataURI"
             :src="item.image.dataURI"
             :alt="item.image.title"
@@ -102,7 +102,7 @@
       </div>
     </div>
     <button
-      class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
+      class="p-1 m-2 shrink-0 focus:outline-none rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
       @click="removeItem(i)"
       aria-label="Remove product"
       title="Remove product"

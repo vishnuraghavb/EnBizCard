@@ -17,7 +17,7 @@
           Cancel
         </button>
         <button
-          class="font-extrabold leading-none tracking-wide select-none flex-shrink-0 p-3 text-white bg-green-600 rounded hover:bg-green-500 focus:bg-green-500 transition-colors duration-200 focus:outline-none"
+          class="font-extrabold leading-none tracking-wide select-none shrink-0 p-3 text-white bg-emerald-600 rounded hover:bg-emerald-500 focus:bg-emerald-500 transition-colors duration-200 focus:outline-none"
           @click="cropPhoto"
         >
           Crop photo

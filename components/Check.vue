@@ -3,7 +3,7 @@
     <div class="relative" style="line-height: 0">
       <input
         v-model="downloadCheckList[index].checked"
-        class="checkbox cursor-pointer appearance-none bg-black h-12 w-12 border-transparent rounded border transition-colors duration-200 checked:bg-green-600 checked:border-green-600 focus:outline-none"
+        class="checkbox cursor-pointer appearance-none bg-black h-12 w-12 border-transparent rounded border transition-colors duration-200 checked:bg-emerald-600 checked:border-emerald-600 focus:outline-none"
         :class="
           downloadCheckList[index].checked
             ? 'hover:border-transparent focus:border-transparent'

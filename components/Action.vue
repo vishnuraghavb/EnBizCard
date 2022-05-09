@@ -1,7 +1,7 @@
 <template>
   <div class="stepC flex mt-6">
     <button
-      class="py-1 pr-1 flex-shrink-0 focus:outline-none drag cursor-move"
+      class="py-1 pr-1 shrink-0 focus:outline-none drag cursor-move"
       tabindex="-1"
     >
       <div
@@ -10,7 +10,7 @@
       ></div>
     </button>
     <div
-      class="p-3 flex-shrink-0 rounded-l"
+      class="p-3 shrink-0 rounded-l"
       :style="{
         backgroundColor: `${
           name == 'secondaryActions' ? item.color : buttonBg
@@ -36,7 +36,7 @@
       />
     </div>
     <button
-      class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+      class="p-1 m-2 shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
       @click="removeAction(name, index)"
       :aria-label="'Remove ' + item.label"
       title="Remove field"

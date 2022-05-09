@@ -10,7 +10,7 @@
           ></div
         ></NuxtLink>
         <a
-          class="font-extrabold tracking-wide leading-none flex-shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+          class="font-extrabold tracking-wide leading-none shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
           href="https://www.vishnuraghav.com/donate"
           target="_blank"
           >Donate</a
@@ -79,7 +79,7 @@
               business cards for you using
               <NuxtLink
                 to="/"
-                class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+                class="underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
                 >EnBizCard</NuxtLink
               >.
             </li>
@@ -88,7 +88,7 @@
               IT team to host it for you. Just send them the downloaded ZIP
               files and share the link to this
               <a
-                class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+                class="underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
                 href="https://enbizcard.vishnuraghav.com/hosting-guide"
                 target="_blank"
                 >Hosting Guide</a
@@ -120,21 +120,21 @@
             You can host your digital business card using several free hosting
             services available such as
             <a
-              class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+              class="underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
               href="https://surge.sh"
               target="_blank"
               rel="noopener noreferrer"
               >Surge</a
             >,
             <a
-              class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+              class="underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
               href="https://pages.github.com/"
               target="_blank"
               rel="noopener noreferrer"
               >GitHub Pages</a
             >,
             <a
-              class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+              class="underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
               href="https://docs.gitlab.com/ee/user/project/pages/"
               target="_blank"
               rel="noopener noreferrer"
@@ -156,7 +156,7 @@
             If you got any doubt setting up your digital business card on any of
             these platforms, You can always
             <a
-              class="underline text-green-600 font-extrabold hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+              class="underline text-emerald-600 font-extrabold hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
               href="https://t.me/enbizcard"
               target="_blank"
               rel="noopener noreferrer"
@@ -178,7 +178,7 @@
               Visit
               <NuxtLink
                 to="/"
-                class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+                class="underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
                 >EnBizCard</NuxtLink
               >
               and generate a new digital business card.
@@ -202,7 +202,7 @@
               Visit
               <NuxtLink
                 to="/"
-                class="underline font-extrabold text-green-600 hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+                class="underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
                 >EnBizCard</NuxtLink
               >
               and generate a digital business card.
@@ -225,7 +225,7 @@
       <div class="mt-24">
         Help me improve this guide on
         <a
-          class="underline text-green-600 font-extrabold hover:text-green-500 focus:text-green-500 transition-colors duration-200"
+          class="underline text-emerald-600 font-extrabold hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
           href="https://github.com/vishnuraghavb/EnBizCard"
           target="_blank"
           rel="noopener noreferrer"

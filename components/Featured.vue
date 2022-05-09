@@ -3,7 +3,7 @@
     <div class="flex justify-between">
       <div class="flex items-center w-full">
         <div
-          class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
+          class="p-1 shrink-0 focus:outline-none drag cursor-move"
           tabindex="-1"
         >
           <div
@@ -24,7 +24,7 @@
         </div>
       </div>
       <button
-        class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+        class="p-1 m-2 shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
         @click="featured.splice(index, 1)"
         aria-label="Remove section"
         title="Remove section"
@@ -50,7 +50,7 @@
             v-if="item.contentType == 'media'"
           >
             <button
-              class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
+              class="p-1 shrink-0 focus:outline-none drag cursor-move"
               tabindex="-1"
             >
               <div
@@ -59,7 +59,7 @@
               ></div>
             </button>
             <img
-              class="w-12 h-12 rounded-l object-contain flex-shrink-0 bg-gray-700"
+              class="w-12 h-12 rounded-l object-contain shrink-0 bg-gray-700"
               v-if="
                 item.type == 'image'
                   ? item.dataURI
@@ -72,7 +72,7 @@
             />
             <a
               v-else
-              class="w-12 h-12 bg-gray-900 flex items-center justify-center text-center text-xs rounded-l flex-shrink-0 leading-none select-none cursor-pointer"
+              class="w-12 h-12 bg-gray-900 flex items-center justify-center text-center text-xs rounded-l shrink-0 leading-none select-none cursor-pointer"
               target="_blank"
               href="https://duckduckgo.com/?q=Add+ID3+tags+to+mp3+file"
             >
@@ -90,7 +90,7 @@
               />
             </div>
             <button
-              class="p-1 m-2 self-end flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              class="p-1 m-2 self-end shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
               @click="removeItem(i)"
               aria-label="Remove media"
               title="Remove media"
@@ -115,7 +115,7 @@
             v-else-if="item.contentType == 'text'"
           >
             <button
-              class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
+              class="p-1 shrink-0 focus:outline-none drag cursor-move"
               tabindex="-1"
             >
               <div
@@ -135,7 +135,7 @@
               ></textarea>
             </div>
             <button
-              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              class="p-1 m-2 shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
               @click="removeItem(i)"
               aria-label="Remove text"
               title="Remove text"
@@ -148,7 +148,7 @@
           </div>
           <div class="flex items-center mt-2" v-else>
             <button
-              class="p-1 flex-shrink-0 focus:outline-none drag cursor-move"
+              class="p-1 shrink-0 focus:outline-none drag cursor-move"
               tabindex="-1"
             >
               <div
@@ -168,7 +168,7 @@
               />
             </div>
             <button
-              class="p-1 m-2 flex-shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
+              class="p-1 m-2 shrink-0 focus:outline-none rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
               @click="removeItem(i)"
               aria-label="Remove field"
               title="Remove field"

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "HOST=192.168.1.7 nuxt",
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -13,20 +13,20 @@
     "@caohenghu/vue-colorpicker": "^1.2.4",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/robots": "^2.4.2",
-    "core-js": "^3.19.3",
+    "core-js": "^3.22.4",
     "cropperjs": "^1.5.11",
     "file-saver": "^2.0.5",
     "id3-parser": "^2.0.0",
-    "jszip": "^3.6.0",
+    "jszip": "^3.9.1",
     "nuxt": "^2.15.8",
     "vue-clickaway2": "^2.3.2",
     "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^4.2.1",
+    "@nuxtjs/tailwindcss": "^5.0.4",
     "imagemin-optipng": "^8.0.0",
     "raw-loader": "^4.0.2",
-    "sass": "^1.44.0",
-    "sass-loader": "^10.1.1"
+    "sass": "^1.51.0",
+    "sass-loader": "^10.2.1"
   }
 }

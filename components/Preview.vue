@@ -33,6 +33,7 @@
           <script>
             "http"==window.location.href.substr(0,4)&&"/"!=window.location.href.slice(-1)&&window.location.replace(window.location.href+"/");
           </script>
+
           <link v-if="getCssHref" :href="getCssHref" rel="stylesheet" />
           <title>{{ getFullname }}'s Digital Business Card</title>
           <style>
@@ -318,7 +319,11 @@
                 >
                   <p class="textC cardColor">{{ item.value }}</p>
                 </div>
-                <div v-else-if="stripAttr(item)" class="media embedded">
+                <div
+                  v-else-if="stripAttr(item)"
+                  class="media embedded"
+                  :style="{ backgroundColor: `${colors.cardBg.color}` }"
+                >
                   <iframe
                     :src="stripAttr(item)"
                     frameborder="0"
@@ -386,6 +391,7 @@ export default {
   data() {
     return {
       paused: [],
+      hasInstagramEmbed: false,
     }
   },
   computed: {
@@ -400,16 +406,6 @@ export default {
     },
     getFeaturedMusic() {
       return this.featured.music
-    },
-    getEmbedContent() {
-      return this.embedded
-        .map((e) => {
-          return {
-            title: e.title,
-            content: e.content.filter((f) => this.stripAttr(f)),
-          }
-        })
-        .filter((e) => e)
     },
     getCssHref() {
       if (this.genInfo.fontLink) {
@@ -448,9 +444,13 @@ export default {
       if (/<iframe(.*)\/iframe>/.test(val)) {
         let iframe = val.match(/<iframe(.*)\/iframe>/)[0]
         return iframe.match(/src="?([^"\s]+)"/)[1]
-      } else return null
+      } else if (/\/\/www\.instagram\.com\/embed\.js/.test(val)) {
+        return `${
+          val.match(/data-instgrm-permalink="(.*?)\/\?/)[1]
+        }/embed/captioned`
+      }
+      return null
     },
-
     toggleContainer(e) {
       '2rem' == e.style.top
         ? ((e.style.visibility = 'visible'),
@@ -475,7 +475,7 @@ export default {
     },
     sharingAlert() {
       this.showAlert(
-        'You are able to share your business card after completing the hosting process.\n\nCheck out the <a class="underline font-extrabold text-green-600 hover:text-green-500 transition-colors duration-200" href="/demo" target="_blank">demo</a> to test the functionality.'
+        'You are able to share your business card after completing the hosting process.\n\nCheck out the <a class="underline font-extrabold text-emerald-600 hover:text-emerald-500 transition-colors duration-200" href="/demo" target="_blank">demo</a> to test the functionality.'
       )
     },
     togglePlay(ref) {
@@ -502,8 +502,14 @@ export default {
       })
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.hasInstagramEmbed = true
+    }, 5000)
+  },
 }
 </script>
+
 <style lang="scss">
 #Theme1 {
   // General
@@ -769,7 +775,8 @@ export default {
   }
   .embedded {
     position: relative;
-    padding-top: 56.25%;
+    padding-top: 100%;
+    // padding-top: 56.25%;
     iframe {
       position: absolute;
       top: 0;
@@ -1127,7 +1134,8 @@ export default {
   }
   .embedded {
     position: relative;
-    padding-top: 56.25%;
+    padding-top: 100%;
+    // padding-top: 56.25%;
     iframe {
       position: absolute;
       top: 0;
@@ -1481,7 +1489,8 @@ export default {
   }
   .embedded {
     position: relative;
-    padding-top: 56.25%;
+    padding-top: 100%;
+    // padding-top: 56.25%;
     iframe {
       position: absolute;
       top: 0;
