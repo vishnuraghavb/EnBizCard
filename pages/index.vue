@@ -935,11 +935,11 @@
         <div id="step-11" class="mt-16">
           <h2 class="font-extrabold text-2xl">Hosting</h2>
           <div class="stepC mt-6">
-            <label for="font-css" class="ml-4">Hosted card URL</label>
+            <label for="hosted-url" class="ml-4">Hosted card URL</label>
             <input
               spellcheck="false"
               type="text"
-              id="font-css"
+              id="hosted-url"
               v-model="hostedURL"
               class="
                 block
@@ -1578,7 +1578,7 @@ export default {
             href: 'https://gitlab.com/',
             placeholder: 'username',
             value: null,
-            color: '#554488 ',
+            color: '#171321 ',
             label: 'Gitlab username',
           },
           {
