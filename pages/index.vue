@@ -1337,6 +1337,26 @@ export default {
             order: 17,
             isURL: 1,
           },
+          {
+            name: 'XMPP',
+            icon: 'xmpp',
+            href: 'xmpp:',
+            placeholder: 'XMPP ID',
+            value: null,
+            label: 'XMPP ID',
+            order: 18,
+            isURL: 1,
+          },
+          // {
+          //   name: 'IRC',
+          //   icon: 'irc',
+          //   href: 'irc:',
+          //   placeholder: 'IRC ID',
+          //   value: null,
+          //   label: 'IRC ID',
+          //   order: 19,
+          //   isURL: 1,
+          // },
         ],
         secondaryActions: [
           // todo: Fix Instagram gradient icon preview
