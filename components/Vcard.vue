@@ -11,7 +11,6 @@ TEL;TYPE=CELL:{{ vCard.cell }}
 TEL;TYPE=WORK:{{ vCard.work }}
 TEL;TYPE=HOME:{{ vCard.home }}
 TEL;TYPE=MSG:{{ vCard.sms }}
-TEL;TYPE=SIGNAL:{{ vCard.signal }}
 EMAIL;TYPE=WORK:{{ vCard.email }}
 URL;TYPE=Digital Business Card:{{ vCard.hostedURL }}
 URL:{{ vCard.website }}

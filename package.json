@@ -13,11 +13,11 @@
     "@caohenghu/vue-colorpicker": "^1.2.4",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/robots": "^2.4.2",
-    "core-js": "^3.22.4",
+    "core-js": "^3.22.7",
     "cropperjs": "^1.5.11",
     "file-saver": "^2.0.5",
     "id3-parser": "^2.0.0",
-    "jszip": "^3.9.1",
+    "jszip": "^3.10.0",
     "nuxt": "^2.15.8",
     "vue-clickaway2": "^2.3.2",
     "vuedraggable": "^2.24.3"
@@ -26,7 +26,10 @@
     "@nuxtjs/tailwindcss": "^5.0.4",
     "imagemin-optipng": "^8.0.0",
     "raw-loader": "^4.0.2",
-    "sass": "^1.51.0",
+    "sass": "^1.52.1",
     "sass-loader": "^10.2.1"
+  },
+  "engines": {
+    "node": ">=10 <=16"
   }
 }
