@@ -7,3 +7,4 @@ RUN npm run generate
 
 FROM nginx:alpine
 COPY --from=build /app/public /usr/share/nginx/html
+EXPOSE 80
