@@ -64,14 +64,20 @@ You can,
 
 In order to quickly host the EnBizCard Generator on a machine running Docker and Docker Compose, follow these steps:
 
-1. Create a .env file by copying and adjusting env.example:
+1. Clone the repository to your machine and `cd` into the directory.
+
+```
+git clone git@github.com:vishnuraghavb/EnBizCard.git
+```
+
+2. Create a .env file by copying and adjusting env.example:
 
 ```
 cp env.example .env
 ```
 
-2. Run `docker-compose up -d`
-3. Access the app at http://localhost:22212 (or a different port, in case you edited the .env file).
+3. Run `docker-compose up -d`
+4. Access the app at http://localhost:22212 (or a different port, in case you edited the .env file).
 
 ## License
 
