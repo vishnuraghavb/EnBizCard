@@ -9,10 +9,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@aceforth/nuxt-optimized-images": "^1.4.0",
     "@caohenghu/vue-colorpicker": "^1.2.4",
     "@nuxtjs/pwa": "^3.3.5",
-    "@nuxtjs/robots": "^2.4.2",
     "core-js": "^3.22.7",
     "cropperjs": "^1.5.11",
     "file-saver": "^2.0.5",
@@ -23,13 +21,10 @@
     "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
+    "@aceforth/nuxt-optimized-images": "^1.4.0",
     "@nuxtjs/tailwindcss": "^5.0.4",
-    "imagemin-optipng": "^8.0.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.52.1",
     "sass-loader": "^10.2.1"
-  },
-  "engines": {
-    "node": ">=10 <=16"
   }
 }

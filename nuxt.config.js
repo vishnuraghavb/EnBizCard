@@ -201,17 +201,14 @@ export default {
         ? '[path][name]--[width][hash:optimized].[ext]'
         : 'img/[contenthash:7]-[width].[ext]',
     handleImages: ['jpeg', 'png', 'svg', 'webp', 'gif'],
-    optimizeImages: true,
+    optimizeImages: false,
     optimizeImagesInDev: false,
     defaultImageLoader: 'img-loader',
-    optipng: {
-      optimizationLevel: 7,
-    },
   },
   /*
    ** Nuxt.js modules
    */
-  modules: [['@nuxtjs/pwa', { icon: false }], '@nuxtjs/robots'],
+  modules: [['@nuxtjs/pwa', { icon: false }]],
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
@@ -253,9 +250,6 @@ export default {
   generate: {
     dir: 'public',
     fallback: true,
-  },
-  robots: {
-    UserAgent: '*',
   },
   telemetry: false,
 }

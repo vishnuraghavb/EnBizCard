@@ -1,20 +1,13 @@
 <template>
   <div class="stepC flex mt-6">
-    <button
-      class="py-1 pr-1 shrink-0 focus:outline-none drag cursor-move"
-      tabindex="-1"
-    >
-      <div
-        class="w-6 h-6"
-        v-html="require(`~/assets/icons/drag.svg?include`)"
-      ></div>
+    <button class="py-1 pr-1 shrink-0 focus:outline-none drag cursor-move" tabindex="-1">
+      <div class="w-6 h-6" v-html="require(`~/assets/icons/drag.svg?include`)"></div>
     </button>
     <div
       class="p-3 shrink-0 rounded-l"
       :style="{
-        background: `${
-          name == 'secondaryActions' ? item.color : buttonBg
-        }`,
+        background: `${name == 'secondaryActions' ? item.color : buttonBg
+          }`,
       }"
       :title="item.name"
     >
@@ -24,6 +17,7 @@
         v-html="getSVG(item)"
       ></div>
     </div>
+    <!-- // TODO show title content when input is focused. -->
     <div class="w-full">
       <input
         ref="input"
@@ -41,10 +35,7 @@
       :aria-label="'Remove ' + item.label"
       title="Remove field"
     >
-      <div
-        class="w-6 h-6"
-        v-html="require(`~/assets/icons/x.svg?include`)"
-      ></div>
+      <div class="w-6 h-6" v-html="require(`~/assets/icons/x.svg?include`)"></div>
     </button>
   </div>
 </template>
