@@ -9,7 +9,7 @@
     "generate": "nuxt generate"
   },
   "engines": {
-    "node": "16.17.0"
+    "node": ">=16 < 18"
   },
   "engineStrict": true,
   "dependencies": {
