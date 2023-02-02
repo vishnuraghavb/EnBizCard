@@ -1,92 +1,1241 @@
-<!DOCTYPE html><html style="background-color: rgb(5, 150, 105);" lang="en"><head><meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="robots" content="noindex, nofollow"> <meta name="author" content="EnBizCard - An Open-Source Digital Business Card Generator"> <meta name="url" content="https://enbizcard.vercel.app/"> <meta name="designer" content="Vishnu Raghav"> <meta property="og:title" content="EnBizCard's Digital Business Card"> <meta property="twitter:title" content="EnBizCard's Digital Business Card"> <script>
-          "http"==window.location.href.substr(0,4)&&"/"!=window.location.href.slice(-1)&&window.location.replace(window.location.href+"/");
-        </script> <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&amp;display=swap" rel="stylesheet"> <title>EnBizCard's Digital Business Card</title> <style>
-          #body{ font-family: sans-serif; } input[type='range']::-moz-range-track { background: none; } input[type='range']::-moz-range-thumb { -moz-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: 100%; border: none; background: #059669; z-index: 3; cursor: pointer; } input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: 100%; border: none; background: #059669; z-index: 3; cursor: pointer; } .closeColor{  } .topAction { } .iconColor{ color:#eee;  } .cardColor{ false } .textColor{ color:#eee !important } .seekbarColor{  background:#05966980 !important }
-        </style> <!----> <style>
-          #body{
-          font-family:'Nunito', sans-serif
-          }
-        </style><link rel="stylesheet" href="./style.min.css"><script src="https://getinsights.io/js/insights.js"></script><script>
-insights.init('jXInThyXOQTzVEaa');
-insights.trackPages();
-</script></head> <body id="body"><div id="modal" style="background-color: rgb(8, 10, 10); visibility: hidden; top: 2rem; opacity: 0;"><a id="close" class="closeColor"><div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M18 6 6 18M6 6l12 12" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px"></path></svg></div></a> <div id="keyView"><p class="textColor">
-              Use my public key to send me encrypted messages
-            </p> <a download="" target="_blank" id="dlKey" rel="noreferrer" tabindex="-1" style="background-color: rgb(5, 150, 105);" href="./EnBizCard's public key.asc"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M21 15v4c0 1.097-.903 2-2 2H5c-1.097 0-2-.903-2-2v-4m4-5 5 5 5-5m-5 5V3" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px"></path></svg></div> <span class="iconColor">Download Key</span></a></div> <div id="copyView"><p class="textColor">
-              Copy and send the URL to share my Business Card
-            </p> <button id="copyURL" style="background-color: rgb(5, 150, 105);"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M22 11a2 2 0 0 0-2-2h-9a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-9Z" style="fill:none;stroke:#fff;stroke-width:2px"></path><path d="M5 15H4c-1.097 0-2-.903-2-2V4c0-1.097.903-2 2-2h9c1.097 0 2 .903 2 2v1" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px"></path></svg></div> <span class="iconColor">Copy URL</span></button></div> <div id="qrView" class="textColor"><div id="qr"></div> <h3>Scan the QR Code</h3> <p>to view my Business Card on another device</p></div></div> <header><div id="topActions" style="display: none;"><div><a id="share"><div class="icon topAction"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:2"><g><path style="fill:none" d="M0 0h24v24H0z"></path><clipPath id="a"><path d="M0 0h24v24H0z"></path></clipPath><g clip-path="url(#a)"><circle cx="17" cy="5" r="3" style="fill:none;stroke:#fff;stroke-width:2px"></circle><circle cx="5" cy="12" r="3" style="fill:none;stroke:#fff;stroke-width:2px"></circle><circle cx="17" cy="19" r="3" style="fill:none;stroke:#fff;stroke-width:2px"></circle><path d="m7.59 13.51 6.83 3.98m-.01-10.98-6.82 3.98" style="fill:none;stroke:#fff;stroke-width:2px"></path></g></g></svg></div></a> <a id="showQR"><div class="icon topAction"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M4 4h4v4H4V4Zm0 12h4v4H4v-4ZM16 4h4v4h-4V4Z" style="fill:none;stroke:#fff;stroke-width:2px"></path><path d="M12 4v14c0 1.097.903 2 2 2h4c1.097 0 2-.903 2-2v-4c0-1.097-.903-2-2-2H4" style="fill:none;stroke:#fff;stroke-width:2px;stroke-linejoin:miter"></path><path style="fill:#fff" d="M15 15h2v2h-2z"></path></svg></div></a></div> <a id="showKey"><div class="icon topAction"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><circle cx="7" cy="148" r="5" style="fill:none;stroke:#fff;stroke-width:2px" transform="translate(0 -132)"></circle><path d="m16 139 3 3 3-3-3-3" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px" transform="translate(0 -132)"></path><path d="m21 134-10.465 10.465" style="fill:none;stroke:#fff;stroke-width:2px" transform="translate(0 -132)"></path></svg></div></a></div> <div class="headerImgC"><img id="cover" src="./cover.gif" alt="Background Pattern"> <img id="logo" src="./logo.svg" alt="Logo"></div></header> <main style="background-color: rgb(8, 10, 10);"><img id="profilePhoto" src="./photo.png" alt="Photo"> <div id="info" class="textColor"><p class="name">
-              EnBizCard
-            </p> <p class="jobtitle">
-               An Open-Source Digital Business Card Generator
-            </p> <p class="bizname">
-              EnBizCard
-            </p></div> <p class="sub textColor">
-                        EnBizCard helps you create beautiful, responsive HTML-based digital business cards that can be hosted on your website.
-          </p> <a id="cta" rel="noreferrer" download="" target="_blank" aria-label="Save Contact" style="background-color: rgb(5, 150, 105);" href="enbizcard.vcf"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><circle cx="8.5" cy="7" r="4" style="fill:none;stroke:#fff;stroke-width:2.29px" transform="matrix(.875 0 0 .875 4.563 -.625)"></circle><path d="M86 181c0-3.863 3.137-7 7-7s7 3.137 7 7" style="fill:none;stroke:#fff;stroke-width:2px" transform="translate(-81 -163)"></path><path d="M104 168v6m3-3-3 3-3-3" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px" transform="translate(-92 -152)"></path></svg></div> <p class="iconColor">Save Contact</p></a> <div class="actions"><div class="actionsC"><div class="actionBtn"><a href="tel:+91 9876543210" target="_blank" rel="noopener noreferrer" aria-label="Mobile" style="background-color: rgb(5, 150, 105);"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M11.5 22a.952.952 0 0 1-1.052.945c-4.358-.544-7.851-4.338-8.379-8.39a.938.938 0 0 1 .936-1.046c.399-.009.847-.009 1.202-.009.388 0 .738.237.882.597l.478 1.196a.95.95 0 0 1-.21 1.025l-.107.107a.951.951 0 0 0-.181 1.091c.495.825 1.59 1.92 2.425 2.396a.927.927 0 0 0 1.066-.177c.05-.02.086-.056.122-.092a.95.95 0 0 1 1.025-.21l1.196.478c.36.144.597.494.597.882V22Z" style="fill:none;stroke:#fff;stroke-width:.95px" transform="translate(-2.21 -26.421) scale(2.10526)"></path></svg></div></a> <p class="textColor">
-                  Mobile
-                </p></div></div><div class="actionsC"><div class="actionBtn"><a href="sms:+91 9876543210" target="_blank" rel="noopener noreferrer" aria-label="SMS" style="background-color: rgb(5, 150, 105);"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M75.3 61c.477 0 .935.171 1.273.476.337.305.527.718.527 1.149v8.125c0 .897-.806 1.625-1.8 1.625h-8.975a9.7 9.7 0 0 0-4.992 1.365L60.9 74V62.625c0-.431.19-.844.527-1.149A1.904 1.904 0 0 1 62.7 61h12.6Z" style="fill:none;stroke:#fff;stroke-width:1.71px" transform="matrix(1.11111 0 0 1.23077 -64.667 -71.077)"></path><path d="M36 13h4" style="fill:none;stroke:#fff;stroke-width:2px;stroke-linejoin:miter" transform="translate(-28)"></path><path d="M36 9h8" style="fill:none;stroke:#fff;stroke-width:2px" transform="translate(-28)"></path></svg></div></a> <p class="textColor">
-                  SMS
-                </p></div></div><div class="actionsC"><div class="actionBtn"><a href="https://t.me/enbizcard" target="_blank" rel="noopener noreferrer" aria-label="Telegram" style="background-color: rgb(5, 150, 105);"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="m10 14 3.636-4M1 12l19-9-2 18-5-4.375L8 19l-2-5.889L1 12Z" style="fill:none;stroke:#fff;stroke-width:2px"></path></svg></div></a> <p class="textColor">
-                  Telegram
-                </p></div></div><div class="actionsC"><div class="actionBtn"><a href="tel:+91 9876543210" target="_blank" rel="noopener noreferrer" aria-label="Signal" style="background-color: rgb(5, 150, 105);"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M5.43 4.93A9.969 9.969 0 0 1 12.5 2c5.519 0 10 4.481 10 10 0 2.76-1.12 5.26-2.93 7.07l.001.001-.003.001A9.97 9.97 0 0 1 12.5 22a9.835 9.835 0 0 1-5.005-1.354l-4.187.546.546-4.187A9.835 9.835 0 0 1 2.5 12a9.97 9.97 0 0 1 2.928-7.068l.001-.003.001.001Z" style="fill:none;stroke:#fff;stroke-width:2.86px" transform="matrix(.7 0 0 .7 3.75 3.6)"></path><path d="M5.43 4.93A9.969 9.969 0 0 1 12.5 2c5.519 0 10 4.481 10 10 0 2.76-1.12 5.26-2.93 7.07l.001.001-.003.001A9.97 9.97 0 0 1 12.5 22a9.835 9.835 0 0 1-5.005-1.354l-4.187.546.546-4.187A9.835 9.835 0 0 1 2.5 12a9.97 9.97 0 0 1 2.928-7.068l.001-.003.001.001Z" style="fill:none;stroke:#fff;stroke-width:.91px;stroke-dasharray:2.73,2.73,0,0;stroke-dashoffset:1.82" transform="matrix(1.1 0 0 1.1 -1.25 -1.2)"></path></svg></div></a> <p class="textColor">
-                  Signal
-                </p></div></div><div class="actionsC"><div class="actionBtn"><a target="_blank" rel="noopener noreferrer" aria-label="Email" style="background-color: rgb(5, 150, 105);" href="mailto:apps@vishnuraghav.com"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M22 33.75c0-.966-.896-1.75-2-1.75H4c-1.104 0-2 .784-2 1.75v10.5c0 .966.896 1.75 2 1.75h16c1.104 0 2-.784 2-1.75v-10.5Z" style="fill:none;stroke:#fff;stroke-width:1.86px" transform="matrix(1 0 0 1.14286 0 -32.571)"></path><path d="m18 7.042-6 2.625-6-2.625" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:1.86px" transform="matrix(1 0 0 1.14286 0 1.952)"></path></svg></div></a> <p class="textColor">
-                  Email
-                </p></div></div><div class="actionsC"><div class="actionBtn"><a href="https://enbizcard.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Website" style="background-color: rgb(5, 150, 105);"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><g><path style="fill:none" d="M0 0h24v24H0z"></path><clipPath id="a"><path d="M0 0h24v24H0z"></path></clipPath><g clip-path="url(#a)"><circle cx="12" cy="12" r="10" style="fill:none;stroke:#fff;stroke-width:2px"></circle><ellipse cx="40" cy="40" rx="4" ry="10" style="fill:none;stroke:#fff;stroke-width:2px;stroke-linejoin:miter" transform="translate(-28 -28)"></ellipse><path d="M40 50s-2-4-2-10 2-10 2-10" style="fill:none;stroke:#fff;stroke-width:2px" transform="rotate(-90 11.5 39.5)"></path></g></g></svg></div></a> <p class="textColor">
-                  Website
-                </p></div></div><div class="actionsC"><div class="actionBtn"><a target="_blank" rel="noopener noreferrer" aria-label="Store" style="background-color: rgb(5, 150, 105);" href="https://www.vishnuraghav.com"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="m59 37 .721-4.329A2.001 2.001 0 0 1 61.694 31h12.612c.977 0 1.812.707 1.973 1.671L77 37" style="fill:none;stroke:#fff;stroke-width:2px" transform="translate(-56 -28)"></path><path d="M71 39a2 2 0 0 1-4 0" style="fill:none;stroke:#fff;stroke-width:1.33px" transform="matrix(1.5 0 0 1.5 -85.5 -49.5)"></path><path d="M71 39a2 2 0 0 1-4 0" style="fill:none;stroke:#fff;stroke-width:1.33px" transform="matrix(1.5 0 0 1.5 -91.5 -49.5)"></path><path d="M71 39a2 2 0 0 1-4 0" style="fill:none;stroke:#fff;stroke-width:1.33px" transform="matrix(1.5 0 0 1.5 -97.5 -49.5)"></path><path d="M61 39.235V47c0 .53.184 1.039.513 1.414.328.375.773.586 1.237.586h10.5c.464 0 .909-.211 1.237-.586A2.15 2.15 0 0 0 75 47v-7.765" style="fill:none;stroke:#fff;stroke-width:1.86px" transform="matrix(1.14286 0 0 1 -65.714 -28)"></path></svg></div></a> <p class="textColor">
-                  Store
-                </p></div></div></div> <div class="actions secondary"><div class="actionsC"><div class="actionBtn secBtn"><a href="https://gitlab.com/vishnuraghavb" target="_blank" rel="noopener noreferrer" aria-label="GitLab" style="background-color: rgb(85, 68, 136);"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="#e24329" d="m12 20.29 3.32-10.2H8.69zm-7.95-10.2h4.64l-2-6.14a.34.34 0 0 0-.65 0zm15.91 0h-4.64l2-6.14c.1-.32.54-.32.65 0z"></path><path fill="#fca326" d="m4.05 10.09-1.01 3.1a.69.69 0 0 0 .24.77L12 20.29zm15.91 0 1 3.1a.69.69 0 0 1-.24.77L12 20.29z"></path><path fill="#fc6d26" d="m12 20.29 3.32-10.2h4.64zm0 0-7.95-10.2h4.64z"></path></svg></div></a></div></div><div class="actionsC"><div class="actionBtn secBtn"><a href="https://github.com/vishnuraghavb/EnBizCard" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="background-color: rgb(51, 51, 51);"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff"><path fill-rule="evenodd" d="M12.03 2a9.97 9.97 0 0 0-3.16 19.44c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.91-.61.06-.6.06-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.33 1.08 2.9.83.1-.65.35-1.09.64-1.34-2.22-.25-4.55-1.1-4.55-4.93 0-1.08.4-1.98 1.03-2.67-.1-.26-.45-1.27.1-2.64 0 0 .83-.27 2.74 1.02a9.58 9.58 0 0 1 5 0c1.9-1.3 2.73-1.02 2.73-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.58 1.03 2.67 0 3.84-2.33 4.68-4.56 4.92.36.31.68.92.68 1.85l-.01 2.74c0 .26.18.57.68.48A9.98 9.98 0 0 0 12.03 2z" clip-rule="evenodd"></path></svg></div></a></div></div><div class="actionsC"><div class="actionBtn secBtn"><a target="_blank" rel="noopener noreferrer" aria-label="Pixelfed" style="background-color: rgb(141, 89, 168);" href="https://pixelfed.social/vishnuraghavb"><div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" fill="#fff"><path d="M9.835 15.338h3.387C16.413 15.338 19 12.8 19 9.669S16.413 4 13.222 4H8.333C6.492 4 5 5.464 5 7.271V20l4.835-4.662z"></path></svg></div></a></div></div><div class="actionsC"><div class="actionBtn secBtn"><a target="_blank" rel="noopener noreferrer" aria-label="Mastodon" style="background-color: rgb(43, 144, 217);" href="https://mastodon.social/@vishnuraghavb"><div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" fill="#fff"><path d="M20.93 13.99c-.274 1.411-2.455 2.955-4.961 3.254-1.307.156-2.594.299-3.966.236-2.243-.103-4.013-.535-4.013-.535 0 .218.013.426.04.621.291 2.214 2.195 2.346 3.999 2.408 1.82.063 3.441-.448 3.441-.448l.075 1.645s-1.274.684-3.542.81c-1.25.068-2.803-.032-4.612-.511-3.923-1.038-4.598-5.22-4.701-9.462-.031-1.26-.012-2.448-.012-3.441 0-4.339 2.842-5.611 2.842-5.611 1.434-.658 3.894-.935 6.45-.956h.063c2.557.021 5.018.298 6.452.956 0 0 2.842 1.272 2.842 5.611 0 0 .036 3.201-.397 5.423zm-2.956-5.087v5.253h-2.081V9.058c0-1.075-.453-1.621-1.357-1.621-1.001 0-1.501.647-1.501 1.927v2.791h-2.07V9.364c0-1.28-.501-1.927-1.501-1.927-.904 0-1.357.546-1.357 1.621v5.098H6.025V8.903c0-1.074.275-1.927.823-2.558.567-.632 1.308-.955 2.228-.955 1.066 0 1.872.409 2.405 1.228l.519.87.519-.87c.532-.819 1.339-1.228 2.404-1.228.921 0 1.662.323 2.228.955.549.631.823 1.484.823 2.558z"></path></svg></div></a></div></div><div class="actionsC"><div class="actionBtn secBtn"><a href="https://joinpeertube.org/" target="_blank" rel="noopener noreferrer" aria-label="Peertube" style="background-color: rgb(255, 255, 255);"><div class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><path d="M6.5 2v10L14 7" fill="#211f20"></path><path d="M6.5 12v10l7.5-5" fill="#737373"></path><path d="M14 7v10l7.5-5" fill="#f1680d"></path></svg></div></a></div></div><div class="actionsC"><div class="actionBtn secBtn"><a target="_blank" rel="noopener noreferrer" aria-label="PayPal" style="background-color: rgb(0, 48, 135);" href="https://paypal.me/vishnuraghav"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24"><path d="M19.554 9.488c.121.563.106 1.246-.04 2.051-.582 2.978-2.477 4.466-5.683 4.466h-.442a.666.666 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.706.706 0 0 1-.247.426.666.666 0 0 1-.447.166H8.874a.395.395 0 0 1-.331-.15.457.457 0 0 1-.09-.363c.061-.373.148-.938.267-1.689.117-.75.206-1.314.267-1.689s.15-.938.272-1.685c.121-.748.212-1.31.271-1.685.033-.248.179-.371.433-.371h1.316c.893.013 1.682-.057 2.375-.211 1.172-.262 2.134-.744 2.886-1.449.685-.637 1.203-1.462 1.56-2.473.162-.47.277-.917.352-1.338.006-.041.014-.066.025-.074.008-.011.022-.014.035-.011a.378.378 0 0 1 .062.035c.524.398.854.941.98 1.632zm-1.728-2.836c0 .717-.154 1.508-.465 2.374-.537 1.562-1.547 2.618-3.037 3.168-.758.269-1.602.408-2.535.425 0 .006-.301.007-.904.007l-.903-.007c-.672 0-1.067.32-1.187.964-.013.053-.298 1.83-.855 5.329-.008.066-.048.102-.121.102H4.854a.473.473 0 0 1-.369-.165.469.469 0 0 1-.115-.39L6.702 3.664a.784.784 0 0 1 .276-.483.785.785 0 0 1 .519-.19h6.014c.228 0 .555.044.979.131.428.084.801.194 1.123.321.718.274 1.266.688 1.645 1.237.379.552.568 1.207.568 1.972z"></path></svg></div></a></div></div></div> <div class="featured"><h2 class="section textColor">
-              Image Gallery
-            </h2> <div><div class="media image" style="background-color: rgb(44, 44, 44);"><div><img src="./media/photo_by_andreas_gücklhorn.jpeg" alt="Product image"> <div class="controls cardColor"><p class="title">
-                      Photo by Andreas Gücklhorn
-                    </p></div></div> <!----> <!----></div></div><div><div class="media image" style="background-color: rgb(44, 44, 44);"><div><img src="./media/photo_by_erol_ahmed.jpeg" alt="Product image"> <div class="controls cardColor"><p class="title">
-                      Photo by Erol Ahmed
-                    </p></div></div> <!----> <!----></div></div></div><div class="featured"><h2 class="section textColor">
-              Music Releases
-            </h2> <div><div class="media music" style="background-color: rgb(44, 44, 44);"><!----> <div class="mediaC"><video controlslist="nodownload nofullscreen noremoteplayback" disablepictureinpicture="" preload="metadata" class="source" style="pointer-events: auto; display: none;" controls="controls"><source src="./media/over_the_water,_humans_gather.mp3"></video> <img src="./media/over_the_water,_humans_gather.jpeg" alt="cover"> <div class="controls cardColor"><p class="title">
-      Over the Water, Humans Gather
-    </p> <p class="sub"><span>Doctor Turtle</span> <span> - One Person Listening Now</span></p> <div class="pCtrl" style="display: none;"><output class="currentTime sub">00:00</output> <a class="playPause" style="background-color: rgb(5, 150, 105);"><div class="icon play iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M7 6.663a1.998 1.998 0 0 1 3.082-1.682l8.301 5.337a2 2 0 0 1 0 3.364l-8.301 5.337A1.998 1.998 0 0 1 7 17.337V6.663Z" style="fill:none;stroke:#fff;stroke-width:2px"></path></svg></div> <div class="icon pause iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px" transform="translate(-28 -132)"></path><path d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px" transform="translate(-20 -132)"></path></svg></div></a> <input type="range" value="0" class="seekBar seekbarColor"></div></div></div> <!----></div></div><div><div class="media embedded"><iframe src="https://audiomack.com/embed/album/tamilhuntmp3/enthiran-20?background=1" allowfullscreen="allowfullscreen" frameborder="0"></iframe></div></div></div><div class="featured"><h2 class="section textColor">
-              Video Gallery
-            </h2> <div><div class="media video" style="background-color: rgb(44, 44, 44);"><!----> <div class="mediaC"><video controlslist="nodownload nofullscreen noremoteplayback" disablepictureinpicture="" preload="metadata" class="source" style="pointer-events: auto;" controls="controls"><source src="./media/butterflies.mp4"></video> <!----> <div class="controls cardColor"><p class="title">
-      Butterflies
-    </p> <!----> <div class="pCtrl" style="display: none;"><output class="currentTime sub">00:00</output> <a class="playPause" style="background-color: rgb(5, 150, 105);"><div class="icon play iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M7 6.663a1.998 1.998 0 0 1 3.082-1.682l8.301 5.337a2 2 0 0 1 0 3.364l-8.301 5.337A1.998 1.998 0 0 1 7 17.337V6.663Z" style="fill:none;stroke:#fff;stroke-width:2px"></path></svg></div> <div class="icon pause iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px" transform="translate(-28 -132)"></path><path d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px" transform="translate(-20 -132)"></path></svg></div></a> <input type="range" value="0" class="seekBar seekbarColor"></div></div></div> <!----></div></div></div><div class="featured"><h2 class="section textColor">
-              Documents
-            </h2> <div><div class="media document" style="background-color: rgb(44, 44, 44);"><!----> <!----> <div class="mediaC"><div><img src="./media/business_card_-_wikipedia.jpeg" alt="Business Card - Wikipedia"></div> <div class="controls cardColor"><p class="title">
-      Business Card - Wikipedia
-    </p> <div class="docDl"><p class="fileSize sub">PDF - 386.96 KB</p> <a href="./media/business_card_-_wikipedia.pdf" download="" target="_blank" class="dlBtn" style="background-color: rgb(5, 150, 105);"><div class="icon iconColor"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M0 0h24v24H0z"></path><path d="M21 15v4c0 1.097-.903 2-2 2H5c-1.097 0-2-.903-2-2v-4m4-5 5 5 5-5m-5 5V3" style="fill:none;fill-rule:nonzero;stroke:#fff;stroke-width:2px"></path></svg></div></a></div></div></div></div></div></div><div class="featured"><h2 class="section textColor">
-              Text Content
-            </h2> <div><div class="media" style="background-color: rgb(44, 44, 44);"><p class="textC cardColor">
-POEM - ONCE IN A LIFETIME
-
-Once in a lifetime you find someone special,
-
-Your lives intermingle and somehow you know.
-
-This is the beginning of all you have longed for,
-
-A love you can build on, a love that will grow.
-
-Once in a lifetime to those who are lucky,
-
-A miracle happens and dreams all come true.
-
-I know it can happen, it happened to me,
-For I've found my "once in a lifetime" with you.
-
-</p></div></div></div><div class="featured"><h2 class="section textColor">
-              Geolocation
-            </h2> <div><div class="media embedded"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=76.92369461059572%2C10.965207912805845%2C77.00420379638673%2C11.039687592091763&amp;amp;layer=mapnik" allowfullscreen="allowfullscreen" frameborder="0"></iframe></div></div></div><div class="featured"><h2 class="section textColor">
-              Product Showcase
-            </h2> <div><div class="media" style="background-color: rgb(44, 44, 44);"><img src="./media/photo.png" alt="Product image"> <div class="controls cardColor prodInfo"><p class="title">
-      EnBizCard
-    </p> <p class="sub">
-            by Vishnu Raghav
-    </p> <p class="price">
-      Free Forever
-    </p> <a target="_blank" href="https://enbizcard.vercel.app/" class="label" style="background-color: rgb(5, 150, 105); line-height: 1.5rem;"><p class="iconColor">Create your own</p></a></div></div></div><div><div class="media" style="background-color: rgb(44, 44, 44);"><!----> <div class="controls cardColor prodInfo"><p class="title">
-      Please Donate
-    </p> <p class="sub">
-            If you find this service valuable to you or your business, please consider donating.
-    </p> <!----> <a target="_blank" href="https://www.vishnuraghav.com/donate/" class="label" style="background-color: rgb(5, 150, 105); line-height: 1.5rem;"><p class="iconColor">Donate</p></a></div></div></div></div></main> <footer class="textColor" style="background-color: rgb(8, 10, 10);">
-          Created with
-          <a href="https://enbizcard.vercel.app/" target="_blank" rel="noopener noreferrer" class="textColor">EnBizCard</a></footer><script src="./qrcode.min.js"></script><script>let m=document.getElementById("modal"),c=document.getElementById("close"),ki=document.getElementById("keyView"),cv=document.getElementById("copyView"),curl=document.getElementById("copyURL"),qrv=document.getElementById("qrView"),qr=document.getElementById("qr"),s=document.getElementById("share"),sqr=document.getElementById("showQR"),sk=document.getElementById("showKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#topActions").style.display="flex",qr.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(m),cv.style.display="flex",dN(qrv),ki&&dN(ki)}),sqr.addEventListener("click",()=>{tC(m),qrv.style.display="block",dN(cv),ki&&dN(ki)}),sk&&sk.addEventListener("click",()=>{tC(m),ki&&(ki.style.display="flex"),dN(cv),dN(qrv)}),c.addEventListener("click",()=>tC(m)),curl.addEventListener("click",async()=>{let e=curl.querySelectorAll(".iconColor")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});</script><script>let pC=document.querySelectorAll(".pCtrl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),c=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",c.style.display="none");let o=Math.floor(e/60),y=Math.floor(e%60);o.toString().length<2&&(o="0"+o),y.toString().length<2&&(y="0"+y),r.value=o+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",c.style.display="block"):(srcs[l].pause(),c.style.display="none",a.style.display="block")})});</script></body></html>
+<!DOCTYPE html>
+<html style="background-color: rgb(5, 150, 105)" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="author"
+      content="EnBizCard - An Open-Source Digital Business Card Generator"
+    />
+    <meta name="url" content="https://enbizcard.vishnuraghav.com/" />
+    <meta name="designer" content="Vishnu Raghav" />
+    <meta property="og:title" content="EnBizCard's Digital Business Card" />
+    <meta
+      property="twitter:title"
+      content="EnBizCard's Digital Business Card"
+    />
+    <script>
+      'http' == window.location.href.substr(0, 4) &&
+        '/' != window.location.href.slice(-1) &&
+        window.location.replace(window.location.href + '/')
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>EnBizCard's Digital Business Card</title>
+    <style>
+      #body{ font-family: sans-serif; } input[type='range']::-moz-range-track { background: none; } input[type='range']::-moz-range-thumb { -moz-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: 100%; border: none; background: #059669; z-index: 3; cursor: pointer; } input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 1.5rem; height: 1.5rem; border-radius: 100%; border: none; background: #059669; z-index: 3; cursor: pointer; } .closeColor{  } .topAction { } .iconColor{ color:#eee;  } .cardColor{ false } .textColor{ color:#eee !important } .seekbarColor{  background:#05966980 !important }
+    </style>
+    <!---->
+    <style>
+      #body {
+        font-family: 'Nunito', sans-serif;
+      }
+    </style>
+    <link rel="stylesheet" href="./style.min.css" />
+    <script src="https://getinsights.io/js/insights.js"></script>
+    <script>
+      insights.init('jXInThyXOQTzVEaa')
+      insights.trackPages()
+    </script>
+  </head>
+  <body id="body">
+    <div
+      id="modal"
+      style="
+        background-color: rgb(8, 10, 10);
+        visibility: hidden;
+        top: 2rem;
+        opacity: 0;
+      "
+    >
+      <a id="close" class="closeColor"
+        ><div class="icon">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            xml:space="preserve"
+            style="
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              stroke-miterlimit: 2;
+            "
+          >
+            <path style="fill: none" d="M0 0h24v24H0z"></path>
+            <path
+              d="M18 6 6 18M6 6l12 12"
+              style="
+                fill: none;
+                fill-rule: nonzero;
+                stroke: #fff;
+                stroke-width: 2px;
+              "
+            ></path>
+          </svg></div
+      ></a>
+      <div id="keyView">
+        <p class="textColor">Use my public key to send me encrypted messages</p>
+        <a
+          download=""
+          target="_blank"
+          id="dlKey"
+          rel="noreferrer"
+          tabindex="-1"
+          style="background-color: rgb(5, 150, 105)"
+          href="./EnBizCard's public key.asc"
+          ><div class="icon iconColor">
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              style="
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 2;
+              "
+            >
+              <path style="fill: none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M21 15v4c0 1.097-.903 2-2 2H5c-1.097 0-2-.903-2-2v-4m4-5 5 5 5-5m-5 5V3"
+                style="
+                  fill: none;
+                  fill-rule: nonzero;
+                  stroke: #fff;
+                  stroke-width: 2px;
+                "
+              ></path>
+            </svg>
+          </div>
+          <span class="iconColor">Download Key</span></a
+        >
+      </div>
+      <div id="copyView">
+        <p class="textColor">Copy and send the URL to share my Business Card</p>
+        <button id="copyURL" style="background-color: rgb(5, 150, 105)">
+          <div class="icon iconColor">
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              style="
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 2;
+              "
+            >
+              <path style="fill: none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M22 11a2 2 0 0 0-2-2h-9a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-9Z"
+                style="fill: none; stroke: #fff; stroke-width: 2px"
+              ></path>
+              <path
+                d="M5 15H4c-1.097 0-2-.903-2-2V4c0-1.097.903-2 2-2h9c1.097 0 2 .903 2 2v1"
+                style="
+                  fill: none;
+                  fill-rule: nonzero;
+                  stroke: #fff;
+                  stroke-width: 2px;
+                "
+              ></path>
+            </svg>
+          </div>
+          <span class="iconColor">Copy URL</span>
+        </button>
+      </div>
+      <div id="qrView" class="textColor">
+        <div id="qr"></div>
+        <h3>Scan the QR Code</h3>
+        <p>to view my Business Card on another device</p>
+      </div>
+    </div>
+    <header>
+      <div id="topActions" style="display: none">
+        <div>
+          <a id="share"
+            ><div class="icon topAction">
+              <svg
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                xml:space="preserve"
+                style="
+                  fill-rule: evenodd;
+                  clip-rule: evenodd;
+                  stroke-linecap: round;
+                  stroke-miterlimit: 2;
+                "
+              >
+                <g>
+                  <path style="fill: none" d="M0 0h24v24H0z"></path>
+                  <clipPath id="a"><path d="M0 0h24v24H0z"></path></clipPath>
+                  <g clip-path="url(#a)">
+                    <circle
+                      cx="17"
+                      cy="5"
+                      r="3"
+                      style="fill: none; stroke: #fff; stroke-width: 2px"
+                    ></circle>
+                    <circle
+                      cx="5"
+                      cy="12"
+                      r="3"
+                      style="fill: none; stroke: #fff; stroke-width: 2px"
+                    ></circle>
+                    <circle
+                      cx="17"
+                      cy="19"
+                      r="3"
+                      style="fill: none; stroke: #fff; stroke-width: 2px"
+                    ></circle>
+                    <path
+                      d="m7.59 13.51 6.83 3.98m-.01-10.98-6.82 3.98"
+                      style="fill: none; stroke: #fff; stroke-width: 2px"
+                    ></path>
+                  </g>
+                </g>
+              </svg></div
+          ></a>
+          <a id="showQR"
+            ><div class="icon topAction">
+              <svg
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                xml:space="preserve"
+                style="
+                  fill-rule: evenodd;
+                  clip-rule: evenodd;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                  stroke-miterlimit: 2;
+                "
+              >
+                <path style="fill: none" d="M0 0h24v24H0z"></path>
+                <path
+                  d="M4 4h4v4H4V4Zm0 12h4v4H4v-4ZM16 4h4v4h-4V4Z"
+                  style="fill: none; stroke: #fff; stroke-width: 2px"
+                ></path>
+                <path
+                  d="M12 4v14c0 1.097.903 2 2 2h4c1.097 0 2-.903 2-2v-4c0-1.097-.903-2-2-2H4"
+                  style="
+                    fill: none;
+                    stroke: #fff;
+                    stroke-width: 2px;
+                    stroke-linejoin: miter;
+                  "
+                ></path>
+                <path style="fill: #fff" d="M15 15h2v2h-2z"></path>
+              </svg></div
+          ></a>
+        </div>
+        <a id="showKey"
+          ><div class="icon topAction">
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              style="
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-miterlimit: 2;
+              "
+            >
+              <path style="fill: none" d="M0 0h24v24H0z"></path>
+              <circle
+                cx="7"
+                cy="148"
+                r="5"
+                style="fill: none; stroke: #fff; stroke-width: 2px"
+                transform="translate(0 -132)"
+              ></circle>
+              <path
+                d="m16 139 3 3 3-3-3-3"
+                style="
+                  fill: none;
+                  fill-rule: nonzero;
+                  stroke: #fff;
+                  stroke-width: 2px;
+                "
+                transform="translate(0 -132)"
+              ></path>
+              <path
+                d="m21 134-10.465 10.465"
+                style="fill: none; stroke: #fff; stroke-width: 2px"
+                transform="translate(0 -132)"
+              ></path>
+            </svg></div
+        ></a>
+      </div>
+      <div class="headerImgC">
+        <img id="cover" src="./cover.gif" alt="Background Pattern" />
+        <img id="logo" src="./logo.svg" alt="Logo" />
+      </div>
+    </header>
+    <main style="background-color: rgb(8, 10, 10)">
+      <img id="profilePhoto" src="./photo.png" alt="Photo" />
+      <div id="info" class="textColor">
+        <p class="name">EnBizCard</p>
+        <p class="jobtitle">An Open-Source Digital Business Card Generator</p>
+        <p class="bizname">EnBizCard</p>
+      </div>
+      <p class="sub textColor">
+        EnBizCard helps you create beautiful, responsive HTML-based digital
+        business cards that can be hosted on your website.
+      </p>
+      <a
+        id="cta"
+        rel="noreferrer"
+        download=""
+        target="_blank"
+        aria-label="Save Contact"
+        style="background-color: rgb(5, 150, 105)"
+        href="enbizcard.vcf"
+        ><div class="icon iconColor">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            xml:space="preserve"
+            style="
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              stroke-miterlimit: 2;
+            "
+          >
+            <path style="fill: none" d="M0 0h24v24H0z"></path>
+            <circle
+              cx="8.5"
+              cy="7"
+              r="4"
+              style="fill: none; stroke: #fff; stroke-width: 2.29px"
+              transform="matrix(.875 0 0 .875 4.563 -.625)"
+            ></circle>
+            <path
+              d="M86 181c0-3.863 3.137-7 7-7s7 3.137 7 7"
+              style="fill: none; stroke: #fff; stroke-width: 2px"
+              transform="translate(-81 -163)"
+            ></path>
+            <path
+              d="M104 168v6m3-3-3 3-3-3"
+              style="
+                fill: none;
+                fill-rule: nonzero;
+                stroke: #fff;
+                stroke-width: 2px;
+              "
+              transform="translate(-92 -152)"
+            ></path>
+          </svg>
+        </div>
+        <p class="iconColor">Save Contact</p></a
+      >
+      <div class="actions">
+        <div class="actionsC">
+          <div class="actionBtn">
+            <a
+              href="tel:+91 9876543210"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Mobile"
+              style="background-color: rgb(5, 150, 105)"
+              ><div class="icon iconColor">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 2;
+                  "
+                >
+                  <path style="fill: none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="M11.5 22a.952.952 0 0 1-1.052.945c-4.358-.544-7.851-4.338-8.379-8.39a.938.938 0 0 1 .936-1.046c.399-.009.847-.009 1.202-.009.388 0 .738.237.882.597l.478 1.196a.95.95 0 0 1-.21 1.025l-.107.107a.951.951 0 0 0-.181 1.091c.495.825 1.59 1.92 2.425 2.396a.927.927 0 0 0 1.066-.177c.05-.02.086-.056.122-.092a.95.95 0 0 1 1.025-.21l1.196.478c.36.144.597.494.597.882V22Z"
+                    style="fill: none; stroke: #fff; stroke-width: 0.95px"
+                    transform="translate(-2.21 -26.421) scale(2.10526)"
+                  ></path>
+                </svg></div
+            ></a>
+            <p class="textColor">Mobile</p>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn">
+            <a
+              href="sms:+91 9876543210"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="SMS"
+              style="background-color: rgb(5, 150, 105)"
+              ><div class="icon iconColor">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 2;
+                  "
+                >
+                  <path style="fill: none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="M75.3 61c.477 0 .935.171 1.273.476.337.305.527.718.527 1.149v8.125c0 .897-.806 1.625-1.8 1.625h-8.975a9.7 9.7 0 0 0-4.992 1.365L60.9 74V62.625c0-.431.19-.844.527-1.149A1.904 1.904 0 0 1 62.7 61h12.6Z"
+                    style="fill: none; stroke: #fff; stroke-width: 1.71px"
+                    transform="matrix(1.11111 0 0 1.23077 -64.667 -71.077)"
+                  ></path>
+                  <path
+                    d="M36 13h4"
+                    style="
+                      fill: none;
+                      stroke: #fff;
+                      stroke-width: 2px;
+                      stroke-linejoin: miter;
+                    "
+                    transform="translate(-28)"
+                  ></path>
+                  <path
+                    d="M36 9h8"
+                    style="fill: none; stroke: #fff; stroke-width: 2px"
+                    transform="translate(-28)"
+                  ></path>
+                </svg></div
+            ></a>
+            <p class="textColor">SMS</p>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn">
+            <a
+              href="https://t.me/enbizcard"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+              style="background-color: rgb(5, 150, 105)"
+              ><div class="icon iconColor">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 1.5;
+                  "
+                >
+                  <path style="fill: none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="m10 14 3.636-4M1 12l19-9-2 18-5-4.375L8 19l-2-5.889L1 12Z"
+                    style="fill: none; stroke: #fff; stroke-width: 2px"
+                  ></path>
+                </svg></div
+            ></a>
+            <p class="textColor">Telegram</p>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn">
+            <a
+              href="tel:+91 9876543210"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Signal"
+              style="background-color: rgb(5, 150, 105)"
+              ><div class="icon iconColor">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 2;
+                  "
+                >
+                  <path style="fill: none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="M5.43 4.93A9.969 9.969 0 0 1 12.5 2c5.519 0 10 4.481 10 10 0 2.76-1.12 5.26-2.93 7.07l.001.001-.003.001A9.97 9.97 0 0 1 12.5 22a9.835 9.835 0 0 1-5.005-1.354l-4.187.546.546-4.187A9.835 9.835 0 0 1 2.5 12a9.97 9.97 0 0 1 2.928-7.068l.001-.003.001.001Z"
+                    style="fill: none; stroke: #fff; stroke-width: 2.86px"
+                    transform="matrix(.7 0 0 .7 3.75 3.6)"
+                  ></path>
+                  <path
+                    d="M5.43 4.93A9.969 9.969 0 0 1 12.5 2c5.519 0 10 4.481 10 10 0 2.76-1.12 5.26-2.93 7.07l.001.001-.003.001A9.97 9.97 0 0 1 12.5 22a9.835 9.835 0 0 1-5.005-1.354l-4.187.546.546-4.187A9.835 9.835 0 0 1 2.5 12a9.97 9.97 0 0 1 2.928-7.068l.001-.003.001.001Z"
+                    style="
+                      fill: none;
+                      stroke: #fff;
+                      stroke-width: 0.91px;
+                      stroke-dasharray: 2.73, 2.73, 0, 0;
+                      stroke-dashoffset: 1.82;
+                    "
+                    transform="matrix(1.1 0 0 1.1 -1.25 -1.2)"
+                  ></path>
+                </svg></div
+            ></a>
+            <p class="textColor">Signal</p>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Email"
+              style="background-color: rgb(5, 150, 105)"
+              href="mailto:apps@vishnuraghav.com"
+              ><div class="icon iconColor">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 2;
+                  "
+                >
+                  <path style="fill: none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="M22 33.75c0-.966-.896-1.75-2-1.75H4c-1.104 0-2 .784-2 1.75v10.5c0 .966.896 1.75 2 1.75h16c1.104 0 2-.784 2-1.75v-10.5Z"
+                    style="fill: none; stroke: #fff; stroke-width: 1.86px"
+                    transform="matrix(1 0 0 1.14286 0 -32.571)"
+                  ></path>
+                  <path
+                    d="m18 7.042-6 2.625-6-2.625"
+                    style="
+                      fill: none;
+                      fill-rule: nonzero;
+                      stroke: #fff;
+                      stroke-width: 1.86px;
+                    "
+                    transform="matrix(1 0 0 1.14286 0 1.952)"
+                  ></path>
+                </svg></div
+            ></a>
+            <p class="textColor">Email</p>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn">
+            <a
+              href="https://enbizcard.vishnuraghav.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Website"
+              style="background-color: rgb(5, 150, 105)"
+              ><div class="icon iconColor">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 2;
+                  "
+                >
+                  <g>
+                    <path style="fill: none" d="M0 0h24v24H0z"></path>
+                    <clipPath id="a"><path d="M0 0h24v24H0z"></path></clipPath>
+                    <g clip-path="url(#a)">
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        style="fill: none; stroke: #fff; stroke-width: 2px"
+                      ></circle>
+                      <ellipse
+                        cx="40"
+                        cy="40"
+                        rx="4"
+                        ry="10"
+                        style="
+                          fill: none;
+                          stroke: #fff;
+                          stroke-width: 2px;
+                          stroke-linejoin: miter;
+                        "
+                        transform="translate(-28 -28)"
+                      ></ellipse>
+                      <path
+                        d="M40 50s-2-4-2-10 2-10 2-10"
+                        style="fill: none; stroke: #fff; stroke-width: 2px"
+                        transform="rotate(-90 11.5 39.5)"
+                      ></path>
+                    </g>
+                  </g>
+                </svg></div
+            ></a>
+            <p class="textColor">Website</p>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Store"
+              style="background-color: rgb(5, 150, 105)"
+              href="https://www.vishnuraghav.com"
+              ><div class="icon iconColor">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 2;
+                  "
+                >
+                  <path style="fill: none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="m59 37 .721-4.329A2.001 2.001 0 0 1 61.694 31h12.612c.977 0 1.812.707 1.973 1.671L77 37"
+                    style="fill: none; stroke: #fff; stroke-width: 2px"
+                    transform="translate(-56 -28)"
+                  ></path>
+                  <path
+                    d="M71 39a2 2 0 0 1-4 0"
+                    style="fill: none; stroke: #fff; stroke-width: 1.33px"
+                    transform="matrix(1.5 0 0 1.5 -85.5 -49.5)"
+                  ></path>
+                  <path
+                    d="M71 39a2 2 0 0 1-4 0"
+                    style="fill: none; stroke: #fff; stroke-width: 1.33px"
+                    transform="matrix(1.5 0 0 1.5 -91.5 -49.5)"
+                  ></path>
+                  <path
+                    d="M71 39a2 2 0 0 1-4 0"
+                    style="fill: none; stroke: #fff; stroke-width: 1.33px"
+                    transform="matrix(1.5 0 0 1.5 -97.5 -49.5)"
+                  ></path>
+                  <path
+                    d="M61 39.235V47c0 .53.184 1.039.513 1.414.328.375.773.586 1.237.586h10.5c.464 0 .909-.211 1.237-.586A2.15 2.15 0 0 0 75 47v-7.765"
+                    style="fill: none; stroke: #fff; stroke-width: 1.86px"
+                    transform="matrix(1.14286 0 0 1 -65.714 -28)"
+                  ></path>
+                </svg></div
+            ></a>
+            <p class="textColor">Store</p>
+          </div>
+        </div>
+      </div>
+      <div class="actions secondary">
+        <div class="actionsC">
+          <div class="actionBtn secBtn">
+            <a
+              href="https://gitlab.com/vishnuraghavb"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitLab"
+              style="background-color: rgb(85, 68, 136)"
+              ><div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                  <path
+                    fill="#e24329"
+                    d="m12 20.29 3.32-10.2H8.69zm-7.95-10.2h4.64l-2-6.14a.34.34 0 0 0-.65 0zm15.91 0h-4.64l2-6.14c.1-.32.54-.32.65 0z"
+                  ></path>
+                  <path
+                    fill="#fca326"
+                    d="m4.05 10.09-1.01 3.1a.69.69 0 0 0 .24.77L12 20.29zm15.91 0 1 3.1a.69.69 0 0 1-.24.77L12 20.29z"
+                  ></path>
+                  <path
+                    fill="#fc6d26"
+                    d="m12 20.29 3.32-10.2h4.64zm0 0-7.95-10.2h4.64z"
+                  ></path>
+                </svg></div
+            ></a>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn secBtn">
+            <a
+              href="https://github.com/vishnuraghavb/EnBizCard"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              style="background-color: rgb(51, 51, 51)"
+              ><div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="#fff"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.03 2a9.97 9.97 0 0 0-3.16 19.44c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.91-.61.06-.6.06-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.33 1.08 2.9.83.1-.65.35-1.09.64-1.34-2.22-.25-4.55-1.1-4.55-4.93 0-1.08.4-1.98 1.03-2.67-.1-.26-.45-1.27.1-2.64 0 0 .83-.27 2.74 1.02a9.58 9.58 0 0 1 5 0c1.9-1.3 2.73-1.02 2.73-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.58 1.03 2.67 0 3.84-2.33 4.68-4.56 4.92.36.31.68.92.68 1.85l-.01 2.74c0 .26.18.57.68.48A9.98 9.98 0 0 0 12.03 2z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg></div
+            ></a>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn secBtn">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Mastodon"
+              style="background-color: rgb(43, 144, 217)"
+              href="https://mastodon.social/@vishnuraghavb"
+              ><div class="icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  stroke-linejoin="round"
+                  stroke-miterlimit="2"
+                  fill="#fff"
+                >
+                  <path
+                    d="M20.93 13.99c-.274 1.411-2.455 2.955-4.961 3.254-1.307.156-2.594.299-3.966.236-2.243-.103-4.013-.535-4.013-.535 0 .218.013.426.04.621.291 2.214 2.195 2.346 3.999 2.408 1.82.063 3.441-.448 3.441-.448l.075 1.645s-1.274.684-3.542.81c-1.25.068-2.803-.032-4.612-.511-3.923-1.038-4.598-5.22-4.701-9.462-.031-1.26-.012-2.448-.012-3.441 0-4.339 2.842-5.611 2.842-5.611 1.434-.658 3.894-.935 6.45-.956h.063c2.557.021 5.018.298 6.452.956 0 0 2.842 1.272 2.842 5.611 0 0 .036 3.201-.397 5.423zm-2.956-5.087v5.253h-2.081V9.058c0-1.075-.453-1.621-1.357-1.621-1.001 0-1.501.647-1.501 1.927v2.791h-2.07V9.364c0-1.28-.501-1.927-1.501-1.927-.904 0-1.357.546-1.357 1.621v5.098H6.025V8.903c0-1.074.275-1.927.823-2.558.567-.632 1.308-.955 2.228-.955 1.066 0 1.872.409 2.405 1.228l.519.87.519-.87c.532-.819 1.339-1.228 2.404-1.228.921 0 1.662.323 2.228.955.549.631.823 1.484.823 2.558z"
+                  ></path>
+                </svg></div
+            ></a>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn secBtn">
+            <a
+              href="https://joinpeertube.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Peertube"
+              style="background-color: rgb(255, 255, 255)"
+              ><div class="icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  clip-rule="evenodd"
+                  stroke-linejoin="round"
+                  stroke-miterlimit="2"
+                >
+                  <path d="M6.5 2v10L14 7" fill="#211f20"></path>
+                  <path d="M6.5 12v10l7.5-5" fill="#737373"></path>
+                  <path d="M14 7v10l7.5-5" fill="#f1680d"></path>
+                </svg></div
+            ></a>
+          </div>
+        </div>
+        <div class="actionsC">
+          <div class="actionBtn secBtn">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="PayPal"
+              style="background-color: rgb(0, 48, 135)"
+              href="https://paypal.me/vishnuraghav"
+              ><div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#fff"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    d="M19.554 9.488c.121.563.106 1.246-.04 2.051-.582 2.978-2.477 4.466-5.683 4.466h-.442a.666.666 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.706.706 0 0 1-.247.426.666.666 0 0 1-.447.166H8.874a.395.395 0 0 1-.331-.15.457.457 0 0 1-.09-.363c.061-.373.148-.938.267-1.689.117-.75.206-1.314.267-1.689s.15-.938.272-1.685c.121-.748.212-1.31.271-1.685.033-.248.179-.371.433-.371h1.316c.893.013 1.682-.057 2.375-.211 1.172-.262 2.134-.744 2.886-1.449.685-.637 1.203-1.462 1.56-2.473.162-.47.277-.917.352-1.338.006-.041.014-.066.025-.074.008-.011.022-.014.035-.011a.378.378 0 0 1 .062.035c.524.398.854.941.98 1.632zm-1.728-2.836c0 .717-.154 1.508-.465 2.374-.537 1.562-1.547 2.618-3.037 3.168-.758.269-1.602.408-2.535.425 0 .006-.301.007-.904.007l-.903-.007c-.672 0-1.067.32-1.187.964-.013.053-.298 1.83-.855 5.329-.008.066-.048.102-.121.102H4.854a.473.473 0 0 1-.369-.165.469.469 0 0 1-.115-.39L6.702 3.664a.784.784 0 0 1 .276-.483.785.785 0 0 1 .519-.19h6.014c.228 0 .555.044.979.131.428.084.801.194 1.123.321.718.274 1.266.688 1.645 1.237.379.552.568 1.207.568 1.972z"
+                  ></path>
+                </svg></div
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div class="featured">
+        <h2 class="section textColor">Image Gallery</h2>
+        <div>
+          <div class="media image" style="background-color: rgb(44, 44, 44)">
+            <div>
+              <img
+                src="./media/photo_by_andreas_gücklhorn.jpeg"
+                alt="Product image"
+              />
+              <div class="controls cardColor">
+                <p class="title">Photo by Andreas Gücklhorn</p>
+              </div>
+            </div>
+            <!---->
+            <!---->
+          </div>
+        </div>
+        <div>
+          <div class="media image" style="background-color: rgb(44, 44, 44)">
+            <div>
+              <img src="./media/photo_by_erol_ahmed.jpeg" alt="Product image" />
+              <div class="controls cardColor">
+                <p class="title">Photo by Erol Ahmed</p>
+              </div>
+            </div>
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <div class="featured">
+        <h2 class="section textColor">Music Releases</h2>
+        <div>
+          <div class="media music" style="background-color: rgb(44, 44, 44)">
+            <!---->
+            <div class="mediaC">
+              <video
+                controlslist="nodownload nofullscreen noremoteplayback"
+                disablepictureinpicture=""
+                preload="metadata"
+                class="source"
+                style="pointer-events: auto; display: none"
+                controls="controls"
+              >
+                <source src="./media/over_the_water,_humans_gather.mp3" />
+              </video>
+              <img
+                src="./media/over_the_water,_humans_gather.jpeg"
+                alt="cover"
+              />
+              <div class="controls cardColor">
+                <p class="title">Over the Water, Humans Gather</p>
+                <p class="sub">
+                  <span>Doctor Turtle</span>
+                  <span> - One Person Listening Now</span>
+                </p>
+                <div class="pCtrl" style="display: none">
+                  <output class="currentTime sub">00:00</output>
+                  <a
+                    class="playPause"
+                    style="background-color: rgb(5, 150, 105)"
+                    ><div class="icon play iconColor">
+                      <svg
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xml:space="preserve"
+                        style="
+                          fill-rule: evenodd;
+                          clip-rule: evenodd;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-miterlimit: 2;
+                        "
+                      >
+                        <path style="fill: none" d="M0 0h24v24H0z"></path>
+                        <path
+                          d="M7 6.663a1.998 1.998 0 0 1 3.082-1.682l8.301 5.337a2 2 0 0 1 0 3.364l-8.301 5.337A1.998 1.998 0 0 1 7 17.337V6.663Z"
+                          style="fill: none; stroke: #fff; stroke-width: 2px"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="icon pause iconColor">
+                      <svg
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xml:space="preserve"
+                        style="
+                          fill-rule: evenodd;
+                          clip-rule: evenodd;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-miterlimit: 2;
+                        "
+                      >
+                        <path style="fill: none" d="M0 0h24v24H0z"></path>
+                        <path
+                          d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z"
+                          style="
+                            fill: none;
+                            fill-rule: nonzero;
+                            stroke: #fff;
+                            stroke-width: 2px;
+                          "
+                          transform="translate(-28 -132)"
+                        ></path>
+                        <path
+                          d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z"
+                          style="
+                            fill: none;
+                            fill-rule: nonzero;
+                            stroke: #fff;
+                            stroke-width: 2px;
+                          "
+                          transform="translate(-20 -132)"
+                        ></path>
+                      </svg></div
+                  ></a>
+                  <input type="range" value="0" class="seekBar seekbarColor" />
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
+        <div>
+          <div class="media embedded">
+            <iframe
+              src="https://audiomack.com/embed/album/tamilhuntmp3/enthiran-20?background=1"
+              allowfullscreen="allowfullscreen"
+              frameborder="0"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="featured">
+        <h2 class="section textColor">Video Gallery</h2>
+        <div>
+          <div class="media video" style="background-color: rgb(44, 44, 44)">
+            <!---->
+            <div class="mediaC">
+              <video
+                controlslist="nodownload nofullscreen noremoteplayback"
+                disablepictureinpicture=""
+                preload="metadata"
+                class="source"
+                style="pointer-events: auto"
+                controls="controls"
+              >
+                <source src="./media/butterflies.mp4" />
+              </video>
+              <!---->
+              <div class="controls cardColor">
+                <p class="title">Butterflies</p>
+                <!---->
+                <div class="pCtrl" style="display: none">
+                  <output class="currentTime sub">00:00</output>
+                  <a
+                    class="playPause"
+                    style="background-color: rgb(5, 150, 105)"
+                    ><div class="icon play iconColor">
+                      <svg
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xml:space="preserve"
+                        style="
+                          fill-rule: evenodd;
+                          clip-rule: evenodd;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-miterlimit: 2;
+                        "
+                      >
+                        <path style="fill: none" d="M0 0h24v24H0z"></path>
+                        <path
+                          d="M7 6.663a1.998 1.998 0 0 1 3.082-1.682l8.301 5.337a2 2 0 0 1 0 3.364l-8.301 5.337A1.998 1.998 0 0 1 7 17.337V6.663Z"
+                          style="fill: none; stroke: #fff; stroke-width: 2px"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="icon pause iconColor">
+                      <svg
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xml:space="preserve"
+                        style="
+                          fill-rule: evenodd;
+                          clip-rule: evenodd;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-miterlimit: 2;
+                        "
+                      >
+                        <path style="fill: none" d="M0 0h24v24H0z"></path>
+                        <path
+                          d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z"
+                          style="
+                            fill: none;
+                            fill-rule: nonzero;
+                            stroke: #fff;
+                            stroke-width: 2px;
+                          "
+                          transform="translate(-28 -132)"
+                        ></path>
+                        <path
+                          d="M34 138a2 2 0 1 1 4 0v12a2 2 0 1 1-4 0v-12Z"
+                          style="
+                            fill: none;
+                            fill-rule: nonzero;
+                            stroke: #fff;
+                            stroke-width: 2px;
+                          "
+                          transform="translate(-20 -132)"
+                        ></path>
+                      </svg></div
+                  ></a>
+                  <input type="range" value="0" class="seekBar seekbarColor" />
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <div class="featured">
+        <h2 class="section textColor">Documents</h2>
+        <div>
+          <div class="media document" style="background-color: rgb(44, 44, 44)">
+            <!---->
+            <!---->
+            <div class="mediaC">
+              <div>
+                <img
+                  src="./media/business_card_-_wikipedia.jpeg"
+                  alt="Business Card - Wikipedia"
+                />
+              </div>
+              <div class="controls cardColor">
+                <p class="title">Business Card - Wikipedia</p>
+                <div class="docDl">
+                  <p class="fileSize sub">PDF - 386.96 KB</p>
+                  <a
+                    href="./media/business_card_-_wikipedia.pdf"
+                    download=""
+                    target="_blank"
+                    class="dlBtn"
+                    style="background-color: rgb(5, 150, 105)"
+                    ><div class="icon iconColor">
+                      <svg
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xml:space="preserve"
+                        style="
+                          fill-rule: evenodd;
+                          clip-rule: evenodd;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-miterlimit: 2;
+                        "
+                      >
+                        <path style="fill: none" d="M0 0h24v24H0z"></path>
+                        <path
+                          d="M21 15v4c0 1.097-.903 2-2 2H5c-1.097 0-2-.903-2-2v-4m4-5 5 5 5-5m-5 5V3"
+                          style="
+                            fill: none;
+                            fill-rule: nonzero;
+                            stroke: #fff;
+                            stroke-width: 2px;
+                          "
+                        ></path>
+                      </svg></div
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="featured">
+        <h2 class="section textColor">Text Content</h2>
+        <div>
+          <div class="media" style="background-color: rgb(44, 44, 44)">
+            <p class="textC cardColor">
+              POEM - ONCE IN A LIFETIME Once in a lifetime you find someone
+              special, Your lives intermingle and somehow you know. This is the
+              beginning of all you have longed for, A love you can build on, a
+              love that will grow. Once in a lifetime to those who are lucky, A
+              miracle happens and dreams all come true. I know it can happen, it
+              happened to me, For I've found my "once in a lifetime" with you.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="featured">
+        <h2 class="section textColor">Geolocation</h2>
+        <div>
+          <div class="media embedded">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=76.92369461059572%2C10.965207912805845%2C77.00420379638673%2C11.039687592091763&amp;amp;layer=mapnik"
+              allowfullscreen="allowfullscreen"
+              frameborder="0"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="featured">
+        <h2 class="section textColor">Product Showcase</h2>
+        <div>
+          <div class="media" style="background-color: rgb(44, 44, 44)">
+            <img src="./media/photo.png" alt="Product image" />
+            <div class="controls cardColor prodInfo">
+              <p class="title">EnBizCard</p>
+              <p class="sub">by Vishnu Raghav</p>
+              <p class="price">Free Forever</p>
+              <a
+                target="_blank"
+                href="https://enbizcard.vishnuraghav.com/"
+                class="label"
+                style="background-color: rgb(5, 150, 105); line-height: 1.5rem"
+                ><p class="iconColor">Create your own</p></a
+              >
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="media" style="background-color: rgb(44, 44, 44)">
+            <!---->
+            <div class="controls cardColor prodInfo">
+              <p class="title">Please Donate</p>
+              <p class="sub">
+                If you find this service valuable to you or your business,
+                please consider donating.
+              </p>
+              <!---->
+              <a
+                target="_blank"
+                href="https://www.vishnuraghav.com/donate/"
+                class="label"
+                style="background-color: rgb(5, 150, 105); line-height: 1.5rem"
+                ><p class="iconColor">Donate</p></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="textColor" style="background-color: rgb(8, 10, 10)">
+      Created with
+      <a
+        href="https://enbizcard.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="textColor"
+        >EnBizCard</a
+      >
+    </footer>
+    <script src="./qrcode.min.js"></script>
+    <script>
+      let m = document.getElementById('modal'),
+        c = document.getElementById('close'),
+        ki = document.getElementById('keyView'),
+        cv = document.getElementById('copyView'),
+        curl = document.getElementById('copyURL'),
+        qrv = document.getElementById('qrView'),
+        qr = document.getElementById('qr'),
+        s = document.getElementById('share'),
+        sqr = document.getElementById('showQR'),
+        sk = document.getElementById('showKey')
+      function tC(e) {
+        '2rem' == e.style.top
+          ? ((e.style.visibility = 'visible'),
+            (e.style.top = '0px'),
+            (e.style.opacity = 1))
+          : ((e.style.top = '2rem'),
+            (e.style.opacity = 0),
+            setTimeout(() => {
+              e.style.visibility = 'hidden'
+            }, 200))
+      }
+      function dN(e) {
+        e.style.display = 'none'
+      }
+      window.addEventListener('load', () => {
+        ;(document.querySelector('#topActions').style.display = 'flex'),
+          (qr.innerHTML = new QRCode({
+            content: window.location.href,
+            container: 'svg-viewbox',
+            join: !0,
+            ecl: 'L',
+            padding: 0,
+          }).svg())
+      }),
+        navigator.canShare
+          ? s.addEventListener('click', () => {
+              navigator.share({
+                title: document.title,
+                text: 'You can view my Digital Business Card here:',
+                url: window.location.href,
+              })
+            })
+          : s.addEventListener('click', () => {
+              tC(m), (cv.style.display = 'flex'), dN(qrv), ki && dN(ki)
+            }),
+        sqr.addEventListener('click', () => {
+          tC(m), (qrv.style.display = 'block'), dN(cv), ki && dN(ki)
+        }),
+        sk &&
+          sk.addEventListener('click', () => {
+            tC(m), ki && (ki.style.display = 'flex'), dN(cv), dN(qrv)
+          }),
+        c.addEventListener('click', () => tC(m)),
+        curl.addEventListener('click', async () => {
+          let e = curl.querySelectorAll('.iconColor')[1]
+          await navigator.clipboard
+            .writeText(window.location.href)
+            .then((t) => {
+              ;(e.innerText = 'Copied'),
+                setTimeout(() => {
+                  e.innerText = 'Copy URL'
+                }, 1e3)
+            })
+        })
+    </script>
+    <script>
+      let pC = document.querySelectorAll('.pCtrl'),
+        pP = document.querySelectorAll('.playPause'),
+        srcs = document.querySelectorAll('.source')
+      srcs.forEach((e) => {
+        ;(e.style.pointerEvents = 'none'), e.removeAttribute('controls')
+      }),
+        pC.forEach((e, l) => {
+          e.style.display = 'flex'
+          let r = e.querySelector('.currentTime'),
+            s = e.querySelector('.seekBar'),
+            t = e.querySelector('.playPause'),
+            a = t.querySelector('.play'),
+            c = t.querySelector('.pause')
+          srcs[l].addEventListener('timeupdate', () => {
+            let e = srcs[l].currentTime,
+              t = (100 / srcs[l].duration) * e
+            ;(s.value = t),
+              100 == t &&
+                ((s.value = 0),
+                (a.style.display = 'block'),
+                (c.style.display = 'none'))
+            let o = Math.floor(e / 60),
+              y = Math.floor(e % 60)
+            o.toString().length < 2 && (o = '0' + o),
+              y.toString().length < 2 && (y = '0' + y),
+              (r.value = o + ':' + y)
+          }),
+            s.addEventListener('change', () => {
+              srcs[l].currentTime = srcs[l].duration * (parseInt(s.value) / 100)
+            }),
+            t.addEventListener('click', () => {
+              srcs[l].paused
+                ? (srcs.forEach((e, r) => {
+                    l != r && (e.paused || e.pause())
+                  }),
+                  pP.forEach((e, l) => {
+                    let r = e.querySelector('.play'),
+                      s = e.querySelector('.pause')
+                    ;(r.style.display = 'block'), (s.style.display = 'none')
+                  }),
+                  srcs[l].play(),
+                  (a.style.display = 'none'),
+                  (c.style.display = 'block'))
+                : (srcs[l].pause(),
+                  (c.style.display = 'none'),
+                  (a.style.display = 'block'))
+            })
+        })
+    </script>
+  </body>
+</html>

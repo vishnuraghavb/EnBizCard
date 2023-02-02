@@ -8,6 +8,10 @@
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
+  "engines": {
+    "node": "16.17.0"
+  },
+  "engineStrict": true,
   "dependencies": {
     "@caohenghu/vue-colorpicker": "^1.2.4",
     "@nuxtjs/pwa": "^3.3.5",
