@@ -1,11 +1,6 @@
 <template>
   <div
-    class="
-      overflow-y-scroll
-      max-hd
-      border-t-0 border-4 border-black
-      bg-gray-900
-    "
+    class="overflow-y-scroll max-hd border-t-0 border-4 border-black bg-gray-900"
   >
     <div :id="`Theme${theme}`">
       <html
@@ -617,7 +612,7 @@ export default {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
-    height: 100%;
+    // height: 100%;
     overflow: hidden;
   }
   #cover {
