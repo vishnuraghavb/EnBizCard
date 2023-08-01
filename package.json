@@ -19,7 +19,7 @@
     "cropperjs": "^1.5.11",
     "file-saver": "^2.0.5",
     "id3-parser": "^2.0.0",
-    "jszip": "^3.10.0",
+    "jszip": "^3.10.1",
     "nuxt": "^2.15.8",
     "vue-clickaway2": "^2.3.2",
     "vuedraggable": "^2.24.3"
