@@ -1372,6 +1372,15 @@ export default {
             label: 'Instagram username',
           },
           {
+            name: 'Threads',
+            icon: 'threads',
+            href: 'https://www.threads.net/',
+            placeholder: '@username',
+            value: null,
+            color: '#000000',
+            label: 'Threads username',
+          },
+          {
             name: 'Pixelfed',
             icon: 'pixelfed',
             placeholder: 'https://pixelfed.social/username',
