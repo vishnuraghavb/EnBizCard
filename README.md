@@ -32,12 +32,14 @@
 - Themes
 - Track your audience with analytics
 - Custom fonts
+- Cloud Sync Feature - (Optional). Checkout [How it works](https://www.youtube.com/watch?v=hg-IDl4JBXA) and [How to Setup](https://www.youtube.com/watch?v=wM6Plcbihxo) - 
 
 ## Highlights
 
 - Zero limitations
 - Your data belongs to you
 - Private by design
+- Cloud Sync Feature with Cloudinary (Optional)
 
 ## Future
 

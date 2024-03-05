@@ -185,6 +185,81 @@
     </div>
     <div class="md:grid md:grid-cols-2">
       <div class="px-4 mt-32">
+        <p
+          v-if="error"
+          class="my-8 border p-4 rounded border-red-700 text-white bg-red-500"
+        >
+          {{ error }}
+        </p>
+
+        <div class="stepC mt-8">
+          <h2 class="font-extrabold text-2xl">Import Data</h2>
+
+          <div class="flex items-center">
+            <p class="mr-4">Do you want to Import Data from the cloud?</p>
+
+            <div
+              class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
+              :class="{
+                'bg-emerald-600 hover:bg-emerald-500 focus:bg-emerald-500':
+                  doImportData,
+              }"
+              tabindex="0"
+              @click="doImportData = !doImportData"
+              @keypress.space.enter.prevent="doImportData = !doImportData"
+            >
+              <transition name="slide">
+                <input
+                  type="checkbox"
+                  name="toggle"
+                  aria-label="Toggle footer credit"
+                  id="toggle"
+                  v-model="doImportData"
+                  class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
+                  tabindex="-1"
+                />
+              </transition>
+            </div>
+          </div>
+
+          <div v-if="doImportData" ref="import" id="step-1" class="pt-8">
+            <div class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              You can import your existing data to pre-populate the V-Card
+            </div>
+
+            <div class="stepC mt-6">
+              <label for="import" class="ml-4">Cloudinary File URL</label>
+              <input
+                id="import"
+                spellcheck="false"
+                type="text"
+                :value="importUrl"
+                @change="changeImportUrl"
+                placeholder="https://res.cloudinary.com/wendy/raw/upload/v745456746/vcard/config.json"
+                class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              />
+            </div>
+            <button
+              ref="importData"
+              @click="importData"
+              class="flex bg-gray-700 leading-none text-2xl tracking-wide border-2 border-transparent font-extrabold p-4 rounded mt-4 select-none transition-colors duration-200 focus:outline-none"
+              :title="importDataEntered ? '' : 'Please enter your import URL'"
+              :class="
+                importDataEntered
+                  ? 'bg-emerald-600 cursor-pointer text-white focus:bg-emerald-500 hover:bg-emerald-500'
+                  : 'cursor-not-allowed text-black'
+              "
+            >
+            <div
+                class="w-6 mr-4"
+                v-if="loading"
+                v-html="require(`~/assets/icons/spinner.svg?include`)"
+              ></div>
+              Import Data
+            </button>
+          </div>
+        </div>
+
         <div ref="create" id="step-1" class="pt-8">
           <h2 class="font-extrabold text-2xl">Header attachments</h2>
           <div class="stepC">
@@ -246,7 +321,7 @@
                   focus:outline-none focus:border-gray-600
                   hover:border-gray-600
                 "
-              />
+                />
             </div>
             <div>
               <label for="lastname" class="ml-4">Last name</label>
@@ -269,7 +344,7 @@
                   focus:outline-none focus:border-gray-600
                   hover:border-gray-600
                 "
-              />
+                  />
             </div>
           </div>
           <div class="stepC mt-6">
@@ -295,7 +370,7 @@
                 focus:outline-none focus:border-gray-600
                 hover:border-gray-600
               "
-            />
+              />
           </div>
           <div class="stepC mt-6">
             <label for="job-title" class="ml-4">Job title</label>
@@ -318,7 +393,7 @@
                 focus:outline-none focus:border-gray-600
                 hover:border-gray-600
               "
-            />
+              />
           </div>
           <div class="stepC mt-6">
             <label for="business-name" class="ml-4">Business name</label>
@@ -966,6 +1041,105 @@
             </p>
           </div>
         </div>
+
+        <div class="stepC mt-8">
+          <h2 class="font-extrabold text-2xl">Save Data</h2>
+
+          <div class="flex items-center">
+            <p class="mr-4">Do you want to Save Data in the cloud?</p>
+
+            <div
+              class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
+              :class="{
+                'bg-emerald-600 hover:bg-emerald-500 focus:bg-emerald-500':
+                  doSaveData,
+              }"
+              tabindex="0"
+              @click="doSaveData = !doSaveData"
+              @keypress.space.enter.prevent="doSaveData = !doSaveData"
+            >
+              <transition name="slide">
+                <input
+                  type="checkbox"
+                  name="toggle"
+                  aria-label="Toggle footer credit"
+                  id="toggle"
+                  v-model="doSaveData"
+                  class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
+                  tabindex="-1"
+                />
+              </transition>
+            </div>
+          </div>
+          <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+            By enabling the Save Data, you can persist your v-card Data state in
+            the cloud and retrieve for editing next time.
+          </p>
+
+          <div v-if="doSaveData" ref="sync" id="step-1" class="pt-8">
+            <div class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+              Please paste your Cloudinary connection URL, You can
+              <ol class="list-decimal ml-4">
+                <li>
+                  <a
+                    class="text-blue-200"
+                    href="https://cloudinary.com/users/register_free"
+                    target="_blank"
+                    >create a FREE account,</a
+                  > if you don't have one
+                </li>
+                <li>Create an Unsigned Upload Preset with exactly "v-card-unsigned-preset" as name </li>
+                <li>copy and paste your Cloudinary Cloud Name here.</li>
+              </ol>
+            </div>
+
+            <div class="stepC mt-6">
+              <label for="import" class="ml-4">Cloudinary Cloud Name</label>
+              <input
+                id="saveDataUrl"
+                spellcheck="false"
+                type="text"
+                :value="saveDataUrl"
+                @change="changeSaveDataUrl"
+                placeholder="wendy"
+                class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
+              />
+            </div>
+            <div
+              v-if="configUrl"
+              @click="copyToClipboard"
+              class="flex my-8 border cursor-pointer p-4 rounded border-gray-700 text-white"
+            >
+              <div>
+                <div class="font-bold text-white my-2">
+                  Click to Copy and Save this for next time
+                </div>
+                <div>{{ configUrl }}</div>
+              </div>
+            </div>
+            <!-- TODO: add spinner for loading -->
+            <button
+              ref="saveData"
+              @click="saveData"
+              class="flex bg-gray-700 leading-none text-2xl tracking-wide border-2 border-transparent font-extrabold p-4 rounded mt-4 select-none transition-colors duration-200 focus:outline-none"
+              :title="saveDataEntered ? '' : 'Please enter your import URL'"
+              :class="
+                saveDataEntered
+                  ? 'bg-emerald-600 cursor-pointer text-white focus:bg-emerald-500 hover:bg-emerald-500'
+                  : 'cursor-not-allowed text-black'
+              "
+              :disabled="loading"
+            >
+              <div
+                class="w-6 mr-4"
+                v-if="loading"
+                v-html="require(`~/assets/icons/spinner.svg?include`)"
+              ></div>
+              Save Data
+            </button>
+          </div>
+        </div>
+
         <Download
           :downloadCheckList="downloadCheckList"
           :downloadChecked="downloadChecked"
@@ -977,7 +1151,7 @@
         id="preview-container"
         class="relative w-full mt-20 sm:mt-0 hidden md:block"
       >
-        <div
+      <div
           id="preview"
           class="
             flex flex-col
@@ -1008,7 +1182,7 @@
                     class="pl-4 h-12 w-full bg-black rounded text-gray-500"
                     aria-label="vCard URL"
                     disabled
-                    :value="'https://yoursite/vcard/' + username"
+                    :value=" hostedURL ? hostedURL : 'https://yoursite/vcard/' + username"
                     tabindex="-1"
                   />
                   <div
@@ -1738,6 +1912,72 @@ export default {
       showPreview: false,
       scrollPos: null,
       opening: false,
+
+      error: '',
+      loading: false,
+
+      importUrl: '',
+      importDataEntered: false,
+      doImportData: false,
+
+      saveDataUrl: '',
+      saveDataEntered: false,
+      doSaveData: false,
+
+      configData: {
+        logo: {
+          url: '',
+          ext: '',
+        },
+        cover: {
+          url: '',
+          ext: '',
+        },
+        profilePhoto: {
+          url: '',
+          ext: '',
+        },
+        firstName: '',
+        lastName: '',
+        fullName: '', // optional
+        pronouns: '',
+        jobTitle: '',
+        businessName: '',
+        businessAddress: '',
+        businessDescription: '',
+        openPGPPublicKey: '',
+        openPGPPublicKeyUrl: '',
+        primaryActions: [],
+        secondaryActions: [],
+        featuredContents: [
+          {
+            title: '',
+            content: [],
+          },
+        ],
+        footerCredit: false,
+        theme: this.theme,
+        colors: {
+          logoBg: {
+            color: `#059669`,
+          },
+          mainBg: {
+            color: `#ddd`,
+          },
+          buttonBg: {
+            color: `#059669`,
+          },
+          cardBg: {
+            color: `#fff`,
+          },
+        },
+        fontLink: '',
+        fontCss: '',
+        tracker: '',
+        hostedURL: '',
+      },
+
+      configUrl: '',
     }
   },
   computed: {
@@ -2166,6 +2406,259 @@ export default {
           this.PreviewMode = true
         }, 250)
       }
+    },
+
+    setError(message) {
+      this.error = message
+
+      let timeout = null
+
+      timeout = setTimeout(() => {
+        this.error = ''
+        timeout = null
+      }, 5000)
+    },
+
+    changeImportUrl(event) {
+      this.importUrl = event.target.value
+      if (this.importUrl) {
+        this.importDataEntered = true
+      } else {
+        this.importDataEntered = false
+      }
+    },
+
+    changeSaveDataUrl(event) {
+      this.saveDataUrl = event.target.value
+      if (this.saveDataUrl) {
+        this.saveDataEntered = true
+      } else {
+        this.saveDataEntered = false
+      }
+    },
+
+    copyToClipboard() {
+      navigator.clipboard.writeText(this.configUrl)
+    },
+
+    async uploadAsset(file, type = 'image') {
+      const url = `https://api.cloudinary.com/v1_1/${this.saveDataUrl}/${type}/upload`
+
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('upload_preset', 'v-card-unsigned-preset')
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          body: formData,
+        })
+
+        const responseData = await res.json()
+
+        return responseData
+      } catch (error) {
+        this.setError(error.message || 'Request Failed')
+      }
+    },
+
+    async getConfigData() {
+      if (this.images.logo.blob) {
+        const res = await this.uploadAsset(this.images.logo.blob)
+        if (res) {
+          this.configData.logo.url = res.secure_url
+        }
+      }
+
+      if (this.images.cover.blob) {
+        const res = await this.uploadAsset(this.images.cover.blob)
+        if (res) {
+          this.configData.cover.url = res.secure_url
+        }
+      }
+
+      if (this.images.photo.blob) {
+        const res = await this.uploadAsset(this.images.photo.blob)
+        if (res) {
+          this.configData.profilePhoto.url = res.secure_url
+        }
+      }
+
+      for (const [key1, feature] of Object.entries(this.featured)) {
+        if (!Array.isArray(this.configData.featuredContents)) {
+          this.configData.featuredContents = []
+        }
+
+        this.configData.featuredContents[key1].title = feature.title
+
+        for (const [key2, content] of Object.entries(feature.content)) {
+          if (
+            !Array.isArray(this.configData.featuredContents[key1]['content'])
+          ) {
+            this.configData.featuredContents[key1]['content'] = []
+          }
+
+          if (content.contentType === 'media') {
+            const res = await this.uploadAsset(content.file, content.type)
+
+            if (res) {
+              this.configData.featuredContents[key1]['content'][key2] = {
+                ...this.configData.featuredContents[key1]['content'][key2],
+                file: {
+                  url: res.secure_url,
+                },
+              }
+            }
+
+            this.configData.featuredContents[key1]['content'][key2].title =
+              content.title
+            this.configData.featuredContents[key1]['content'][key2].ext =
+              content.ext
+            this.configData.featuredContents[key1]['content'][key2].type =
+              content.type
+
+            continue
+          }
+
+          if (content.contentType === 'product') {
+            this.configData.featuredContents[key1]['content'][key2] = {
+              ...content,
+            }
+
+            if (content.image?.file) {
+              const res = await this.uploadAsset(content.image.file)
+
+              if (res) {
+                this.configData.featuredContents[key1]['content'][key2].url =
+                  res.secure_url
+
+                this.configData.featuredContents[key1]['content'][key2] = {
+                  ...this.configData.featuredContents[key1]['content'][key2],
+                  image: {
+                    file: {
+                      url: res.secure_url,
+                    },
+                  },
+                }
+              }
+            }
+
+            delete this.configData.featuredContents[key1]['content'][key2].image
+
+            continue
+          }
+
+          this.configData.featuredContents[key1]['content'][key2] = content
+        }
+      }
+
+      this.configData.firstName = this.genInfo.fname
+      this.configData.lastName = this.genInfo.lname
+      this.configData.fullName = `${this.genInfo.fname} ${this.genInfo.lname}` // optional
+
+      this.configData.pronouns = this.genInfo.pronouns
+      this.configData.jobTitle = this.genInfo.title
+      this.configData.businessName = this.genInfo.biz
+      this.configData.businessAddress = this.genInfo.addr
+      this.configData.businessDescription = this.genInfo.desc
+
+      this.configData.primaryActions = this.primaryActions
+      this.configData.secondaryActions = this.secondaryActions
+      this.configData.footerCredit = this.footerCredit
+      this.configData.theme = this.theme
+
+      this.configData.colors = this.colors
+
+      this.configData.fontLink = this.genInfo.fontLink
+      this.configData.fontCss = this.genInfo.fontCss
+      this.configData.tracker = this.genInfo.tracker
+      this.configData.hostedURL = this.hostedURL
+
+      return this.configData
+    },
+
+    async importData() {
+      this.loading = true;
+      if (!this.importUrl) {
+        this.setError('Import Url is required')
+        return
+      }
+
+      try {
+        const res = await fetch(this.importUrl, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+
+        if (!res.status) {
+          this.setError('Request Failed')
+          return
+        }
+
+        const responseData = await res.json()
+
+        this.configData = responseData
+
+        this.images.logo.url = this.configData.logo.url
+        this.images.logo.ext = this.configData.logo.ext
+
+        this.images.cover.url = this.configData.cover.url
+        this.images.cover.ext = this.configData.cover.ext
+
+        this.images.photo.url = this.configData.profilePhoto.url
+        this.images.photo.ext = this.configData.profilePhoto.ext
+
+        this.genInfo.fname = this.configData.firstName
+        this.genInfo.lname = this.configData.lastName
+        this.genInfo.pronouns = this.configData.pronouns
+        this.genInfo.title = this.configData.jobTitle
+        this.genInfo.biz = this.configData.businessName
+        this.genInfo.addr = this.configData.businessAddress
+        this.genInfo.desc = this.configData.businessDescription
+        this.genInfo.key = this.configData.openPGPPublicKey
+        this.genInfo.tracker = this.configData.tracker
+        this.genInfo.fontLink = this.configData.fontLink
+        this.genInfo.fontCss = this.configData.fontCss
+
+        this.primaryActions = this.configData.primaryActions
+        this.secondaryActions = this.configData.secondaryActions
+
+        this.featured = this.configData.featuredContents
+        this.hostedURL = this.configData.hostedURL
+        this.footerCredit = this.configData.footerCredit
+        this.colors = this.configData.colors
+
+        this.changeTheme(this.configData.theme)
+      } catch (error) {
+        this.setError(error.message || 'Request Failed')
+      }
+      this.loading = false;
+    },
+
+
+    async saveData() {
+      this.loading = true
+      if (!this.saveDataUrl) {
+        this.setError('Cloudinary Cloud Name is required')
+        return
+      }
+
+      try {
+        const config = await this.getConfigData()
+
+        const file = new File([JSON.stringify(config)], 'v-card-config.json', {
+          type: 'application/json',
+        })
+        const res = await this.uploadAsset(file, 'raw')
+
+        if (res) {
+          this.configUrl = res.secure_url
+        }
+      } catch (error) {
+        this.setError(error.message || 'Request Failed')
+      }
+      this.loading = false
     },
   },
   mounted() {
