@@ -20,8 +20,8 @@
           type == 'logo'
             ? 'Brand logo'
             : type == 'photo'
-            ? 'Card holder\'s photo'
-            : 'Cover image'
+              ? 'Card holder\'s photo'
+              : 'Cover image'
         }`"
       />
       <button
@@ -88,59 +88,59 @@ export default {
       tempURL: null,
       mime: null,
       filetype: null,
-    }
+    };
   },
   computed: {
     imageAttached() {
-      return this.content[this.type].url ? true : false
+      return this.content[this.type].url ? true : false;
     },
   },
   methods: {
     closeCropper() {
-      this.showCropper = false
+      this.showCropper = false;
     },
     attachFile(e, type, dropped) {
       dropped
         ? (this.fileLoaded(e, type, true), (this.dragOver = false))
-        : this.$refs[`import${type}`].click()
+        : this.$refs[`import${type}`].click();
     },
     fileLoaded(e, type, dropped) {
       if (
         (dropped && e.dataTransfer.files.length) ||
         (!dropped && e.target.files.length)
       ) {
-        let file = dropped ? e.dataTransfer.files[0] : e.target.files[0]
-        let mime = file.type
+        let file = dropped ? e.dataTransfer.files[0] : e.target.files[0];
+        let mime = file.type;
         if (
           (type == 'logo' || type == 'cover') &&
           file.type.match(/image\/(svg\+xml|png|jpeg|gif|webp)/)
         ) {
-          this.imageLoaded(file, type, mime)
+          this.imageLoaded(file, type, mime);
         } else if (file.type.match(/image\/(png|jpeg|gif|webp)/)) {
-          this.imageLoaded(file, type, mime)
+          this.imageLoaded(file, type, mime);
         } else {
           if (type == 'logo' || type == 'cover') {
             this.showAlert(
               'Unsupported file format.\nOnly jpeg, png, webp, gif and svg file can be attached.'
-            )
+            );
           } else {
             this.showAlert(
               'Unsupported file format.\nOnly jpeg, png, webp and gif file can be attached.'
-            )
+            );
           }
         }
       }
     },
     imageLoaded(file, type, mime) {
-      console.log(type, mime)
-      let reader = new FileReader()
+      console.log(type, mime);
+      let reader = new FileReader();
       reader.onload = (f) => {
-        let dataURI = f.target.result
+        let dataURI = f.target.result;
         let ext = dataURI
           .split(',')[0]
           .split(':')[1]
           .split('/')[1]
-          .match(/^\w+/g)[0]
+          .match(/^\w+/g)[0];
         if (type == 'logo' || mime.match(/svg|gif|webp/)) {
           this.content[type] = {
             url: dataURI,
@@ -148,18 +148,18 @@ export default {
             ext,
             mime,
             resized: file,
-          }
-          if (!mime.match(/svg|gif|webp/)) this.resizeImage(type, mime)
+          };
+          if (!mime.match(/svg|gif|webp/)) this.resizeImage(type, mime);
         } else {
-          this.content[type].ext = ext
-          this.filetype = type
-          this.mime = mime
-          this.tempURL = dataURI
-          this.showCropper = true
+          this.content[type].ext = ext;
+          this.filetype = type;
+          this.mime = mime;
+          this.tempURL = dataURI;
+          this.showCropper = true;
         }
-      }
-      reader.readAsDataURL(file)
+      };
+      reader.readAsDataURL(file);
     },
   },
-}
+};
 </script>

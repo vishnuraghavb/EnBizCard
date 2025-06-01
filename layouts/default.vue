@@ -6,7 +6,7 @@
 <script>
 export default {
   transition: 'page',
-}
+};
 </script>
 
 <style lang="scss">
@@ -96,7 +96,9 @@ html {
 .fade-enter-active,
 .fade-leave-active {
   backface-visibility: hidden;
-  transition: transform 0.4s ease, opacity 0.2s ease;
+  transition:
+    transform 0.4s ease,
+    opacity 0.2s ease;
 }
 .fade-enter,
 .fade-leave-to {
@@ -112,7 +114,9 @@ html {
   opacity: 0;
 }
 .list-enter-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 .list-enter {
   transform: translateY(0.5rem);

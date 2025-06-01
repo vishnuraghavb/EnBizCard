@@ -237,13 +237,13 @@
   </div>
 </template>
 <script>
-import Footer from '@/components/Footer'
-import Help from '@/components/Help'
+import Footer from '@/components/Footer';
+import Help from '@/components/Help';
 
 export default {
   components: {
     Footer,
     Help,
   },
-}
+};
 </script>

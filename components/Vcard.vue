@@ -29,18 +29,18 @@ export default {
     getURLs() {
       return this.vCard.urls
         .map((e) => `URL;TYPE=${e.title}:${e.url}`)
-        .join('\n')
+        .join('\n');
     },
     getSplitName() {
-      let fn = this.vCard.fn
-      let ln = this.vCard.ln
-      return `${ln ? ln : ''};${fn ? fn : ''};;;`
+      let fn = this.vCard.fn;
+      let ln = this.vCard.ln;
+      return `${ln ? ln : ''};${fn ? fn : ''};;;`;
     },
     getFullname() {
-      let fn = this.vCard.fn
-      let ln = this.vCard.ln
-      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null
+      let fn = this.vCard.fn;
+      let ln = this.vCard.ln;
+      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null;
     },
   },
-}
+};
 </script>

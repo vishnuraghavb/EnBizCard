@@ -39,8 +39,8 @@ export default {
   props: ['product', 'colors', 'PreviewMode'],
   methods: {
     getTitle(e) {
-      return e.toLowerCase().split(' ').join('_')
+      return e.toLowerCase().split(' ').join('_');
     },
   },
-}
+};
 </script>

@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import Check from '@/components/Check'
+import Check from '@/components/Check';
 export default {
   props: ['downloadCheckList', 'downloadChecked', 'downloadPackage'],
   components: {
     Check,
   },
-}
+};
 </script>

@@ -32,7 +32,9 @@ a {
   z-index: 1;
   width: 100%;
   bottom: 0;
-  transition: top 0.2s ease-out, opacity 0.1s ease-out;
+  transition:
+    top 0.2s ease-out,
+    opacity 0.1s ease-out;
   transform: translateZ(0);
 }
 #close {

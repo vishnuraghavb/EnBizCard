@@ -39,19 +39,19 @@
 </template>
 
 <script>
-import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver';
 export default {
   props: ['media', 'type', 'colors', 'PreviewMode'],
   methods: {
     getTitle(e) {
-      return e.toLowerCase().split(' ').join('_')
+      return e.toLowerCase().split(' ').join('_');
     },
     downloadDocument() {
       saveAs(
         window.URL.createObjectURL(this.media.file),
         `${this.media.title}.pdf`
-      )
+      );
     },
   },
-}
+};
 </script>
