@@ -77,41 +77,41 @@ export default {
   props: ['media', 'type', 'colors', 'PreviewMode', 'togglePlay'],
   methods: {
     getTitle(e) {
-      return e.toLowerCase().split(' ').join('_')
+      return e.toLowerCase().split(' ').join('_');
     },
     setProgress(e) {
-      let mediaSource = this.$refs.mediaSource
-      let time = mediaSource.duration * (e.target.value / 100)
-      mediaSource.currentTime = time
+      let mediaSource = this.$refs.mediaSource;
+      let time = mediaSource.duration * (e.target.value / 100);
+      mediaSource.currentTime = time;
     },
     updateSeek() {
-      let mediaSource = this.$refs.mediaSource
-      let timenow = mediaSource.currentTime
-      let seekbar = this.$refs.seekbar
-      let bubble = this.$refs.bubble
-      let value = (100 / mediaSource.duration) * timenow
-      seekbar.value = value
+      let mediaSource = this.$refs.mediaSource;
+      let timenow = mediaSource.currentTime;
+      let seekbar = this.$refs.seekbar;
+      let bubble = this.$refs.bubble;
+      let value = (100 / mediaSource.duration) * timenow;
+      seekbar.value = value;
 
-      let m = Math.floor(timenow / 60)
-      let s = Math.floor(timenow % 60)
+      let m = Math.floor(timenow / 60);
+      let s = Math.floor(timenow % 60);
       if (m.toString().length < 2) {
-        m = '0' + m
+        m = '0' + m;
       }
       if (s.toString().length < 2) {
-        s = '0' + s
+        s = '0' + s;
       }
-      bubble.value = m + ':' + s
+      bubble.value = m + ':' + s;
 
       if (value == 100) {
-        this.isPlaying = false
-        seekbar.value = 0
-        this.$refs.play.style.display = 'block'
-        this.$refs.pause.style.display = 'none'
+        this.isPlaying = false;
+        seekbar.value = 0;
+        this.$refs.play.style.display = 'block';
+        this.$refs.pause.style.display = 'none';
       }
     },
   },
   mounted() {
-    this.$refs.pCtrl.style.display = 'flex'
+    this.$refs.pCtrl.style.display = 'flex';
   },
-}
+};
 </script>

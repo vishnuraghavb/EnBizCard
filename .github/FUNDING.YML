@@ -1,6 +1,3 @@
 liberapay: vishnuraghavb
 custom:
-  [
-    'https://www.vishnuraghav.com/donate',
-    'https://paypal.me/vishnuraghav'
-  ]
+  ['https://www.vishnuraghav.com/donate', 'https://paypal.me/vishnuraghav']

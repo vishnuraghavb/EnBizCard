@@ -27,5 +27,5 @@
 <script>
 export default {
   props: ['downloadCheckList', 'item', 'index'],
-}
+};
 </script>

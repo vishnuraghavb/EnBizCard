@@ -357,11 +357,11 @@
 </template>
 
 <script>
-import MediaPlayer from './MediaPlayer'
-import DocumentDownloader from './DocumentDownloader'
-import ProductShowcase from './ProductShowcase'
-import utils from '@/mixins/utils'
-import { mapState } from 'vuex'
+import MediaPlayer from './MediaPlayer';
+import DocumentDownloader from './DocumentDownloader';
+import ProductShowcase from './ProductShowcase';
+import utils from '@/mixins/utils';
+import { mapState } from 'vuex';
 
 export default {
   props: [
@@ -388,71 +388,71 @@ export default {
   },
   watch: {
     getFeaturedMusic(oldv, newv) {
-      this.paused = this.getFeaturedMusic.map((e) => true)
+      this.paused = this.getFeaturedMusic.map((e) => true);
     },
   },
   data() {
     return {
       paused: [],
       hasInstagramEmbed: false,
-    }
+    };
   },
   computed: {
     ...mapState(['theme']),
     getFullname() {
-      let fn = this.genInfo.fname
-      let ln = this.genInfo.lname
-      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null
+      let fn = this.genInfo.fname;
+      let ln = this.genInfo.lname;
+      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null;
     },
     hasOnlyProfilePic() {
-      return !(this.images.cover.url || this.images.logo.url)
+      return !(this.images.cover.url || this.images.logo.url);
     },
     getFeaturedMusic() {
-      return this.featured.music
+      return this.featured.music;
     },
     getCssHref() {
       if (this.genInfo.fontLink) {
         let html = new DOMParser().parseFromString(
           this.genInfo.fontLink,
           'text/html'
-        )
+        );
         let link = Array.from(html.getElementsByTagName('link')).filter(
           (e) => e.getAttribute('rel') == 'stylesheet'
-        )
-        return link.length && link[0].getAttribute('href')
+        );
+        return link.length && link[0].getAttribute('href');
       }
-      return false
+      return false;
     },
     getFontFamily() {
-      let regex = /^font-family[^;]*/
-      let css = this.genInfo.fontCss.replace(/\s+/, '')
+      let regex = /^font-family[^;]*/;
+      let css = this.genInfo.fontCss.replace(/\s+/, '');
       if (regex.test(css)) {
-        return css.match(/^font-family[^;]*/)[0]
+        return css.match(/^font-family[^;]*/)[0];
       }
     },
   },
   methods: {
     getHref(e) {
-      let value = null
+      let value = null;
       if (e.name === 'Viber' && e.value)
-        value = e.value.replace(/[\s\-()]/g, '').replace(/\+/, '%2B')
+        value = e.value.replace(/[\s\-()]/g, '').replace(/\+/, '%2B');
       return e.href
         ? e.href + (value || e.value) + (e.hrefEnd ? e.hrefEnd : '')
-        : value || e.value
+        : value || e.value;
     },
     getTitle(e) {
-      return e.toLowerCase().split(' ').join('_')
+      return e.toLowerCase().split(' ').join('_');
     },
     stripAttr(val) {
       if (/<iframe(.*)\/iframe>/.test(val)) {
-        let iframe = val.match(/<iframe(.*)\/iframe>/)[0]
-        return iframe.match(/src="?([^"\s]+)"/)[1]
+        let iframe = val.match(/<iframe(.*)\/iframe>/)[0];
+        return iframe.match(/src="?([^"\s]+)"/)[1];
       } else if (/\/\/www\.instagram\.com\/embed\.js/.test(val)) {
         return `${
           val.match(/data-instgrm-permalink="(.*?)\/\?/)[1]
-        }/embed/captioned`
+        }/embed/captioned`;
       }
-      return null
+      return null;
     },
     toggleContainer(e) {
       '2rem' == e.style.top
@@ -462,55 +462,55 @@ export default {
         : ((e.style.top = '2rem'),
           (e.style.opacity = 0),
           setTimeout(() => {
-            e.style.visibility = 'hidden'
-          }, 200))
+            e.style.visibility = 'hidden';
+          }, 200));
     },
     showKey() {
-      let modal = this.$refs.modal
-      let copyView = this.$refs.copyView
-      let qrView = this.$refs.qrView
-      this.toggleContainer(modal)
-      copyView.style.display = qrView.style.display = 'none'
+      let modal = this.$refs.modal;
+      let copyView = this.$refs.copyView;
+      let qrView = this.$refs.qrView;
+      this.toggleContainer(modal);
+      copyView.style.display = qrView.style.display = 'none';
     },
     closePublicKey() {
-      let modal = this.$refs.modal
-      this.toggleContainer(modal)
+      let modal = this.$refs.modal;
+      this.toggleContainer(modal);
     },
     sharingAlert() {
       this.showAlert(
         'You are able to share your business card after completing the hosting process.\n\nCheck out the <a class="underline font-extrabold text-emerald-600 hover:text-emerald-500 transition-colors duration-200" href="/demo" target="_blank">demo</a> to test the functionality.'
-      )
+      );
     },
     togglePlay(ref) {
-      let mediaPlayers = this.$refs.mediaPlayer
+      let mediaPlayers = this.$refs.mediaPlayer;
       mediaPlayers.forEach((e) => {
-        let mediaSource = e.$refs.mediaSource
-        let play = e.$refs.play
-        let pause = e.$refs.pause
+        let mediaSource = e.$refs.mediaSource;
+        let play = e.$refs.play;
+        let pause = e.$refs.pause;
         if (ref != mediaSource) {
-          mediaSource.pause()
-          play.style.display = 'block'
-          pause.style.display = 'none'
+          mediaSource.pause();
+          play.style.display = 'block';
+          pause.style.display = 'none';
         } else {
           if (mediaSource.paused) {
-            mediaSource.play()
-            play.style.display = 'none'
-            pause.style.display = 'block'
+            mediaSource.play();
+            play.style.display = 'none';
+            pause.style.display = 'block';
           } else {
-            mediaSource.pause()
-            play.style.display = 'block'
-            pause.style.display = 'none'
+            mediaSource.pause();
+            play.style.display = 'block';
+            pause.style.display = 'none';
           }
         }
-      })
+      });
     },
   },
   mounted() {
     setTimeout(() => {
-      this.hasInstagramEmbed = true
-    }, 5000)
+      this.hasInstagramEmbed = true;
+    }, 5000);
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -549,7 +549,9 @@ export default {
     z-index: 1;
     width: 100%;
     bottom: 0;
-    transition: top 0.2s ease-out, opacity 0.1s ease-out;
+    transition:
+      top 0.2s ease-out,
+      opacity 0.1s ease-out;
     transform: translateZ(0);
   }
   #close {
@@ -913,7 +915,9 @@ export default {
     z-index: 1;
     width: 100%;
     bottom: 0;
-    transition: top 0.2s ease-out, opacity 0.1s ease-out;
+    transition:
+      top 0.2s ease-out,
+      opacity 0.1s ease-out;
     transform: translateZ(0);
   }
   #close {
@@ -1276,7 +1280,9 @@ export default {
     z-index: 1;
     width: 100%;
     bottom: 0;
-    transition: top 0.2s ease-out, opacity 0.1s ease-out;
+    transition:
+      top 0.2s ease-out,
+      opacity 0.1s ease-out;
     transform: translateZ(0);
   }
   #close {

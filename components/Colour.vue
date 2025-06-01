@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import colorpicker from '@caohenghu/vue-colorpicker'
-import { directive as onClickaway } from 'vue-clickaway2'
+import colorpicker from '@caohenghu/vue-colorpicker';
+import { directive as onClickaway } from 'vue-clickaway2';
 export default {
   components: {
     colorpicker,
@@ -42,13 +42,13 @@ export default {
   props: ['name', 'label', 'colors'],
   methods: {
     changeColour({ hex }, name) {
-      this.colors[name].color = hex
+      this.colors[name].color = hex;
     },
     closeColourPalette(name) {
-      this.colors[name].openPalette = false
+      this.colors[name].openPalette = false;
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .palette-enter-active,

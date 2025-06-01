@@ -121,47 +121,47 @@ export default {
   data() {
     return {
       dragOver: false,
-    }
+    };
   },
   methods: {
     removeImage(i) {
-      this.featured[this.index].content[i].image = null
+      this.featured[this.index].content[i].image = null;
     },
     removeItem(i) {
-      this.featured[this.index].content.splice(i, 1)
+      this.featured[this.index].content.splice(i, 1);
     },
     loadFile() {
-      this.$refs.import.click()
+      this.$refs.import.click();
     },
     getFileName(file) {
-      return file.name.replace(/(?:\.([^.]+))?$/, '')
+      return file.name.replace(/(?:\.([^.]+))?$/, '');
     },
     fileLoaded(e, i, dropped) {
       if (
         (dropped && e.dataTransfer.files.length) ||
         (!dropped && e.target.files.length)
       ) {
-        let file = dropped ? e.dataTransfer.files[0] : e.target.files[0]
-        let mimetype = file.type
-        this.dragOver = false
+        let file = dropped ? e.dataTransfer.files[0] : e.target.files[0];
+        let mimetype = file.type;
+        this.dragOver = false;
         if (file && mimetype.match(/image\/jpeg|image\/png/gi)) {
-          this.imageLoaded(file, i, mimetype)
+          this.imageLoaded(file, i, mimetype);
         } else
           this.showAlert(
             'Unsupported file format.\nOnly jpeg and png files can be attached.'
-          )
-      } else this.dragOver = false
+          );
+      } else this.dragOver = false;
     },
     imageLoaded(file, i, mime) {
-      let title = this.getFileName(file)
-      let reader = new FileReader()
+      let title = this.getFileName(file);
+      let reader = new FileReader();
       reader.onload = (f) => {
-        let dataURI = f.target.result
+        let dataURI = f.target.result;
         let ext = dataURI
           .split(',')[0]
           .split(':')[1]
           .split('/')[1]
-          .match(/^\w+/g)[0]
+          .match(/^\w+/g)[0];
         this.featured[this.index].content[i].image = {
           dataURI,
           file,
@@ -169,19 +169,19 @@ export default {
           ext,
           mime,
           title,
-        }
+        };
         this.resizeImage(
           'product',
           mime,
           this.index,
           this.featured[this.index].content.length - 1
-        )
-      }
-      reader.readAsDataURL(file)
+        );
+      };
+      reader.readAsDataURL(file);
     },
   },
   mounted() {
-    !this.$refs.input.value && this.$refs.input.focus()
+    !this.$refs.input.value && this.$refs.input.focus();
   },
-}
+};
 </script>

@@ -21,8 +21,8 @@ export default {
   props: ['content', 'clearContent'],
   methods: {
     navTo() {
-      router.push('hosting-guide')
+      router.push('hosting-guide');
     },
   },
-}
+};
 </script>

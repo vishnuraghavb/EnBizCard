@@ -13,32 +13,14 @@
     <transition name="drop">
       <div
         v-if="inView || showPreview"
-        class="
-          fixed
-          top-0
-          w-full
-          z-30
-          bg-gray-900
-          justify-between
-          items-center
-          flex
-          md:hidden
-        "
+        class="fixed top-0 w-full z-30 bg-gray-900 justify-between items-center flex md:hidden"
       >
         <div
           class="logo w-16 m-4"
           v-html="require(`~/assets/icons/logo.svg?include`)"
         ></div>
         <button
-          class="
-            p-3
-            mx-4
-            font-extrabold
-            rounded
-            tracking-wide
-            focus:outline-none
-            select-none
-          "
+          class="p-3 mx-4 font-extrabold rounded tracking-wide focus:outline-none select-none"
           :class="showPreview ? 'bg-gray-700' : 'bg-emerald-600'"
           @click="!opening && togglePreview()"
         >
@@ -76,21 +58,7 @@
           title="EnBizCard - An Open-Source Digital Business Card Generator"
         ></div>
         <a
-          class="
-            font-extrabold
-            tracking-wide
-            leading-none
-            shrink-0
-            p-3
-            border-2
-            text-white
-            border-gray-700
-            rounded
-            hover:bg-gray-700
-            focus:bg-gray-700
-            transition-colors
-            duration-200
-          "
+          class="font-extrabold tracking-wide leading-none shrink-0 p-3 border-2 text-white border-gray-700 rounded hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-200"
           href="https://www.vishnuraghav.com/donate"
           target="_blank"
           rel="noreferrer"
@@ -98,13 +66,7 @@
         >
       </div>
       <h1
-        class="
-          text-3xl
-          md:text-5xl
-          font-extrabold
-          mt-24
-          md:mt-48 md:leading-tight
-        "
+        class="text-3xl md:text-5xl font-extrabold mt-24 md:mt-48 md:leading-tight"
       >
         Why Pay When Your Website Can Host Your Digital Business Cards for Free!
       </h1>
@@ -120,46 +82,13 @@
       </ul>
       <div class="mt-4 flex flex-wrap items-center">
         <button
-          class="
-            font-extrabold
-            leading-none
-            text-lg
-            tracking-wide
-            select-none
-            shrink-0
-            p-5
-            mt-2
-            mr-2
-            text-white
-            bg-emerald-600
-            rounded
-            hover:bg-emerald-500
-            focus:bg-emerald-500
-            transition-colors
-            duration-200
-            focus:outline-none
-          "
+          class="font-extrabold leading-none text-lg tracking-wide select-none shrink-0 p-5 mt-2 mr-2 text-white bg-emerald-600 rounded hover:bg-emerald-500 focus:bg-emerald-500 transition-colors duration-200 focus:outline-none"
           @click="create()"
         >
           Create your own
         </button>
         <a
-          class="
-            font-extrabold
-            leading-none
-            text-lg
-            tracking-wide
-            shrink-0
-            p-5
-            mt-2
-            text-white
-            bg-gray-700
-            rounded
-            hover:bg-gray-600
-            focus:bg-gray-600
-            transition-colors
-            duration-200
-          "
+          class="font-extrabold leading-none text-lg tracking-wide shrink-0 p-5 mt-2 text-white bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200"
           href="/demo"
           target="_blank"
           >View demo</a
@@ -169,16 +98,7 @@
         Read the
         <NuxtLink
           to="/hosting-guide"
-          class="
-            cursor-pointer
-            underline
-            font-extrabold
-            text-emerald-600
-            hover:text-emerald-500
-            focus:text-emerald-500
-            transition-colors
-            duration-200
-          "
+          class="cursor-pointer underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
           >Hosting Guide</NuxtLink
         >
       </p>
@@ -233,19 +153,7 @@
                 type="text"
                 v-model="genInfo.fname"
                 autocapitalize="words"
-                class="
-                  mt-2
-                  px-4
-                  w-full
-                  h-12
-                  bg-black
-                  rounded
-                  border border-transparent
-                  transition-colors
-                  duration-200
-                  focus:outline-none focus:border-gray-600
-                  hover:border-gray-600
-                "
+                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               />
             </div>
             <div>
@@ -256,19 +164,7 @@
                 type="text"
                 v-model="genInfo.lname"
                 autocapitalize="words"
-                class="
-                  mt-2
-                  px-4
-                  w-full
-                  h-12
-                  bg-black
-                  rounded
-                  border border-transparent
-                  transition-colors
-                  duration-200
-                  focus:outline-none focus:border-gray-600
-                  hover:border-gray-600
-                "
+                class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               />
             </div>
           </div>
@@ -281,20 +177,7 @@
               v-model="genInfo.pronouns"
               placeholder="He/Him/His"
               autocapitalize="words"
-              class="
-                mt-2
-                px-4
-                w-full
-                h-12
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                hover:border-gray-600
-              "
+              class="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
             />
           </div>
           <div class="stepC mt-6">
@@ -305,19 +188,7 @@
               spellcheck="true"
               autocapitalize="words"
               v-model="genInfo.title"
-              class="
-                mt-2
-                px-4
-                w-full
-                h-12
-                bg-black
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                hover:border-gray-600
-              "
+              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
             />
           </div>
           <div class="stepC mt-6">
@@ -328,19 +199,7 @@
               type="text"
               v-model="genInfo.biz"
               autocapitalize="words"
-              class="
-                mt-2
-                px-4
-                w-full
-                h-12
-                bg-black
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                hover:border-gray-600
-              "
+              class="mt-2 px-4 w-full h-12 bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
             />
           </div>
           <div class="stepC mt-6">
@@ -349,21 +208,7 @@
               id="business-address"
               :value="genInfo.addr"
               @input="genInfo.addr = $event.target.value"
-              class="
-                block
-                mt-2
-                px-4
-                py-3
-                w-full
-                bg-black
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                resize-none
-                hover:border-gray-600
-              "
+              class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               rows="4"
             ></textarea>
           </div>
@@ -375,21 +220,7 @@
               id="business-description"
               :value="genInfo.desc"
               @input="genInfo.desc = $event.target.value"
-              class="
-                block
-                mt-2
-                px-4
-                py-3
-                w-full
-                bg-black
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                resize-none
-                hover:border-gray-600
-              "
+              class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               rows="4"
             ></textarea>
           </div>
@@ -405,22 +236,7 @@
             <textarea
               id="pgp-public-key"
               v-model="genInfo.key"
-              class="
-                block
-                mt-2
-                px-4
-                py-3
-                w-full
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                resize-none
-                hover:border-gray-600
-              "
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               rows="4"
               spellcheck="false"
               placeholder="Paste public key block here"
@@ -457,20 +273,7 @@
               type="text"
               v-model="filterPrimary"
               placeholder="Search an action"
-              class="
-                px-4
-                mb-2
-                w-full
-                h-12
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                hover:border-gray-600
-              "
+              class="px-4 mb-2 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               @keydown.esc="clearFilterActions"
               @keypress.enter="
                 filteredAction('filteredPrimaryActions', 'primaryActions')
@@ -480,16 +283,7 @@
               Can't find an action? Please
               <a
                 href="#help"
-                class="
-                  cursor-pointer
-                  underline
-                  font-extrabold
-                  text-emerald-600
-                  hover:text-emerald-500
-                  focus:text-emerald-500
-                  transition-colors
-                  duration-200
-                "
+                class="cursor-pointer underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
                 >leave your suggestion</a
               >
               on Telegram
@@ -499,19 +293,7 @@
                 v-for="(action, index) in filteredPrimaryActions"
                 :key="index"
                 @click="addAction('primaryActions', action.name)"
-                class="
-                  p-3
-                  flex
-                  items-center
-                  shrink-0
-                  rounded
-                  hover:bg-gray-600
-                  focus:bg-gray-600
-                  transition-colors
-                  duration-200
-                  focus:outline-none
-                  bg-gray-700
-                "
+                class="p-3 flex items-center shrink-0 rounded hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none bg-gray-700"
                 :title="
                   action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
                 "
@@ -559,20 +341,7 @@
               type="text"
               v-model="filterSecondary"
               placeholder="Search an action"
-              class="
-                px-4
-                mb-2
-                w-full
-                h-12
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                hover:border-gray-600
-              "
+              class="px-4 mb-2 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
               @keydown.esc="clearFilterActions"
               @keypress.enter="
                 filteredAction('filteredSecondaryActions', 'secondaryActions')
@@ -582,16 +351,7 @@
               Can't find an action? Please
               <a
                 href="#help"
-                class="
-                  cursor-pointer
-                  underline
-                  font-extrabold
-                  text-emerald-600
-                  hover:text-emerald-500
-                  focus:text-emerald-500
-                  transition-colors
-                  duration-200
-                "
+                class="cursor-pointer underline font-extrabold text-emerald-600 hover:text-emerald-500 focus:text-emerald-500 transition-colors duration-200"
                 >leave your suggestion</a
               >
               on Telegram
@@ -601,18 +361,7 @@
                 v-for="(action, index) in filteredSecondaryActions"
                 :key="index"
                 @click="addAction('secondaryActions', action.name)"
-                class="
-                  p-3
-                  flex
-                  items-center
-                  shrink-0
-                  rounded
-                  hover:brightness-125
-                  focus:brightness-125
-                  transition-all
-                  duration-200
-                  focus:outline-none
-                "
+                class="p-3 flex items-center shrink-0 rounded hover:brightness-125 focus:brightness-125 transition-all duration-200 focus:outline-none"
                 :style="{ background: action.color }"
                 :title="
                   action.name.substr(0, 1).toUpperCase() + action.name.slice(1)
@@ -661,16 +410,7 @@
             <div class="flex mt-6">
               <div class="flex flex-wrap items-center">
                 <button
-                  class="
-                    p-3
-                    rounded
-                    bg-gray-700
-                    hover:bg-gray-600
-                    focus:bg-gray-600
-                    transition-colors
-                    duration-200
-                    focus:outline-none
-                  "
+                  class="p-3 rounded bg-gray-700 hover:bg-gray-600 focus:bg-gray-600 transition-colors duration-200 focus:outline-none"
                   @click="addFeature()"
                   aria-label="Add section"
                 >
@@ -692,25 +432,7 @@
           <div class="stepC mt-6">
             <div class="flex items-center">
               <div
-                class="
-                  relative
-                  group
-                  inline-block
-                  w-24
-                  h-12
-                  mr-3
-                  align-middle
-                  select-none
-                  transition
-                  duration-200
-                  ease-in
-                  bg-gray-700
-                  rounded
-                  hover:bg-gray-600
-                  focus:bg-gray-600
-                  cursor-pointer
-                  focus:outline-none
-                "
+                class="relative group inline-block w-24 h-12 mr-3 align-middle select-none transition duration-200 ease-in bg-gray-700 rounded hover:bg-gray-600 focus:bg-gray-600 cursor-pointer focus:outline-none"
                 :class="{
                   'bg-emerald-600 hover:bg-emerald-500 focus:bg-emerald-500':
                     footerCredit,
@@ -726,22 +448,7 @@
                     aria-label="Toggle footer credit"
                     id="toggle"
                     v-model="footerCredit"
-                    class="
-                      toggle-switch
-                      absolute
-                      block
-                      w-10
-                      h-10
-                      m-1
-                      rounded
-                      border-4 border-transparent
-                      appearance-none
-                      cursor-pointer
-                      transition-colors
-                      duration-200
-                      focus:outline-none
-                      bg-white
-                    "
+                    class="toggle-switch absolute block w-10 h-10 m-1 rounded border-4 border-transparent appearance-none cursor-pointer transition-colors duration-200 focus:outline-none bg-white"
                     tabindex="-1"
                   />
                 </transition>
@@ -759,17 +466,7 @@
           <div class="stepC mt-3 flex flex-wrap">
             <button
               @click="changeTheme(1)"
-              class="
-                w-12
-                h-12
-                rounded
-                mt-3
-                mr-3
-                font-extrabold
-                focus:outline-none
-                transition-colors
-                duration-200
-              "
+              class="w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200"
               :class="
                 theme == 1
                   ? 'bg-emerald-600'
@@ -780,17 +477,7 @@
             </button>
             <button
               @click="changeTheme(2)"
-              class="
-                w-12
-                h-12
-                rounded
-                mt-3
-                mr-3
-                font-extrabold
-                focus:outline-none
-                transition-colors
-                duration-200
-              "
+              class="w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200"
               :class="
                 theme == 2
                   ? 'bg-emerald-600'
@@ -801,17 +488,7 @@
             </button>
             <button
               @click="changeTheme(3)"
-              class="
-                w-12
-                h-12
-                rounded
-                mt-3
-                mr-3
-                font-extrabold
-                focus:outline-none
-                transition-colors
-                duration-200
-              "
+              class="w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200"
               :class="
                 theme == 3
                   ? 'bg-emerald-600'
@@ -846,22 +523,7 @@
             <textarea
               id="font-link"
               v-model="genInfo.fontLink"
-              class="
-                block
-                mt-2
-                px-4
-                py-3
-                w-full
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                resize-none
-                hover:border-gray-600
-              "
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               rows="4"
               spellcheck="false"
               :placeholder="`<link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;>`"
@@ -874,22 +536,7 @@
               type="text"
               id="font-css"
               v-model="genInfo.fontCss"
-              class="
-                block
-                mt-2
-                px-4
-                py-3
-                w-full
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                resize-none
-                hover:border-gray-600
-              "
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               :placeholder="`font-family: 'Poppins', sans-serif;`"
             />
           </div>
@@ -907,22 +554,7 @@
               id="tracking-code"
               aria-label="tracking-code"
               v-model="genInfo.tracker"
-              class="
-                block
-                mt-2
-                px-4
-                py-3
-                w-full
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                resize-none
-                hover:border-gray-600
-              "
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               rows="4"
               spellcheck="false"
               placeholder="Paste tracking code here"
@@ -941,22 +573,7 @@
               type="text"
               id="hosted-url"
               v-model="hostedURL"
-              class="
-                block
-                mt-2
-                px-4
-                py-3
-                w-full
-                bg-black
-                placeholder-gray-600
-                rounded
-                border border-transparent
-                transition-colors
-                duration-200
-                focus:outline-none focus:border-gray-600
-                resize-none
-                hover:border-gray-600
-              "
+              class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
               placeholder="https://yoursite/vcard/username"
             />
             <p class="mt-6 border p-4 rounded border-gray-700 text-gray-400">
@@ -979,14 +596,7 @@
       >
         <div
           id="preview"
-          class="
-            flex flex-col
-            items-center
-            justify-center
-            sm:sticky sm:top-0
-            md:mx-6
-            lg:mx-12
-          "
+          class="flex flex-col items-center justify-center sm:sticky sm:top-0 md:mx-6 lg:mx-12"
         >
           <div id="device" class="bg-black rounded sm:mt-10">
             <h2 class="text-center py-4 font-extrabold text-gray-200">
@@ -995,12 +605,7 @@
             <div id="browserFrame" class="overflow-hidden flex flex-col">
               <div
                 id="topBar"
-                class="
-                  topbar
-                  border-r-4 border-l-4 border-black
-                  bg-gray-900
-                  z-10
-                "
+                class="topbar border-r-4 border-l-4 border-black bg-gray-900 z-10"
               >
                 <div id="searchField" class="p-2 flex items-center">
                   <input
@@ -1046,27 +651,27 @@
 </template>
 
 <script>
-import Modal from '@/components/Modal'
-import Attachment from '@/components/Attachment'
-import Action from '@/components/Action'
-import Featured from '@/components/Featured'
-import Colour from '@/components/Colour'
-import Preview from '@/components/Preview'
-import Download from '@/components/Download'
-import Help from '@/components/Help'
-import Footer from '@/components/Footer'
-import Cropper from '@/components/Cropper'
+import Modal from '@/components/Modal';
+import Attachment from '@/components/Attachment';
+import Action from '@/components/Action';
+import Featured from '@/components/Featured';
+import Colour from '@/components/Colour';
+import Preview from '@/components/Preview';
+import Download from '@/components/Download';
+import Help from '@/components/Help';
+import Footer from '@/components/Footer';
+import Cropper from '@/components/Cropper';
 
-import Vcard from '@/components/Vcard'
-import JSZip from 'jszip'
-import draggable from 'vuedraggable'
+import Vcard from '@/components/Vcard';
+import JSZip from 'jszip';
+import draggable from 'vuedraggable';
 
-import { saveAs } from 'file-saver'
-import QRCode from '!!raw-loader!~/static/qrcode.min.js'
-import Theme1 from '!!raw-loader!~/assets/styles/T1.min.css'
-import Theme2 from '!!raw-loader!~/assets/styles/T2.min.css'
-import Theme3 from '!!raw-loader!~/assets/styles/T3.min.css'
-import { mapState, mapActions } from 'vuex'
+import { saveAs } from 'file-saver';
+import QRCode from '!!raw-loader!~/static/qrcode.min.js';
+import Theme1 from '!!raw-loader!~/assets/styles/T1.min.css';
+import Theme2 from '!!raw-loader!~/assets/styles/T2.min.css';
+import Theme3 from '!!raw-loader!~/assets/styles/T3.min.css';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -1738,73 +1343,73 @@ export default {
       showPreview: false,
       scrollPos: null,
       opening: false,
-    }
+    };
   },
   computed: {
     ...mapState(['theme']),
     getFullname() {
-      let fn = this.genInfo.fname
-      let ln = this.genInfo.lname
-      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null
+      let fn = this.genInfo.fname;
+      let ln = this.genInfo.lname;
+      return (fn + ln).length ? `${fn ? fn : ''}${ln ? ' ' + ln : ''}` : null;
     },
     pubKeyIsValid() {
       if (this.genInfo.key) {
         if (!this.genInfo.key.match(/^(-----BEGIN PGP PUBLIC KEY BLOCK-----)/))
-          return false
+          return false;
 
         if (!this.genInfo.key.match(/(-----END PGP PUBLIC KEY BLOCK-----)$/))
-          return false
+          return false;
 
-        return true
-      } else return false
+        return true;
+      } else return false;
     },
     downloadChecked() {
-      return this.downloadCheckList.filter((e) => e.checked).length == 3
+      return this.downloadCheckList.filter((e) => e.checked).length == 3;
     },
     username() {
       return this.getFullname
         ? this.getFullname.toLowerCase().replace(/\W+/g, '')
-        : 'username'
+        : 'username';
     },
     orderedPrimaryActions() {
       return this.actions.primaryActions.sort((a, b) =>
         a.order > b.order ? 1 : a.order < b.order ? -1 : 0
-      )
+      );
     },
     filteredPrimaryActions() {
       return this.orderedPrimaryActions.filter((e) =>
         e.name.toLowerCase().includes(this.filterPrimary.toLowerCase())
-      )
+      );
     },
     orderedSecondaryActions() {
       return this.actions.secondaryActions.sort((a, b) =>
         a.name.localeCompare(b.name)
-      )
+      );
     },
     filteredSecondaryActions() {
       return this.orderedSecondaryActions.filter((e) =>
         e.name.toLowerCase().includes(this.filterSecondary.toLowerCase())
-      )
+      );
     },
     vCard() {
       const getNumber = (type) => {
         let no = this.primaryActions
           .map((e) => (e.name == type ? e.value : null))
-          .filter((e) => e)[0]
-        return no ? no.replace(/\s/g, '') : null
-      }
+          .filter((e) => e)[0];
+        return no ? no.replace(/\s/g, '') : null;
+      };
       let email = this.primaryActions
         .map((e) => (e.name == 'Email' ? e.value : null))
-        .filter((e) => e)[0]
+        .filter((e) => e)[0];
       let website = this.primaryActions
         .map((e) => (e.name == 'Website' ? e.value : null))
-        .filter((e) => e)[0]
+        .filter((e) => e)[0];
       let actions = [
         ...this.primaryActions,
         ...this.secondaryActions.map((e) => {
-          return { ...e, isURL: 1 }
+          return { ...e, isURL: 1 };
         }),
-      ]
+      ];
       let urls = actions
         .map((e) => {
           if (e.isURL && e.value) {
@@ -1812,17 +1417,17 @@ export default {
               title: e.name,
               url:
                 (e.href ? e.href : '') + e.value + (e.hrefEnd ? e.hrefEnd : ''),
-            }
+            };
           }
-          return false
+          return false;
         })
-        .filter((e) => e)
+        .filter((e) => e);
 
       let note = this.genInfo.desc
         ? this.genInfo.desc.replace(/[\r\n]+/gm, '')
-        : null
-      let key = this.pubKeyIsValid ? window.btoa(this.genInfo.key) : null
-      let randomNumber = Math.floor(100000000 + Math.random() * 900000)
+        : null;
+      let key = this.pubKeyIsValid ? window.btoa(this.genInfo.key) : null;
+      let randomNumber = Math.floor(100000000 + Math.random() * 900000);
       return {
         fn: this.genInfo.fname,
         ln: this.genInfo.lname,
@@ -1840,216 +1445,216 @@ export default {
         key,
         note,
         uid: `EnBizCard-${randomNumber}`,
-      }
+      };
     },
   },
   methods: {
     ...mapActions(['changeTheme']),
     togglePreview() {
-      this.opening = true
-      let c = this.$refs.container
+      this.opening = true;
+      let c = this.$refs.container;
       if (this.showPreview) {
-        c.classList.remove('overflow-y-hidden', 'h-screen')
-        window.scrollTo(0, this.scrollPos)
-        this.opening = false
+        c.classList.remove('overflow-y-hidden', 'h-screen');
+        window.scrollTo(0, this.scrollPos);
+        this.opening = false;
       } else {
-        this.scrollPos = window.scrollY
+        this.scrollPos = window.scrollY;
         setTimeout(() => {
-          c.classList.add('overflow-y-hidden', 'h-screen')
-          this.opening = false
-        }, 400)
+          c.classList.add('overflow-y-hidden', 'h-screen');
+          this.opening = false;
+        }, 400);
       }
-      this.showPreview = !this.showPreview
+      this.showPreview = !this.showPreview;
     },
     checkView() {
-      let e = this.$refs.create
+      let e = this.$refs.create;
       if (e) {
-        let top = e.getBoundingClientRect().top
-        this.inView = this.showPreview ? true : top < 0
+        let top = e.getBoundingClientRect().top;
+        this.inView = this.showPreview ? true : top < 0;
       }
     },
     clearContent() {
-      this.content = null
+      this.content = null;
     },
     create() {
-      this.$refs.create.scrollIntoView({ behavior: 'smooth' })
+      this.$refs.create.scrollIntoView({ behavior: 'smooth' });
     },
     getTitle(e) {
-      return e.toLowerCase().split(' ').join('_')
+      return e.toLowerCase().split(' ').join('_');
     },
     addFeature() {
       this.featured.push({
         title: 'Section title',
         content: [],
-      })
+      });
     },
     hasLightBG(e) {
-      let hex = this.colors[e].color
-      hex = hex.slice(1)
+      let hex = this.colors[e].color;
+      hex = hex.slice(1);
       if (hex.length === 3) {
-        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
       }
-      let r = parseInt(hex.slice(0, 2), 16)
-      let g = parseInt(hex.slice(2, 4), 16)
-      let b = parseInt(hex.slice(4, 6), 16)
+      let r = parseInt(hex.slice(0, 2), 16);
+      let g = parseInt(hex.slice(2, 4), 16);
+      let b = parseInt(hex.slice(4, 6), 16);
       const brightness = Math.round(
         (parseInt(r) * 299 + parseInt(g) * 587 + parseInt(b) * 114) / 1000
-      )
-      return brightness > 125 ? true : false
+      );
+      return brightness > 125 ? true : false;
     },
     showAlert(content) {
-      this.content = content
+      this.content = content;
     },
     clearFilterActions() {
-      this.filterPrimary = this.filterSecondary = ''
+      this.filterPrimary = this.filterSecondary = '';
     },
     filteredAction(filterType, actionType) {
       if (this[filterType].length)
-        this.addAction(actionType, this[filterType][0].name)
-      this.clearFilterActions()
+        this.addAction(actionType, this[filterType][0].name);
+      this.clearFilterActions();
     },
     addAction(type, name) {
-      let index = this.actions[type].findIndex((e) => e.name === name)
-      this[type].push(this.actions[type][index])
-      this.actions[type].splice(index, 1)
-      this.clearFilterActions()
+      let index = this.actions[type].findIndex((e) => e.name === name);
+      this[type].push(this.actions[type][index]);
+      this.actions[type].splice(index, 1);
+      this.clearFilterActions();
     },
     removeAction(type, index) {
-      this.actions[type].unshift(this[type][index])
-      this[type].splice(index, 1)
+      this.actions[type].unshift(this[type][index]);
+      this[type].splice(index, 1);
     },
     downloadVcard() {
       let blob = new Blob([this.$refs.vCard.$refs.vCard.innerText], {
         type: 'text/plain',
-      })
-      saveAs(window.URL.createObjectURL(blob), `${this.username}.vcf`)
+      });
+      saveAs(window.URL.createObjectURL(blob), `${this.username}.vcf`);
     },
     downloadKey() {
       let blob = new Blob([this.genInfo.key], {
         type: 'text/plain',
-      })
+      });
       saveAs(
         window.URL.createObjectURL(blob),
         `${this.getFullname}'s public key.asc`
-      )
+      );
     },
     async resizeImage(type, mime, index1, index2) {
-      let vm = this
-      let reader = new FileReader()
-      let file
+      let vm = this;
+      let reader = new FileReader();
+      let file;
       if (index2 >= 0) {
         if (type == 'image') {
-          file = await this.featured[index1].content[index2].file
+          file = await this.featured[index1].content[index2].file;
         } else if (type == 'music') {
-          file = await this.featured[index1].content[index2].cover
+          file = await this.featured[index1].content[index2].cover;
         } else if (type == 'product') {
-          file = await this.featured[index1].content[index2].image.file
+          file = await this.featured[index1].content[index2].image.file;
         }
       } else {
-        file = await this.images[type].blob
+        file = await this.images[type].blob;
       }
-      let canvas = document.createElement('canvas')
-      let ctx = canvas.getContext('2d')
-      let img = document.createElement('img')
-      let maxWidth, maxHeight
+      let canvas = document.createElement('canvas');
+      let ctx = canvas.getContext('2d');
+      let img = document.createElement('img');
+      let maxWidth, maxHeight;
       reader.onload = (e) => {
-        img.src = e.target.result
+        img.src = e.target.result;
         img.onload = () => {
           if (type == 'photo') {
-            canvas.width = canvas.height = 320
+            canvas.width = canvas.height = 320;
           } else {
             if (type == 'logo') {
-              maxWidth = 960
-              maxHeight = 192
+              maxWidth = 960;
+              maxHeight = 192;
             } else {
-              maxWidth = maxHeight = 960
+              maxWidth = maxHeight = 960;
             }
-            let width = img.width
-            let height = img.height
+            let width = img.width;
+            let height = img.height;
 
             if (width > maxWidth) {
-              height *= maxWidth / width
-              width = maxWidth
+              height *= maxWidth / width;
+              width = maxWidth;
             }
             if (height > maxHeight) {
-              width *= maxHeight / height
-              height = maxHeight
+              width *= maxHeight / height;
+              height = maxHeight;
             }
-            canvas.width = width
-            canvas.height = height
+            canvas.width = width;
+            canvas.height = height;
           }
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           canvas.toBlob(
             (blob) => {
               let image = new File([blob], type, {
                 type: mime,
-              })
+              });
               if (index2 >= 0) {
                 if (type == 'image') {
-                  vm.featured[index1].content[index2].file = image
+                  vm.featured[index1].content[index2].file = image;
                 } else if (type == 'music') {
-                  vm.featured[index1].content[index2].cover = image
+                  vm.featured[index1].content[index2].cover = image;
                 } else if (type == 'product') {
-                  vm.featured[index1].content[index2].image.file = image
+                  vm.featured[index1].content[index2].image.file = image;
                 }
               } else {
-                vm.images[type].resized = image
+                vm.images[type].resized = image;
               }
             },
             mime,
             0.8
-          )
-        }
-      }
-      reader.readAsDataURL(file)
+          );
+        };
+      };
+      reader.readAsDataURL(file);
     },
     getTrackingCode() {
-      let regex = /<script[^<]*<\/script>/g
-      let tracker = this.genInfo.tracker
+      let regex = /<script[^<]*<\/script>/g;
+      let tracker = this.genInfo.tracker;
       if (regex.test(tracker)) {
-        let scripts = tracker.match(regex)
-        let temp = document.createElement('div')
-        temp.innerHTML = tracker
-        return scripts.length && temp
+        let scripts = tracker.match(regex);
+        let temp = document.createElement('div');
+        temp.innerHTML = tracker;
+        return scripts.length && temp;
       }
-      return false
+      return false;
     },
     downloadPackage() {
       if (this.downloadChecked) {
-        this.PreviewMode = false
+        this.PreviewMode = false;
         setTimeout(() => {
           let el = new DOMParser().parseFromString(
             this.$refs.html.$refs.html.outerHTML,
             'text/html'
-          )
+          );
 
           // Inject stylesheets
-          let styleLink = document.createElement('link')
-          styleLink.rel = 'stylesheet'
-          styleLink.href = './style.min.css'
-          el.querySelector('head').appendChild(styleLink)
+          let styleLink = document.createElement('link');
+          styleLink.rel = 'stylesheet';
+          styleLink.href = './style.min.css';
+          el.querySelector('head').appendChild(styleLink);
 
           // Inject qrcode script
-          let qrcode = document.createElement('script')
-          qrcode.src = './qrcode.min.js'
-          el.querySelector('body').appendChild(qrcode)
+          let qrcode = document.createElement('script');
+          qrcode.src = './qrcode.min.js';
+          el.querySelector('body').appendChild(qrcode);
 
           // Inject general script
-          let modals = document.createElement('script')
+          let modals = document.createElement('script');
           modals.innerText =
-            'let m=document.getElementById("modal"),c=document.getElementById("close"),ki=document.getElementById("keyView"),cv=document.getElementById("copyView"),curl=document.getElementById("copyURL"),qrv=document.getElementById("qrView"),qr=document.getElementById("qr"),s=document.getElementById("share"),sqr=document.getElementById("showQR"),sk=document.getElementById("showKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#topActions").style.display="flex",qr.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(m),cv.style.display="flex",dN(qrv),ki&&dN(ki)}),sqr.addEventListener("click",()=>{tC(m),qrv.style.display="block",dN(cv),ki&&dN(ki)}),sk&&sk.addEventListener("click",()=>{tC(m),ki&&(ki.style.display="flex"),dN(cv),dN(qrv)}),c.addEventListener("click",()=>tC(m)),curl.addEventListener("click",async()=>{let e=curl.querySelectorAll(".iconColor")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});'
-          el.querySelector('body').appendChild(modals)
+            'let m=document.getElementById("modal"),c=document.getElementById("close"),ki=document.getElementById("keyView"),cv=document.getElementById("copyView"),curl=document.getElementById("copyURL"),qrv=document.getElementById("qrView"),qr=document.getElementById("qr"),s=document.getElementById("share"),sqr=document.getElementById("showQR"),sk=document.getElementById("showKey");function tC(e){"2rem"==e.style.top?(e.style.visibility="visible",e.style.top="0px",e.style.opacity=1):(e.style.top="2rem",e.style.opacity=0,setTimeout(()=>{e.style.visibility="hidden"},200))}function dN(e){e.style.display="none"}window.addEventListener("load",()=>{document.querySelector("#topActions").style.display="flex",qr.innerHTML=new QRCode({content:window.location.href,container:"svg-viewbox",join:!0,ecl:"L",padding:0}).svg()}),navigator.canShare?s.addEventListener("click",()=>{navigator.share({title:document.title,text:"You can view my Digital Business Card here:",url:window.location.href})}):s.addEventListener("click",()=>{tC(m),cv.style.display="flex",dN(qrv),ki&&dN(ki)}),sqr.addEventListener("click",()=>{tC(m),qrv.style.display="block",dN(cv),ki&&dN(ki)}),sk&&sk.addEventListener("click",()=>{tC(m),ki&&(ki.style.display="flex"),dN(cv),dN(qrv)}),c.addEventListener("click",()=>tC(m)),curl.addEventListener("click",async()=>{let e=curl.querySelectorAll(".iconColor")[1];await navigator.clipboard.writeText(window.location.href).then(t=>{e.innerText="Copied",setTimeout(()=>{e.innerText="Copy URL"},1e3)})});';
+          el.querySelector('body').appendChild(modals);
 
           // Inject media script
-          let mediaHandler = document.createElement('script')
+          let mediaHandler = document.createElement('script');
           mediaHandler.innerText =
-            'let pC=document.querySelectorAll(".pCtrl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),c=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",c.style.display="none");let o=Math.floor(e/60),y=Math.floor(e%60);o.toString().length<2&&(o="0"+o),y.toString().length<2&&(y="0"+y),r.value=o+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",c.style.display="block"):(srcs[l].pause(),c.style.display="none",a.style.display="block")})});'
+            'let pC=document.querySelectorAll(".pCtrl"),pP=document.querySelectorAll(".playPause"),srcs=document.querySelectorAll(".source");srcs.forEach(e=>{e.style.pointerEvents="none",e.removeAttribute("controls")}),pC.forEach((e,l)=>{e.style.display="flex";let r=e.querySelector(".currentTime"),s=e.querySelector(".seekBar"),t=e.querySelector(".playPause"),a=t.querySelector(".play"),c=t.querySelector(".pause");srcs[l].addEventListener("timeupdate",()=>{let e=srcs[l].currentTime,t=100/srcs[l].duration*e;s.value=t,100==t&&(s.value=0,a.style.display="block",c.style.display="none");let o=Math.floor(e/60),y=Math.floor(e%60);o.toString().length<2&&(o="0"+o),y.toString().length<2&&(y="0"+y),r.value=o+":"+y}),s.addEventListener("change",()=>{srcs[l].currentTime=srcs[l].duration*(parseInt(s.value)/100)}),t.addEventListener("click",()=>{srcs[l].paused?(srcs.forEach((e,r)=>{l!=r&&(e.paused||e.pause())}),pP.forEach((e,l)=>{let r=e.querySelector(".play"),s=e.querySelector(".pause");r.style.display="block",s.style.display="none"}),srcs[l].play(),a.style.display="none",c.style.display="block"):(srcs[l].pause(),c.style.display="none",a.style.display="block")})});';
           if (this.featured.length)
-            el.querySelector('body').appendChild(mediaHandler)
+            el.querySelector('body').appendChild(mediaHandler);
 
           // Inject tracking scripts
-          let tracker = this.getTrackingCode()
-          while (tracker.firstChild) el.head.appendChild(tracker.firstChild)
+          let tracker = this.getTrackingCode();
+          while (tracker.firstChild) el.head.appendChild(tracker.firstChild);
 
           // Create blobs
           let html = new Blob(
@@ -2057,25 +1662,25 @@ export default {
             {
               type: 'text/html',
             }
-          )
-          let theme = 1
+          );
+          let theme = 1;
           switch (this.theme) {
             case 1:
-              theme = Theme1
-              break
+              theme = Theme1;
+              break;
             case 2:
-              theme = Theme2
-              break
+              theme = Theme2;
+              break;
             case 3:
-              theme = Theme3
-              break
+              theme = Theme3;
+              break;
           }
           let css = new Blob([theme], {
             type: 'text/css',
-          })
+          });
           let vCard = new Blob([this.$refs.vCard.$refs.vCard.innerText], {
             type: 'text/plain',
-          })
+          });
           let guide = new Blob(
             [
               '<html><head><meta http-equiv="refresh" content="0; url=https://enbizcard.vishnuraghav.com/hosting-guide" /></head></html>',
@@ -2083,18 +1688,18 @@ export default {
             {
               type: 'text/html',
             }
-          )
+          );
           let qrScript = new Blob([QRCode], {
             type: 'application/javascript',
-          })
+          });
 
           // Prepare files
-          let username = this.username
-          let zip = new JSZip()
-          zip.folder(username).file('index.html', html)
-          zip.folder(username).file('style.min.css', css)
-          zip.folder(username).file('qrcode.min.js', qrScript)
-          zip.file('Hosting-Guide.html', guide)
+          let username = this.username;
+          let zip = new JSZip();
+          zip.folder(username).file('index.html', html);
+          zip.folder(username).file('style.min.css', css);
+          zip.folder(username).file('qrcode.min.js', qrScript);
+          zip.file('Hosting-Guide.html', guide);
 
           // Image attachments
           for (const key in this.images) {
@@ -2104,14 +1709,14 @@ export default {
                 .file(
                   `${key}.${this.images[key].ext}`,
                   this.images[key].resized
-                )
+                );
             }
           }
 
           // Featured content
           let hasFeaturedContent = this.featured.filter(
             (e) => e.content.length
-          ).length
+          ).length;
           if (hasFeaturedContent) {
             this.featured.forEach((item) => {
               item.content.forEach((item) => {
@@ -2119,7 +1724,10 @@ export default {
                   zip
                     .folder(username)
                     .folder('media')
-                    .file(`${this.getTitle(item.title)}.${item.ext}`, item.file)
+                    .file(
+                      `${this.getTitle(item.title)}.${item.ext}`,
+                      item.file
+                    );
                   if (item.type.match(/music|document/gi)) {
                     if (!item.info) {
                       zip
@@ -2128,7 +1736,7 @@ export default {
                         .file(
                           `${this.getTitle(item.title)}.${item.coverExt}`,
                           item.cover
-                        )
+                        );
                     }
                   }
                 } else if (item.contentType == 'product' && item.image) {
@@ -2138,22 +1746,22 @@ export default {
                     .file(
                       `${this.getTitle(item.image.title)}.${item.image.ext}`,
                       item.image.file
-                    )
+                    );
                 }
-              })
-            })
+              });
+            });
           }
 
           //  Public key
-          let name = this.getFullname
+          let name = this.getFullname;
           if (this.pubKeyIsValid) {
             zip
               .folder(username)
-              .file(`${name}'s public key.asc`, this.genInfo.key)
+              .file(`${name}'s public key.asc`, this.genInfo.key);
           }
 
           // VCARD
-          zip.folder(username).file(`${username}.vcf`, vCard)
+          zip.folder(username).file(`${username}.vcf`, vCard);
 
           // Final ZIP file
           zip
@@ -2161,18 +1769,18 @@ export default {
               type: 'blob',
             })
             .then(function (zip) {
-              saveAs(zip, `${name}'s Digital Business Card.zip`)
-            })
-          this.PreviewMode = true
-        }, 250)
+              saveAs(zip, `${name}'s Digital Business Card.zip`);
+            });
+          this.PreviewMode = true;
+        }, 250);
       }
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.checkView)
+    window.addEventListener('scroll', this.checkView);
     // window.onbeforeunload = function () {
     //   return 'Your work will be lost.'
     // }
   },
-}
+};
 </script>

@@ -1,5 +1,6 @@
 {
     "extends": [
-      "plugin:nuxt/recommended"
+      "plugin:nuxt/recommended",
+      "plugin:prettier/recommended"
     ]
   }

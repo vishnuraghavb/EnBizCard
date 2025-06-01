@@ -64,8 +64,8 @@
                 item.type == 'image'
                   ? item.dataURI
                   : item.coverDataURI
-                  ? item.coverDataURI
-                  : false
+                    ? item.coverDataURI
+                    : false
               "
               :src="item.type == 'image' ? item.dataURI : item.coverDataURI"
               :alt="item.title"
@@ -249,23 +249,23 @@
 </template>
 
 <script>
-import { convertFileToBuffer } from 'id3-parser/lib/universal/helpers'
-import { parse } from 'id3-parser'
-const pdfjs = require('~/assets/scripts/pdfjs-dist')
-const pdfjsWorker = require('~/assets/scripts/pdfjs-dist/build/pdf.worker.entry')
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
-pdfjs.disableWorker = true
-pdfjs.workerSrc = false
-import draggable from 'vuedraggable'
+import { convertFileToBuffer } from 'id3-parser/lib/universal/helpers';
+import { parse } from 'id3-parser';
+const pdfjs = require('~/assets/scripts/pdfjs-dist');
+const pdfjsWorker = require('~/assets/scripts/pdfjs-dist/build/pdf.worker.entry');
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+pdfjs.disableWorker = true;
+pdfjs.workerSrc = false;
+import draggable from 'vuedraggable';
 
-import ProductCard from './ProductCard'
+import ProductCard from './ProductCard';
 
 export default {
   props: ['featured', 'mimetypes', 'index', 'resizeImage', 'showAlert'],
   data() {
     return {
       dragOver: false,
-    }
+    };
   },
   components: {
     ProductCard,
@@ -273,31 +273,31 @@ export default {
   },
   computed: {
     hasContent() {
-      return this.featured[this.index].content.length
+      return this.featured[this.index].content.length;
     },
   },
   methods: {
     mediaType(t) {
       switch (true) {
         case t == 'image/jpeg' || t == 'image/png':
-          return 'image'
+          return 'image';
         case t == 'audio/mpeg':
-          return 'music'
+          return 'music';
         case t == 'video/mp4' || t == 'video/webm':
-          return 'video'
+          return 'video';
         case t == 'application/pdf':
-          return 'document'
+          return 'document';
       }
     },
     attachMedia() {
-      this.$refs.import.click()
+      this.$refs.import.click();
     },
     addLink() {
-      this.featured[this.index].content.push('')
+      this.featured[this.index].content.push('');
       let links = this.featured[this.index].content.filter(
         (e) => !e.contentType
-      )
-      setTimeout(() => this.$refs.link[links.length - 1].focus(), 50)
+      );
+      setTimeout(() => this.$refs.link[links.length - 1].focus(), 50);
     },
     addProduct() {
       this.featured[this.index].content.push({
@@ -308,67 +308,67 @@ export default {
         label: null,
         link: null,
         contentType: 'product',
-      })
+      });
     },
     addText() {
       this.featured[this.index].content.push({
         contentType: 'text',
         value: null,
-      })
+      });
       let texts = this.featured[this.index].content.filter(
         (e) => e.contentType == 'text'
-      )
-      setTimeout(() => this.$refs.text[texts.length - 1].focus(), 50)
+      );
+      setTimeout(() => this.$refs.text[texts.length - 1].focus(), 50);
     },
     fileLoaded(e, dropped) {
       if (
         (dropped && e.dataTransfer.files.length) ||
         (!dropped && e.target.files.length)
       ) {
-        let file = dropped ? e.dataTransfer.files[0] : e.target.files[0]
-        this.dragOver = false
-        let mimetype = file.type
-        let type = this.mediaType(mimetype)
+        let file = dropped ? e.dataTransfer.files[0] : e.target.files[0];
+        this.dragOver = false;
+        let mimetype = file.type;
+        let type = this.mediaType(mimetype);
         if (file) {
           switch (type) {
             case 'image':
-              this.imageLoaded(file, type, mimetype)
-              break
+              this.imageLoaded(file, type, mimetype);
+              break;
             case 'music':
-              this.musicLoaded(file, type)
-              break
+              this.musicLoaded(file, type);
+              break;
             case 'video':
-              this.videoLoaded(file, type)
-              break
+              this.videoLoaded(file, type);
+              break;
             case 'document':
-              this.documentLoaded(file, type)
-              break
+              this.documentLoaded(file, type);
+              break;
             default:
               this.showAlert(
                 'Unsupported file format.\n\nOnly jpeg, png, mp3, mp4, webm and pdf files can be attached.'
-              )
-              break
+              );
+              break;
           }
         }
-      } else this.dragOver = false
+      } else this.dragOver = false;
     },
     getFileName(file) {
-      return file.name.replace(/(?:\.([^.]+))?$/, '')
+      return file.name.replace(/(?:\.([^.]+))?$/, '');
     },
     removeItem(i) {
-      this.featured[this.index].content.splice(i, 1)
+      this.featured[this.index].content.splice(i, 1);
     },
     // Images
     imageLoaded(file, type, mime) {
-      let title = this.getFileName(file)
-      let reader = new FileReader()
+      let title = this.getFileName(file);
+      let reader = new FileReader();
       reader.onload = (f) => {
-        let dataURI = f.target.result
+        let dataURI = f.target.result;
         let ext = dataURI
           .split(',')[0]
           .split(':')[1]
           .split('/')[1]
-          .match(/^\w+/g)[0]
+          .match(/^\w+/g)[0];
         this.featured[this.index].content.push({
           name: file.name,
           title,
@@ -378,15 +378,15 @@ export default {
           contentType: 'media',
           ext,
           mime,
-        })
+        });
         this.resizeImage(
           type,
           mime,
           this.index,
           this.featured[this.index].content.length - 1
-        )
-      }
-      reader.readAsDataURL(file)
+        );
+      };
+      reader.readAsDataURL(file);
     },
 
     // Music
@@ -398,9 +398,9 @@ export default {
             'image/jpeg',
             this.index,
             this.featured[this.index].content.length - 1
-          )
+          );
         })
-        .catch((err) => {})
+        .catch((err) => {});
     },
     async extractTags(file, type) {
       return new Promise((resolve, reject) => {
@@ -409,8 +409,8 @@ export default {
           .then((tag) => {
             if (tag) {
               if (tag.image) {
-                let cover = new Blob([new Uint8Array(tag.image.data)])
-                let coverDataURI = URL.createObjectURL(cover)
+                let cover = new Blob([new Uint8Array(tag.image.data)]);
+                let coverDataURI = URL.createObjectURL(cover);
                 this.featured[this.index].content.push({
                   name: file.name,
                   cover,
@@ -424,17 +424,17 @@ export default {
                   contentType: 'media',
                   file,
                   ext: 'mp3',
-                })
+                });
                 let loadTags = setInterval(() => {
                   if (
                     this.featured[this.index].content[
                       this.featured[this.index].content.length - 1
                     ].file
                   ) {
-                    clearInterval(loadTags)
-                    resolve(true)
+                    clearInterval(loadTags);
+                    resolve(true);
                   }
-                }, 500)
+                }, 500);
               } else {
                 this.featured[this.index].content.push({
                   name: file.name,
@@ -447,8 +447,8 @@ export default {
                   file,
                   ext: 'mp3',
                   info: 'No Thumb',
-                })
-                reject()
+                });
+                reject();
               }
             } else {
               this.featured[this.index].content.push({
@@ -460,41 +460,41 @@ export default {
                 file,
                 ext: 'mp3',
                 info: 'No ID3 Tag',
-              })
-              reject()
+              });
+              reject();
             }
-          })
-      })
+          });
+      });
     },
 
     // Videos
     videoLoaded(file, type) {
-      let title = this.getFileName(file)
-      let canvas = document.createElement('canvas')
-      let ctx = canvas.getContext('2d')
-      let video = document.createElement('video')
-      let videoFile, dataURI
-      let maxWidth, maxHeight
-      maxWidth = maxHeight = 80
-      let reader = new FileReader()
-      let uA = navigator.userAgent.match(/firefox|android/gi)
-      let vm = this
+      let title = this.getFileName(file);
+      let canvas = document.createElement('canvas');
+      let ctx = canvas.getContext('2d');
+      let video = document.createElement('video');
+      let videoFile, dataURI;
+      let maxWidth, maxHeight;
+      maxWidth = maxHeight = 80;
+      let reader = new FileReader();
+      let uA = navigator.userAgent.match(/firefox|android/gi);
+      let vm = this;
       function videoProcessor() {
-        let width = video.videoWidth
-        let height = video.videoHeight
+        let width = video.videoWidth;
+        let height = video.videoHeight;
 
         if (width > maxWidth) {
-          height *= maxWidth / width
-          width = maxWidth
+          height *= maxWidth / width;
+          width = maxWidth;
         }
         if (height > maxHeight) {
-          width *= maxHeight / height
-          height = maxHeight
+          width *= maxHeight / height;
+          height = maxHeight;
         }
-        canvas.width = width
-        canvas.height = height
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-        let coverDataURI = canvas.toDataURL('image/jpeg', 0.8)
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        let coverDataURI = canvas.toDataURL('image/jpeg', 0.8);
         vm.featured[vm.index].content.push({
           name: file.name,
           coverDataURI,
@@ -505,83 +505,83 @@ export default {
           type,
           contentType: 'media',
           ext: 'mp4',
-        })
+        });
       }
       if (uA && uA.length == 2) {
-        video.addEventListener('loadstart', videoProcessor)
+        video.addEventListener('loadstart', videoProcessor);
       } else {
-        video.addEventListener('seeked', videoProcessor)
+        video.addEventListener('seeked', videoProcessor);
       }
 
       reader.onload = (f) => {
-        videoFile = new Blob([f.target.result], { type: 'video/mp4' })
-        dataURI = URL.createObjectURL(videoFile)
-        video.src = dataURI + '#t=0.2'
-      }
-      reader.readAsArrayBuffer(file)
+        videoFile = new Blob([f.target.result], { type: 'video/mp4' });
+        dataURI = URL.createObjectURL(videoFile);
+        video.src = dataURI + '#t=0.2';
+      };
+      reader.readAsArrayBuffer(file);
     },
 
     // PDFs
     dataURIToBinary(dataURI) {
-      var BASE64_MARKER = ';base64,'
-      var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length
-      var base64 = dataURI.substring(base64Index)
-      var raw = window.atob(base64)
-      var rawLength = raw.length
-      var array = new Uint8Array(new ArrayBuffer(rawLength))
+      var BASE64_MARKER = ';base64,';
+      var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+      var base64 = dataURI.substring(base64Index);
+      var raw = window.atob(base64);
+      var rawLength = raw.length;
+      var array = new Uint8Array(new ArrayBuffer(rawLength));
 
       for (i = 0; i < rawLength; i++) {
-        array[i] = raw.charCodeAt(i)
+        array[i] = raw.charCodeAt(i);
       }
-      return array
+      return array;
     },
     formatBytes(a, b = 2) {
-      if (0 === a) return '0 Bytes'
+      if (0 === a) return '0 Bytes';
       const c = 0 > b ? 0 : b,
-        d = Math.floor(Math.log(a) / Math.log(1024))
+        d = Math.floor(Math.log(a) / Math.log(1024));
       return (
         parseFloat((a / Math.pow(1024, d)).toFixed(c)) +
         ' ' +
         ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'][d]
-      )
+      );
     },
     documentLoaded(file, type) {
-      let filesize = this.formatBytes(file.size)
-      let title = this.getFileName(file)
-      let reader = new FileReader()
-      let data, maxWidth, maxHeight
-      maxWidth = maxHeight = 1296
+      let filesize = this.formatBytes(file.size);
+      let title = this.getFileName(file);
+      let reader = new FileReader();
+      let data, maxWidth, maxHeight;
+      maxWidth = maxHeight = 1296;
       reader.onload = (f) => {
-        data = this.dataURIToBinary(f.target.result)
-        let loadingTask = pdfjs.getDocument(data)
+        data = this.dataURIToBinary(f.target.result);
+        let loadingTask = pdfjs.getDocument(data);
         loadingTask.promise.then((pdf) => {
           pdf.getPage(1).then((page) => {
-            let canvas = document.createElement('canvas')
-            let ctx = canvas.getContext('2d')
-            let scale = 1
-            let viewport = page.getViewport({ scale })
-            let width = viewport.width
-            let height = viewport.height
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            let scale = 1;
+            let viewport = page.getViewport({ scale });
+            let width = viewport.width;
+            let height = viewport.height;
 
             if (width > maxWidth) {
-              height *= maxWidth / width
-              width = maxWidth
+              height *= maxWidth / width;
+              width = maxWidth;
             }
             if (height > maxHeight) {
-              width *= maxHeight / height
-              height = maxHeight
+              width *= maxHeight / height;
+              height = maxHeight;
             }
-            canvas.width = width
-            canvas.height = height
+            canvas.width = width;
+            canvas.height = height;
             var renderContext = {
               canvasContext: ctx,
               viewport: viewport,
-            }
+            };
             page.render(renderContext).promise.then((e) => {
-              let coverDataURI = canvas.toDataURL('image/jpeg', 0.8)
+              let coverDataURI = canvas.toDataURL('image/jpeg', 0.8);
               let cover = new Blob([this.dataURIToBinary(coverDataURI)], {
                 type: 'image/jpeg',
-              })
+              });
               this.featured[this.index].content.push({
                 name: file.name,
                 cover,
@@ -593,13 +593,13 @@ export default {
                 type,
                 contentType: 'media',
                 ext: 'pdf',
-              })
-            })
-          })
-        })
-      }
-      reader.readAsDataURL(file)
+              });
+            });
+          });
+        });
+      };
+      reader.readAsDataURL(file);
     },
   },
-}
+};
 </script>

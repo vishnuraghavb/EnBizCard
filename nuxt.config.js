@@ -226,7 +226,7 @@ export default {
           },
         ],
         exclude: /(node_modules)/,
-      })
+      });
     },
     html: {
       minify: {
@@ -252,4 +252,4 @@ export default {
     fallback: true,
   },
   telemetry: false,
-}
+};

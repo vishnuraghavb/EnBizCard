@@ -45,6 +45,20 @@ Check out the [roadmap](https://github.com/vishnuraghavb/EnBizCard/projects/1) t
 
 Your feedback and suggestions are very important. If you have an idea to improve Digital Business Card Generator, [do let me know](#having-issues-suggestions-and-feedback). I'm always open to ideas ;)
 
+## Code Quality
+
+This project uses ESLint and Prettier to ensure code quality and consistent formatting.
+
+- **ESLint**: Helps to find and fix problems in JavaScript and Vue.js code.
+- **Prettier**: An opinionated code formatter that enforces a consistent style.
+
+You can use the following npm scripts to manage code quality:
+
+- `npm run lint`: Checks the codebase for linting issues using ESLint.
+- `npm run format`: Automatically formats the code using Prettier.
+
+It's recommended to run these scripts before committing changes.
+
 ## Having issues, suggestions and feedback?
 
 You can,

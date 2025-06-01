@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import Cropper from 'cropperjs'
-import 'cropperjs/dist/cropper.css'
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
 export default {
   props: ['src', 'mime', 'content', 'resizeImage', 'type'],
   data() {
@@ -38,30 +38,30 @@ export default {
       dataURL: null,
       blobData: null,
       image: {},
-    }
+    };
   },
   methods: {
     cropPhoto() {
-      let vm = this
-      const canvas = this.cropper.getCroppedCanvas()
-      let url = canvas.toDataURL(this.mime)
-      this.content[this.type].url = url
-      this.content[this.type].mime = this.mime
+      let vm = this;
+      const canvas = this.cropper.getCroppedCanvas();
+      let url = canvas.toDataURL(this.mime);
+      this.content[this.type].url = url;
+      this.content[this.type].mime = this.mime;
       canvas.toBlob(
         (blob) => {
           vm.content[vm.type].blob = new File([blob], 'photo', {
             type: this.mime,
-          })
-          vm.resizeImage(vm.type, vm.mime)
-          vm.$emit('closeCropper')
+          });
+          vm.resizeImage(vm.type, vm.mime);
+          vm.$emit('closeCropper');
         },
         this.mime,
         0.8
-      )
+      );
     },
   },
   mounted() {
-    this.image = this.$refs.image
+    this.image = this.$refs.image;
     this.cropper = new Cropper(this.image, {
       zoomable: false,
       scalable: false,
@@ -71,7 +71,7 @@ export default {
       viewMode: 2,
       highlight: false,
       rotatable: true,
-    })
+    });
   },
-}
+};
 </script>

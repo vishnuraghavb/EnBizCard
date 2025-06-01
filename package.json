@@ -6,7 +6,9 @@
     "dev": "HOST=0.0.0.0 PORT=2221 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue .",
+    "format": "prettier --write ."
   },
   "engines": {
     "node": ">=16 <18"
@@ -27,6 +29,11 @@
   "devDependencies": {
     "@aceforth/nuxt-optimized-images": "^1.4.0",
     "@nuxtjs/tailwindcss": "^5.0.4",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "prettier": "^3.5.3",
     "raw-loader": "^4.0.2",
     "sass": "^1.52.1",
     "sass-loader": "^10.2.1"

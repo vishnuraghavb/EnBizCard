@@ -1,0 +1,15 @@
+# Ignore directories
+node_modules/
+dist/
+build/
+coverage/
+.nuxt/
+static/
+
+# Ignore specific vendored libraries
+assets/scripts/pdfjs-dist/
+
+# Ignore other specific files or patterns if needed
+# e.g., specific minified files if not covered by directory ignores
+*.min.css
+*.min.js
