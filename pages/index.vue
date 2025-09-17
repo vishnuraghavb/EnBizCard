@@ -1249,13 +1249,22 @@ export default {
             isURL: 1,
           },
           {
+            name: 'SimpleX',
+            icon: 'simplex',
+            placeholder: 'SimpleX link',
+            value: null,
+            label: 'Short SimpleX contact link',
+            order: 9,
+            isURL: 1,
+          },          
+          {
             name: 'Telegram',
             icon: 'telegram',
             href: 'https://t.me/',
             placeholder: 'username',
             value: null,
             label: 'Telegram username',
-            order: 9,
+            order: 10,
             isURL: 1,
           },
           {
@@ -1265,7 +1274,7 @@ export default {
             placeholder: '@username:matrix.org',
             value: null,
             label: 'Matrix userID',
-            order: 10,
+            order: 11,
             isURL: 1,
           },
           {
@@ -1274,7 +1283,7 @@ export default {
             placeholder: 'https://wa.me/profileID',
             value: null,
             label: 'WhatsApp profile URL',
-            order: 11,
+            order: 12,
             isURL: 1,
           },
           {
@@ -1284,7 +1293,7 @@ export default {
             placeholder: 'username',
             value: null,
             label: 'Messenger username',
-            order: 12,
+            order: 13,
             isURL: 1,
           },
           {
@@ -1295,7 +1304,7 @@ export default {
             placeholder: 'username',
             value: null,
             label: 'Skype username',
-            order: 13,
+            order: 14,
             isURL: 1,
           },
           {
@@ -1305,7 +1314,7 @@ export default {
             placeholder: 'LINE ID',
             value: null,
             label: 'Line profile ID',
-            order: 14,
+            order: 15,
             isURL: 1,
           },
           {
@@ -1315,7 +1324,7 @@ export default {
             placeholder: 'XX XXXXX XXXXX',
             value: null,
             label: 'Viber mobile number',
-            order: 15,
+            order: 16,
             isURL: 1,
           },
           {
@@ -1325,7 +1334,7 @@ export default {
             placeholder: 'WeChat ID',
             value: null,
             label: 'WeChat profile ID',
-            order: 16,
+            order: 17,
             isURL: 1,
           },
           {
@@ -1334,7 +1343,7 @@ export default {
             placeholder: 'https://example.com/calendarID',
             value: null,
             label: 'Calendar URL',
-            order: 17,
+            order: 18,
             isURL: 1,
           },
           {
@@ -1344,7 +1353,7 @@ export default {
             placeholder: 'XMPP ID',
             value: null,
             label: 'XMPP ID',
-            order: 18,
+            order: 19,
             isURL: 1,
           },
           // {
@@ -1354,7 +1363,7 @@ export default {
           //   placeholder: 'IRC ID',
           //   value: null,
           //   label: 'IRC ID',
-          //   order: 19,
+          //   order: 20,
           //   isURL: 1,
           // },
         ],
