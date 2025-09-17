@@ -59,6 +59,7 @@ You can,
 - [Feather icons](https://feathericons.com)
 - Logo and some icons by [Vishnu Raghav](https://www.vishnuraghav.com/)
 - [QRCode-SVG](https://github.com/papnkukn/qrcode-svg)
+- [Simple Icons](https://simpleicons.org/)
 
 ## Self-Hosting Guide - Docker
 
